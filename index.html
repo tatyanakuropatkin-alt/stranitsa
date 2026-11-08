@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сообщество «Страница» — интерактивные работы по литературе</title>
+<meta name="description" content="Независимая страница сообщества «Страница»: интерактивные работы по литературе для 6–7 классов. А. С. Пушкин «Дубровский», И. С. Тургенев «Бирюк». Одна попытка, автопроверка, оценка по нормам Минпросвещения.">
+<meta property="og:title" content="Сообщество «Страница» — интерактивные работы по литературе">
+<meta property="og:description" content="«Дубровский» (6 класс) и «Бирюк» (7 класс): работы с автопроверкой и разбором после финиша.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<style>
+:root{--bg0:#0b1810;--bg1:#12251a;--panel:#16281c;--line:#2e4a33;--line-gold:rgba(216,180,90,.35);
+--gold:#d8b45a;--gold-b:#f0cf7a;--gold-d:#a08339;--ink:#e9e4d6;--ink-mut:#b9c4b4;--ink-dim:#8fa08c;
+--serif:"Playfair Display",Georgia,"Times New Roman",serif}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:var(--serif);line-height:1.6;
+background:radial-gradient(1100px 650px at 70% -10%,#1d3a26 0%,transparent 60%),linear-gradient(180deg,var(--bg1),var(--bg0) 70%);
+min-height:100vh;overflow-x:hidden}
+#leaves{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.leaf{position:absolute;top:-8vh;left:var(--x);opacity:var(--o);animation:fall var(--d) linear infinite;animation-delay:var(--dl)}
+.leaf svg{width:var(--s);height:var(--s);animation:sway 3.6s ease-in-out infinite alternate}
+@keyframes fall{to{transform:translateY(118vh) translateX(var(--dr)) rotate(var(--rr))}}
+@keyframes sway{from{transform:rotate(-26deg)}to{transform:rotate(30deg)}}
+.wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:48px 22px 60px}
+header{text-align:center;margin-bottom:44px}
+.overline{letter-spacing:.3em;text-transform:uppercase;font-size:12px;color:var(--gold-d);margin:0 0 12px}
+h1{font-size:clamp(40px,7vw,76px);margin:0 0 14px;color:var(--gold);text-shadow:0 3px 0 rgba(0,0,0,.45)}
+.sub{font-style:italic;color:var(--gold-b);font-size:clamp(15px,2.2vw,19px);margin:0 auto;max-width:60ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:26px}
+.work{position:relative;background:rgba(22,40,28,.9);border:1px solid var(--line);padding:28px 26px;backdrop-filter:blur(6px);
+box-shadow:0 16px 40px rgba(0,0,0,.3);display:flex;flex-direction:column;transition:transform .25s,border-color .25s;overflow:hidden}
+.work:hover{transform:translateY(-6px);border-color:var(--line-gold)}
+.work::after{content:attr(data-roman);position:absolute;top:-16px;right:10px;font-size:110px;color:rgba(216,180,90,.07);font-weight:700;line-height:1}
+.cls{align-self:flex-start;border:1px solid var(--gold-d);color:var(--gold);padding:3px 11px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;transform:rotate(-2deg);margin-bottom:14px}
+.work h2{margin:0 0 8px;font-size:26px;color:var(--ink)}
+.work .theme{color:var(--ink-mut);font-size:15px;font-style:italic;margin:0 0 16px;flex:1}
+.meta{list-style:none;margin:0 0 20px;padding:0;font-size:13.5px;color:var(--ink-dim)}
+.meta li{padding:5px 0;border-bottom:1px dashed rgba(46,74,51,.7)}
+.meta li:last-child{border-bottom:none}
+.btn{display:block;text-align:center;text-decoration:none;background:linear-gradient(180deg,var(--gold-b),var(--gold) 55%,#c09b45);
+color:#241a06;font-weight:700;font-size:16px;padding:13px 18px;box-shadow:0 8px 24px rgba(216,180,90,.25);transition:transform .12s}
+.btn:hover{transform:translateY(-2px)}
+.soon{border:1px dashed var(--line);background:transparent;box-shadow:none;align-items:center;justify-content:center;text-align:center;color:var(--ink-dim);font-style:italic;padding:40px 26px}
+.how{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:46px 0 0}
+.how span{border:1px solid var(--line);padding:9px 16px;font-size:13.5px;color:var(--ink-mut);background:rgba(12,24,16,.5)}
+footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim);font-size:13.5px}
+footer .sig{color:var(--gold);font-size:16px;letter-spacing:.1em;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div id="leaves"></div>
+<div class="wrap">
+  <header>
+    <p class="overline">Литература · 6–7 класс · одна попытка · автопроверка</p>
+    <h1>Сообщество «Страница»</h1>
+    <p class="sub">Независимая страница наших интерактивных работ: читай текст, выполняй задания, получай разбор и оценку по нормам Минпросвещения.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Чтобы добавить работу: скопируйте блок <article class="work">… и поменяйте ссылку в href -->
+    <article class="work" data-roman="I">
+      <span class="cls">6 класс</span>
+      <h2>А. С. Пушкин «Дубровский»</h2>
+      <p class="theme">Смысл финала романа: трагедия невозможного счастья и нравственный выбор героя.</p>
+      <ul class="meta">
+        <li>7 заданий · максимум 28 баллов</li>
+        <li>Одна попытка, подсказок нет</li>
+        <li>После финиша — ответы, разбор и цитаты</li>
+      </ul>
+      <a class="btn" href="dubrovskyfinal-6class.html">Открыть работу →</a>
+    </article>
+
+    <article class="work" data-roman="II">
+      <span class="cls">7 класс</span>
+      <h2>И. С. Тургенев «Бирюк»</h2>
+      <p class="theme">Лесник, отпустивший вора: одиночество, долг и пробуждение совести.</p>
+      <ul class="meta">
+        <li>7 заданий + рефлексия · максимум 28 баллов</li>
+        <li>Творчество и рефлексия не оцениваются</li>
+        <li>Таймер покажет затраченное время</li>
+      </ul>
+      <a class="btn" href="biryuk-7class.html">Открыть работу →</a>
+    </article>
+
+    <article class="work soon">
+      <p>Свободный слот:<br>следующая работа появится здесь.<br>(«Капитанская дочка»? «Муму»? Решать вам.)</p>
+    </article>
+  </div>
+
+  <div class="how">
+    <span>✓ Одна попытка — честный результат</span>
+    <span>✓ Автопроверка и оценка по нормам Минпросвещения</span>
+    <span>✓ Открывается на телефоне и ПК, без установки</span>
+    <span>✓ Результат хранится на устройстве ученика</span>
+  </div>
+
+  <footer>
+    <div class="sig">Сообщество «Страница»</div>
+    <div>Интерактивные рабочие листы по литературе · публикуются независимо от платформ</div>
+  </footer>
+</div>
+<script>
+(function(){
+  const cols=["#8a6d2f","#6b7a3a","#a3542f","#c9a227","#4f5d2f"];
+  const box=document.getElementById("leaves");
+  for(let i=0;i<12;i++){
+    const d=document.createElement("div");d.className="leaf";
+    const s=12+Math.random()*18;
+    d.style.cssText="--x:"+Math.random()*100+"%;--d:"+(12+Math.random()*14)+"s;--dl:"+(-Math.random()*20)+"s;--s:"+s+"px;--o:"+(.2+Math.random()*.35)+";--dr:"+((Math.random()*2-1)*20)+"vw;--rr:"+((Math.random()*2-1)*540)+"deg";
+    d.innerHTML='<svg viewBox="0 0 24 24"><path d="M4 20C4 9 11 4 20 4c0 9-5 16-16 16z" fill="'+cols[i%cols.length]+'"/></svg>';
+    box.appendChild(d);
+  }
+})();
+</script>
+</body>
+</html>
