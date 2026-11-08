@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>«Дубровский» · Интерактивная работа · 6 класс</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg0:#0b1510; --bg1:#12211a; --panel:#17291f; --panel2:#1c3226;
+  --line:#2c4636; --ink:#efe7d2; --dim:#b9b09a; --faint:#8b846f;
+  --gold:#d3a94f; --gold-d:#a8842f; --wax:#b03a2e; --wax-l:#d06a5a;
+  --paper:#f2ead4; --paper-ink:#2b2a1f; --ok:#9fc98a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Spectral',Georgia,serif; color:var(--ink); background:var(--bg0);
+  background-image:
+    radial-gradient(1100px 600px at 12% -8%, rgba(38,74,52,.55), transparent 60%),
+    radial-gradient(900px 700px at 105% 15%, rgba(24,52,38,.6), transparent 55%),
+    radial-gradient(1400px 900px at 50% 115%, rgba(10,26,18,.9), transparent 60%);
+  min-height:100vh; overflow-x:hidden;
+}
+body::before{content:''; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");}
+body::after{content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(0,0,0,.55));}
+h1,h2,h3,.disp{font-family:'Oranienbaum',Georgia,serif; font-weight:400}
+.wrap{max-width:1060px; margin:0 auto; padding:0 22px; position:relative; z-index:2}
+.caps{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold)}
+.hidden{display:none !important}
+
+/* листья */
+.leaf{position:fixed; z-index:1; pointer-events:none; opacity:.16; animation:fall linear infinite}
+.leaf svg{width:100%; height:100%; fill:var(--gold-d)}
+@keyframes fall{
+  0%{transform:translate3d(0,-12vh,0) rotate(0deg)}
+  50%{transform:translate3d(36px,50vh,0) rotate(170deg)}
+  100%{transform:translate3d(-14px,112vh,0) rotate(350deg)}
+}
+
+/* прогресс-бар */
+#pbar{position:fixed; top:0; left:0; height:4px; width:0%; z-index:60;
+  background:linear-gradient(90deg,var(--gold-d),var(--gold)); box-shadow:0 0 12px rgba(211,169,79,.6); transition:width .4s ease}
+
+/* ===== шапка-заставка ===== */
+#intro{padding:64px 0 40px}
+.kickrow{display:flex; align-items:center; gap:14px; margin-bottom:18px}
+.kickrow .rule{flex:0 0 64px; height:1px; background:var(--gold-d)}
+.duo{display:grid; grid-template-columns:1.25fr .85fr; gap:44px; align-items:start}
+@media(max-width:880px){.duo{grid-template-columns:1fr}}
+h1.big{font-size:clamp(58px,9vw,104px); line-height:.95; letter-spacing:.03em; color:var(--ink);
+  text-shadow:0 2px 0 rgba(0,0,0,.4), 0 0 44px rgba(211,169,79,.14)}
+h1.big em{font-style:normal; color:var(--gold)}
+.author{font-family:'Oranienbaum',serif; font-size:clamp(20px,2.6vw,28px); color:var(--dim); margin-top:6px}
+.subhead{margin-top:20px; font-size:18px; font-style:italic; color:var(--gold); max-width:520px}
+.lede{margin-top:22px; font-size:17px; line-height:1.65; color:var(--dim); max-width:560px}
+.lede::first-letter{font-family:'Oranienbaum',serif; font-size:62px; float:left; line-height:.78;
+  padding:8px 12px 0 0; color:var(--gold)}
+
+/* билет условий */
+.billet{background:linear-gradient(180deg,var(--panel2),var(--panel)); border:1px solid var(--line);
+  border-top:3px solid var(--gold); padding:26px 26px 28px; box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.billet h2{font-size:26px; margin:8px 0 16px}
+.rules{list-style:none; display:grid; gap:12px; margin-bottom:20px}
+.rules li{display:flex; gap:12px; font-size:15px; line-height:1.5; color:var(--dim)}
+.rules li::before{content:''; flex:0 0 11px; height:11px; margin-top:4px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--wax-l), var(--wax) 70%); box-shadow:0 0 0 2px rgba(176,58,46,.25)}
+.rules b{color:var(--ink); font-weight:600}
+#nameIn{width:100%; padding:12px 14px; margin-bottom:14px; background:#0f1d15; color:var(--ink);
+  border:1px solid var(--line); border-radius:6px; font:inherit; font-size:15px}
+#nameIn:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(211,169,79,.18)}
+.btn{cursor:pointer; border:none; font-family:'Spectral',serif; font-weight:700; font-size:16px;
+  padding:14px 30px; border-radius:6px; transition:transform .18s ease, box-shadow .18s ease, background .18s}
+.btn-gold{background:linear-gradient(180deg,#e2bb62,#c39a3e); color:#221a07; width:100%;
+  box-shadow:0 10px 26px rgba(211,169,79,.25)}
+.btn-gold:hover{transform:translateY(-2px); box-shadow:0 16px 34px rgba(211,169,79,.38)}
+.tinynote{margin-top:12px; font-size:12.5px; color:var(--faint); text-align:center}
+
+/* ===== задания ===== */
+#quiz{padding:10px 0 130px}
+.task{position:relative; background:linear-gradient(180deg,#182c21,#142419); border:1px solid var(--line);
+  border-radius:10px; padding:34px 34px 30px; margin-bottom:34px; overflow:hidden;
+  opacity:0; transform:translateY(26px); transition:opacity .6s ease, transform .6s ease, border-color .3s, box-shadow .3s}
+.task.in{opacity:1; transform:none}
+.task.miss{border-color:var(--wax-l); box-shadow:0 0 0 3px rgba(208,106,90,.2); animation:shake .5s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.tnum{position:absolute; top:-26px; right:8px; font-family:'Oranienbaum',serif; font-size:130px;
+  color:rgba(211,169,79,.10); pointer-events:none; user-select:none}
+.thead{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:6px}
+.thead h2{font-size:clamp(24px,3.4vw,32px)}
+.pts{margin-left:auto; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold);
+  border:1px solid rgba(211,169,79,.5); padding:4px 10px; border-radius:20px; white-space:nowrap}
+.argtag{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--wax-l);
+  border:1px dashed rgba(208,106,90,.6); padding:4px 10px; border-radius:20px}
+.instr{color:var(--dim); font-size:15px; line-height:1.55; margin-bottom:20px; max-width:760px}
+.instr b{color:var(--ink)}
+
+/* Т1: соответствие */
+.meanings{display:grid; gap:8px; margin-bottom:22px; font-size:14.5px}
+.meanings div{display:flex; gap:10px; color:var(--dim)}
+.meanings b{color:var(--gold); font-family:'Oranienbaum',serif; font-size:18px; min-width:20px}
+.mrow{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:16px; align-items:center;
+  padding:12px 0; border-top:1px solid rgba(44,70,54,.6)}
+@media(max-width:720px){.mrow{grid-template-columns:1fr}}
+.mrow .ev{font-size:15px; line-height:1.45}
+.mrow .ev b{font-family:'Oranienbaum',serif; color:var(--gold); font-size:19px; margin-right:8px}
+.opts{display:flex; gap:8px}
+.opt{width:46px; height:42px; border:1px solid rgba(211,169,79,.45); background:transparent; color:var(--ink);
+  font-family:'Oranienbaum',serif; font-size:20px; border-radius:6px; cursor:pointer;
+  transition:transform .15s, background .15s, color .15s, border-color .15s}
+.opt:hover{background:rgba(211,169,79,.14); transform:translateY(-2px)}
+.opt.on{background:linear-gradient(180deg,#e2bb62,#c39a3e); color:#221a07; border-color:var(--gold);
+  transform:scale(1.07); box-shadow:0 6px 16px rgba(211,169,79,.3)}
+
+/* Т2: распределение */
+.clsrow{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:14px; align-items:center;
+  padding:11px 0; border-top:1px solid rgba(44,70,54,.6)}
+@media(max-width:720px){.clsrow{grid-template-columns:1fr}}
+.clsrow .st{font-size:15px}
+.clsrow .st b{font-family:'Oranienbaum',serif; color:var(--gold); font-size:19px; margin-right:8px}
+.pair{display:flex; gap:8px}
+.abtn{padding:9px 14px; font-size:13px; font-weight:600; letter-spacing:.03em; border-radius:6px; cursor:pointer;
+  border:1px solid rgba(211,169,79,.45); background:transparent; color:var(--dim); transition:all .15s}
+.abtn:hover{transform:translateY(-2px); color:var(--ink)}
+.abtn.on{background:linear-gradient(180deg,#e2bb62,#c39a3e); color:#221a07; border-color:var(--gold)}
+.legend{display:flex; gap:18px; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin-bottom:8px}
+
+/* Т3: последовательность */
+#seqList{list-style:none; display:grid; gap:10px}
+.srow{display:flex; align-items:center; gap:14px; background:#122117; border:1px solid var(--line);
+  border-radius:8px; padding:12px 16px; transition:border-color .2s, transform .2s}
+.srow:hover{border-color:rgba(211,169,79,.55)}
+.rank{flex:0 0 38px; height:38px; display:grid; place-items:center; font-family:'Oranienbaum',serif;
+  font-size:22px; color:#221a07; background:linear-gradient(180deg,#e2bb62,#c39a3e); border-radius:50%}
+.stxt{flex:1; font-size:15px; line-height:1.4}
+.arrows{display:flex; flex-direction:column; gap:4px}
+.arr{width:32px; height:22px; border:1px solid var(--line); background:#0f1d15; color:var(--gold);
+  border-radius:4px; cursor:pointer; font-size:12px; line-height:1; transition:all .15s}
+.arr:hover{border-color:var(--gold); transform:scale(1.1)}
+
+/* Т4: ошибки */
+.errtext{font-size:17.5px; line-height:2; background:#122117; border:1px solid var(--line);
+  border-radius:8px; padding:22px 24px; margin-bottom:14px}
+.frag{cursor:pointer; padding:2px 4px; border-bottom:2px dashed rgba(211,169,79,.5); transition:all .15s; border-radius:3px}
+.frag:hover{background:rgba(211,169,79,.12)}
+.frag.sel{background:rgba(176,58,46,.28); border-bottom:2px solid var(--wax-l); color:#f4d9d3}
+.selcount{font-size:13px; color:var(--faint); margin-bottom:18px}
+.selcount b{color:var(--gold)}
+.corrs{display:grid; gap:12px}
+.corrs label{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:5px}
+.corrin{width:100%; padding:11px 13px; background:#0f1d15; border:1px solid var(--line); border-radius:6px;
+  color:var(--ink); font:inherit; font-size:15px; transition:border-color .2s}
+.corrin:focus{outline:none; border-color:var(--gold)}
+.corrin:disabled{opacity:.4; cursor:not-allowed}
+
+/* поля аргументации */
+.argbox textarea{width:100%; min-height:120px; padding:14px 16px; background:#0f1d15; border:1px solid var(--line);
+  border-radius:8px; color:var(--ink); font:inherit; font-size:15.5px; line-height:1.6; resize:vertical; transition:border-color .2s}
+.argbox textarea:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(211,169,79,.15)}
+.counter{margin-top:7px; font-size:12.5px; color:var(--faint); display:flex; justify-content:space-between}
+.counter.ok{color:var(--ok)}
+.hintline{font-size:13.5px; font-style:italic; color:var(--faint); margin:4px 0 12px}
+
+/* нижняя панель */
+#dock{position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:50;
+  display:flex; align-items:center; gap:18px; background:rgba(15,29,21,.94); border:1px solid rgba(211,169,79,.4);
+  border-radius:40px; padding:10px 12px 10px 24px; box-shadow:0 18px 44px rgba(0,0,0,.55); backdrop-filter:blur(6px)}
+#dockStatus{font-size:13.5px; color:var(--dim); white-space:nowrap}
+#dockStatus b{color:var(--gold)}
+#finishBtn{padding:11px 26px; font-size:15px; border-radius:30px}
+@media(max-width:560px){#dock{gap:10px; padding-left:16px} #dockStatus{font-size:12px}}
+
+/* модалка, тост */
+#overlay{position:fixed; inset:0; background:rgba(4,10,7,.8); z-index:80; display:grid; place-items:center; padding:20px}
+.modal{background:linear-gradient(180deg,var(--panel2),var(--panel)); border:1px solid var(--gold-d);
+  border-top:4px solid var(--gold); border-radius:10px; max-width:480px; width:100%; padding:32px; text-align:center;
+  animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.85); opacity:0}}
+.modal h3{font-size:28px; margin-bottom:12px}
+.modal p{font-size:15px; line-height:1.6; color:var(--dim); margin-bottom:22px}
+.modal .btnrow{display:flex; gap:12px; justify-content:center}
+.btn-ghost{background:transparent; border:1px solid var(--line); color:var(--dim)}
+.btn-ghost:hover{border-color:var(--gold); color:var(--ink)}
+#toast{position:fixed; top:18px; left:50%; transform:translateX(-50%) translateY(-140%); z-index:90;
+  background:#2a1512; border:1px solid var(--wax-l); color:#f2d5cf; padding:12px 22px; border-radius:8px;
+  font-size:14px; max-width:90vw; transition:transform .35s cubic-bezier(.2,1.2,.4,1); box-shadow:0 12px 30px rgba(0,0,0,.5)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ===== результаты ===== */
+#results{padding:56px 0 80px}
+.reshead{display:flex; gap:34px; align-items:center; flex-wrap:wrap; margin-bottom:14px}
+.stamp{width:148px; height:148px; border-radius:50%; border:3px solid var(--wax-l); position:relative; flex:0 0 auto;
+  display:grid; place-items:center; color:var(--wax-l); transform:rotate(-7deg);
+  box-shadow:inset 0 0 0 5px rgba(176,58,46,.14), inset 0 0 0 8px var(--wax-l), inset 0 0 0 11px rgba(176,58,46,.14);
+  animation:stampIn .65s cubic-bezier(.2,1.5,.35,1) .25s both; background:rgba(176,58,46,.06)}
+@keyframes stampIn{0%{transform:scale(2.6) rotate(-30deg); opacity:0}60%{transform:scale(.93) rotate(-5deg); opacity:1}100%{transform:scale(1) rotate(-7deg); opacity:1}}
+.stamp .g{font-family:'Oranienbaum',serif; font-size:72px; line-height:1}
+.stamp .l{font-size:10px; letter-spacing:.3em; text-transform:uppercase}
+.scorebig{font-family:'Oranienbaum',serif; font-size:clamp(44px,6vw,64px); line-height:1}
+.scorebig span{color:var(--gold)}
+.resmeta{color:var(--faint); font-size:14px; margin-top:8px; line-height:1.6}
+.resmeta b{color:var(--dim)}
+.bars{display:grid; gap:9px; margin:28px 0 38px; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:24px 26px}
+.bar-row{display:grid; grid-template-columns:180px 1fr 52px; gap:14px; align-items:center; font-size:14px}
+@media(max-width:640px){.bar-row{grid-template-columns:110px 1fr 46px; font-size:12.5px}}
+.bar-track{height:10px; background:#0f1d15; border-radius:6px; overflow:hidden}
+.bar-fill{height:100%; border-radius:6px; background:linear-gradient(90deg,var(--gold-d),var(--gold)); width:0; transition:width 1s ease .3s}
+.bar-fill.low{background:linear-gradient(90deg,#7c2f26,var(--wax-l))}
+.bar-val{text-align:right; color:var(--dim); font-variant-numeric:tabular-nums}
+.rev{background:linear-gradient(180deg,#182c21,#142419); border:1px solid var(--line); border-radius:10px;
+  padding:30px 32px; margin-bottom:26px; opacity:0; transform:translateY(22px); transition:all .55s ease}
+.rev.in{opacity:1; transform:none}
+.rev h3{font-size:26px; margin-bottom:4px}
+.rev .rscore{color:var(--gold); font-size:14px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:16px}
+.rev .rscore.bad{color:var(--wax-l)}
+.ansrow{display:flex; gap:10px; padding:9px 0; border-top:1px solid rgba(44,70,54,.55); font-size:15px; line-height:1.5}
+.mark{flex:0 0 auto; font-weight:700}
+.mark.ok{color:var(--ok)} .mark.bad{color:var(--wax-l)}
+.rightans{color:var(--gold)}
+.cite{background:var(--paper); color:var(--paper-ink); border-left:5px solid var(--wax); border-radius:0 8px 8px 0;
+  padding:18px 22px 14px; margin:18px 0 0; transform:rotate(-.4deg); box-shadow:0 12px 26px rgba(0,0,0,.35)}
+.cite p{font-style:italic; font-size:16.5px; line-height:1.55}
+.cite .src{display:block; margin-top:8px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#7a6a3a; font-style:normal}
+.model{background:#10201600; border:1px dashed rgba(211,169,79,.5); border-radius:8px; padding:16px 20px; margin-top:16px; font-size:15px; line-height:1.6}
+.model .caps{display:block; margin-bottom:8px}
+.model .utext{color:var(--dim); font-style:italic}
+.footnote{margin-top:34px; font-size:13px; color:var(--faint); line-height:1.7; border-top:1px solid var(--line); padding-top:18px}
+.btnrow-end{display:flex; gap:14px; margin-top:26px; flex-wrap:wrap}
+.flour{display:flex; align-items:center; gap:12px; margin:34px 0 30px; color:var(--gold-d)}
+.flour::before,.flour::after{content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold-d))}
+.flour::after{background:linear-gradient(90deg,var(--gold-d),transparent)}
+@media print{
+  body{background:#fff; color:#111} body::before,body::after,.leaf,#pbar,#dock,#toast{display:none}
+  .task,.rev{opacity:1; transform:none; border-color:#aaa; background:#fff; color:#111; box-shadow:none}
+  .cite{box-shadow:none} .btn{display:none}
+}
+</style>
+</head>
+<body>
+
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="oakleaf" viewBox="0 0 64 84">
+    <path d="M32 6 C36 14 44 13 47 20 C55 22 53 32 46 34 C53 40 49 50 40 48 C40 57 33 61 32 62 C31 61 24 57 24 48 C15 50 11 40 18 34 C11 32 9 22 17 20 C20 13 28 14 32 6 Z"/>
+    <path d="M32 60 L32 80" stroke="currentColor" stroke-width="3" fill="none"/>
+    <path d="M32 12 L32 56" stroke="rgba(0,0,0,.25)" stroke-width="2" fill="none"/>
+  </symbol>
+</svg>
+
+<div id="pbar"></div>
+
+<!-- ================= ЗАСТАВКА ================= -->
+<header id="intro">
+  <div class="wrap">
+    <div class="kickrow">
+      <span class="rule"></span>
+      <span class="caps">Рабочий лист · 6 класс · Русский язык и литература</span>
+    </div>
+    <div class="duo">
+      <div>
+        <div class="author">А. С. Пушкин</div>
+        <h1 class="big"><em>«ДУБРОВСКИЙ»</em></h1>
+        <div class="subhead">Смысл финала романа. Трагедия невозможного счастья и нравственный выбор героя</div>
+        <p class="lede">Кольцо в дупле дуба, перехваченная карета, слово, данное перед алтарём, и приказ «Не трогать его!»… Финал «Дубровского» обрывается на полуслове — как и сама судьба героя. Разберись, что теряет Владимир, какие решения принимает и почему счастье оказалось невозможным.</p>
+      </div>
+      <aside class="billet">
+        <span class="caps">Условия испытания</span>
+        <h2 class="disp">Одна попытка</h2>
+        <ul class="rules">
+          <li><span><b>Попытка одна.</b> После кнопки «Завершить работу» изменить ответы нельзя.</span></li>
+          <li><span><b>Подсказок нет.</b> Вспоминай текст романа сам.</span></li>
+          <li><span><b>Аргументация обязательна:</b> задания 5, 6 и рефлексия не примутся без развёрнутого ответа.</span></li>
+          <li><span><b>После завершения</b> откроются правильные ответы, разбор и цитаты из романа.</span></li>
+        </ul>
+        <input id="nameIn" type="text" maxlength="60" placeholder="Имя и фамилия (необязательно)">
+        <button class="btn btn-gold" id="startBtn">Начать работу →</button>
+        <div class="tinynote">Результат сохранится на этом устройстве. Максимум — 28 баллов.</div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<!-- ================= ЗАДАНИЯ ================= -->
+<main id="quiz" class="hidden">
+<div class="wrap">
+
+  <!-- 1 -->
+  <section class="task" id="task1">
+    <div class="tnum">I</div>
+    <div class="thead"><h2>Событие и его значение</h2><span class="pts">4 балла</span></div>
+    <p class="instr">Соедини событие финала и его значение: нажми нужную цифру в каждой строке.</p>
+    <div class="meanings">
+      <div><b>1</b><span>Кольцо становится условным знаком: по нему Дубровский узнает, что Маше нужна помощь.</span></div>
+      <div><b>2</b><span>Маша говорит, что уже обвенчана и считает Верейского своим мужем.</span></div>
+      <div><b>3</b><span>Дубровский не позволяет сообщникам тронуть Верейского.</span></div>
+      <div><b>4</b><span>Дубровский прекращает жить с шайкой и уходит.</span></div>
+    </div>
+    <div id="matchRows"></div>
+  </section>
+
+  <!-- 2 -->
+  <section class="task" id="task2">
+    <div class="tnum">II</div>
+    <div class="thead"><h2>Что теряет — что решает</h2><span class="pts">6 баллов</span></div>
+    <p class="instr">Распредели утверждения: что Владимир <b>теряет</b> и какие <b>решения</b> принимает.</p>
+    <div class="legend"><span>◈ Теряет</span><span>◈ Принимает решение</span></div>
+    <div id="classRows"></div>
+  </section>
+
+  <!-- 3 -->
+  <section class="task" id="task3">
+    <div class="tnum">III</div>
+    <div class="thead"><h2>Восстанови последовательность</h2><span class="pts">4 балла</span></div>
+    <p class="instr">Стрелками расставь события финала <b>по порядку</b>: от первого (1) к последнему (4).</p>
+    <ol id="seqList"></ol>
+  </section>
+
+  <!-- 4 -->
+  <section class="task" id="task4">
+    <div class="tnum">IV</div>
+    <div class="thead"><h2>Найди и исправь три ошибки</h2><span class="pts">6 баллов</span></div>
+    <p class="instr">В тексте <b>три фактические ошибки</b>. Нажми на ошибочные места (выделились красным), затем запиши исправления.</p>
+    <p class="errtext" id="errText"></p>
+    <div class="selcount">Отмечено ошибок: <b id="selNum">0</b> из 3</div>
+    <div class="corrs">
+      <div><label for="corr0">Исправление 1</label><input class="corrin" id="corr0" disabled placeholder="Как было на самом деле?"></div>
+      <div><label for="corr1">Исправление 2</label><input class="corrin" id="corr1" disabled placeholder="Как было на самом деле?"></div>
+      <div><label for="corr2">Исправление 3</label><input class="corrin" id="corr2" disabled placeholder="Как было на самом деле?"></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="task argbox" id="task5">
+    <div class="tnum">V</div>
+    <div class="thead"><h2>Сравни два эпизода</h2><span class="argtag">Аргументация обязательна</span><span class="pts">4 балла</span></div>
+    <p class="hintline">Пара 1: Маша передаёт кольцо как знак, чтобы попросить о помощи, — Дубровский приезжает к карете уже после венчания.<br>Пара 2: Дубровский останавливает карету силой — но приказывает не трогать Верейского и не увозит Машу против её воли.</p>
+    <p class="instr">Какой контраст ты видишь в этих парах? Напиши <b>2–3 предложения</b> (не меньше 80 знаков).</p>
+    <textarea id="t5" placeholder="Мой ответ…"></textarea>
+    <div class="counter" id="c5"><span>0 знаков</span><span>минимум — 80</span></div>
+  </section>
+
+  <!-- 6 -->
+  <section class="task argbox" id="task6">
+    <div class="tnum">VI</div>
+    <div class="thead"><h2>Обоснуй вывод</h2><span class="argtag">Аргументация обязательна</span><span class="pts">4 балла</span></div>
+    <p class="instr">Почему финал можно назвать <b>трагическим</b>, хотя Дубровский не позволяет сообщникам тронуть Верейского? Напиши <b>3–4 предложения</b> (не меньше 100 знаков), упомяни хотя бы один эпизод финала и объясни, как ты понимаешь поступок Владимира.</p>
+    <textarea id="t6" placeholder="Мой ответ…"></textarea>
+    <div class="counter" id="c6"><span>0 знаков</span><span>минимум — 100</span></div>
+  </section>
+
+  <!-- 7 -->
+  <section class="task argbox" id="task7">
+    <div class="tnum">VII</div>
+    <div class="thead"><h2>Творческое задание</h2><span class="pts">не оценивается</span></div>
+    <p class="instr">Представь, что Дубровский остался один после того, как карета уехала. Напиши его внутренний монолог из 3–4 предложений: передай боль утраты и решение не заставлять Машу уехать. Используй хотя бы одно слово: <b>честь, любовь, выбор, свобода</b>.</p>
+    <textarea id="t7" placeholder="Внутренний монолог Владимира…"></textarea>
+  </section>
+
+  <!-- рефлексия -->
+  <section class="task argbox" id="taskR">
+    <div class="tnum">✦</div>
+    <div class="thead"><h2>Короткая рефлексия</h2><span class="argtag">Аргументация обязательна</span></div>
+    <p class="instr">Какой поступок или эпизод финала лучше всего помогает понять характер Дубровского? Назови его и объясни почему.</p>
+    <textarea id="tr" style="min-height:90px" placeholder="Мой ответ…"></textarea>
+    <div class="counter" id="cr"><span>0 знаков</span><span>минимум — 40</span></div>
+  </section>
+
+</div>
+</main>
+
+<!-- нижняя панель -->
+<div id="dock" class="hidden">
+  <span id="dockStatus">Выполнено <b>0</b> из 7</span>
+  <button class="btn btn-gold" id="finishBtn">Завершить работу</button>
+</div>
+
+<!-- подтверждение -->
+<div id="overlay" class="hidden">
+  <div class="modal">
+    <h3 class="disp">Последний шаг</h3>
+    <p>Помни: <b>попытка одна</b>. После завершения откроются правильные ответы и цитаты, но изменить ничего будет нельзя.</p>
+    <div class="btnrow">
+      <button class="btn btn-ghost" id="backBtn">Вернуться</button>
+      <button class="btn btn-gold" style="width:auto" id="confirmBtn">Завершить и проверить</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- ================= РЕЗУЛЬТАТЫ ================= -->
+<section id="results" class="hidden"><div class="wrap" id="resWrap"></div></section>
+
+<script>
+(function(){
+"use strict";
+var KEY='dubrovsky_ws_v1';
+
+/* ---------- данные ---------- */
+var EVENTS=[
+ {l:'А',t:'Саша по просьбе Маши кладёт кольцо в дупло дуба.'},
+ {l:'Б',t:'После венчания Маша отказывается уехать с Дубровским.'},
+ {l:'В',t:'Дубровский останавливает карету и приказывает: «Не трогать его!»'},
+ {l:'Г',t:'Дубровский распускает шайку и исчезает.'}
+];
+var KEY1={А:1,Б:2,В:3,Г:4};
+var STMT=[
+ {t:'Дом и имение отца.'},{t:'Возможность быть с Машей.'},{t:'Шайку, которую он распускает.'},
+ {t:'Приказывает не трогать Верейского.'},{t:'Не заставляет Машу уехать с ним.'},{t:'Решает оставить сообщников.'}
+];
+var KEY2=['lose','lose','lose','dec','dec','dec'];
+var SEQDEF={
+ a:'Дубровский останавливает карету Верейского.',
+ b:'Саша кладёт кольцо в дупло по просьбе Маши.',
+ c:'Дубровский распускает шайку и исчезает.',
+ d:'После венчания Маша отказывается уехать с Дубровским.'
+};
+var SEQKEY=['b','d','a','c'];
+var FRAGS=[
+ {id:'f1',t:'Маша попросила Сашу',err:null},
+ {id:'f2',t:'у входа в дом',err:'e1'},
+ {id:'f3',t:'После венчания',err:null},
+ {id:'f4',t:'согласилась уехать',err:'e2'},
+ {id:'f5',t:'с Дубровским',err:null},
+ {id:'f6',t:'Во время встречи у кареты',err:null},
+ {id:'f7',t:'Дубровский приказал сообщникам',err:null},
+ {id:'f8',t:'расправиться с Верейским',err:'e3'}
+];
+var PAT={e1:/дупл|дуб/,e2:/отказ|не согласи|не уеха|не поеха|обвенча/,e3:/не трог|не трон|не вреди|пощад|не убив|отпусти|не стал/};
+var MAX=[4,6,4,6,4,4], TOTAL=28;
+
+/* ---------- состояние ---------- */
+var S=load()||{v:1,name:'',started:false,startedAt:0,submitted:false,submittedAt:0,
+ a:{t1:{},t2:{},t3:['a','b','c','d'],t3t:false,t4sel:[],t4c:['','',''],t5:'',t6:'',t7:'',r:''}};
+function load(){try{return JSON.parse(localStorage.getItem(KEY));}catch(e){return null;}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+/* ---------- листья ---------- */
+(function(){
+ for(var i=0;i<8;i++){
+   var d=document.createElement('div'); d.className='leaf';
+   var sz=26+Math.random()*44; d.style.width=sz+'px'; d.style.height=(sz*1.3)+'px';
+   d.style.left=(Math.random()*100)+'vw'; d.style.top=(-10-Math.random()*20)+'vh';
+   d.style.animationDuration=(22+Math.random()*26)+'s'; d.style.animationDelay=(-Math.random()*30)+'s';
+   d.style.opacity=(.08+Math.random()*.14).toFixed(2);
+   d.innerHTML='<svg><use href="#oakleaf"/></svg>';
+   document.body.appendChild(d);
+ }
+})();
+
+/* ---------- построение заданий ---------- */
+var matchWrap=document.getElementById('matchRows');
+EVENTS.forEach(function(ev){
+ var row=document.createElement('div'); row.className='mrow';
+ var opts=''; for(var v=1;v<=4;v++){opts+='<button type="button" class="opt" data-letter="'+ev.l+'" data-v="'+v+'">'+v+'</button>';}
+ row.innerHTML='<div class="ev"><b>'+ev.l+'</b>'+ev.t+'</div><div class="opts">'+opts+'</div>';
+ matchWrap.appendChild(row);
+});
+matchWrap.addEventListener('click',function(e){
+ var b=e.target.closest('.opt'); if(!b)return;
+ S.a.t1[b.dataset.letter]=+b.dataset.v; save(); paintT1(); progress();
+});
+function paintT1(){
+ matchWrap.querySelectorAll('.opt').forEach(function(b){
+   b.classList.toggle('on', S.a.t1[b.dataset.letter]===+b.dataset.v);
+ });
+}
+
+var classWrap=document.getElementById('classRows');
+STMT.forEach(function(s,i){
+ var row=document.createElement('div'); row.className='clsrow';
+ row.innerHTML='<div class="st"><b>'+(i+1)+'</b>'+s.t+'</div>'+
+  '<div class="pair"><button type="button" class="abtn" data-i="'+i+'" data-a="lose">Теряет</button>'+
+  '<button type="button" class="abtn" data-i="'+i+'" data-a="dec">Решение</button></div>';
+ classWrap.appendChild(row);
+});
+classWrap.addEventListener('click',function(e){
+ var b=e.target.closest('.abtn'); if(!b)return;
+ S.a.t2[b.dataset.i]=b.dataset.a; save(); paintT2(); progress();
+});
+function paintT2(){
+ classWrap.querySelectorAll('.abtn').forEach(function(b){
+   b.classList.toggle('on', S.a.t2[b.dataset.i]===b.dataset.a);
+ });
+}
+
+var seqList=document.getElementById('seqList');
+function renderSeq(){
+ seqList.innerHTML='';
+ S.a.t3.forEach(function(id,idx){
+   var li=document.createElement('li'); li.className='srow';
+   li.innerHTML='<span class="rank">'+(idx+1)+'</span><span class="stxt">'+SEQDEF[id]+'</span>'+
+    '<span class="arrows"><button type="button" class="arr" data-id="'+id+'" data-dir="-1">▲</button>'+
+    '<button type="button" class="arr" data-id="'+id+'" data-dir="1">▼</button></span>';
+   seqList.appendChild(li);
+ });
+}
+seqList.addEventListener('click',function(e){
+ var b=e.target.closest('.arr'); if(!b)return;
+ var arr=S.a.t3, i=arr.indexOf(b.dataset.id), ni=i+(+b.dataset.dir);
+ if(ni<0||ni>=arr.length)return;
+ arr[i]=arr[ni]; arr[ni]=b.dataset.id; S.a.t3t=true; save(); renderSeq(); progress();
+});
+
+/* текст с ошибками */
+var errText=document.getElementById('errText');
+(function(){
+ var html='';
+ FRAGS.forEach(function(f,i){
+   html+='<span class="frag" data-f="'+f.id+'">'+f.t+'</span>';
+   if(i===1)html+='.'; if(i===1)html+=' ';
+   if(i===2)html+=' она ';
+   if(i===4)html+='.';
+   if(i===5)html+=' '; if(i===6)html+=' '; if(i===7)html+=' '; if(i===0)html+=' ';
+   if(i===3)html+=' ';
+ });
+ html+='.';
+ errText.innerHTML=html;
+})();
+errText.addEventListener('click',function(e){
+ var sp=e.target.closest('.frag'); if(!sp)return;
+ var id=sp.dataset.f, sel=S.a.t4sel, i=sel.indexOf(id);
+ if(i>-1){sel.splice(i,1);}
+ else{ if(sel.length>=3){toast('Можно отметить не больше трёх ошибок');return;} sel.push(id); }
+ save(); paintT4(); progress();
+});
+function paintT4(){
+ errText.querySelectorAll('.frag').forEach(function(sp){
+   sp.classList.toggle('sel', S.a.t4sel.indexOf(sp.dataset.f)>-1);
+ });
+ document.getElementById('selNum').textContent=S.a.t4sel.length;
+ var en=S.a.t4sel.length===3;
+ ['corr0','corr1','corr2'].forEach(function(id,ix){
+   var el=document.getElementById(id); el.disabled=!en; el.value=S.a.t4c[ix];
+ });
+}
+['corr0','corr1','corr2'].forEach(function(id,ix){
+ document.getElementById(id).addEventListener('input',function(){
+   S.a.t4c[ix]=this.value; save(); progress();
+ });
+});
+
+/* текстовые поля */
+function bindText(id,field,counterId,min){
+ var ta=document.getElementById(id), c=document.getElementById(counterId);
+ ta.addEventListener('input',function(){
+   S.a[field]=ta.value; save();
+   var n=ta.value.trim().length;
+   c.firstElementChild.textContent=n+' знаков';
+   c.classList.toggle('ok',n>=min);
+   progress();
+ });
+}
+bindText('t5','t5','c5',80);
+bindText('t6','t6','c6',100);
+bindText('t7','t7',null,0);
+bindText('tr','r','cr',40);
+document.getElementById('t7').addEventListener('input',function(){S.a.t7=this.value;save();});
+
+/* ---------- полнота и прогресс ---------- */
+function done(){
+ var d=[];
+ d.push(['task1', EVENTS.every(function(ev){return S.a.t1[ev.l];})]);
+ d.push(['task2', STMT.every(function(s,i){return S.a.t2[i];})]);
+ d.push(['task3', S.a.t3t]);
+ d.push(['task4', S.a.t4sel.length===3 && S.a.t4c.every(function(c){return c.trim().length>=4;})]);
+ d.push(['task5', S.a.t5.trim().length>=80]);
+ d.push(['task6', S.a.t6.trim().length>=100]);
+ d.push(['taskR', S.a.r.trim().length>=40]);
+ return d;
+}
+function progress(){
+ var d=done(), n=d.filter(function(x){return x[1];}).length;
+ document.getElementById('pbar').style.width=(n/d.length*100)+'%';
+ document.getElementById('dockStatus').innerHTML='Выполнено <b>'+n+'</b> из '+d.length;
+}
+
+/* ---------- запуск ---------- */
+document.getElementById('startBtn').addEventListener('click',function(){
+ S.name=document.getElementById('nameIn').value.trim();
+ S.started=true; S.startedAt=Date.now(); save();
+ startQuiz();
+});
+function startQuiz(){
+ document.getElementById('intro').classList.add('hidden');
+ document.getElementById('quiz').classList.remove('hidden');
+ document.getElementById('dock').classList.remove('hidden');
+ restore(); progress();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function restore(){
+ document.getElementById('nameIn').value=S.name||'';
+ paintT1(); paintT2(); renderSeq(); paintT4();
+ document.getElementById('t5').value=S.a.t5;
+ document.getElementById('t6').value=S.a.t6;
+ document.getElementById('t7').value=S.a.t7;
+ document.getElementById('tr').value=S.a.r;
+ [['c5','t5',80],['c6','t6',100],['cr','r',40]].forEach(function(x){
+   var c=document.getElementById(x[0]), n=S.a[x[1]].trim().length;
+   c.firstElementChild.textContent=n+' знаков'; c.classList.toggle('ok',n>=x[2]);
+ });
+}
+
+/* появление карточек */
+var io=new IntersectionObserver(function(es){
+ es.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in'); io.unobserve(en.target);} });
+},{threshold:.12});
+document.querySelectorAll('.task').forEach(function(t){io.observe(t);});
+
+/* ---------- завершение ---------- */
+var finishBtn=document.getElementById('finishBtn');
+finishBtn.addEventListener('click',function(){
+ var miss=done().filter(function(x){return !x[1];}).map(function(x){return x[0];});
+ if(miss.length){
+   toast('Не всё готово: есть незавершённые задания. Работа не примется без аргументации.');
+   miss.forEach(function(id){
+     var el=document.getElementById(id);
+     el.classList.add('miss');
+     setTimeout(function(){el.classList.remove('miss');},1200);
+   });
+   document.getElementById(miss[0]).scrollIntoView({behavior:'smooth',block:'center'});
+   return;
+ }
+ document.getElementById('overlay').classList.remove('hidden');
+});
+document.getElementById('backBtn').addEventListener('click',function(){
+ document.getElementById('overlay').classList.add('hidden');
+});
+document.getElementById('confirmBtn').addEventListener('click',function(){
+ document.getElementById('overlay').classList.add('hidden');
+ S.submitted=true; S.submittedAt=Date.now(); save();
+ renderResults();
+});
+
+/* ---------- проверка ---------- */
+function kwCount(text,list){
+ var n=0; list.forEach(function(k){ if(text.indexOf(k)>-1)n++; }); return n;
+}
+function grade(){
+ var r={scores:[0,0,0,0,0,0]};
+ // 1
+ r.t1={}; r.scores[0]=0;
+ EVENTS.forEach(function(ev){
+   var user=S.a.t1[ev.l]||0;
+   r.t1[ev.l]={user:user,right:KEY1[ev.l]};
+   if(user===KEY1[ev.l])r.scores[0]++;
+ });
+ // 2
+ r.t2=[]; r.scores[1]=0;
+ STMT.forEach(function(s,i){
+   var user=S.a.t2[i]||'—';
+   r.t2.push({user:user,right:KEY2[i]});
+   if(user===KEY2[i])r.scores[1]++;
+ });
+ // 3
+ r.t3=[]; r.scores[2]=0;
+ S.a.t3.forEach(function(id,idx){
+   var ok=SEQKEY[idx]===id;
+   r.t3.push({id:id,ok:ok,pos:idx+1});
+   if(ok)r.scores[2]++;
+ });
+ // 4
+ r.scores[3]=0;
+ r.t4sel=S.a.t4sel.map(function(id){
+   var f=FRAGS.filter(function(x){return x.id===id;})[0];
+   var ok=!!f.err; if(ok)r.scores[3]++;
+   return {id:id,t:f.t,ok:ok};
+ });
+ var groups={e1:false,e2:false,e3:false};
+ S.a.t4c.forEach(function(c){
+   var l=c.toLowerCase();
+   for(var g in PAT){ if(PAT[g].test(l))groups[g]=true; }
+ });
+ r.corrPts=(groups.e1?1:0)+(groups.e2?1:0)+(groups.e3?1:0);
+ r.scores[3]+=r.corrPts;
+ // 5
+ var t5=S.a.t5.toLowerCase(), p5=0;
+ if(S.a.t5.trim().length>=80)p5+=2;
+ if(kwCount(t5,['обвенча','венча','поздно','клятв','не трог','не трон','не заставля','не увоз','не уезж','не уеха','пощад','против воли','кольц','дуб','спас','помощ'])>=2)p5+=2;
+ r.scores[4]=p5;
+ // 6
+ var t6=S.a.t6.toLowerCase(), p6=0;
+ if(S.a.t6.trim().length>=100)p6+=2;
+ if(kwCount(t6,['обвенча','венча','карет','кольц','шайк','не трог','не трон','отказ','распуска'])>=1)p6+=1;
+ if(kwCount(t6,['уважен','выбор','клятв','обещан','самооблад','совест','благород','волю','нравств','люб','честь','достоинств'])>=1)p6+=1;
+ r.scores[5]=p6;
+ r.total=r.scores.reduce(function(a,b){return a+b;},0);
+ r.grade=r.total>=25?5:r.total>=20?4:r.total>=14?3:2;
+ return r;
+}
+
+/* ---------- результаты ---------- */
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function cite(t,s){return '<div class="cite"><p>'+t+'</p><span class="src">'+s+'</span></div>';}
+function mark(ok){return '<span class="mark '+(ok?'ok':'bad')+'">'+(ok?'✓':'✗')+'</span>';}
+
+function renderResults(){
+ var r=grade(), a=S.a;
+ document.getElementById('quiz').classList.add('hidden');
+ document.getElementById('intro').classList.add('hidden');
+ document.getElementById('dock').classList.add('hidden');
+ document.getElementById('pbar').style.width='100%';
+ var res=document.getElementById('results'); res.classList.remove('hidden');
+
+ var nm=S.name?esc(S.name):'Шестиклассник';
+ var mins=Math.max(1,Math.round((S.submittedAt-S.startedAt)/60000));
+ var dt=new Date(S.submittedAt).toLocaleString('ru-RU',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
+
+ var html='';
+ html+='<div class="reshead"><div class="stamp"><div><div class="l">оценка</div><div class="g">'+r.grade+'</div></div></div>';
+ html+='<div><div class="caps">Испытание завершено · одна попытка использована</div>';
+ html+='<div class="scorebig">'+r.total+' <span>/ '+TOTAL+'</span> баллов</div>';
+ html+='<div class="resmeta"><b>'+nm+'</b> · '+dt+'<br>Время работы: около '+mins+' мин. Изменить ответы уже нельзя.</div></div></div>';
+
+ var names=['Задание 1','Задание 2','Задание 3','Задание 4','Задание 5','Задание 6'];
+ html+='<div class="bars">';
+ for(var i=0;i<6;i++){
+   var pc=Math.round(r.scores[i]/MAX[i]*100);
+   html+='<div class="bar-row"><span>'+names[i]+'</span><div class="bar-track"><div class="bar-fill'+(pc<50?' low':'')+'" data-w="'+pc+'"></div></div><span class="bar-val">'+r.scores[i]+' / '+MAX[i]+'</span></div>';
+ }
+ html+='</div>';
+
+ html+='<div class="caps" style="margin-bottom:6px">Разбор ответов и цитаты</div><div class="flour">❦</div>';
+
+ /* 1 */
+ html+='<div class="rev"><h3>Задание 1 · Событие и значение</h3><div class="rscore'+(r.scores[0]<4?' bad':'')+'">'+r.scores[0]+' из 4</div>';
+ EVENTS.forEach(function(ev){
+   var x=r.t1[ev.l], ok=x.user===x.right;
+   html+='<div class="ansrow">'+mark(ok)+'<span><b>'+ev.l+'.</b> '+(x.user||'—')+
+    (ok?'':' <span class="rightans">→ верно: '+x.right+'</span>')+'</span></div>';
+ });
+ html+=cite('«…Если когда-нибудь понадобится вам моя помощь… положите это кольцо в дупло дуба…»','Дубровский — Маше · условный знак помощи');
+ html+='</div>';
+
+ /* 2 */
+ html+='<div class="rev"><h3>Задание 2 · Что теряет — что решает</h3><div class="rscore'+(r.scores[1]<6?' bad':'')+'">'+r.scores[1]+' из 6</div>';
+ html+='<div class="ansrow">'+mark(true)+'<span><b>Теряет:</b> 1 — дом и имение отца, 2 — возможность быть с Машей, 3 — шайку, которую распускает.</span></div>';
+ html+='<div class="ansrow">'+mark(true)+'<span><b>Принимает решения:</b> 4 — не трогать Верейского, 5 — не заставлять Машу, 6 — оставить сообщников.</span></div>';
+ var bad2=r.t2.filter(function(x){return x.user!==x.right;}).length;
+ if(bad2)html+='<div class="ansrow">'+mark(false)+'<span>У тебя '+bad2+' пункт(а) распределены иначе — сверься с верным ответом выше.</span></div>';
+ html+='<div class="cite"><p>В финале Владимир теряет всё: отцовский дом, имение, будущее с Машей. Но именно решения — пощадить Верейского, отпустить Машу, распустить шайку — показывают его нравственный выбор.</p><span class="src">Комментарий к финалу</span></div>';
+ html+='</div>';
+
+ /* 3 */
+ html+='<div class="rev"><h3>Задание 3 · Последовательность</h3><div class="rscore'+(r.scores[2]<4?' bad':'')+'">'+r.scores[2]+' из 4</div>';
+ SEQKEY.forEach(function(id,idx){
+   var mine=S.a.t3[idx], ok=mine===id;
+   html+='<div class="ansrow">'+mark(ok)+'<span><b>'+(idx+1)+'.</b> '+SEQDEF[id]+(ok?'':' <span class="rightans">(у тебя на этом месте: '+SEQDEF[mine]+')</span>')+'</span></div>';
+ });
+ html+=cite('«Я обвенчана, я жена князя Верейского»','Маша · финал романа');
+ html+='</div>';
+
+ /* 4 */
+ html+='<div class="rev"><h3>Задание 4 · Три ошибки</h3><div class="rscore'+(r.scores[3]<6?' bad':'')+'">'+r.scores[3]+' из 6</div>';
+ r.t4sel.forEach(function(x){
+   html+='<div class="ansrow">'+mark(x.ok)+'<span>«'+esc(x.t)+'» '+(x.ok?'<span class="rightans">— ошибка найдена верно</span>':'— это не ошибка')+'</span></div>';
+ });
+ html+='<div class="ansrow">'+mark(r.corrPts===3)+'<span><b>Верные исправления:</b> 1) кольцо — в дупло дуба; 2) после венчания Маша отказывается уехать; 3) Дубровский приказывает не трогать Верейского. <span class="rightans">('+(r.corrPts)+' из 3 твоих исправлений приняты)</span></span></div>';
+ html+=cite('«…положите это кольцо в дупло дуба…»','знак для Дубровского');
+ html+=cite('«Я обвенчана, я жена князя Верейского»','Маша отказывается нарушить клятву');
+ html+=cite('«Не трогать его!»','Дубровский щадит Верейского');
+ html+='</div>';
+
+ /* 5 */
+ html+='<div class="rev"><h3>Задание 5 · Два контраста</h3><div class="rscore'+(r.scores[4]<4?' bad':'')+'">'+r.scores[4]+' из 4</div>';
+ html+='<div class="ansrow">'+mark(a.t5.trim().length>=80)+'<span>Объём аргументации: '+(a.t5.trim().length>=80?'выдержан':'меньше минимума')+'.</span></div>';
+ html+='<div class="model"><span class="caps">Твой ответ</span><span class="utext">'+(esc(a.t5)||'—')+'</span></div>';
+ html+='<div class="model"><span class="caps">Образец ответа</span>Кольцо даёт Маше надежду на помощь, но помощь приходит слишком поздно: Маша уже обвенчана. Дубровский останавливает карету, однако не заставляет Машу уехать и не позволяет сообщникам тронуть Верейского. Этот контраст — столкновение надежды на спасение с невозможностью изменить случившееся.</div>';
+ html+=cite('«Я обвенчана, я жена князя Верейского»','надежда на спасение разбивается о свершившееся венчание');
+ html+='</div>';
+
+ /* 6 */
+ html+='<div class="rev"><h3>Задание 6 · Почему финал трагический</h3><div class="rscore'+(r.scores[5]<4?' bad':'')+'">'+r.scores[5]+' из 4</div>';
+ html+='<div class="model"><span class="caps">Твой ответ</span><span class="utext">'+(esc(a.t6)||'—')+'</span></div>';
+ html+='<div class="model"><span class="caps">Образец ответа</span>Финал трагический, потому что Дубровский приезжает, когда Маша уже обвенчана и отказывается уехать с ним. Он приказывает не трогать Верейского, хотя его сообщники готовы напасть. Этот поступок — проявление самообладания и уважения к решению Маши. В конце Дубровский оставляет шайку и исчезает, а судьба героев остаётся тяжёлой.</div>';
+ html+='<div class="cite"><p>Роман остался незавершённым: Пушкин оборвал повествование, не дав героям будущего. Трагедия финала — в невозможности счастья, когда честь и клятва оказываются сильнее любви.</p><span class="src">О финале романа</span></div>';
+ html+='</div>';
+
+ /* 7 + рефлексия */
+ html+='<div class="rev"><h3>Творческое задание и рефлексия</h3><div class="rscore">не входят в 28 баллов</div>';
+ if(a.t7.trim()){
+   var hasWord=/честь|любов|выбор|свобод/.test(a.t7.toLowerCase());
+   html+='<div class="ansrow">'+mark(hasWord)+'<span>Слово из списка (честь / любовь / выбор / свобода): '+(hasWord?'использовано':'не найдено')+'.</span></div>';
+   html+='<div class="model"><span class="caps">Твой монолог</span><span class="utext">'+esc(a.t7)+'</span></div>';
+ } else html+='<div class="ansrow"><span class="mark">—</span><span>Монолог не написан — задание было необязательным.</span></div>';
+ html+='<div class="model"><span class="caps">Образец монолога</span>Я хотел спасти её, но не могу заставить её идти со мной. Она сказала, что дала клятву. Мне больно, но я не стану решать за неё.</div>';
+ html+='<div class="model"><span class="caps">Твоя рефлексия</span><span class="utext">'+(esc(a.r)||'—')+'</span></div>';
+ html+='<div class="model"><span class="caps">Пример</span>Приказ «Не трогать его!» лучше всего раскрывает характер Дубровского: даже раненный и униженный, он сохраняет честь и не мстит тому, кто отнял у него всё.</div>';
+ html+='</div>';
+
+ html+='<div class="footnote">Шкала: 25–28 баллов — «5» · 20–24 — «4» · 14–19 — «3» · 0–13 — «2». Развёрнутые ответы оценены автоматически по объёму и ключевым смысловым опорам — сверь их с образцами выше. Цитаты приведены с сокращениями: точные формулировки проверяй по тексту романа.</div>';
+ html+='<div class="btnrow-end"><button class="btn btn-gold" style="width:auto" onclick="window.print()">Распечатать результат</button></div>';
+
+ document.getElementById('resWrap').innerHTML=html;
+ window.scrollTo({top:0});
+ // анимации
+ requestAnimationFrame(function(){
+   document.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.w+'%';});
+   var rio=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');rio.unobserve(en.target);}});},{threshold:.08});
+   document.querySelectorAll('.rev').forEach(function(x){rio.observe(x);});
+ });
+}
+
+/* ---------- тост ---------- */
+var toastTimer;
+function toast(msg){
+ var t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+ clearTimeout(toastTimer); toastTimer=setTimeout(function(){t.classList.remove('show');},2800);
+}
+
+/* ---------- старт при загрузке ---------- */
+if(S.submitted){ renderResults(); }
+else if(S.started){ startQuiz(); }
+})();
+</script>
+</body>
+</html>
