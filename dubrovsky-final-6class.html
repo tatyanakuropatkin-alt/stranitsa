@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дубровский · Финал романа · Рабочий лист · 6 класс</title>
+<style>
+  :root{
+    --bg:#f6f1e7; --card:#fffdf8; --ink:#22262f; --muted:#6d6558;
+    --accent:#7a2e2e; --accent2:#b08442; --line:#e2d8c6;
+    --ok:#2e6b45; --okbg:#e9f4ec; --bad:#8f2b2b; --badbg:#fbeceb; --warn:#8a6412;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+  h1,h2,h3,.serif{font-family:Georgia,"Times New Roman",serif}
+  header.top{position:sticky;top:0;z-index:20;background:#2b2118;color:#f4ece0;
+       padding:10px 16px;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+  .top-in{max-width:960px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .top-in .t{font-family:Georgia,serif;font-size:17px}
+  .top-in .s{font-size:12.5px;color:#cdbfa8}
+  .spacer{flex:1}
+  .chip{background:#3d3025;border:1px solid #5b4835;color:#f0e4d2;border-radius:999px;
+        padding:4px 11px;font-size:12.5px;white-space:nowrap}
+  main{max-width:960px;margin:0 auto;padding:18px 14px 70px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:18px 18px 20px;margin:0 0 16px;box-shadow:0 1px 3px rgba(80,60,30,.06)}
+  .card h2{margin:0 0 4px;font-size:20px;color:var(--accent)}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
+       border-radius:50%;background:var(--accent);color:#fff;font-size:14px;margin-right:9px;font-family:Arial}
+  .task-head{display:flex;align-items:flex-start;gap:4px;margin-bottom:8px}
+  .pts{margin-left:auto;font-size:12.5px;color:var(--muted);background:#f2ebdd;border:1px solid var(--line);
+       border-radius:999px;padding:3px 10px;white-space:nowrap}
+  .lead{color:var(--muted);font-size:14.5px;margin:0 0 14px}
+  .rules{background:#fbf6ea;border-left:4px solid var(--accent2);padding:12px 14px;border-radius:8px;margin:14px 0}
+  .rules li{margin:5px 0}
+  label.fld{display:block;font-size:13.5px;color:var(--muted);margin:10px 0 4px}
+  input[type=text],select,textarea{width:100%;padding:10px 12px;border:1px solid #cfc3ae;border-radius:9px;
+       background:#fff;font:inherit;color:var(--ink)}
+  textarea{min-height:120px;resize:vertical}
+  input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--accent2);outline-offset:1px}
+  .row{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .row:last-child{border-bottom:0}
+  .row .txt{flex:1}
+  .row select{max-width:110px}
+  .letters{font-weight:700;color:var(--accent);margin-right:6px}
+  .legend{background:#f7f2e6;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14.5px;margin-bottom:8px}
+  .legend div{margin:3px 0}
+  .assign{display:flex;gap:6px;flex-wrap:wrap}
+  .toggle{border:1px solid #cfc3ae;background:#fff;border-radius:999px;padding:7px 13px;font-size:13.5px;cursor:pointer}
+  .toggle[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .frag{font:inherit;background:#fff;border:1px dashed transparent;border-bottom:1px dotted #b9ab93;
+        padding:2px 3px;margin:0 1px;border-radius:5px;cursor:pointer;text-align:left}
+  .frag:hover{background:#f4ecdd}
+  .frag[aria-pressed=true]{background:#fbe9e6;border-bottom:2px solid var(--bad);text-decoration:underline;
+        text-decoration-color:var(--bad);font-weight:600}
+  .quote-src{background:#fbf7ee;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:16px;line-height:1.7}
+  .counter{font-size:12.5px;color:var(--muted);margin-top:5px}
+  .counter.bad{color:var(--bad)}
+  .btn{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:13px 22px;font:600 15.5px/1 inherit;
+       cursor:pointer;box-shadow:0 2px 6px rgba(122,46,46,.25)}
+  .btn:hover{background:#652323}
+  .btn.sec{background:#fff;color:var(--accent);border:1px solid var(--accent);box-shadow:none}
+  .btn.ghost{background:#efe7d8;color:#4a3f31;box-shadow:none}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
+  .errbox{background:var(--badbg);border:1px solid #e7c3c0;color:var(--bad);border-radius:10px;padding:12px 14px;margin:0 0 14px}
+  .errbox ul{margin:6px 0 0 18px;padding:0}
+  .invalid{box-shadow:0 0 0 2px #e0a9a4}
+  .progress{height:7px;background:#e6dccb;border-radius:99px;overflow:hidden;margin-top:8px}
+  .progress i{display:block;height:100%;background:var(--accent2);width:0}
+  /* результаты */
+  .score-hero{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .big{font-family:Georgia,serif;font-size:44px;color:var(--accent);line-height:1}
+  .mark{font-family:Georgia,serif;font-size:34px;width:70px;height:70px;border-radius:50%;
+        display:flex;align-items:center;justify-content:center;background:#2b2118;color:#f6e9d4}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:10px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+  th{background:#f2ebdd}
+  td.n{text-align:center;white-space:nowrap}
+  .rev{border-top:2px solid var(--line);padding-top:14px;margin-top:16px}
+  .ans{background:#f7f4ee;border-left:4px solid #c9bda6;padding:10px 12px;border-radius:8px;margin:8px 0;white-space:pre-wrap}
+  .key{background:var(--okbg);border-left:4px solid var(--ok);padding:10px 12px;border-radius:8px;margin:8px 0}
+  .crit{list-style:none;padding:0;margin:8px 0;font-size:14.5px}
+  .crit li{padding:4px 0 4px 26px;position:relative}
+  .crit li:before{position:absolute;left:0;top:3px}
+  .crit li.y:before{content:"✔";color:var(--ok)}
+  .crit li.n:before{content:"✘";color:var(--bad)}
+  blockquote{margin:10px 0;padding:10px 14px;background:#fbf7ee;border-left:4px solid var(--accent2);
+       border-radius:8px;font-family:Georgia,serif;font-size:16px}
+  blockquote cite{display:block;font-size:13px;color:var(--muted);font-style:normal;margin-top:6px;font-family:inherit}
+  .note{font-size:13.5px;color:var(--muted)}
+  .modal{position:fixed;inset:0;background:rgba(30,22,14,.6);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+  .modal .card{max-width:460px;margin:0}
+  [hidden]{display:none !important}
+  @media print{
+    header.top,.actions,.noprint{display:none!important}
+    body{background:#fff}.card{box-shadow:none;border-color:#bbb;break-inside:avoid}
+  }
+  @media (max-width:620px){
+    .row{flex-direction:column}.row select{max-width:100%}
+    .big{font-size:36px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div>
+      <div class="t">А. С. Пушкин. «Дубровский» · смысл финала</div>
+      <div class="s">Рабочий лист · 6 класс · трагедия невозможного счастья и нравственный выбор</div>
+    </div>
+    <div class="spacer"></div>
+    <div class="chip" id="chipMode">Одна попытка · без подсказок</div>
+    <div class="chip" id="chipTime" hidden>00:00</div>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= СТАРТ ================= -->
+<section id="scr-intro">
+  <div class="card">
+    <h2>Прежде чем начать</h2>
+    <p class="lead">Работа по финалу повести (глава XIX): кольцо в дупле, отказ Маши, приказ «Не трогать его!», роспуск шайки.</p>
+    <div class="rules">
+      <strong>Условия работы</strong>
+      <ul>
+        <li><b>Одна попытка.</b> После нажатия «Завершить работу» ответы изменить нельзя, работа сохранится в этом браузере.</li>
+        <li><b>Подсказок нет.</b> Правильные ответы, критерии и цитаты откроются только после завершения.</li>
+        <li><b>Аргументация обязательна.</b> Задания 5, 6, 7 и рефлексия требуют развёрнутого ответа; без него работа не отправляется.</li>
+        <li>Всего <b>28 баллов</b> (задания 1–6). Задание 7 и рефлексия — дополнительные, без баллов, но обязательны.</li>
+        <li>Шкала: 25–28 — «5»; 20–24 — «4»; 14–19 — «3»; 0–13 — «2».</li>
+      </ul>
+    </div>
+    <label class="fld" for="fio">Фамилия и имя *</label>
+    <input type="text" id="fio" placeholder="Например: Иванова Мария" autocomplete="off">
+    <label class="fld" for="klass">Класс *</label>
+    <input type="text" id="klass" placeholder="6 «А»" autocomplete="off">
+    <div class="actions">
+      <button class="btn" id="btnStart">Начать работу</button>
+      <span class="note">Время не ограничено, оно только фиксируется.</span>
+    </div>
+    <div id="introErr" class="errbox" hidden></div>
+  </div>
+</section>
+
+<!-- ================= РАБОТА ================= -->
+<section id="scr-work" hidden>
+  <div class="card noprint">
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <strong id="whoLine" class="serif" style="font-size:17px"></strong>
+      <div class="spacer"></div>
+      <span class="note" id="progLine">Заполнено: 0 из 11</span>
+    </div>
+    <div class="progress"><i id="progBar"></i></div>
+  </div>
+
+  <div id="workErr" class="errbox" hidden></div>
+
+  <!-- 1 -->
+  <div class="card" id="card1">
+    <div class="task-head"><span class="num">1</span><h2>Соедини событие и его значение</h2><span class="pts">4 балла</span></div>
+    <p class="lead">Выбери для каждого события подходящее значение. Каждое значение используется один раз.</p>
+    <div class="legend">
+      <div><b>1.</b> Кольцо становится условным знаком, по которому Дубровский должен узнать, что Маше нужна помощь.</div>
+      <div><b>2.</b> Маша говорит, что уже обвенчана и считает Верейского своим мужем.</div>
+      <div><b>3.</b> Дубровский не позволяет сообщникам тронуть Верейского.</div>
+      <div><b>4.</b> Дубровский прекращает жить с шайкой и уходит.</div>
+    </div>
+    <div id="t1rows"></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card" id="card2">
+    <div class="task-head"><span class="num">2</span><h2>Распредели утверждения</h2><span class="pts">6 баллов</span></div>
+    <p class="lead">Для каждого пункта выбери группу: что Владимир <b>теряет</b> или какое <b>решение принимает</b>.</p>
+    <div id="t2rows"></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card" id="card3">
+    <div class="task-head"><span class="num">3</span><h2>Восстанови последовательность</h2><span class="pts">4 балла</span></div>
+    <p class="lead">Поставь номера от 1 до 4 в порядке событий в финале романа.</p>
+    <div id="t3rows"></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card" id="card4">
+    <div class="task-head"><span class="num">4</span><h2>Найди и исправь три ошибки</h2><span class="pts">6 баллов</span></div>
+    <p class="lead">Нажми на <b>три</b> фрагмента текста, в которых допущены фактические ошибки (они будут подчёркнуты), затем запиши исправления.</p>
+    <div class="quote-src" id="t4text"></div>
+    <div class="counter" id="t4count">Отмечено фрагментов: 0 из 3</div>
+    <label class="fld">Исправление 1</label><input type="text" class="t4fix" data-i="0" autocomplete="off">
+    <label class="fld">Исправление 2</label><input type="text" class="t4fix" data-i="1" autocomplete="off">
+    <label class="fld">Исправление 3</label><input type="text" class="t4fix" data-i="2" autocomplete="off">
+  </div>
+
+  <!-- 5 -->
+  <div class="card" id="card5">
+    <div class="task-head"><span class="num">5</span><h2>Сравни два эпизода</h2><span class="pts">4 балла</span></div>
+    <p class="lead">Прочитай пары событий и объясни, какой контраст ты в них видишь. Ответ — 2–3 предложения.</p>
+    <div class="legend">
+      <div><b>Пара 1.</b> Маша передаёт кольцо как знак, чтобы попросить о помощи, — Дубровский приезжает к карете уже после венчания.</div>
+      <div><b>Пара 2.</b> Дубровский останавливает карету силой — но приказывает не трогать Верейского и не увозит Машу против её воли.</div>
+    </div>
+    <textarea id="t5" placeholder="Мой ответ…"></textarea>
+    <div class="counter" id="c5"></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card" id="card6">
+    <div class="task-head"><span class="num">6</span><h2>Обоснуй вывод</h2><span class="pts">4 балла</span></div>
+    <p class="lead">Почему финал можно назвать трагическим, хотя Дубровский не позволяет сообщникам тронуть Верейского? Напиши 3–4 предложения. Упомяни хотя бы один эпизод финала и объясни, как ты понимаешь поступок Владимира.</p>
+    <textarea id="t6" placeholder="Финал трагический, потому что…"></textarea>
+    <div class="counter" id="c6"></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card" id="card7">
+    <div class="task-head"><span class="num">7</span><h2>Творческое задание</h2><span class="pts">без баллов · обязательно</span></div>
+    <p class="lead">Представь, что Дубровский остался один после того, как карета уехала. Напиши его внутренний монолог из 3–4 предложений. Передай боль утраты и его решение не заставлять Машу уехать. Используй хотя бы одно слово: <b>честь, любовь, выбор, свобода</b>.</p>
+    <textarea id="t7" placeholder="Я…"></textarea>
+    <div class="counter" id="c7"></div>
+  </div>
+
+  <!-- рефлексия -->
+  <div class="card" id="cardR">
+    <div class="task-head"><span class="num">✦</span><h2>Короткая рефлексия</h2><span class="pts">без баллов · обязательно</span></div>
+    <p class="lead">Какой поступок или эпизод финала лучше всего помогает понять характер Дубровского? Назови его и объясни почему.</p>
+    <textarea id="tR" placeholder="Лучше всего характер героя помогает понять…"></textarea>
+    <div class="counter" id="cR"></div>
+  </div>
+
+  <div class="card noprint">
+    <div class="actions">
+      <button class="btn" id="btnFinish">Завершить работу</button>
+      <span class="note">Проверь, что все задания заполнены: попытка одна, вернуться к ответам будет нельзя.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= РЕЗУЛЬТАТ ================= -->
+<section id="scr-result" hidden></section>
+
+</main>
+
+<script>
+"use strict";
+/* ==================== ДАННЫЕ ==================== */
+const KEY = "dubrovsky_final_6_v1";
+
+const T1 = [
+  {id:"A", label:"А", text:"Саша по просьбе Маши кладёт кольцо в дупло дуба.", correct:"1"},
+  {id:"B", label:"Б", text:"После венчания Маша отказывается уехать с Дубровским.", correct:"2"},
+  {id:"C", label:"В", text:"Дубровский останавливает карету и приказывает: «Не трогать его!»", correct:"3"},
+  {id:"D", label:"Г", text:"Дубровский распускает шайку и исчезает.", correct:"4"}
+];
+const T1MEAN = {
+  "1":"Кольцо — условный знак: Маше нужна помощь.",
+  "2":"Маша уже обвенчана и считает Верейского своим мужем.",
+  "3":"Дубровский не позволяет сообщникам тронуть Верейского.",
+  "4":"Дубровский расстаётся с шайкой и уходит."
+};
+
+const T2 = [
+  {n:1, text:"Дом и имение отца.", correct:"lose"},
+  {n:2, text:"Возможность быть с Машей.", correct:"lose"},
+  {n:3, text:"Шайку, которую он распускает.", correct:"lose"},
+  {n:4, text:"Приказывает не трогать Верейского.", correct:"decide"},
+  {n:5, text:"Не заставляет Машу уехать с ним.", correct:"decide"},
+  {n:6, text:"Решает оставить сообщников.", correct:"decide"}
+];
+
+const T3 = [
+  {id:"a", text:"Дубровский останавливает карету Верейского.", correct:"3"},
+  {id:"b", text:"Саша кладёт кольцо в дупло по просьбе Маши.", correct:"1"},
+  {id:"c", text:"Дубровский распускает шайку и исчезает.", correct:"4"},
+  {id:"d", text:"После венчания Маша отказывается уехать с Дубровским.", correct:"2"}
+];
+
+const T4FRAG = [
+  {id:"f1", text:"Маша попросила Сашу положить кольцо", err:null},
+  {id:"f2", text:"у входа в дом", err:"E1"},
+  {id:"f3", text:". После венчания она", err:null},
+  {id:"f4", text:"согласилась уехать с Дубровским", err:"E2"},
+  {id:"f5", text:". Во время встречи у кареты", err:null},
+  {id:"f6", text:"Дубровский приказал сообщникам", err:null},
+  {id:"f7", text:"расправиться с Верейским", err:"E3"},
+  {id:"f8", text:".", err:null}
+];
+const T4ERR = {
+  E1:{re:/дупл/, fix:"Кольцо нужно положить в дупло дуба (а не у входа в дом).", frag:"у входа в дом"},
+  E2:{re:/отказ|не согласи|не захотел|не поехал|не уехал|не хочет|не хотел|не стал|осталась с мужем/,
+      fix:"После венчания Маша отказывается уехать с Дубровским: она уже обвенчана и дала клятву.", frag:"согласилась уехать с Дубровским"},
+  E3:{re:/не трог|не трон|не сме|не обиж|не напад|не убив|не вред|пощад|в покое|не велел|запретил/,
+      fix:"Дубровский приказывает не трогать Верейского.", frag:"расправиться с Верейским"}
+};
+
+const MINW = {t5:20, t6:30, t7:25, tR:15};
+
+const QUOTES = [
+  {q:"Поздно — я обвенчана, я жена князя Верейского.", c:"Маша — Дубровскому у кареты, гл. XIX"},
+  {q:"Я согласилась, я дала клятву.", c:"Маша о венчании, гл. XIX"},
+  {q:"Я ждала вас до последней минуты… Но теперь, говорю вам, теперь поздно.", c:"Маша — Дубровскому, гл. XIX"},
+  {q:"Не трогать его!", c:"Приказ Дубровского разбойникам у кареты Верейского, гл. XIX"}
+];
+
+/* ==================== СОСТОЯНИЕ ==================== */
+let S = {
+  name:"", klass:"", started:false, startTs:null, finished:false, endTs:null,
+  a:{t1:{}, t2:{}, t3:{}, t4:{sel:[], fix:["","",""]}, t5:"", t6:"", t7:"", tR:""},
+  result:null
+};
+let memOnly=false;
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){ memOnly=true; } }
+function load(){ try{ const r=localStorage.getItem(KEY); if(r) S=Object.assign(S, JSON.parse(r)); }catch(e){ memOnly=true; } }
+
+/* ==================== УТИЛИТЫ ==================== */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const norm=s=>(s||"").toLowerCase().replace(/ё/g,"е").replace(/\s+/g," ").trim();
+const words=s=>norm(s).split(" ").filter(w=>/[а-яa-z0-9]/i.test(w)).length;
+const sents=s=>(s||"").split(/[.!?…]+/).map(x=>x.trim()).filter(x=>x.length>1).length;
+const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const has=(s,re)=>re.test(norm(s));
+function fmtTime(ms){const t=Math.max(0,Math.floor(ms/1000));const m=String(Math.floor(t/60)).padStart(2,"0");const s=String(t%60).padStart(2,"0");return m+":"+s;}
+
+/* ==================== СТАРТ ==================== */
+load();
+if(S.finished){ renderResult(); }
+else if(S.started){ openWork(); }
+
+$("#btnStart").addEventListener("click", ()=>{
+  const n=$("#fio").value.trim(), k=$("#klass").value.trim();
+  if(n.length<3 || k.length<1){
+    const e=$("#introErr"); e.hidden=false; e.textContent="Укажи фамилию и имя (не менее 3 символов) и класс — без этого работа не начинается.";
+    return;
+  }
+  S.name=n; S.klass=k; S.started=true; S.startTs=Date.now(); save(); openWork();
+});
+
+function openWork(){
+  $("#scr-intro").hidden=true; $("#scr-work").hidden=false;
+  $("#whoLine").textContent=S.name+" · "+S.klass;
+  $("#chipTime").hidden=false;
+  buildT1(); buildT2(); buildT3(); buildT4(); bindEssays(); updateProgress(); tick();
+  setInterval(tick,1000);
+  $("#btnFinish").addEventListener("click", tryFinish);
+  window.addEventListener("beforeunload", e=>{ if(!S.finished){ e.preventDefault(); e.returnValue=""; }});
+}
+function tick(){ if(S.startTs && !S.finished) $("#chipTime").textContent=fmtTime(Date.now()-S.startTs); }
+
+/* ==================== ПОСТРОЕНИЕ ЗАДАНИЙ ==================== */
+function opts(max, val, ph){
+  let h='<option value="">'+ph+'</option>';
+  for(let i=1;i<=max;i++) h+='<option value="'+i+'"'+(String(val)===String(i)?' selected':'')+'>'+i+'</option>';
+  return h;
+}
+function buildT1(){
+  $("#t1rows").innerHTML=T1.map(r=>
+    '<div class="row"><div class="txt"><span class="letters">'+r.label+'.</span>'+esc(r.text)+'</div>'+
+    '<select data-t1="'+r.id+'" aria-label="Значение события '+r.label+'">'+opts(4,S.a.t1[r.id],"— № —")+'</select></div>').join("");
+  $$("[data-t1]").forEach(el=>el.addEventListener("change",()=>{S.a.t1[el.dataset.t1]=el.value;save();updateProgress();}));
+}
+function buildT2(){
+  $("#t2rows").innerHTML=T2.map(r=>
+    '<div class="row"><div class="txt"><b>'+r.n+'.</b> '+esc(r.text)+'</div><div class="assign">'+
+    '<button type="button" class="toggle" data-t2="'+r.n+'" data-v="lose" aria-pressed="'+(S.a.t2[r.n]==="lose")+'">Теряет</button>'+
+    '<button type="button" class="toggle" data-t2="'+r.n+'" data-v="decide" aria-pressed="'+(S.a.t2[r.n]==="decide")+'">Решение</button>'+
+    '</div></div>').join("");
+  $$("[data-t2]").forEach(b=>b.addEventListener("click",()=>{
+    const n=b.dataset.t2;
+    S.a.t2[n]= (S.a.t2[n]===b.dataset.v) ? "" : b.dataset.v;
+    $$('[data-t2="'+n+'"]').forEach(x=>x.setAttribute("aria-pressed", String(S.a.t2[n]===x.dataset.v)));
+    save(); updateProgress();
+  }));
+}
+function buildT3(){
+  $("#t3rows").innerHTML=T3.map(r=>
+    '<div class="row"><select data-t3="'+r.id+'" aria-label="Порядковый номер">'+opts(4,S.a.t3[r.id],"— № —")+'</select>'+
+    '<div class="txt">'+esc(r.text)+'</div></div>').join("");
+  $$("[data-t3]").forEach(el=>el.addEventListener("change",()=>{S.a.t3[el.dataset.t3]=el.value;save();updateProgress();}));
+}
+function buildT4(){
+  $("#t4text").innerHTML=T4FRAG.map(f=>{
+    if(f.id==="f8") return ".";
+    const on=S.a.t4.sel.includes(f.id);
+    return '<button type="button" class="frag" data-frag="'+f.id+'" aria-pressed="'+on+'">'+esc(f.text)+'</button>';
+  }).join(" ");
+  $$("[data-frag]").forEach(b=>b.addEventListener("click",()=>{
+    const id=b.dataset.frag, i=S.a.t4.sel.indexOf(id);
+    if(i>=0) S.a.t4.sel.splice(i,1); else S.a.t4.sel.push(id);
+    b.setAttribute("aria-pressed", String(i<0));
+    t4count(); save(); updateProgress();
+  }));
+  $$(".t4fix").forEach(inp=>{
+    inp.value=S.a.t4.fix[+inp.dataset.i]||"";
+    inp.addEventListener("input",()=>{S.a.t4.fix[+inp.dataset.i]=inp.value;save();updateProgress();});
+  });
+  t4count();
+}
+function t4count(){
+  const n=S.a.t4.sel.length, el=$("#t4count");
+  el.textContent="Отмечено фрагментов: "+n+" из 3";
+  el.className="counter"+(n>3?" bad":"");
+}
+function bindEssays(){
+  [["t5","#t5","#c5"],["t6","#t6","#c6"],["t7","#t7","#c7"],["tR","#tR","#cR"]].forEach(([k,ta,co])=>{
+    const t=$(ta); t.value=S.a[k]||"";
+    const upd=()=>{
+      const w=words(t.value), need=MINW[k];
+      $(co).textContent="Слов: "+w+" · предложений: "+sents(t.value)+" (минимум "+need+" слов)";
+      $(co).className="counter"+(w<need?" bad":"");
+    };
+    t.addEventListener("input",()=>{S.a[k]=t.value;save();upd();updateProgress();});
+    upd();
+  });
+}
+
+/* ==================== ПРОГРЕСС / ВАЛИДАЦИЯ ==================== */
+function checks(){
+  const c=[];
+  const v1=Object.values(S.a.t1).filter(Boolean);
+  c.push({ok:v1.length===4 && new Set(v1).size===4, card:1, msg:"Задание 1: выбери значение для каждого события (номера не должны повторяться)."});
+  c.push({ok:T2.every(r=>S.a.t2[r.n]), card:2, msg:"Задание 2: распредели все 6 утверждений."});
+  const v3=Object.values(S.a.t3).filter(Boolean);
+  c.push({ok:v3.length===4 && new Set(v3).size===4, card:3, msg:"Задание 3: расставь номера 1–4 без повторов."});
+  c.push({ok:S.a.t4.sel.length===3, card:4, msg:"Задание 4: отметь ровно три ошибочных фрагмента."});
+  c.push({ok:S.a.t4.fix.every(x=>words(x)>=3), card:4, msg:"Задание 4: запиши все три исправления (не менее 3 слов каждое)."});
+  c.push({ok:words(S.a.t5)>=MINW.t5, card:5, msg:"Задание 5: обязательна аргументация — не менее "+MINW.t5+" слов (2–3 предложения)."});
+  c.push({ok:words(S.a.t6)>=MINW.t6, card:6, msg:"Задание 6: обязательна аргументация — не менее "+MINW.t6+" слов (3–4 предложения)."});
+  c.push({ok:words(S.a.t7)>=MINW.t7, card:7, msg:"Задание 7: напиши монолог — не менее "+MINW.t7+" слов (3–4 предложения)."});
+  c.push({ok:words(S.a.tR)>=MINW.tR, card:"R", msg:"Рефлексия: назови эпизод и объясни почему — не менее "+MINW.tR+" слов."});
+  return c;
+}
+function updateProgress(){
+  const c=checks(), done=c.filter(x=>x.ok).length, total=c.length+0;
+  $("#progLine").textContent="Заполнено: "+done+" из "+total;
+  $("#progBar").style.width=Math.round(done/total*100)+"%";
+}
+function tryFinish(){
+  const bad=checks().filter(x=>!x.ok);
+  $$(".card").forEach(c=>c.classList.remove("invalid"));
+  const box=$("#workErr");
+  if(bad.length){
+    box.hidden=false;
+    box.innerHTML="<b>Работа не отправлена.</b> Заполни обязательное:"+
+      "<ul>"+bad.map(b=>"<li>"+esc(b.msg)+"</li>").join("")+"</ul>";
+    const first=$("#card"+bad[0].card);
+    if(first){ first.classList.add("invalid"); first.scrollIntoView({behavior:"smooth",block:"center"}); }
+    box.scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
+  box.hidden=true;
+  confirmModal();
+}
+function confirmModal(){
+  const m=document.createElement("div"); m.className="modal";
+  m.innerHTML='<div class="card"><h2>Завершить работу?</h2>'+
+    '<p class="lead">Попытка одна. После подтверждения ответы будут заблокированы, откроются правильные ответы, критерии и цитаты.</p>'+
+    '<div class="actions"><button class="btn" id="mYes">Да, завершить</button>'+
+    '<button class="btn sec" id="mNo">Вернуться к работе</button></div></div>';
+  document.body.appendChild(m);
+  $("#mNo",m).onclick=()=>m.remove();
+  $("#mYes",m).onclick=()=>{m.remove();finish();};
+}
+
+/* ==================== ОЦЕНИВАНИЕ ==================== */
+function scoreT1(){
+  let s=0, d=T1.map(r=>{const ok=S.a.t1[r.id]===r.correct; if(ok)s++;
+    return {ok, label:r.label+" — "+r.correct+" ("+T1MEAN[r.correct]+")"};});
+  return {score:s,max:4,details:d};
+}
+function scoreT2(){
+  let s=0, d=T2.map(r=>{const ok=S.a.t2[r.n]===r.correct; if(ok)s++;
+    return {ok,label:r.n+" — "+(r.correct==="lose"?"что теряет":"какое решение принимает")};});
+  return {score:s,max:6,details:d};
+}
+function scoreT3(){
+  let s=0, d=T3.map(r=>{const ok=S.a.t3[r.id]===r.correct; if(ok)s++;
+    return {ok,label:"«"+r.text+"» — "+r.correct};});
+  return {score:s,max:4,details:d};
+}
+function scoreT4(){
+  let s=0, d=[];
+  const selErr=S.a.t4.sel.map(id=>(T4FRAG.find(f=>f.id===id)||{}).err);
+  ["E1","E2","E3"].forEach(e=>{
+    const ok=selErr.includes(e); if(ok)s++;
+    d.push({ok,label:"Найден ошибочный фрагмент: «"+T4ERR[e].frag+"»"});
+  });
+  const used=new Set();
+  ["E1","E2","E3"].forEach(e=>{
+    let found=-1;
+    S.a.t4.fix.forEach((txt,i)=>{ if(found<0 && !used.has(i) && T4ERR[e].re.test(norm(txt))) found=i; });
+    const ok=found>=0; if(ok){used.add(found);s++;}
+    d.push({ok,label:"Исправление: "+T4ERR[e].fix});
+  });
+  return {score:s,max:6,details:d};
+}
+function scoreT5(){
+  const t=S.a.t5, d=[];
+  const k1=has(t,/кольц|дупл/) && has(t,/позд|обвенч|венчан|не успел|опоздал|уже/);
+  const k2=has(t,/карет|сил[ойуы]|остановил/) && has(t,/не трог|не трон|не увоз|не застав|не стал|вол[ияе]|отпустил|не позволил/);
+  const k3=has(t,/невозможн|безысход|траг|обреч|бессил|не изменить|нельзя изменить|не вернуть|поздно/);
+  const k4=has(t,/потому что|так как|показыва|значит|свидетельств|подчерк|столкновен|контраст|тем самым|следовательно|по-моему|считаю|на мой взгляд|это говорит/);
+  [[k1,"Назван контраст 1: кольцо как надежда на помощь — помощь приходит после венчания"],
+   [k2,"Назван контраст 2: остановка кареты силой — отказ от насилия и от принуждения Маши"],
+   [k3,"Объяснён трагизм: надежда на спасение и невозможность изменить случившееся"],
+   [k4,"Есть пояснение-вывод (мысль развита, а не только названа)"]
+  ].forEach(([ok,label])=>d.push({ok,label}));
+  return {score:d.filter(x=>x.ok).length,max:4,details:d};
+}
+function scoreT6(){
+  const t=S.a.t6, d=[];
+  const k1=has(t,/финал|трагич|трагед|несчаст|горьк|утрат|потер|безысход|развязк/);
+  const k2=has(t,/карет|обвенч|венчан|кольц|дупл|шайк|верейск|не трог|не трон|клятв|исчез/);
+  const k3=has(t,/потому что|так как|это значит|считаю|по-моему|на мой взгляд|проявля|уваж|благород|самообладан|выбор|честь|любов|нравствен|сила воли/);
+  const k4=sents(t)>=3 && norm(t).length>=180;
+  [[k1,"Ответ связан с финалом романа"],
+   [k2,"Приведён точный эпизод финала"],
+   [k3,"Объяснено толкование поступка героя"],
+   [k4,"Связность и объём: не менее 3 предложений (180+ знаков)"]
+  ].forEach(([ok,label])=>d.push({ok,label}));
+  return {score:d.filter(x=>x.ok).length,max:4,details:d};
+}
+function extraT7(){
+  const t=S.a.t7, sn=sents(t);
+  return [
+    {ok:sn>=3&&sn<=5, label:"Объём монолога: 3–4 предложения (сейчас "+sn+")"},
+    {ok:has(t,/чест|любов|любл|выбор|свобод/), label:"Использовано слово: честь / любовь / выбор / свобода"},
+    {ok:has(t,/\bя\b|\bмне\b|\bменя\b|\bмой\b|\bмоя\b/), label:"Речь от первого лица (внутренний монолог)"},
+    {ok:has(t,/боль|тяжело|горьк|потерял|утрат|пусто|прощай|навсегда|не вернуть/), label:"Передана боль утраты"},
+    {ok:has(t,/не застав|не приневол|не стану решать|не могу заставить|ее выбор|её выбор|сама реш|клятв|не принужд|отпускаю/), label:"Передано решение не заставлять Машу уехать"}
+  ];
+}
+function extraR(){
+  const t=S.a.tR;
+  return [
+    {ok:has(t,/карет|не трог|не трон|кольц|дупл|шайк|отказ|венчан|обвенч|исчез|отпускает/), label:"Назван конкретный эпизод финала"},
+    {ok:has(t,/потому что|так как|показыва|значит|свидетельств|считаю|по-моему|на мой взгляд|характер|благород|самообладан|честь|уваж/), label:"Есть объяснение «почему»"}
+  ];
+}
+function mark(total){
+  if(total>=25) return "5";
+  if(total>=20) return "4";
+  if(total>=14) return "3";
+  return "2";
+}
+function finish(){
+  const r={t1:scoreT1(),t2:scoreT2(),t3:scoreT3(),t4:scoreT4(),t5:scoreT5(),t6:scoreT6(),
+           t7:extraT7(),tR:extraR()};
+  r.total=r.t1.score+r.t2.score+r.t3.score+r.t4.score+r.t5.score+r.t6.score;
+  r.mark=mark(r.total);
+  S.result=r; S.finished=true; S.endTs=Date.now(); save();
+  renderResult();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ==================== РЕЗУЛЬТАТ ==================== */
+function critList(arr){
+  return '<ul class="crit">'+arr.map(d=>'<li class="'+(d.ok?"y":"n")+'">'+esc(d.label)+'</li>').join("")+'</ul>';
+}
+function quotesBlock(){
+  return '<div class="card"><h2>Цитаты и опорные фрагменты финала (гл. XIX)</h2>'+
+    QUOTES.map(q=>'<blockquote>«'+esc(q.q)+'»<cite>'+esc(q.c)+'</cite></blockquote>').join("")+
+    '<p class="note"><b>Опорный пересказ (не цитата):</b> Маша просит Сашу опустить кольцо в дупло дуба — это условный знак, что ей нужна помощь. Дубровский останавливает карету уже после венчания, но, услышав отказ Маши, не позволяет тронуть Верейского и не увозит её силой. В конце сообщается, что Дубровский распустил шайку и скрылся; о дальнейшей его судьбе ходят лишь слухи.</p></div>';
+}
+function renderResult(){
+  const r=S.result; if(!r){ return; }
+  $("#scr-intro").hidden=true; $("#scr-work").hidden=true;
+  $("#chipMode").textContent="Работа завершена · ответы заблокированы";
+  $("#chipTime").hidden=false;
+  $("#chipTime").textContent="Время: "+fmtTime((S.endTs||Date.now())-(S.startTs||Date.now()));
+  const dt=new Date(S.endTs||Date.now()).toLocaleString("ru-RU");
+  const rows=[["1. Событие — значение",r.t1],["2. Теряет / решает",r.t2],["3. Последовательность",r.t3],
+              ["4. Три ошибки",r.t4],["5. Сравнение эпизодов",r.t5],["6. Обоснование вывода",r.t6]];
+  const studentT1=T1.map(x=>x.label+" — "+(S.a.t1[x.id]||"нет ответа")).join("; ");
+  const studentT2=T2.map(x=>x.n+" — "+(S.a.t2[x.n]==="lose"?"теряет":S.a.t2[x.n]==="decide"?"решение":"нет ответа")).join("; ");
+  const studentT3=T3.map(x=>"«"+x.text+"» — "+(S.a.t3[x.id]||"—")).join("\n");
+  const selNames=S.a.t4.sel.map(id=>(T4FRAG.find(f=>f.id===id)||{}).text).filter(Boolean);
+
+  let h="";
+  h+='<div class="card"><div class="score-hero">'+
+     '<div class="mark">'+r.mark+'</div>'+
+     '<div><div class="big">'+r.total+' / 28</div><div class="note">баллов за задания 1–6</div></div>'+
+     '<div class="spacer"></div><div><div class="serif" style="font-size:18px">'+esc(S.name)+'</div>'+
+     '<div class="note">'+esc(S.klass)+' · '+esc(dt)+' · время работы '+fmtTime((S.endTs||Date.now())-(S.startTs||Date.now()))+'</div></div></div>'+
+     '<table><tr><th>Задание</th><th class="n">Баллы</th><th class="n">Максимум</th></tr>'+
+     rows.map(([n,x])=>'<tr><td>'+n+'</td><td class="n">'+x.score+'</td><td class="n">'+x.max+'</td></tr>').join("")+
+     '<tr><td><b>Итого</b></td><td class="n"><b>'+r.total+'</b></td><td class="n"><b>28</b></td></tr>'+
+     '<tr><td>7. Монолог и рефлексия</td><td class="n" colspan="2">без баллов · выполнены</td></tr></table>'+
+     '<p class="note">Шкала: 25–28 — «5»; 20–24 — «4»; 14–19 — «3»; 0–13 — «2». Развёрнутые ответы (5, 6) проверены автоматически по признакам критериев — итоговую оценку содержательной части уточняет учитель. Попытка использована.</p>'+
+     '<div class="actions noprint"><button class="btn sec" id="btnPrint">Печать / сохранить PDF</button>'+
+     '<button class="btn ghost" id="btnTxt">Скачать отчёт (.txt)</button></div></div>';
+
+  h+='<div class="card"><h2>Разбор заданий</h2>';
+
+  h+='<div class="rev"><h3>Задание 1 · '+r.t1.score+'/4</h3><div class="ans">Твой ответ: '+esc(studentT1)+'</div>'+
+     '<div class="key"><b>Ключ:</b> А — 1; Б — 2; В — 3; Г — 4.</div>'+critList(r.t1.details)+'</div>';
+
+  h+='<div class="rev"><h3>Задание 2 · '+r.t2.score+'/6</h3><div class="ans">Твой ответ: '+esc(studentT2)+'</div>'+
+     '<div class="key"><b>Ключ:</b> что Владимир теряет — 1, 2, 3; какие решения принимает — 4, 5, 6.</div>'+critList(r.t2.details)+'</div>';
+
+  h+='<div class="rev"><h3>Задание 3 · '+r.t3.score+'/4</h3><div class="ans">'+esc(studentT3)+'</div>'+
+     '<div class="key"><b>Ключ:</b> 1 — кольцо в дупле; 2 — отказ Маши уехать после венчания; 3 — перехват кареты; 4 — роспуск шайки и исчезновение.<br>'+
+     '<span class="note">Обрати внимание: в финале романа Маша отказывается у кареты, уже после венчания, — сначала происходит венчание и отказ, затем Дубровский распускает шайку.</span></div>'+critList(r.t3.details)+'</div>';
+
+  h+='<div class="rev"><h3>Задание 4 · '+r.t4.score+'/6</h3>'+
+     '<div class="ans">Отмеченные фрагменты: '+(selNames.length?esc(selNames.map(x=>"«"+x+"»").join(", ")):"нет")+
+     '\nИсправление 1: '+esc(S.a.t4.fix[0])+'\nИсправление 2: '+esc(S.a.t4.fix[1])+'\nИсправление 3: '+esc(S.a.t4.fix[2])+'</div>'+
+     '<div class="key"><b>Правильные исправления:</b><br>1) Маша просит Сашу положить кольцо <b>в дупло дуба</b>.<br>'+
+     '2) После венчания Маша <b>отказывается</b> уехать с Дубровским: она уже обвенчана и дала клятву.<br>'+
+     '3) Дубровский приказывает <b>не трогать</b> Верейского.</div>'+critList(r.t4.details)+'</div>';
+
+  h+='<div class="rev"><h3>Задание 5 · '+r.t5.score+'/4</h3><div class="ans">'+esc(S.a.t5)+'</div>'+
+     '<div class="key"><b>Пример ответа:</b> Кольцо даёт Маше надежду на помощь, но помощь приходит слишком поздно: Маша уже обвенчана. '+
+     'Дубровский останавливает карету, однако не заставляет Машу уехать и не позволяет сообщникам тронуть Верейского. '+
+     'Этот контраст — столкновение надежды на спасение с невозможностью изменить случившееся.</div>'+critList(r.t5.details)+'</div>';
+
+  h+='<div class="rev"><h3>Задание 6 · '+r.t6.score+'/4</h3><div class="ans">'+esc(S.a.t6)+'</div>'+
+     '<div class="key"><b>Пример ответа:</b> Финал трагический, потому что Дубровский приезжает, когда Маша уже обвенчана и отказывается уехать с ним. '+
+     'Он приказывает не трогать Верейского, хотя его сообщники готовы напасть. Этот поступок можно понять как проявление самообладания и уважения к решению Маши. '+
+     'В конце Дубровский оставляет шайку и исчезает, а судьба героев остаётся тяжёлой.</div>'+critList(r.t6.details)+'</div>';
+
+  h+='<div class="rev"><h3>Задание 7 · без баллов</h3><div class="ans">'+esc(S.a.t7)+'</div>'+
+     '<div class="key"><b>Пример:</b> Я хотел спасти её, но не могу заставить её идти со мной. Она сказала, что дала клятву. Мне больно, но я не стану решать за неё.</div>'+
+     '<p class="note">Проверь себя по требованиям задания:</p>'+critList(r.t7)+'</div>';
+
+  h+='<div class="rev"><h3>Рефлексия · без баллов</h3><div class="ans">'+esc(S.a.tR)+'</div>'+critList(r.tR)+
+     '<p class="note">Сильный ответ обычно опирается на приказ «Не трогать его!» или на отказ увозить Машу силой: герой выбирает уважение к чужой воле вместо мести.</p></div>';
+
+  h+='</div>'+quotesBlock();
+  h+='<div class="card"><h2>Вывод по теме урока</h2><p>Трагедия финала в том, что счастье героев оказывается невозможным: помощь приходит после венчания, а слово, данное перед Богом, для Маши сильнее чувства. '+
+     'Нравственный выбор Дубровского — не мстить и не принуждать — показывает, что и «разбойник» у Пушкина способен на благородство; но этот выбор не возвращает ему ни дома, ни любви, и потому герой расстаётся с шайкой и исчезает.</p></div>';
+
+  const box=$("#scr-result"); box.innerHTML=h; box.hidden=false;
+  $("#btnPrint").onclick=()=>window.print();
+  $("#btnTxt").onclick=downloadTxt;
+}
+function downloadTxt(){
+  const r=S.result;
+  const L=[];
+  L.push("Рабочий лист: А. С. Пушкин «Дубровский», смысл финала (6 класс)");
+  L.push("Ученик: "+S.name+" · "+S.klass);
+  L.push("Дата: "+new Date(S.endTs||Date.now()).toLocaleString("ru-RU"));
+  L.push("Время работы: "+fmtTime((S.endTs||Date.now())-(S.startTs||Date.now())));
+  L.push("Итог: "+r.total+"/28, отметка «"+r.mark+"» (одна попытка)");
+  L.push("Баллы: 1) "+r.t1.score+"/4  2) "+r.t2.score+"/6  3) "+r.t3.score+"/4  4) "+r.t4.score+"/6  5) "+r.t5.score+"/4  6) "+r.t6.score+"/4");
+  L.push("");
+  L.push("1) "+T1.map(x=>x.label+"—"+(S.a.t1[x.id]||"-")).join("; ")+" | ключ: А—1; Б—2; В—3; Г—4");
+  L.push("2) "+T2.map(x=>x.n+"—"+(S.a.t2[x.n]==="lose"?"теряет":S.a.t2[x.n]==="decide"?"решение":"-")).join("; ")+" | ключ: теряет 1,2,3; решения 4,5,6");
+  L.push("3) "+T3.map(x=>"«"+x.text+"»—"+(S.a.t3[x.id]||"-")).join("; "));
+  L.push("4) отмечено: "+S.a.t4.sel.map(id=>(T4FRAG.find(f=>f.id===id)||{}).text).join(" / "));
+  S.a.t4.fix.forEach((f,i)=>L.push("   Исправление "+(i+1)+": "+f));
+  L.push("5) "+S.a.t5);
+  L.push("6) "+S.a.t6);
+  L.push("7) "+S.a.t7);
+  L.push("Рефлексия) "+S.a.tR);
+  const blob=new Blob([L.join("\n")],{type:"text/plain;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="Дубровский_финал_"+S.name.replace(/\s+/g,"_")+".txt";
+  a.click(); URL.revokeObjectURL(a.href);
+}
+</script>
+</body>
+</html>
