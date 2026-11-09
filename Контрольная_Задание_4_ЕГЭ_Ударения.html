@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Контрольная. Задание 4 ЕГЭ. Ударения</title>
+<style>
+  :root{ --blue:#33608c; --blue-d:#274e75; --line:#94a3b8; --mut:#64748b; --bg:#e8ecf1; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);font:15px/1.45 "Segoe UI",Arial,sans-serif;color:#1e293b}
+  .wrap{max-width:1500px;margin:0 auto;padding:18px}
+  .card{background:#f8fafc;border-radius:10px;padding:18px 22px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+  h2{font-size:19px;margin:0}
+  .subline{color:var(--mut);font-size:13px;margin-top:3px}
+  .gridhead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #cbd5e1;padding-bottom:10px;margin-bottom:12px}
+  .gridhead .no{color:var(--mut);font-size:13px}
+  .task{margin:6px 0 14px}
+  .task b{color:var(--blue)}
+  table.grid{border-collapse:collapse;width:100%;table-layout:fixed}
+  td.cell{border:1px solid var(--line);height:74px;text-align:center;vertical-align:middle;cursor:pointer;padding:4px;user-select:none}
+  td.cell .s{display:block;font-size:11px;color:var(--mut)}
+  td.cell .w{display:block;font-weight:700;font-size:15px;margin:2px 0}
+  td.cell.mk{background:var(--blue);color:#fff}
+  td.cell.mk .s{color:#cfe1f2}
+  td.cell.ok{box-shadow:inset 0 0 0 3px #16a34a}
+  td.cell.extra{box-shadow:inset 0 0 0 3px #dc2626}
+  td.cell.miss{box-shadow:inset 0 0 0 3px #f59e0b;background:#fef3c7}
+  td.shade{background:#c7d4e2}
+  table.locked td.cell{cursor:default}
+  .hint{color:var(--mut);font-size:13px;margin-top:10px}
+  .results{display:none;margin-top:14px;padding:12px 18px;border-radius:8px;background:#eef4fa;border:1px solid #c7d8ea}
+  .results .grade{font-size:24px;font-weight:800;color:var(--blue)}
+  .results .det{font-size:13px;color:var(--mut);margin-top:4px}
+  .msg{margin-top:10px;padding:10px 14px;border-radius:8px;font-weight:600;display:none}
+  .msg.ok{display:block;background:#eafbef;color:#14532d;border:1px solid #86efac}
+  .msg.warn{display:block;background:#fef2f2;color:#7f1d1d;border:1px solid #fca5a5}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px;border-top:1px solid #cbd5e1;padding-top:14px}
+  .fields{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .fields b{margin-right:4px}
+  .pill{min-width:44px;padding:8px 6px;text-align:center;border:1px solid #cbd5e1;border-radius:8px;background:#fff;cursor:pointer;font-size:14px}
+  .pill.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .pill .g{font-weight:800;margin-left:4px}
+  .pill.on .g{color:#ffe08a}
+  button{font:inherit;padding:9px 16px;border-radius:8px;border:1px solid var(--blue);cursor:pointer}
+  .b-fill{background:var(--blue);color:#fff}
+  .b-fill:hover:not(:disabled){background:var(--blue-d)}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  .b-w{background:#fff;border-color:var(--line);color:#1e293b}
+  .links button{border:none;background:none;color:var(--blue);text-decoration:underline;padding:4px 6px;font-size:13px}
+  #printArea{display:none}
+  @media print{
+    body{background:#fff}
+    #app{display:none}
+    #printArea{display:block}
+    .pfield{page-break-after:always}
+    .pfield h3{margin:4px 0 8px;font-size:15px}
+    td.cell{height:58px;cursor:default}
+    .keys li{margin:2px 0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="card">
+    <div class="gridhead">
+      <div>
+        <h2>Контрольная. Задание 4 ЕГЭ. Ударения</h2>
+        <div class="subline">Орфоэпическая раскраска по словнику ЕГЭ 2027</div>
+      </div>
+      <span class="no" id="fieldNo"></span>
+    </div>
+    <div class="task">Найдите клетки, в которых ударение поставлено <b>неверно</b>, и закрасьте их. <b>Каждое поле можно пройти только один раз.</b></div>
+    <table class="grid" id="grid"></table>
+    <div class="hint">Ударная гласная в словнике обозначена прописной буквой (звонИт). Зелёная рамка после проверки — верная закраска, красная — лишняя, жёлтая — пропущенная клетка с ошибкой.</div>
+    <div class="results" id="results"></div>
+    <div class="msg" id="msg"></div>
+    <div class="toolbar">
+      <div class="fields"><b>Поле</b><span id="pills" style="display:contents"></span></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="b-fill" id="checkBtn" onclick="check()">Проверить</button>
+        <button class="b-w" onclick="resetField()">Сбросить</button>
+        <span class="links">
+          <button onclick="printMode('tasks')">Печать заданий</button>
+          <button onclick="printMode('keys')">Печать ключей</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="printArea"></div>
+
+<script>
+/* ===== Словник ЕГЭ-2027: [контекст, верно, неверно, часть речи] ===== */
+const N=[["жилой","квартАл","квАртал"],["важный","докумЕнт","дОкумент"],["кожный","диспансЕр","диспАнсер"],["закрыть","жалюзИ","жАлюзи"],["сидеть в","партЕр","пАртер"],["нотный","пюпИтр","пЮпитр"],["самолётное","шассИ","шАсси"],["опытный","гравЁр","грАвер"],["библиотечный","каталОг","катАлог"],["написать","некролОг","некрОлог"],["вести","диалОг","диАлог"],["актёрский","монолОг","мОнолог"],["городские","аэропОрты","аэропОртЫ"],["пышные","бАнты","бантЫ"],["нет опытных","бухгАлтеров","бухгалтерОв"],["новые","крАны","кранЫ"],["свежие","тОрты","тортЫ"],["тёплые","шАрфы","шарфЫ"],["свежая","свЁкла","свеклА"],["зелёный","щавЕль","щАвель"],["твёрдый","кремЕнь","крЕмень"],["кусочек","кремнЯ","крЕмня"],["болит до","лОктя","локтя"],["не хватает","локтЕй","лОктей"],["длиной до","нОгтя","ногтя"],["стрижка","ногтЕй","нОгтей"],["много хороших","новостЕй","нОвостей"],["горных","мЕстностей","местностЕй"],["две","сирОты","сиротЫ"],["транспортные","срЕдства","средстВА"],["марка","цемЕнт","цЕмент"],["весит","цЕнтнер","центнЕр"],["золотая","цепОчка","цЕпочка"],["опытный","шофЁр","шОфер"],["независимый","экспЕрт","Эксперт"],["пройти","тамОжня","тАможня"],["опытный","столЯр","стОляр"],["школьный","портфЕль","пОртфель"],["новая","тУфля","туфлЯ"],["мраморная","стАтуя","статУя"],["период","Отрочество","отрОчество"],["богатое","придАное","прИданое"],["надеть","пОручни","порУчни"],["весенний","призЫв","прИзыв"],["трубы","созЫв","сОзыв"],["серьёзное","намЕрение","намерЕние"],["на сосне","нарОст","нАрост"],["побороть","недУг","нЕдуг"],["чувствовать","нЕнависть","ненавИсть"],["личная","корЫсть","кОрысть"],["провести","досУг","дОсуг"],["поставить","дефИс","дЕфис"],["поразительная","дешевИзна","дЕшевизна"],["особая","знАчимость","значИмость"],["любое","вероисповЕдание","вЕроисповедание"],["полная","договорЁнность","дОговоренность"],["полное","сосредотОчение","сосредоточЕние"],["городской","водопровОд","вОдопровод"],["новый","газопровОд","гАзопровод"],["подземный","нефтепровОд","нЕфтепровод"],["дворовый","мусоропровОд","мусоропрОвод"],["медный","электропрОвод","электропровОд"],["пройти","киломЕтр","кИлометр"],["пять","кОнусов","конусОв"],["поставить","Иксы","иксЫ"],["древний","еретИк","ерЕтик"],["проложить","лыжнЯ","лЫжня"],["получить","граждАнство","грАжданство"]];
+const V=[["телефон","звонИт","звОнит"],["он скоро","позвонИт","позвОнит"],["мама","перезвонИт","перезвОнит"],["менеджер","обзвонИт","обзвОнит"],["свет","включИт","вклЮчит"],["директор","вручИт","врУчит"],["мастер","сверлИт","свЕрлит"],["сердце","щемИт","щЕмит"],["нерв","защемИт","защЕмит"],["рана","кровоточИть","кровотОчить"],["сад","плодоносИть","плОдоносить"],["башня","накренИтся","накрЕнится"],["долго не","дозвонИтся","дозвОнится"],["учитель","повторИт","пОвторит"],["стена","укрепИт","укрЕпит"],["враг","окружИт","окрУжит"],["друг","одолжИт","одОлжит"],["тренер","ободрИт","обОдрит"],["работа","облегчИт","облЕгчит"],["землёй","наделИт","надЕлит"],["ветер","сорИт","сОрит"],["неудача","озлОбить","озлобИть"],["идею","опОшлить","опошлИть"],["о цене","освЕдомиться","осведомИться"],["бумагу","клЕить","клеИть"],["комнату","оклЕить","оклеИть"],["банки","закУпорить","закупОрить"],["бутылку","откУпорить","откупОрить"],["дверь","запломбировАть","запломбИровать"],["зуб","пломбировАть","пломбИровать"],["нагрузку","дозИровать","дозирОвать"],["тихо","кАшлянуть","кашлянУть"],["семечки","щЁлкать","щелкАть"],["воду","чЕрпать","черпАть"],["место","занЯть","зАнять"],["урок","начАть","нАчать"],["задачу","понЯть","пОнять"],["гостей","принЯть","прИнять"],["поезд","прибЫть","прИбыть"],["совет","воспринЯть","воспрИнять"],["дверь","заперЕть","зАпереть"],["она шляпу","снялА","снЯла"],["она книгу","бралА","брАла"],["она друга","ждалА","ждАла"],["она детей","звалА","звАла"],["она часто","лгалА","лгАла"],["она воду","лилА","лИла"],["она цветы","рвалА","рвАла"],["она машину","гналА","гнАла"],["она зонт","взялА","взЯла"],["она долг","отдалА","отдАла"],["она сайт","создалА","сОздала"],["она письмо","послАла","послалА"],["она сахар","клАла","клалА"],["она тихо","крАлась","кралАсь"],["она песню","началА","нАчала"],["она ошибку","понялА","пОняла"],["она ванну","принялА","прИняла"],["она вчера","прибылА","прИбыла"],["она место","занялА","зАняла"],["она новость","воспринялА","воспрИняла"],["ему легко","жилОсь","жИлось"]];
+const P=[["край","зАгнутый","загнУтый"],["прут","сОгнутый","согнУтый"],["класс","зАнятый","занЯтый"],["закон","прИнятый","принЯтый"],["труд","нАчатый","начАтый"],["дом","зАпертый","запЕртый"],["картина","снятА","снЯта"],["комната","занятА","зАнята"],["работа","принятА","прИнята"],["планета","заселенА","засЕлена"],["груз","довезЁнный","довЕзенный"],["остров","заселЁнный","засЕленный"],["до роли","низведЁнный","низвЕденный"],["вариант","облегчЁнный","облегчЕнный"],["спортсмен","ободрЁнный","обОдренный"],["слух","обострЁнный","обОстренный"],["свет","отключЁнный","отклЮченный"],["урок","повторЁнный","пОвторенный"],["пирог","поделЁнный","пОделенный"],["зверь","приручЁнный","прирУченный"],["анализ","углублЁнный","углУбленный"],["кот","кормЯщий","кОрмящий"],["рана","кровоточАщий","кровотОчащий"],["богатство","нажИвший","нАживший"],["чай","налИвший","нАливший"],["первым","начАвший","нАчавший"],["все","понЯвший","пОнявший"],["рабочий","нанЯвшийся","нАнявшийся"],["жизнь","прожИвший","прОживший"]];
+const D=[["игру","начАв","нАчав"],["дождь","начАвшись","нАчавшись"],["долг","отдАв","Отдав"],["голову","поднЯв","пОдняв"],["шутку","понЯв","пОняв"],["на место","прибЫв","прИбыв"],["проект","создАв","сОздав"],["овощи","закУпорив","закупОрив"]];
+const AD=[["прийти","вОвремя","воврЕмя"],["налить","дОверху","довЕрху"],["опустить","дОнизу","донИзу"],["вытереть","дОсуха","досухА"],["очень","донЕльзя","донельзЯ"],["вернуться","зАсветло","засвЕтло"],["выйти","зАтемно","затемнО"],["уехать","надОлго","надолгО"],["заглянуть","ненадОлго","ненадолгО"],["выглядеть","красИвее","красивЕе"]];
+const AJ=[["она","вернА","вЕрна","кр. прил."],["она","ловкА","лОвка","кр. прил."],["она","прозорлИва","прозОрлива","кр. прил."],["весомый","знАчимый","значИмый","прил."],["стол","кУхонный","кухОнный","прил."],["узор","мозаИчный","мозАичный","прил."],["склад","оптОвый","Оптовый","прил."],["пирог","слИвовый","сливОвый","прил."],["вид","красИвейший","красивЕйший","прил."]];
+const POOL=[];
+N.forEach(x=>POOL.push({p:x[0],c:x[1],b:x[2],pos:"сущ."}));
+V.forEach(x=>POOL.push({p:x[0],c:x[1],b:x[2],pos:"гл."}));
+P.forEach(x=>POOL.push({p:x[0],c:x[1],b:x[2],pos:"прич."}));
+D.forEach(x=>POOL.push({p:x[0],c:x[1],b:x[2],pos:"деепр."}));
+AD.forEach(x=>POOL.push({p:x[0],c:x[1],b:x[2],pos:"нареч."}));
+AJ.forEach(x=>POOL.push({p:x[0],c:x[1],b:x[2],pos:x[3]}));
+
+/* ===== Рисунки полей 7×7 (# = клетка с неверным ударением) ===== */
+const FIELDS=[
+{n:"сердце",p:[".##.##.","#######","#######",".#####.","..###..","...#...","......."]},
+{n:"звезда",p:["...#...","..###..","#######",".#####.","..###..",".#...#.","......."]},
+{n:"стрелка",p:["...#...","..###..",".#.#.#.","...#...","...#...","...#...","...#..."]},
+{n:"смайлик",p:[".#####.","#.....#","#.#.#.#","#.....#","#.###.#","#.....#",".#####."]},
+{n:"ёлка",p:["...#...","..###..",".#####.","..###..",".#####.","#######","...#..."]},
+{n:"дом",p:["...#...","..###..",".#####.","#######","#..#..#","#..#..#","#######"]},
+{n:"гриб",p:[".#####.","#######","#######","..###..","..###..","..###..","......."]},
+{n:"ромб",p:["...#...","..###..",".#####.","#######",".#####.","..###..","...#..."]},
+{n:"кольцо",p:[".#####.","#.....#","#.....#","#.....#","#.....#","#.....#",".#####."]},
+{n:"месяц",p:["..###..",".##....",".##....",".##....",".##....",".##....","..###.."]},
+{n:"зонт",p:[".#####.","#######","#######","...#...","...#...","...#...","....##."]},
+{n:"рыба",p:[".####..","######.","#######","######.",".####..",".......","......."]},
+{n:"кот",p:["#.....#","##...##","#######","#######",".#.#.#.",".#####.","......."]},
+{n:"чашка",p:["#######","#.....#","#.....#","#.....#","#.....#",".#####.","......."]},
+{n:"крест",p:["...#...","...#...","...#...","#######","...#...","...#...","...#..."]},
+{n:"флаг",p:["######.","######.","######.","...#...","...#...","...#...","...#..."]}];
+
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const assignCache={};
+function assignment(f){
+  if(assignCache[f])return assignCache[f];
+  const rnd=mulberry32(f+7),arr=[...Array(POOL.length).keys()];
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  return assignCache[f]=arr.slice(0,49);
+}
+const patIdx=f=>{const r=[];for(let i=0;i<49;i++)if(FIELDS[f].p[Math.floor(i/7)][i%7]==="#")r.push(i);return r};
+
+let cur=0;
+const marks=Array.from({length:16},()=>new Set());
+const revealed=Array(16).fill(false);
+const locked=Array(16).fill(false);
+const results=Array(16).fill(null);
+
+const pills=document.getElementById("pills");
+FIELDS.forEach((_,i)=>{const b=document.createElement("span");b.className="pill";b.onclick=()=>{cur=i;render()};pills.appendChild(b)});
+function updatePills(){[...pills.children].forEach((el,i)=>{el.classList.toggle("on",i===cur);el.innerHTML=(i+1)+(results[i]?`<span class="g">${results[i].grade}</span>`:"");});}
+
+function render(){
+  updatePills();
+  document.getElementById("fieldNo").textContent="Поле № "+(cur+1)+(locked[cur]?" (пройдено)":"");
+  const pat=new Set(patIdx(cur));
+  const t=document.getElementById("grid");t.innerHTML="";
+  t.classList.toggle("locked",locked[cur]);
+  for(let r=0;r<7;r++){const tr=document.createElement("tr");
+    for(let c=0;c<7;c++){const i=r*7+c,e=POOL[assignment(cur)[i]],bad=pat.has(i);
+      const td=document.createElement("td");td.className="cell";
+      td.innerHTML=`<span class="s">${e.p}</span><span class="w">${bad?e.b:e.c}</span><span class="s">${e.pos}</span>`;
+      if(marks[cur].has(i))td.classList.add("mk");
+      if(revealed[cur]){
+        if(marks[cur].has(i)&&bad)td.classList.add("ok");
+        else if(marks[cur].has(i)&&!bad)td.classList.add("extra");
+        else if(!marks[cur].has(i)&&bad)td.classList.add("miss");
+      }
+      if(!locked[cur])td.onclick=()=>{marks[cur].has(i)?marks[cur].delete(i):marks[cur].add(i);render()};
+      tr.appendChild(td);}
+    t.appendChild(tr);}
+  document.getElementById("checkBtn").disabled=locked[cur];
+  if(results[cur])showResults(results[cur]);else document.getElementById("results").style.display="none";
+}
+function check(){
+  if(locked[cur])return;
+  revealed[cur]=true;locked[cur]=true;
+  const pat=patIdx(cur),patSet=new Set(pat),K=pat.length;
+  let tp=0,tn=0,fp=0,fn=0;
+  for(let i=0;i<49;i++){const bad=patSet.has(i),mk=marks[cur].has(i);
+    if(bad&&mk)tp++;else if(!bad&&!mk)tn++;else if(!bad&&mk)fp++;else fn++;}
+  const pts=tp+tn,pct=Math.round(pts*100/49);
+  const grade=pct>91?5:pct>75?4:pct>50?3:2;
+  const res={pts,pct,grade,tp,tn,fp,fn,K};
+  results[cur]=res;
+  render();showResults(res);
+  const msg=document.getElementById("msg");
+  if(tp===K&&fp===0){msg.className="msg ok";msg.textContent="Отлично! Рисунок поля № "+(cur+1)+" — «"+FIELDS[cur].n+"». Попытка использована.";}
+  else{msg.className="msg warn";msg.textContent="Проверка завершена: зелёная рамка — верные закраски, красная — лишние, жёлтая — пропущенные клетки с неверным ударением. Попытка использована, поле заблокировано.";}
+}
+function showResults(res){
+  const d=document.getElementById("results");d.style.display="block";
+  d.innerHTML=`Баллы: <b>${res.pts}</b> из <b>49</b> (${res.pct}%) &nbsp;·&nbsp; Оценка: <span class="grade">${res.grade}</span>
+  <div class="det">Верно закрашено клеток с ошибками: ${res.tp} из ${res.K} · верно оставлено незакрашенными: ${res.tn} из ${49-res.K} · лишних закрасок: ${res.fp} · пропусков: ${res.fn}. Шкала: свыше 91% — «5», свыше 75% — «4», свыше 50% — «3», иначе — «2». Одна попытка на поле.</div>`;
+}
+function resetField(){
+  const msg=document.getElementById("msg");
+  if(locked[cur]){msg.className="msg warn";msg.textContent="Поле № "+(cur+1)+" уже пройдено: сброс невозможен (одна попытка).";return;}
+  marks[cur]=new Set();msg.className="msg";render();
+}
+
+/* ===== Печать ===== */
+function printMode(mode){
+  const pa=document.getElementById("printArea");let h="";
+  FIELDS.forEach((F,f)=>{
+    h+=`<div class="pfield"><h3>Поле № ${f+1}${mode==="keys"?" (рисунок: "+F.n+")":""}</h3><table class="grid">`;
+    for(let r=0;r<7;r++){h+="<tr>";
+      for(let c=0;c<7;c++){const i=r*7+c,e=POOL[assignment(f)[i]],bad=patIdx(f).includes(i);
+        h+=`<td class="cell${mode==="keys"&&bad?" shade":""}"><span class="s">${e.p}</span><span class="w">${bad?e.b:e.c}</span><span class="s">${e.pos}</span></td>`;}
+      h+="</tr>";}
+    h+="</table>";
+    if(mode==="keys"){h+="<ol class=\"keys\">"+patIdx(f).map(i=>`<li>${POOL[assignment(f)[i]].c}</li>`).join("")+"</ol>";}
+    h+="</div>";});
+  pa.innerHTML=`<h2>${mode==="keys"?"Ключи. Задание 4 ЕГЭ. Ударения":"Контрольная. Задание 4 ЕГЭ. Ударения"}</h2>`+h;
+  setTimeout(()=>window.print(),60);
+}
+render();
+</script>
+</body>
+</html>
