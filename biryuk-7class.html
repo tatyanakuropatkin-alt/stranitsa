@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>«Бирюк» · Интерактивная работа · 7 класс</title>
+<style>
+/* ============ БАЗА: КЛАССИКА + АВАНГАРД ============ */
+:root{
+  --bg0:#0b1810; --bg1:#12251a; --panel:#16281c; --panel2:#1b3122;
+  --line:#2e4a33; --line-gold:rgba(216,180,90,.35);
+  --gold:#d8b45a; --gold-b:#f0cf7a; --gold-d:#a08339;
+  --ink:#e9e4d6; --ink-mut:#b9c4b4; --ink-dim:#8fa08c;
+  --red:#d0705a; --red-bg:rgba(208,112,90,.12);
+  --grn:#8fbf6f; --grn-bg:rgba(143,191,111,.12);
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--ink); font-family:var(--serif); line-height:1.65;
+  background:radial-gradient(1200px 700px at 70% -10%, #1d3a26 0%, transparent 60%),
+             radial-gradient(900px 600px at 10% 110%, #173021 0%, transparent 55%),
+             linear-gradient(180deg,var(--bg1),var(--bg0) 70%);
+  min-height:100vh; overflow-x:hidden;
+}
+/* ============ ФОН: ЛИСТЬЯ, ЛЕС, ГРОЗА ============ */
+#leaves{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.leaf{position:absolute;top:-8vh;left:var(--x);opacity:var(--o);animation:fall var(--d) linear infinite;animation-delay:var(--dl);will-change:transform}
+.leaf svg{width:var(--s);height:var(--s);display:block;animation:sway 3.6s ease-in-out infinite alternate;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.leaf.front{z-index:6;filter:blur(1px)}
+@keyframes fall{to{transform:translateY(118vh) translateX(var(--dr)) rotate(var(--rr))}}
+@keyframes sway{from{transform:rotate(-26deg)}to{transform:rotate(30deg)}}
+#forest{position:fixed;left:0;right:0;bottom:0;height:200px;pointer-events:none;z-index:0}
+#forest svg{width:100%;height:100%;display:block}
+#storm{position:fixed;inset:0;pointer-events:none;z-index:40;opacity:0;
+  background:radial-gradient(ellipse 90% 45% at 72% -5%, rgba(225,238,255,.5), rgba(225,238,255,.12) 45%, transparent 70%);
+  animation:flash 23s linear infinite}
+@keyframes flash{0%,84.5%,88%,100%{opacity:0}85%{opacity:.4}86%{opacity:.08}87%{opacity:.3}}
+/* ============ КАРКАС ============ */
+.wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:34px 22px 130px}
+.hidden{display:none!important}
+.cover{display:grid;grid-template-columns:1.35fr .85fr;gap:44px;align-items:start;padding:26px 0 10px}
+.overline{letter-spacing:.28em;text-transform:uppercase;font-size:12px;color:var(--gold-d);margin:0 0 10px}
+h1.title{font-size:clamp(52px,9vw,104px);line-height:.95;margin:0 0 18px;color:var(--gold);
+  text-shadow:0 3px 0 rgba(0,0,0,.45),0 0 60px rgba(216,180,90,.15);font-weight:700;letter-spacing:.01em}
+.subtitle{font-style:italic;color:var(--gold-b);font-size:clamp(16px,2.2vw,21px);margin:0 0 26px;opacity:.92}
+.lead{font-size:17.5px;color:var(--ink-mut);max-width:56ch}
+.lead::first-letter{float:left;font-size:3.6em;line-height:.82;padding:4px 10px 0 0;color:var(--gold);font-weight:700}
+.gate{background:linear-gradient(180deg,rgba(27,49,34,.85),rgba(16,32,20,.85));border:1px solid var(--line-gold);
+  border-top:3px solid var(--gold);padding:26px 24px;backdrop-filter:blur(6px);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.gate h3{margin:0 0 4px;font-size:26px;color:var(--ink)}
+.gate .lab{letter-spacing:.22em;text-transform:uppercase;font-size:11px;color:var(--gold-d);margin:0 0 14px}
+.gate ul{list-style:none;margin:0 0 20px;padding:0}
+.gate li{position:relative;padding-left:22px;margin-bottom:12px;font-size:14.5px;color:var(--ink-mut)}
+.gate li::before{content:"";position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #e88f7a, #a33b2a);box-shadow:0 0 8px rgba(200,90,60,.5)}
+.gate li b{color:var(--ink)}
+#name{width:100%;background:rgba(10,20,12,.6);border:1px solid var(--line);color:var(--ink);
+  padding:13px 14px;font:inherit;font-size:15px;margin-bottom:14px}
+#name:focus{outline:none;border-color:var(--gold)}
+.btn-gold{display:block;width:100%;background:linear-gradient(180deg,var(--gold-b),var(--gold) 55%,#c09b45);
+  color:#241a06;border:none;padding:15px 18px;font:inherit;font-weight:700;font-size:17px;cursor:pointer;
+  box-shadow:0 8px 24px rgba(216,180,90,.25), inset 0 1px 0 rgba(255,255,255,.5);transition:transform .12s, box-shadow .2s}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(216,180,90,.35)}
+.btn-gold:active{transform:scale(.98)}
+.btn-gold:disabled{opacity:.6;cursor:default;transform:none}
+.gate .note{font-size:12.5px;color:var(--ink-dim);text-align:center;margin:12px 0 0}
+/* ============ КАРТОЧКИ ЗАДАНИЙ ============ */
+.card{position:relative;background:rgba(22,40,28,.88);border:1px solid var(--line);margin:0 0 30px;padding:30px 32px 28px;
+  backdrop-filter:blur(6px);box-shadow:0 16px 40px rgba(0,0,0,.3);overflow:hidden;transition:border-color .25s, transform .25s}
+.card:hover{border-color:var(--line-gold)}
+.card::after{content:attr(data-roman);position:absolute;top:-18px;right:14px;font-size:130px;line-height:1;
+  color:rgba(216,180,90,.07);font-weight:700;pointer-events:none;letter-spacing:-.04em}
+.card h2{margin:0 0 6px;font-size:clamp(22px,3.4vw,30px);color:var(--ink);display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.rule{height:3px;width:130px;background:linear-gradient(90deg,var(--gold),transparent);transform:skewX(-24deg);margin:6px 0 16px}
+.pts{border:1px solid var(--gold-d);color:var(--gold);padding:3px 11px;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;transform:rotate(-2deg);background:rgba(216,180,90,.06);white-space:nowrap}
+.pts.free{border-color:rgba(143,191,111,.5);color:var(--grn);background:var(--grn-bg)}
+.task-note{color:var(--ink-mut);font-size:15px;margin:0 0 18px}
+.free-note{font-style:italic;color:var(--ink-dim);font-size:13.5px;border-left:2px solid rgba(143,191,111,.4);
+  padding:6px 0 6px 14px;margin:0 0 18px;background:linear-gradient(90deg,rgba(143,191,111,.06),transparent)}
+.done-tag{position:absolute;top:16px;right:20px;z-index:2;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grn);border:1px solid rgba(143,191,111,.4);padding:3px 9px;background:var(--grn-bg);opacity:0;transition:opacity .3s}
+.card.done .done-tag{opacity:1}
+/* Задание I */
+.ev-list{margin:0 0 8px;padding:0;list-style:none;border-bottom:1px solid var(--line);padding-bottom:14px}
+.ev-list li{display:flex;gap:14px;margin-bottom:10px;color:var(--ink-mut);font-size:15.5px}
+.ev-list .n{color:var(--gold);font-weight:700;font-size:19px;min-width:16px}
+.mrow{display:flex;align-items:center;gap:16px;padding:15px 2px;border-bottom:1px dashed rgba(46,74,51,.7);flex-wrap:wrap}
+.mrow:last-child{border-bottom:none}
+.mrow .ltr{color:var(--gold);font-size:21px;font-weight:700;min-width:22px}
+.mrow .txt{flex:1;min-width:220px;font-size:15.5px}
+.nums{display:flex;gap:9px}
+.nbtn{width:46px;height:46px;border:1px solid var(--line-gold);background:rgba(10,20,12,.5);color:var(--ink);
+  font:inherit;font-size:19px;cursor:pointer;transition:all .15s}
+.nbtn:hover{border-color:var(--gold);color:var(--gold-b);transform:translateY(-2px)}
+.nbtn.sel{background:linear-gradient(180deg,var(--gold-b),var(--gold));color:#241a06;font-weight:700;border-color:var(--gold);
+  box-shadow:0 4px 14px rgba(216,180,90,.35)}
+.nbtn.ok{border-color:var(--grn);box-shadow:0 0 0 2px var(--grn-bg)}
+.nbtn.bad{border-color:var(--red);box-shadow:0 0 0 2px var(--red-bg)}
+.reveal{font-size:12.5px;color:var(--ink-dim);width:100%;padding-left:38px;display:none}
+body.locked .reveal{display:block}
+.reveal b{color:var(--gold)}
+/* Задание II */
+.cols-head{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.col-lab{flex:1;min-width:200px;text-align:center;padding:10px;border:1px solid var(--line);font-size:14px;letter-spacing:.06em}
+.col-lab.w{color:#d9b48f;border-color:rgba(217,180,143,.35);background:rgba(93,64,55,.15)}
+.col-lab.h{color:#bcd9a8;border-color:rgba(143,191,111,.35);background:rgba(143,191,111,.08)}
+.quote{border:1px solid var(--line);background:rgba(12,24,16,.5);padding:16px 18px;margin-bottom:13px;transition:border-color .2s}
+.quote:hover{border-color:var(--line-gold)}
+.quote .q{font-style:italic;color:var(--ink-mut);font-size:15.5px;margin-bottom:12px}
+.stamps{display:flex;gap:10px;flex-wrap:wrap}
+.stamp{border:1px solid var(--line);background:transparent;color:var(--ink-dim);padding:8px 16px;font:inherit;font-size:14px;
+  cursor:pointer;letter-spacing:.04em;transition:all .15s;transform:rotate(-.6deg)}
+.stamp+.stamp{transform:rotate(.6deg)}
+.stamp:hover{color:var(--ink);border-color:var(--gold-d)}
+.stamp.sel.w{background:#5d4037;border-color:#8d6e63;color:#ffe9d6;box-shadow:0 4px 12px rgba(93,64,55,.4)}
+.stamp.sel.h{background:#33502c;border-color:#6f9a58;color:#e4f5d6;box-shadow:0 4px 12px rgba(51,80,44,.4)}
+.stamp.ok{outline:2px solid var(--grn);outline-offset:2px}
+.stamp.bad{outline:2px solid var(--red);outline-offset:2px}
+/* Задание III */
+.seq{list-style:none;margin:0;padding:0}
+.seq li{display:flex;align-items:center;gap:14px;border:1px solid var(--line);background:rgba(12,24,16,.5);
+  padding:12px 14px;margin-bottom:10px;transition:border-color .2s}
+.seq .pos{width:38px;height:38px;flex:none;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--gold-d);color:var(--gold);font-size:18px;font-weight:700;background:rgba(216,180,90,.06)}
+.seq li.ok .pos{border-color:var(--grn);color:var(--grn);background:var(--grn-bg)}
+.seq li.bad .pos{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+.seq .stxt{flex:1;font-size:15px;color:var(--ink-mut)}
+.arrows{display:flex;flex-direction:column;gap:5px}
+.abtn{width:36px;height:26px;border:1px solid var(--line-gold);background:rgba(10,20,12,.5);color:var(--gold);
+  cursor:pointer;font-size:13px;line-height:1;transition:all .12s}
+.abtn:hover{background:var(--gold);color:#241a06}
+.abtn:disabled{opacity:.25;cursor:default}
+/* Задание IV */
+.errtext{font-size:16.5px;line-height:1.9;background:rgba(12,24,16,.55);border:1px dashed var(--line);padding:20px 22px}
+.err{color:var(--red);border-bottom:2px dashed var(--red);cursor:pointer;padding:1px 4px;background:var(--red-bg);transition:all .15s}
+.err:hover{background:rgba(208,112,90,.25)}
+.err.marked{color:var(--gold-b);border-bottom:2px solid var(--gold);background:rgba(216,180,90,.1)}
+.err.ok{color:var(--grn);border-bottom:2px solid var(--grn);background:var(--grn-bg)}
+.err.bad{color:var(--red);border-bottom:2px solid var(--red)}
+.errcount{margin:14px 0 6px;font-size:14px;color:var(--ink-dim);letter-spacing:.06em}
+.errcount b{color:var(--gold)}
+.fix{display:none;margin-top:14px;border-left:3px solid var(--gold-d);padding:4px 0 4px 16px;animation:slidein .3s ease}
+.fix.open{display:block}
+@keyframes slidein{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.fix label{display:block;font-size:13.5px;color:var(--gold);margin-bottom:6px;letter-spacing:.05em}
+.fix input{width:100%;background:rgba(10,20,12,.6);border:1px solid var(--line);color:var(--ink);padding:11px 13px;font:inherit;font-size:15px}
+.fix input:focus{outline:none;border-color:var(--gold)}
+/* Письменные */
+textarea{width:100%;min-height:110px;resize:vertical;background:rgba(10,20,12,.6);border:1px solid var(--line);
+  color:var(--ink);padding:14px 16px;font:inherit;font-size:15.5px;line-height:1.6}
+textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(216,180,90,.12)}
+.cnt{text-align:right;font-size:13px;color:var(--ink-dim);margin-top:6px;transition:color .2s}
+.cnt.ok{color:var(--grn);font-weight:700}
+.cnt.low{color:var(--red)}
+.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.chip{border:1px solid var(--line);color:var(--ink-dim);padding:5px 13px;font-size:13.5px;font-style:italic;transition:all .25s}
+.chip.on{border:1px solid var(--gold);color:var(--gold-b);background:rgba(216,180,90,.12);box-shadow:0 0 12px rgba(216,180,90,.2)}
+blockquote{margin:14px 0;padding:12px 20px;border-left:3px solid var(--gold-d);background:rgba(216,180,90,.05);
+  font-style:italic;color:var(--ink-mut);font-size:15px}
+/* ============ НИЖНЯЯ ПАНЕЛЬ ============ */
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;gap:18px;
+  padding:14px 22px calc(14px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(10,20,12,0),rgba(8,16,10,.92) 35%,rgba(6,13,8,.98));backdrop-filter:blur(8px)}
+.luchina{flex:none;display:flex;flex-direction:column;align-items:center}
+.flame{width:13px;height:19px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;
+  background:radial-gradient(circle at 50% 78%, #ffe6a1, #e2a03c 62%, rgba(226,160,60,0) 75%);
+  box-shadow:0 0 20px 7px rgba(255,190,90,.28);animation:flick 1.15s ease-in-out infinite alternate;transform-origin:50% 100%}
+@keyframes flick{0%{transform:scale(1) rotate(-2deg)}40%{transform:scale(1.12,.88) rotate(2.5deg);opacity:.85}
+  70%{transform:scale(.9,1.14) rotate(-1.5deg)}100%{transform:scale(1.05,.95) rotate(1deg);opacity:.95}}
+.stick{width:3px;height:20px;background:linear-gradient(180deg,#7a5a33,#4a351d);margin-top:-2px}
+.progwrap{flex:1}
+.progtext{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:7px;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.progtext b{color:var(--gold)}
+#timer{color:var(--gold-b);font-variant-numeric:tabular-nums;letter-spacing:.1em;text-transform:none}
+.progbar{height:6px;background:rgba(216,180,90,.14);overflow:hidden}
+.progbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-d),var(--gold-b));transition:width .5s ease;
+  box-shadow:0 0 10px rgba(216,180,90,.5)}
+#finishBtn{flex:none;width:auto;padding:13px 30px;font-size:15.5px}
+/* ============ МОДАЛКА ============ */
+#overlay{position:fixed;inset:0;z-index:100;background:rgba(5,10,6,.75);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{max-width:520px;width:100%;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line-gold);
+  border-top:3px solid var(--gold);padding:32px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.modal h3{margin:0 0 12px;font-size:24px;color:var(--gold-b)}
+.modal p{color:var(--ink-mut);font-size:15px;margin:0 0 18px}
+.modal .warn{color:var(--red);font-size:14px;background:var(--red-bg);border:1px solid rgba(208,112,90,.4);padding:10px 14px;margin-bottom:18px}
+.mbtns{display:flex;gap:12px}
+.mbtns .btn-gold{flex:1.2}
+.btn-ghost{flex:1;background:transparent;border:1px solid var(--line);color:var(--ink-mut);font:inherit;font-size:15px;cursor:pointer;padding:13px}
+.btn-ghost:hover{border-color:var(--gold-d);color:var(--ink)}
+/* ============ РЕЗУЛЬТАТ ============ */
+#results .gradebox{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin:8px 0 20px}
+.grade{width:110px;height:110px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:56px;font-weight:700;border:3px double var(--gold);box-shadow:0 0 40px rgba(216,180,90,.25), inset 0 0 30px rgba(216,180,90,.08)}
+.grade.g5{color:#c9e8b0;border-color:var(--grn);box-shadow:0 0 40px rgba(143,191,111,.3)}
+.grade.g4{color:var(--gold-b)} .grade.g3{color:#e8b078} .grade.g2{color:var(--red)}
+.scoreline{font-size:19px;color:var(--ink-mut)} .scoreline b{color:var(--gold-b);font-size:26px}
+.timeline{font-size:14px;color:var(--ink-dim);margin-top:4px;font-style:italic}
+.scale{font-size:12.5px;color:var(--ink-dim);margin-top:6px}
+.breakdown{list-style:none;margin:0 0 14px;padding:0}
+.breakdown li{display:flex;justify-content:space-between;gap:14px;padding:9px 4px;border-bottom:1px dashed rgba(46,74,51,.7);font-size:15px;color:var(--ink-mut)}
+.breakdown b{color:var(--gold)}
+.breakdown b.free{color:var(--grn)}
+.freenote{font-size:13px;color:var(--ink-dim);font-style:italic;background:var(--grn-bg);border:1px solid rgba(143,191,111,.3);
+  padding:10px 14px;margin:0 0 22px}
+.key{border-top:3px solid var(--gold-d);padding-top:18px;margin-top:8px}
+.key h3{color:var(--gold-b);font-size:20px;margin:20px 0 10px}
+.key table{width:100%;border-collapse:collapse;font-size:14.5px}
+.key td,.key th{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top;color:var(--ink-mut)}
+.key th{color:var(--gold);background:rgba(216,180,90,.06);letter-spacing:.04em}
+.key .cite{font-style:italic;color:var(--ink-dim);font-size:13.5px}
+.key .etalon{color:var(--grn);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:11.5px;display:block;margin-bottom:5px}
+footer{margin-top:50px;padding-top:22px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim);font-size:13.5px}
+footer .sig{color:var(--gold);font-size:16px;letter-spacing:.1em;margin-bottom:6px}
+body.locked #workspace{pointer-events:none}
+body.locked textarea,body.locked input{opacity:.85}
+@media(max-width:860px){
+  .cover{grid-template-columns:1fr;gap:26px}
+  .card{padding:22px 18px}
+  .card::after{font-size:90px;top:-10px}
+  .mrow .nums{width:100%;justify-content:flex-start}
+  #bar{gap:12px;padding-left:14px;padding-right:14px}
+  #finishBtn{padding:12px 18px;font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<div id="leaves"></div>
+<div id="forest"></div>
+<div id="storm"></div>
+
+<div class="wrap">
+
+  <!-- ================= ОБЛОЖКА ================= -->
+  <section class="cover" id="cover">
+    <div>
+      <p class="overline">И. С. Тургенев · «Записки охотника»</p>
+      <h1 class="title">«БИРЮК»</h1>
+      <p class="subtitle">Лесник, отпустивший вора. Одиночество, долг и пробуждение совести</p>
+      <p class="lead">Гроза, нищая изба, пойманный вор и молчаливое решение отпустить… В рассказе «Бирюк» Тургенев показывает, как в суровом, одиноком человеке просыпается сострадание. Разберись, что превращает «зверя» в человека, какие детали раскрывают характер Бирюка и почему финал рассказа — это не слабость, а сила.</p>
+    </div>
+    <aside class="gate">
+      <p class="lab">Условия испытания</p>
+      <h3>Одна попытка</h3>
+      <ul>
+        <li><b>Попытка одна.</b> После кнопки «Завершить работу» изменить ответы нельзя.</li>
+        <li><b>Подсказок нет.</b> Вспоминай текст рассказа сам.</li>
+        <li><b>Аргументация обязательна:</b> задания 5, 6 и рефлексия не примутся без развёрнутого ответа.</li>
+        <li><b>Творчество и рефлексия не оцениваются баллами</b> — но без них работа не завершится. В 28 баллов входят только задания I–VI.</li>
+        <li><b>Таймер — необязательный:</b> он лишь покажет, сколько времени (примерно) ты затратил на работу.</li>
+        <li><b>После завершения</b> откроются правильные ответы, разбор, цитаты и эталонные ответы на творчество и рефлексию.</li>
+      </ul>
+      <input id="name" type="text" placeholder="Имя и фамилия (необязательно)" autocomplete="off">
+      <button class="btn-gold" id="startBtn">Начать работу →</button>
+      <p class="note">Результат сохранится на этом устройстве. Максимум — 28 баллов.</p>
+    </aside>
+  </section>
+
+  <!-- ================= ЗАДАНИЯ ================= -->
+  <div id="workspace" class="hidden">
+
+    <!-- I -->
+    <section class="card" data-roman="I" id="card1">
+      <span class="done-tag">✓ выполнено</span>
+      <h2>Событие и его значение <span class="pts">4 балла</span></h2>
+      <div class="rule"></div>
+      <p class="task-note">Соедини событие рассказа и его значение: нажми нужную цифру в каждой строке.</p>
+      <ul class="ev-list">
+        <li><span class="n">1</span>Охотник попадает в грозу и оказывается в избе Бирюка.</li>
+        <li><span class="n">2</span>Бирюк ловит мужика-браконьера и приводит в избу.</li>
+        <li><span class="n">3</span>Мужик в отчаянии кричит Бирюку: «зверь, зверь, зверь!»</li>
+        <li><span class="n">4</span>Бирюк молча сдёргивает кушак и выталкивает мужика вон.</li>
+      </ul>
+      <div id="matchRows"></div>
+    </section>
+
+    <!-- II -->
+    <section class="card" data-roman="II" id="card2">
+      <span class="done-tag">✓ выполнено</span>
+      <h2>«Зверь» или человек? <span class="pts">6 баллов</span></h2>
+      <div class="rule"></div>
+      <p class="task-note">Распредели цитаты: что показывает Бирюка суровым служакой, а что раскрывает в нём человека.</p>
+      <div class="cols-head">
+        <div class="col-lab w">🐺 Бирюк как «зверь» · долг, сила, суровость</div>
+        <div class="col-lab h">👤 Бирюк как человек · бедность, боль, сострадание</div>
+      </div>
+      <div id="quoteList"></div>
+    </section>
+
+    <!-- III -->
+    <section class="card" data-roman="III" id="card3">
+      <span class="done-tag">✓ выполнено</span>
+      <h2>Восстанови последовательность <span class="pts">4 балла</span></h2>
+      <div class="rule"></div>
+      <p class="task-note">Стрелками расставь события рассказа по порядку: от первого (1) к последнему (6).</p>
+      <ul class="seq" id="seqList"></ul>
+    </section>
+
+    <!-- IV -->
+    <section class="card" data-roman="IV" id="card4">
+      <span class="done-tag">✓ выполнено</span>
+      <h2>Найди и исправь три ошибки <span class="pts">6 баллов</span></h2>
+      <div class="rule"></div>
+      <p class="task-note">В тексте три фактические ошибки. Нажми на ошибочные места, затем запиши исправления.</p>
+      <div class="errtext">
+        Бирюк — высокий, плечистый лесник. Его дочь зовут <span class="err" data-e="1">Акулина</span>.
+        Бирюк живёт в <span class="err" data-e="2">просторной избе с полатями</span>.
+        Когда мужик в отчаянии кричит на него, Бирюк не выдерживает и молча отпускает вора.
+        После этого он <span class="err" data-e="3">просит охотника рассказать всем, какой он добрый</span>.
+      </div>
+      <p class="errcount">Отмечено ошибок: <b id="errCnt">0</b> из 3</p>
+      <div class="fix" id="fix1"><label>Исправление 1 · как зовут дочь?</label><input type="text" data-f="1" placeholder="Напиши правильное имя…"></div>
+      <div class="fix" id="fix2"><label>Исправление 2 · какова изба на самом деле?</label><input type="text" data-f="2" placeholder="Напиши, как в тексте…"></div>
+      <div class="fix" id="fix3"><label>Исправление 3 · о чём просит Бирюк?</label><input type="text" data-f="3" placeholder="Напиши, как в тексте…"></div>
+    </section>
+
+    <!-- V -->
+    <section class="card" data-roman="V" id="card5">
+      <span class="done-tag">✓ выполнено</span>
+      <h2>Сравни два эпизода <span class="pts">аргументация · 4 балла</span></h2>
+      <div class="rule"></div>
+      <blockquote>Пара 1: «Говорят, нельзя. Я тоже человек подневольный: с меня взыщут. Вас баловать тоже не приходится.»</blockquote>
+      <blockquote>Пара 2: «Убирайся к чёрту с своей лошадью! — закричал он ему вслед, — да смотри, в другой раз у меня…»</blockquote>
+      <p class="task-note">Какой контраст ты видишь между этими двумя моментами? Что изменилось в Бирюке между отказом и поступком? Напиши 2–3 предложения.</p>
+      <textarea id="t5" placeholder="Твой ответ…"></textarea>
+      <div class="cnt low" id="c5">0 знаков · минимум — 80</div>
+    </section>
+
+    <!-- VI -->
+    <section class="card" data-roman="VI" id="card6">
+      <span class="done-tag">✓ выполнено</span>
+      <h2>Обоснуй вывод <span class="pts">аргументация · 4 балла</span></h2>
+      <div class="rule"></div>
+      <p class="task-note">Почему финал рассказа можно назвать победой человека, хотя Бирюк нарушил служебный долг? Напиши 3–4 предложения, упомяни хотя бы одну деталь из текста и объясни, как ты понимаешь поступок Бирюка.</p>
+      <textarea id="t6" placeholder="Твой ответ…"></textarea>
+      <div class="cnt low" id="c6">0 знаков · минимум — 100</div>
+    </section>
+
+    <!-- VII -->
+    <section class="card" data-roman="VII" id="card7">
+      <span class="done-tag">✓ выполнено</span>
+      <h2>Творческое задание <span class="pts free">не оценивается баллами</span></h2>
+      <div class="rule"></div>
+      <p class="free-note">Это задание не входит в 28 баллов и не влияет на оценку. Пиши для себя — чтобы понять героя. После завершения откроется примерный монолог для сравнения.</p>
+      <p class="task-note">Представь, что Бирюк остался один в избе после того, как мужик уехал. Напиши его внутренний монолог из 3–4 предложений: передай то, что он чувствует после того, как нарушил долг. Используй хотя бы одно слово:</p>
+      <div class="chips" id="chips">
+        <span class="chip" data-w="подневольный">подневольный</span>
+        <span class="chip" data-w="совесть">совесть</span>
+        <span class="chip" data-w="долг">долг</span>
+        <span class="chip" data-w="нельзя">нельзя</span>
+      </div>
+      <textarea id="t7" placeholder="Монолог Бирюка…" style="margin-top:14px"></textarea>
+    </section>
+
+    <!-- Рефлексия -->
+    <section class="card" data-roman="✦" id="cardR">
+      <span class="done-tag">✓ выполнено</span>
+      <h2>Короткая рефлексия <span class="pts free">не оценивается · от 40 знаков</span></h2>
+      <div class="rule"></div>
+      <p class="free-note">Рефлексия не входит в 28 баллов и не влияет на оценку. Но без развёрнутого ответа работа не завершится. После проверки откроется эталонный ответ.</p>
+      <p class="task-note">Какой момент рассказа лучше всего раскрывает характер Бирюка? Назови его и объясни почему.</p>
+      <textarea id="tR" placeholder="Твой ответ…"></textarea>
+      <div class="cnt low" id="cR">0 знаков · минимум — 40</div>
+    </section>
+
+    <!-- РЕЗУЛЬТАТЫ -->
+    <section class="card hidden" data-roman="★" id="results"></section>
+
+  </div><!-- /workspace -->
+
+  <footer>
+    <div class="sig">Сообщество «Страница»</div>
+    <div>Литература · 7 класс · Интерактивный рабочий лист по рассказу И. С. Тургенева «Бирюк»</div>
+  </footer>
+</div>
+
+<!-- Нижняя панель с лучиной и таймером -->
+<div id="bar" class="hidden">
+  <div class="luchina" title="Лучина горит, пока ты работаешь"><div class="flame"></div><div class="stick"></div></div>
+  <div class="progwrap">
+    <div class="progtext"><span>Выполнено <b id="progNum">0</b> из 7</span><span id="timer">≈ 00:00</span></div>
+    <div class="progbar"><i id="progFill"></i></div>
+  </div>
+  <button class="btn-gold" id="finishBtn">Завершить работу</button>
+</div>
+
+<!-- Модалка -->
+<div id="overlay" class="hidden">
+  <div class="modal">
+    <h3 id="mTitle">Последний шаг</h3>
+    <p id="mText">Помни: попытка одна. После завершения откроются правильные ответы, цитаты и эталоны, но изменить ничего будет нельзя.</p>
+    <div class="warn hidden" id="mWarn"></div>
+    <div class="mbtns">
+      <button class="btn-ghost" id="mBack">Вернуться</button>
+      <button class="btn-gold" id="mGo">Завершить и проверить</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ================= ДАННЫЕ ================= */
+const MATCH_ROWS=[
+ {l:"А",t:"Человечность сильнее долга",a:4},
+ {l:"Б",t:"Случайность сводит людей разных сословий",a:1},
+ {l:"В",t:"Долг сталкивается с нищетой",a:2},
+ {l:"Г",t:"Взрыв обнажает общую несвободу",a:3}];
+const QUOTES=[
+ {id:1,q:"«Вязанки хворосту не даст утащить; в какую бы ни было пору, хоть в самую полночь, нагрянет, как снег на голову»",a:"w"},
+ {id:2,q:"«Изба состояла из одной комнаты, закоптелой, низкой и пустой, без полатей и перегородок»",a:"h"},
+ {id:3,q:"«Должность свою справляю... даром господский хлеб есть не приходится»",a:"w"},
+ {id:4,q:"«Лучина горела на столе, печально вспыхивая и погасая»",a:"h"},
+ {id:5,q:"«Я тоже человек подневольный: с меня взыщут. Вас баловать тоже не приходится»",a:"w"},
+ {id:6,q:"«не извольте только сказывать»",a:"h"}];
+const SEQ_CORRECT=["storm","axe","catch","plead","beast","free"];
+const SEQ_TEXT={storm:"Охотник застигнут грозой, Бирюк предлагает провести в избу",
+ axe:"Бирюк слышит стук топора в лесу и идёт ловить вора",
+ catch:"Бирюк ловит мужика и приводит в избу",
+ plead:"В избе мужик просит: «Отпусти... с голодухи... отпусти»",
+ beast:"Мужик взрывается: «зверь, зверь, зверь!»",
+ free:"Бирюк молча отпускает мужика: «Убирайся к чёрту с своей лошадью!»"};
+const ERR_KEY={1:["улит"],2:["без полат","закоптел","низк","пуст"],3:["не рассказ","не изволь","молч","сказывать","никому"]};
+const KEY5=["долг","совесть","человек","подневольн","сострадан","жалост","контраст","переменился","изменился"];
+const KEY6=["сострадан","совесть","человек","долг","свобод","кушак","нельзя","выбор","побед","жалост"];
+/* Эталонные ответы (не оцениваются) — открываются после завершения */
+const ETALON7="Отпустил… Нельзя было, знаю: должность моя — беречь господский лес. С меня теперь взыщут, да разве удержишься, когда он про голодных детей закричал? Я и сам подневольный, только совесть вдруг сильнее страха оказалась. Пусть завтра отвечать буду, а сейчас хоть одному человеку легче уехать.";
+const ETALONR="Лучше всего характер Бирюка раскрывает финальный эпизод, когда он молча, одним движением сдёргивает кушак и выталкивает пойманного мужика вон. До этого мы видели его суровым стражником, но отчаяние вора обнажает их общую трагедию: оба они «подневольные». Отпуская мужика и рискуя быть наказанным барином, Бирюк выбирает совесть. А его смущение и просьба к охотнику «не извольте только сказывать» доказывают, что милосердие в нём сильнее страха, но он не нуждается в похвале за свою человечность.";
+
+let S={started:false,finished:false,name:"",match:{},quotes:{},seq:["catch","storm","free","plead","axe","beast"],
+ seqTouched:false,errMarked:{},errText:{},t5:"",t6:"",t7:"",tR:"",parts:null,score:0,grade:0,t0:0,elapsed:0};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const save=()=>{try{localStorage.setItem("biryuk7_v3",JSON.stringify(S))}catch(e){}};
+const load=()=>{try{const r=localStorage.getItem("biryuk7_v3");if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}};
+
+/* ================= ФОН: ЛИСТЬЯ И ЛЕС ================= */
+(function(){
+  const cols=["#8a6d2f","#6b7a3a","#a3542f","#c9a227","#4f5d2f","#7d8a45"];
+  const box=$("#leaves");
+  for(let i=0;i<16;i++){
+    const d=document.createElement("div");
+    d.className="leaf"+(i<4?" front":"");
+    const s=14+Math.random()*20;
+    d.style.cssText=`--x:${Math.random()*100}%;--d:${11+Math.random()*14}s;--dl:${-Math.random()*20}s;--s:${s}px;--o:${.25+Math.random()*.4};--dr:${(Math.random()*2-1)*22}vw;--rr:${(Math.random()*2-1)*540}deg`;
+    const c=cols[i%cols.length];
+    d.innerHTML=`<svg viewBox="0 0 24 24"><path d="M4 20C4 9 11 4 20 4c0 9-5 16-16 16z" fill="${c}"/><path d="M4 20L20 4" stroke="rgba(0,0,0,.3)" stroke-width="1"/></svg>`;
+    box.appendChild(d);
+  }
+  function treePath(base,hMin,hMax,step){
+    let p=`M0 220 L0 ${base-14}`,x=0;
+    while(x<1460){
+      const h=hMin+Math.random()*(hMax-hMin), w=step*(.7+Math.random()*.6);
+      p+=` L${(x+w*.5).toFixed(0)} ${base-h} L${(x+w).toFixed(0)} ${base-10-Math.random()*10}`;
+      x+=w;
+    }
+    return p+` L1460 220 Z`;
+  }
+  $("#forest").innerHTML=`<svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+    <path d="${treePath(150,60,120,70)}" fill="#132a1b" opacity=".85"/>
+    <path d="${treePath(185,40,95,55)}" fill="#0a170e"/></svg>`;
+})();
+
+/* ================= ТАЙМЕР (необязательный) ================= */
+function fmt(ms){
+  const s=Math.floor(ms/1000), m=Math.floor(s/60), h=Math.floor(m/60);
+  if(h) return h+" ч "+(m%60)+" мин";
+  return String(m).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+}
+function tick(){
+  const el=$("#timer"); if(!el) return;
+  if(S.finished) el.textContent="≈ "+fmt(S.elapsed||0);
+  else if(S.t0) el.textContent="≈ "+fmt(Date.now()-S.t0);
+}
+setInterval(tick,1000);
+
+/* ================= РЕНДЕР ЗАДАНИЙ ================= */
+function renderMatch(){
+  $("#matchRows").innerHTML=MATCH_ROWS.map(r=>`
+   <div class="mrow" data-row="${r.l}">
+     <span class="ltr">${r.l}</span><span class="txt">${r.t}</span>
+     <span class="nums">${[1,2,3,4].map(n=>`<button class="nbtn${S.match[r.l]===n?" sel":""}" data-row="${r.l}" data-n="${n}">${n}</button>`).join("")}</span>
+     <span class="reveal">Правильно: <b>${r.l} — ${r.a}</b></span>
+   </div>`).join("");
+}
+function renderQuotes(){
+  $("#quoteList").innerHTML=QUOTES.map(q=>`
+   <div class="quote" data-q="${q.id}">
+     <div class="q">${q.q}</div>
+     <div class="stamps">
+       <button class="stamp w${S.quotes[q.id]==="w"?" sel":""}" data-q="${q.id}" data-v="w">🐺 «зверь»</button>
+       <button class="stamp h${S.quotes[q.id]==="h"?" sel":""}" data-q="${q.id}" data-v="h">👤 человек</button>
+     </div>
+   </div>`).join("");
+}
+function renderSeq(){
+  $("#seqList").innerHTML=S.seq.map((id,i)=>`
+   <li data-id="${id}">
+     <span class="pos">${i+1}</span>
+     <span class="stxt">${SEQ_TEXT[id]}</span>
+     <span class="arrows">
+       <button class="abtn" data-id="${id}" data-dir="-1" ${i===0?"disabled":""}>▲</button>
+       <button class="abtn" data-id="${id}" data-dir="1" ${i===S.seq.length-1?"disabled":""}>▼</button>
+     </span>
+   </li>`).join("");
+}
+function renderErr(){
+  $$(".err").forEach(sp=>{
+    const n=sp.dataset.e;
+    sp.classList.toggle("marked",!!S.errMarked[n]);
+    if(S.errMarked[n]) $("#fix"+n).classList.add("open");
+  });
+  $("#errCnt").textContent=Object.keys(S.errMarked).length;
+  $$("input[data-f]").forEach(inp=>{inp.value=S.errText[inp.dataset.f]||""});
+}
+
+/* ================= ОБРАБОТЧИКИ ================= */
+document.addEventListener("click",e=>{
+  if(S.finished) return;
+  const nb=e.target.closest(".nbtn");
+  if(nb){S.match[nb.dataset.row]=+nb.dataset.n;save();renderMatch();progress();return;}
+  const st=e.target.closest(".stamp");
+  if(st){S.quotes[st.dataset.q]=st.dataset.v;save();renderQuotes();progress();return;}
+  const ab=e.target.closest(".abtn");
+  if(ab){
+    const i=S.seq.indexOf(ab.dataset.id), j=i+ +ab.dataset.dir;
+    [S.seq[i],S.seq[j]]=[S.seq[j],S.seq[i]]; S.seqTouched=true; save(); renderSeq(); progress(); return;
+  }
+  const er=e.target.closest(".err");
+  if(er){S.errMarked[er.dataset.e]=true;save();renderErr();progress();return;}
+});
+document.addEventListener("input",e=>{
+  if(S.finished) return;
+  const t=e.target;
+  if(t.id==="t5"){S.t5=t.value;cnt("t5","c5",80);}
+  if(t.id==="t6"){S.t6=t.value;cnt("t6","c6",100);}
+  if(t.id==="t7"){S.t7=t.value;chips();}
+  if(t.id==="tR"){S.tR=t.value;cnt("tR","cR",40);}
+  if(t.dataset.f){S.errText[t.dataset.f]=t.value;}
+  if(t.id==="name"){S.name=t.value;}
+  save(); progress();
+});
+function cnt(tid,cid,min){
+  const n=$("#"+tid).value.length, el=$("#"+cid);
+  el.textContent=n+" знаков · минимум — "+min;
+  el.className="cnt "+(n>=min?"ok":"low");
+}
+function chips(){
+  const v=S.t7.toLowerCase();
+  $$("#chips .chip").forEach(c=>c.classList.toggle("on",v.includes(c.dataset.w)));
+}
+
+/* ================= ПРОГРЕСС ================= */
+function doneFlags(){
+  return {
+   I: MATCH_ROWS.every(r=>S.match[r.l]),
+   II: QUOTES.every(q=>S.quotes[q.id]),
+   III: S.seqTouched,
+   IV: Object.keys(S.errMarked).length===3 && ["1","2","3"].every(n=>(S.errText[n]||"").trim()),
+   V: S.t5.trim().length>=80,
+   VI: S.t6.trim().length>=100,
+   VII: S.t7.trim().length>=30
+  };
+}
+function progress(){
+  const f=doneFlags(), n=Object.values(f).filter(Boolean).length;
+  $("#progNum").textContent=n; $("#progFill").style.width=(n/7*100)+"%";
+  [["card1",f.I],["card2",f.II],["card3",f.III],["card4",f.IV],["card5",f.V],["card6",f.VI],["card7",f.VII],["cardR",S.tR.trim().length>=40]]
+   .forEach(([id,ok])=>$("#"+id).classList.toggle("done",ok));
+}
+
+/* ================= ПРОВЕРКА ================= */
+function gradeWork(){
+  const p={};
+  p.I=MATCH_ROWS.filter(r=>S.match[r.l]===r.a).length;
+  p.II=QUOTES.filter(q=>S.quotes[q.id]===q.a).length;
+  const corr=S.seq.filter((id,i)=>id===SEQ_CORRECT[i]).length;
+  p.III=Math.round(corr*4/6);
+  p.IV=[1,2,3].reduce((a,n)=>a+(ERR_KEY[n].some(k=>(S.errText[n]||"").toLowerCase().includes(k))?2:0),0);
+  const ok5=S.t5.trim().length>=80, ok6=S.t6.trim().length>=100;
+  p.V= ok5 ? (KEY5.some(k=>S.t5.toLowerCase().includes(k))?4:2) : 0;
+  p.VI= ok6 ? (KEY6.some(k=>S.t6.toLowerCase().includes(k))?4:2) : 0;
+  const score=p.I+p.II+p.III+p.IV+p.V+p.VI, pct=Math.round(score/28*100);
+  const grade= pct>=90?5 : pct>=75?4 : pct>=50?3 : 2;
+  return {p,score,pct,grade};
+}
+function renderResults(r){
+  const who=S.name?`Работа ученика: <b>${S.name}</b><br>`:"";
+  const done7=S.t7.trim().length>0, doneR=S.tR.trim().length>=40;
+  $("#results").innerHTML=`
+   <h2>Результаты проверки</h2><div class="rule"></div>
+   <div class="gradebox">
+     <div class="grade g${r.grade}">${r.grade}</div>
+     <div>
+       ${who}<div class="scoreline">Набрано <b>${r.score}</b> из 28 баллов · ${r.pct}%</div>
+       <div class="timeline">Время работы (примерно): ≈ ${fmt(S.elapsed||0)}. Таймер необязательный — он просто показывает, сколько ты затратил.</div>
+       <div class="scale">Оценка по нормам Минпросвещения: 90–100% — «5», 75–89% — «4», 50–74% — «3», ниже 50% — «2». В 28 баллов входят только задания I–VI.</div>
+     </div>
+   </div>
+   <ul class="breakdown">
+     <li>I. Событие и значение <b>${r.p.I} / 4</b></li>
+     <li>II. «Зверь» или человек <b>${r.p.II} / 6</b></li>
+     <li>III. Последовательность <b>${r.p.III} / 4</b></li>
+     <li>IV. Ошибки и исправления <b>${r.p.IV} / 6</b></li>
+     <li>V. Сравнение эпизодов <b>${r.p.V} / 4</b></li>
+     <li>VI. Обоснование вывода <b>${r.p.VI} / 4</b></li>
+     <li>VII. Творческий монолог <b class="free">не оценивается · ${done7?"выполнено":"не выполнено"}</b></li>
+     <li>✦ Рефлексия <b class="free">не оценивается · ${doneR?"принята":"не принята"}</b></li>
+   </ul>
+   <p class="freenote">Творческое задание и рефлексия не оцениваются баллами и не входят в 28 баллов: это размышление, а не проверка. Ниже — эталонные ответы, чтобы сравнить со своими.</p>
+   <div class="key">
+     <h3>Правильные ответы и разбор</h3>
+     <table>
+       <tr><th>Задание</th><th>Правильно</th><th>Цитата / пояснение</th></tr>
+       <tr><td>I</td><td>1 — Б, 2 — В, 3 — Г, 4 — А</td><td class="cite">Гроза — сюжетный механизм; финал — выбор по совести, а не по правилам.</td></tr>
+       <tr><td>II</td><td>«Зверь»: 1, 3, 5 · Человек: 2, 4, 6</td><td class="cite">Нищета избы и печальная лучина выдают человеческую боль под службой.</td></tr>
+       <tr><td>III</td><td>${SEQ_CORRECT.map((id,i)=>(i+1)+". "+SEQ_TEXT[id]).join("<br>")}</td><td class="cite">От грозы — к стуку топора, от крика «зверь!» — к молчаливому освобождению.</td></tr>
+       <tr><td>IV·1</td><td>Дочь зовут Улита</td><td class="cite">«Улитой, — проговорила она, ещё более понурив своё печальное личико».</td></tr>
+       <tr><td>IV·2</td><td>Изба закоптелая, низкая, без полатей</td><td class="cite">«Изба лесника состояла из одной комнаты, закоптелой, низкой и пустой, без полатей и перегородок».</td></tr>
+       <tr><td>IV·3</td><td>Просит НЕ рассказывать</td><td class="cite">«Э, полноте, барин, — перебил он меня с досадой, — не извольте только сказывать».</td></tr>
+       <tr><td>V</td><td colspan="2">Пример: в первом эпизоде Бирюк действует по долгу — он «подневольный», с него «взыщут»; во втором делает то, что по долгу нельзя: отпускает вора. Между отказом и поступком он увидел не «вора», а живого человека в отчаянии. Долг уступил совести.</td></tr>
+       <tr><td>VI</td><td colspan="2">Пример: финал — победа человека, потому что Бирюк, рискуя наказанием, выбирает сострадание. «Одним поворотом сдёрнул с локтей мужика кушак» — жест освобождения, а не наказания. Просьба «не извольте только сказывать» значит: выбор сделан молча, не ради похвалы, а потому что не мог иначе.</td></tr>
+       <tr><td>VII</td><td colspan="2"><span class="etalon">Эталонный ответ · не оценивается</span>${ETALON7}</td></tr>
+       <tr><td>✦</td><td colspan="2"><span class="etalon">Эталонный ответ на рефлексию · не оценивается</span>${ETALONR}</td></tr>
+     </table>
+   </div>`;
+}
+function markInline(r){
+  $$(".mrow").forEach(row=>{
+    const l=row.dataset.row, need=MATCH_ROWS.find(x=>x.l===l).a, sel=S.match[l];
+    row.querySelector(`.nbtn[data-n="${need}"]`).classList.add(sel===need?"ok":"bad");
+    if(sel&&sel!==need) row.querySelector(`.nbtn[data-n="${sel}"]`).classList.add("bad");
+  });
+  $$(".quote").forEach(q=>{
+    const id=+q.dataset.q, need=QUOTES.find(x=>x.id===id).a, sel=S.quotes[id];
+    q.querySelector(`.stamp[data-v="${need}"]`).classList.add(sel===need?"ok":"bad");
+    if(sel&&sel!==need) q.querySelector(`.stamp[data-v="${sel}"]`).classList.add("bad");
+  });
+  $$("#seqList li").forEach((li,i)=>li.classList.add(S.seq[i]===SEQ_CORRECT[i]?"ok":"bad"));
+  $$(".err").forEach(sp=>{
+    const n=sp.dataset.e;
+    sp.classList.add(ERR_KEY[n].some(k=>(S.errText[n]||"").toLowerCase().includes(k))?"ok":"bad");
+  });
+}
+function lock(){
+  S.finished=true; save();
+  document.body.classList.add("locked");
+  $("#finishBtn").textContent="Работа завершена";
+  $("#finishBtn").disabled=true;
+  tick();
+}
+function celebrate(){
+  for(let i=0;i<26;i++){
+    const d=document.createElement("div");
+    d.className="leaf front";
+    d.style.cssText=`--x:${Math.random()*100}%;--d:${3+Math.random()*3}s;--dl:0s;--s:${10+Math.random()*14}px;--o:.9;--dr:${(Math.random()*2-1)*15}vw;--rr:${(Math.random()*2-1)*720}deg`;
+    d.innerHTML=`<svg viewBox="0 0 24 24"><path d="M4 20C4 9 11 4 20 4c0 9-5 16-16 16z" fill="#e8c547"/></svg>`;
+    $("#leaves").appendChild(d);
+    setTimeout(()=>d.remove(),7000);
+  }
+}
+
+/* ================= СТАРТ / ФИНИШ ================= */
+$("#startBtn").onclick=()=>{
+  S.name=$("#name").value; S.started=true;
+  if(!S.t0) S.t0=Date.now();
+  save();
+  $("#cover").classList.add("hidden");
+  $("#workspace").classList.remove("hidden");
+  $("#bar").classList.remove("hidden");
+  progress(); tick(); window.scrollTo({top:0,behavior:"smooth"});
+};
+$("#finishBtn").onclick=()=>{
+  if(S.finished) return;
+  const miss=[];
+  if(S.t5.trim().length<80) miss.push("задание V — минимум 80 знаков");
+  if(S.t6.trim().length<100) miss.push("задание VI — минимум 100 знаков");
+  if(S.tR.trim().length<40) miss.push("рефлексия — минимум 40 знаков (баллами не оценивается, но обязательна)");
+  $("#mWarn").classList.toggle("hidden",miss.length===0);
+  if(miss.length) $("#mWarn").innerHTML="Не примутся без развёрнутого ответа: "+miss.join("; ")+". Вернись и допиши.";
+  $("#overlay").classList.remove("hidden");
+};
+$("#mBack").onclick=()=>$("#overlay").classList.add("hidden");
+$("#mGo").onclick=()=>{
+  $("#overlay").classList.add("hidden");
+  if(S.t0 && !S.elapsed) S.elapsed=Date.now()-S.t0;
+  const r=gradeWork(); S.parts=r.p; S.score=r.score; S.grade=r.grade;
+  renderResults(r); markInline(r); lock();
+  $("#results").classList.remove("hidden");
+  $("#results").scrollIntoView({behavior:"smooth",block:"start"});
+  if(r.grade===5) celebrate();
+};
+
+/* ================= ВОССТАНОВЛЕНИЕ ================= */
+load();
+if(S.started && !S.t0) S.t0=Date.now();
+renderMatch(); renderQuotes(); renderSeq(); renderErr();
+["t5","t6","t7","tR"].forEach(id=>{ if(S[id]) $("#"+id).value=S[id]; });
+cnt("t5","c5",80); cnt("t6","c6",100); cnt("tR","cR",40); chips();
+if(S.name) $("#name").value=S.name;
+if(S.started){
+  $("#cover").classList.add("hidden");
+  $("#workspace").classList.remove("hidden");
+  $("#bar").classList.remove("hidden");
+  progress(); tick();
+}
+if(S.finished){
+  const r={p:S.parts,score:S.score,pct:Math.round(S.score/28*100),grade:S.grade};
+  renderResults(r); markInline(r); lock();
+  $("#results").classList.remove("hidden");
+}
+</script>
+</body>
+</html>
