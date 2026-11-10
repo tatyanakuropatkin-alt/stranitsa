@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Задание 6 ЕГЭ · Лексические нормы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0e15; --txt:#edf1f8; --mut:#98a0b3;
+  --line:rgba(255,255,255,.12);
+  --panel:rgba(255,255,255,.05); --panel-2:rgba(255,255,255,.08);
+  --mint:#6ee7b7; --cyan:#22d3ee; --violet:#a78bfa; --bad:#fb7185;
+  --fd:'Unbounded','Segoe UI',sans-serif;
+  --fb:'Onest','Segoe UI',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(900px 520px at 88% -12%, rgba(139,92,246,.28), transparent 60%),
+    radial-gradient(820px 540px at -12% 28%, rgba(34,211,238,.20), transparent 55%),
+    radial-gradient(720px 620px at 108% 92%, rgba(110,231,183,.13), transparent 60%),
+    var(--bg);
+  min-height:100vh;color:var(--txt);font:15px/1.5 var(--fb);
+}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.055) 1px, transparent 1.4px);
+  background-size:26px 26px;}
+::selection{background:rgba(110,231,183,.35)}
+.wrap{max-width:920px;margin:0 auto;padding:20px;position:relative;z-index:1}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px 26px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:0 20px 60px rgba(0,0,0,.45);}
+.gridhead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
+  border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px}
+h2{font:700 21px/1.3 var(--fd);margin:0;letter-spacing:.3px}
+h2 .grad{background:linear-gradient(90deg,var(--mint),var(--cyan) 55%,var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.subline{color:var(--mut);font-size:13px;margin-top:6px}
+.no{color:#cfd6e4;font:600 11px/1.3 var(--fd);letter-spacing:.8px;text-transform:uppercase;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 13px;
+  white-space:nowrap;margin-top:3px}
+.task{margin:4px 0 14px;color:#c6cddc;font-size:14.5px}
+.task b{color:var(--mint)}
+.prog{display:flex;align-items:center;gap:12px;margin:10px 0 18px;color:var(--mut);
+  font:600 11px var(--fd);letter-spacing:.8px;text-transform:uppercase}
+.bar{flex:1;height:9px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+.bar i{display:block;height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--mint),var(--cyan));
+  box-shadow:0 0 14px rgba(110,231,183,.55);transition:width .35s}
+.scene{perspective:1500px;max-width:620px;margin:0 auto;animation:rise .35s ease}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+.card3d{position:relative;height:360px;transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.2,.7,.3,1)}
+.card3d.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border:1px solid var(--line);border-radius:22px;padding:20px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  text-align:center;overflow:auto;
+  background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035) 40%,rgba(255,255,255,.05));
+  box-shadow:0 18px 44px rgba(0,0,0,.35)}
+.face.back{transform:rotateY(180deg);
+  background:linear-gradient(180deg,rgba(167,139,250,.16),rgba(255,255,255,.04) 45%,rgba(34,211,238,.09))}
+.type{font:600 11px var(--fd);letter-spacing:1px;text-transform:uppercase;
+  padding:5px 14px;border-radius:999px;border:1px solid}
+.type.d{color:#9bebd6;background:rgba(110,231,183,.12);border-color:rgba(110,231,183,.4)}
+.type.r{color:#d5c6ff;background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.45)}
+.sent{font-size:17.5px;line-height:1.7;text-align:left;max-width:560px;color:#f2f5fb}
+.tw{cursor:pointer;border-radius:6px;padding:0 3px;transition:background .15s,box-shadow .15s}
+.tw:hover{background:rgba(110,231,183,.18)}
+.tw.sel{background:linear-gradient(90deg,var(--mint),var(--cyan));color:#05261b;
+  box-shadow:0 3px 12px rgba(110,231,183,.45)}
+.tw.right{background:rgba(110,231,183,.28);box-shadow:inset 0 -2px 0 var(--mint)}
+.tw.wrong{background:rgba(251,113,133,.28);box-shadow:inset 0 -2px 0 var(--bad)}
+.ansrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;
+  color:var(--mut);font-size:14px;animation:rise .25s ease}
+.ansrow input{font:500 16px var(--fb);color:var(--txt);background:rgba(255,255,255,.07);
+  border:1px solid var(--line);border-radius:12px;padding:9px 12px;width:220px;outline:none;
+  transition:border .15s,box-shadow .15s}
+.ansrow input::placeholder{color:#6d7488}
+.ansrow input:focus{border-color:var(--mint);box-shadow:0 0 0 3px rgba(110,231,183,.2)}
+.hint{color:var(--mut);font-size:12.5px;letter-spacing:.3px}
+.answer{font:700 25px var(--fd);letter-spacing:.3px}
+.answer s{color:var(--bad);text-decoration-thickness:2.5px}
+.alts{font-size:12.5px;color:var(--mut)}
+.expl{font-size:13.5px;color:#c6cddc;max-width:520px}
+.badge{font:600 13px var(--fd);letter-spacing:.6px;padding:6px 16px;border-radius:999px;border:1px solid}
+.badge.ok{color:#b7f3d3;background:rgba(110,231,183,.14);border-color:rgba(110,231,183,.45)}
+.badge.bad{color:#ffd0d8;background:rgba(251,113,133,.14);border-color:rgba(251,113,133,.45)}
+.yourans{font-size:13px;color:var(--mut)}
+.cbtns{display:flex;justify-content:center;gap:12px;margin:18px 0 4px;flex-wrap:wrap}
+button{font:600 14px var(--fb);padding:11px 22px;border-radius:14px;border:1px solid transparent;
+  cursor:pointer;transition:transform .12s,box-shadow .15s,filter .15s}
+.b-fill{color:#05261b;background:linear-gradient(90deg,var(--mint),var(--cyan));
+  box-shadow:0 8px 22px rgba(34,211,238,.35)}
+.b-fill:hover:not(:disabled){filter:brightness(1.07);transform:translateY(-1px)}
+button:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+button:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.done{max-width:620px;margin:0 auto;text-align:center;padding:44px 22px;
+  border:1px dashed var(--line);border-radius:22px;color:var(--mut);background:rgba(255,255,255,.03)}
+.results{display:none;margin:16px auto 0;max-width:620px;padding:16px 20px;border-radius:18px;
+  background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.results .grade{font:700 26px var(--fd);
+  background:linear-gradient(90deg,var(--mint),var(--cyan));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.results .det{font-size:13px;color:var(--mut);margin-top:6px}
+.msg{margin:12px auto 0;max-width:620px;padding:12px 16px;border-radius:14px;font-weight:600;
+  display:none;font-size:14px}
+.msg.ok{display:block;color:#b7f3d3;background:rgba(110,231,183,.12);border:1px solid rgba(110,231,183,.4)}
+.msg.warn{display:block;color:#ffd0d8;background:rgba(251,113,133,.12);border:1px solid rgba(251,113,133,.4)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
+.fields{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fields b{font:600 11px var(--fd);letter-spacing:1px;text-transform:uppercase;color:var(--mut);margin-right:6px}
+.pill{min-width:46px;padding:9px 8px;text-align:center;border:1px solid var(--line);
+  border-radius:12px;background:rgba(255,255,255,.05);cursor:pointer;font:600 13px var(--fb);
+  transition:all .15s}
+.pill:hover{background:rgba(255,255,255,.1)}
+.pill.on{background:linear-gradient(90deg,var(--mint),var(--cyan));border-color:transparent;
+  color:#05261b;box-shadow:0 6px 16px rgba(34,211,238,.3)}
+.pill .g{font-weight:800;margin-left:5px}
+.pill.on .g{color:#0a3a2b}
+@media(max-width:640px){
+  .card{padding:18px 14px;border-radius:18px}
+  .card3d{height:470px}
+  .sent{font-size:16px}
+  h2{font-size:18px}
+  .answer{font-size:22px}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="card">
+    <div class="gridhead">
+      <div>
+        <h2><span class="grad">Задание 6</span> ЕГЭ · лексические нормы</h2>
+        <div class="subline">Редактирование предложения: лишнее слово или неверно употреблённое слово</div>
+      </div>
+      <span class="no" id="deckNo"></span>
+    </div>
+    <div class="task">Кликните слово с ошибкой. Если слово нужно <b>заменить</b> — впишите верный вариант, затем переверните карточку. <b>Каждую колоду можно пройти только один раз.</b></div>
+    <div class="prog"><span id="progTxt"></span><span class="bar"><i id="barFill"></i></span></div>
+    <div id="stage"></div>
+    <div class="results" id="results"></div>
+    <div class="msg" id="msg"></div>
+    <div class="toolbar">
+      <div class="fields"><b>Колода</b><span id="pills" style="display:contents"></span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   БАНК ЗАДАНИЙ (61 карточка, каждый ответ однозначен)
+   ["d", предложение, лишнее слово, [], пояснение]             — исключить
+   ["r", предложение, неверное слово, [верные варианты], пояснение] — заменить
+   ============================================================ */
+const BANK=[
+/* --- исключить лишнее слово --- */
+["d","Яичный омлет с зеленью, приготовленный гостеприимной хозяйкой, показался нам необыкновенно вкусным.","яичный",[],"Плеоназм: омлет по определению готовится из яиц."],
+["d","Аукционный дом выставил на продажу фотографию, которая запечатлела ледяной айсберг, ставший причиной крушения «Титаника».","ледяной",[],"Плеоназм: айсберг — это и есть ледяная гора."],
+["d","Благодаря современным технологиям и нескольким храбрым смельчакам мир узнал много интересного о Марсианской впадине.","храбрым",[],"Плеоназм: смельчак — уже храбрый человек."],
+["d","26 марта 2012 года известный кинорежиссёр Джеймс Кэмерон спустился вниз ко дну Марсианской впадины и сделал несколько фотографий.","вниз",[],"Плеоназм: спуститься — значит двигаться вниз."],
+["d","Знаменитая танцовщица Анна Павлова впервые дебютировала в 1899 году на сцене Петербургского императорского балета.","впервые",[],"Плеоназм: дебют — это первое выступление."],
+["d","Огромный айсберг в считанные мгновения вспорол корпус «Титаника», сделанный из двух слоёв железной стали, и ледяная вода Атлантического океана хлынула в отсеки.","железной",[],"Плеоназм: сталь — сплав на основе железа."],
+["d","Он подарил мне памятный сувенир из Санкт-Петербурга.","памятный",[],"Плеоназм: сувенир — памятный подарок."],
+["d","Мы вернулись обратно домой поздно вечером.","обратно",[],"Плеоназм: вернуться — значит прийти обратно."],
+["d","Наша команда поставила перед собой самую главную задачу.","самую",[],"«Самую» лишнее: главная — уже превосходная степень."],
+["d","В зале собралось много многочисленных зрителей.","много",[],"Плеоназм: многочисленные — значит «много»."],
+["d","Писатель в своей автобиографии подробно рассказал о детстве.","своей",[],"Плеоназм: автобиография — описание собственной жизни."],
+["d","Прейскурант цен висел у входа в магазин.","цен",[],"Плеоназм: прейскурант — справочник цен."],
+["d","Первый дебют молодого актёра состоялся в провинциальном театре.","первый",[],"Плеоназм: дебют — первое появление на сцене."],
+["d","Мы заранее предвидели такой исход матча.","заранее",[],"Плеоназм: предвидеть — значит видеть заранее."],
+["d","Совместное сотрудничество учёных двух стран принесло прекрасные плоды.","совместное",[],"Плеоназм: сотрудничество — совместная работа."],
+["d","Этот случай произошёл в мае месяце прошлого года.","месяце",[],"Плеоназм: май — это месяц."],
+["d","Он был очень удивлён неожиданным сюрпризом.","неожиданным",[],"Плеоназм: сюрприз — неожиданность."],
+["d","Нам пришлось ждать около получаса времени.","времени",[],"Плеоназм: полчаса — отрезок времени."],
+["d","Внутренний интерьер дома был оформлен в светлых тонах.","внутренний",[],"Плеоназм: интерьер — внутреннее оформление помещения."],
+["d","Молодой юноша уверенно шагнул на сцену.","молодой",[],"Плеоназм: юноша — молодой человек."],
+["d","Все эти обстоятельства взаимно дополняют друг друга.","взаимно",[],"Плеоназм: дополняют друг друга — уже взаимно."],
+["d","Он поднялся вверх по крутой лестнице.","вверх",[],"Плеоназм: подняться — значит двинуться вверх."],
+["d","Хронометраж времени показал, что мы отстаём от графика.","времени",[],"Плеоназм: хронометраж — измерение времени."],
+["d","Народный фольклор хранит память о древних временах.","народный",[],"Плеоназм: фольклор — народное творчество."],
+["d","Он снова повторил свой вопрос.","снова",[],"Плеоназм: повторить — значит сказать снова."],
+["d","В театре был полный аншлаг: свободных мест не осталось.","полный",[],"Плеоназм: аншлаг — проданные билеты, полный зал."],
+["d","На заводе появилась свободная вакансия инженера.","свободная",[],"Плеоназм: вакансия — незанятая, свободная должность."],
+["d","Старый ветеран войны выступил перед школьниками.","старый",[],"Плеоназм: ветеран — старый участник событий прошлого."],
+["d","Главная суть романа — поиск человеком смысла жизни.","главная",[],"Плеоназм: суть — это и есть главное."],
+["d","Мы нашли самый оптимальный вариант решения проблемы.","самый",[],"Плеоназм: оптимальный — значит самый лучший."],
+["d","У причала возвышалась огромная махина ледокола.","огромная",[],"Плеоназм: махина — нечто очень большое."],
+/* --- заменить неверно употреблённое слово --- */
+["r","Пётр Петрович, нельзя вести себя заносчиво, ни с кем не считаться, всех мерить под одну гребёнку.","мерить",["стричь"],"Искажён фразеологизм: стричь под одну гребёнку."],
+["r","К сожалению, наша сборная одержала поражение в игре со знаменитой канадской командой.","одержала",["потерпела"],"Сочетаемость: одержать победу, но потерпеть поражение."],
+["r","Проблеме воспитания речевой культуры придаётся особое внимание: она рассматривается на страницах периодической печати, обсуждается на телевидении.","придаётся",["уделяется"],"Внимание уделяют, а придают значение."],
+["r","Крупную роль в духовном развитии Льва Николаевича Толстого сыграла его дальняя родственница Татьяна Александровна Ергольская.","крупную",["большую","значительную"],"Играть роль можно большую или значительную, но не крупную."],
+["r","При Петре Первом буйно развивалась промышленность, процветала торговля, возникло большое количество мануфактур и горных предприятий.","буйно",["бурно"],"Развиваться можно бурно; «буйный» — о человеке и его поведении."],
+["r","В подготовке к ЕГЭ особое внимание нужно оказать подбору сложных заданий.","оказать",["уделить"],"Внимание уделяют; оказать можно помощь, услугу."],
+["r","Эта книга сыграла на меня большое влияние.","сыграла",["оказала"],"Влияние оказывают, а играют роль."],
+["r","Этот фактор играет большое значение для развития науки.","играет",["имеет"],"Значение имеют, а играют роль."],
+["r","На юбилее он сказал тост в честь виновника торжества.","сказал",["произнес","провозгласил"],"Тост произносят или провозглашают."],
+["r","Спортсмен выполнил норматив и поставил новый рекорд.","поставил",["установил"],"Рекорд устанавливают."],
+["r","Мы одержали первое место в соревнованиях.","одержали",["заняли"],"Место занимают, а одерживают победу."],
+["r","Молодой солдат сделал подвиг, о котором написали все газеты.","сделал",["совершил"],"Подвиг совершают."],
+["r","Ребята играли большое внимание подготовке к концерту.","играли",["уделяли"],"Внимание уделяют."],
+["r","Наша команда потерпела победу в финальном матче.","потерпела",["одержала"],"Одерживают победу, а терпят поражение."],
+["r","Врач предпринял срочные меры по спасению больного.","предпринял",["принял"],"Меры принимают, а предпринимают шаги, попытки."],
+["r","Он работал не покладая сил, чтобы успеть к сроку.","сил",["рук"],"Фразеологизм: работать не покладая рук."],
+["r","В трудную минуту он взял себя в кулак.","кулак",["руки"],"Фразеологизм: взять себя в руки."],
+["r","Наш мастер на все дела починил и кран, и розетку.","дела",["руки"],"Фразеологизм: мастер на все руки."],
+["r","Он постоянно ставил палки в ноги своим коллегам.","ноги",["колеса","колёса"],"Фразеологизм: ставить палки в колёса."],
+["r","Львиную часть работы он выполнил самостоятельно.","часть",["долю"],"Фразеологизм: львиная доля."],
+["r","Все родители оказали участие в организации праздника.","оказали",["приняли"],"Участие принимают, а оказывают помощь."],
+["r","Игра артиста оказала впечатление на всех зрителей.","оказала",["произвела"],"Впечатление производят."],
+["r","Нам необходимо улучшить уровень подготовки к экзамену.","улучшить",["повысить"],"Уровень повышают, а улучшают качество."],
+["r","Новая технология позволила увеличить качество продукции.","увеличить",["повысить","улучшить"],"Качество повышают или улучшают; увеличивают количество."],
+["r","Он приложил все руки, чтобы победить в этом конкурсе.","руки",["усилия"],"Фразеологизм: приложить все усилия."],
+["r","Мы должны обратить серьёзное значение на этот факт.","значение",["внимание"],"Обратить внимание, но придать значение."],
+["r","Студент сделал ошибку в сложных расчётах.","сделал",["допустил"],"Ошибку допускают."],
+["r","Педагог улучшил свою квалификацию на специальных курсах.","улучшил",["повысил"],"Квалификацию повышают."],
+["r","Новые технологии улучшили производительность труда на заводе.","улучшили",["повысили"],"Производительность повышают."],
+["r","Курение доставляет серьёзный вред здоровью.","доставляет",["причиняет"],"Вред причиняют."]
+];
+
+const POOL=BANK.map(x=>({t:x[0],s:x[1],w:x[2],a:x[3]||[],e:x[4]}));
+const CARDS=10, DECKS=12;
+
+/* --- детерминированная раздача по колодам --- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const assignCache={};
+function assignment(f){
+  if(assignCache[f])return assignCache[f];
+  const rnd=mulberry32(f+37),arr=[...Array(POOL.length).keys()];
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  return assignCache[f]=arr.slice(0,CARDS);
+}
+
+/* --- работа с текстом --- */
+const norm=s=>(s||"").toLowerCase().replace(/ё/g,"е").replace(/[^a-zа-я]/g,"");
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+function split(tok){
+  const m=tok.match(/^([^A-Za-zА-Яа-яЁё]*)([\s\S]*?)([^A-Za-zА-Яа-яЁё]*)$/);
+  return m?[m[1],m[2],m[3]]:["",tok,""];
+}
+function tokens(e){return e.s.split(/\s+/).map(split)}
+function targetIdx(e){return tokens(e).findIndex(t=>norm(t[1])===norm(e.w))}
+
+let cur=0;
+const st=Array.from({length:DECKS},()=>({idx:0,sel:null,inp:"",flipped:false,answers:[],locked:false,result:null}));
+
+const pills=document.getElementById("pills");
+for(let i=0;i<DECKS;i++){const b=document.createElement("span");b.className="pill";b.onclick=()=>{cur=i;render()};pills.appendChild(b);}
+function updatePills(){[...pills.children].forEach((el,i)=>{el.classList.toggle("on",i===cur);el.innerHTML=(i+1)+(st[i].result?`<span class="g">${st[i].result.grade}</span>`:"");});}
+
+function sentenceHTML(e,s,mark){
+  const ti=targetIdx(e);
+  return tokens(e).map((t,i)=>{
+    let cls="tw";
+    if(mark){ if(i===ti)cls+=" right"; else if(i===s.sel)cls+=" wrong"; }
+    else if(i===s.sel)cls+=" sel";
+    return t[0]+`<span class="${cls}" data-i="${i}">${esc(t[1])}</span>`+t[2];
+  }).join(" ");
+}
+const typeLabel=t=>t==="d"?"Исключите лишнее слово":"Замените неверно употреблённое слово";
+const ready=s=>{const e=POOL[assignment(cur)[s.idx]];return s.sel!==null&&(e.t==="d"||norm(s.inp).length>0)};
+
+function render(){
+  updatePills();
+  const s=st[cur];
+  document.getElementById("deckNo").textContent="Колода "+(cur+1)+(s.locked?" · пройдена":"");
+  document.getElementById("progTxt").textContent=`Карточка ${Math.min(s.idx+1,CARDS)} / ${CARDS}`;
+  document.getElementById("barFill").style.width=(s.idx/CARDS*100)+"%";
+  const stage=document.getElementById("stage"),res=document.getElementById("results");
+  if(s.locked){
+    stage.innerHTML=`<div class="done">Колода пройдена за одну попытку. Результат сохранён.<br>Выберите другую колоду ниже.</div>`;
+    res.style.display="block";
+    res.innerHTML=`Баллы: <b>${s.result.pts}</b> из <b>${CARDS}</b> (${s.result.pct}%) &nbsp;·&nbsp; Оценка: <span class="grade">${s.result.grade}</span>
+    <div class="det">Верно отредактировано предложений: ${s.result.pts} из ${CARDS}. Шкала: свыше 91% — «5», свыше 75% — «4», свыше 50% — «3», иначе — «2».</div>`;
+    return;
+  }
+  res.style.display="none";
+  const e=POOL[assignment(cur)[s.idx]];
+  stage.innerHTML=`
+  <div class="scene"><div class="card3d${s.flipped?" flipped":""}" id="c3d">
+    <div class="face front">
+      <div class="type ${e.t}">${typeLabel(e.t)}</div>
+      <div class="sent">${sentenceHTML(e,s,false)}</div>
+      ${e.t==="r"&&s.sel!==null?`<div class="ansrow">заменить на <input id="inp" autocomplete="off" spellcheck="false" value="${esc(s.inp)}" placeholder="верное слово"></div>`:`<div class="hint">кликните слово в предложении</div>`}
+    </div>
+    <div class="face back">
+      <div class="type ${e.t}">${typeLabel(e.t)}</div>
+      <div id="badge"></div>
+      <div class="answer" id="answer"></div>
+      <div class="alts" id="alts"></div>
+      <div class="expl">${esc(e.e)}</div>
+      <div class="yourans" id="yourans"></div>
+    </div>
+  </div></div>
+  <div class="cbtns">
+    <button class="b-fill" id="flipBtn" ${!ready(s)||s.flipped?"disabled":""}>Перевернуть</button>
+    <button class="b-fill" id="nextBtn" ${s.flipped?"":"disabled"}>${s.idx===CARDS-1?"Завершить колоду":"Дальше"}</button>
+  </div>`;
+  stage.querySelectorAll(".front .tw").forEach(v=>{
+    v.onclick=()=>{if(s.flipped)return;s.sel=+v.dataset.i;render();const i=document.getElementById("inp");if(i)i.focus();};
+  });
+  const inp=document.getElementById("inp");
+  if(inp)inp.oninput=()=>{s.inp=inp.value;document.getElementById("flipBtn").disabled=!ready(s);};
+  document.getElementById("flipBtn").onclick=flip;
+  document.getElementById("nextBtn").onclick=next;
+  if(s.flipped)paintBack();
+}
+
+function flip(){
+  const s=st[cur];if(s.flipped||!ready(s))return;
+  const e=POOL[assignment(cur)[s.idx]],ti=targetIdx(e);
+  const ok=e.t==="d" ? s.sel===ti : (s.sel===ti && e.a.some(a=>norm(a)===norm(s.inp)));
+  s.answers.push(ok);s.flipped=true;
+  document.getElementById("c3d").classList.add("flipped");
+  document.getElementById("flipBtn").disabled=true;
+  document.getElementById("nextBtn").disabled=false;
+  paintBack();
+}
+
+function paintBack(){
+  const s=st[cur],e=POOL[assignment(cur)[s.idx]],ok=s.answers[s.answers.length-1],ti=targetIdx(e);
+  document.getElementById("badge").innerHTML=ok?`<span class="badge ok">✓ верно</span>`:`<span class="badge bad">✕ неверно</span>`;
+  document.getElementById("answer").innerHTML=e.t==="d"
+    ? `лишнее: <s>${esc(e.w)}</s>`
+    : `<s>${esc(e.w)}</s> → ${esc(e.a[0])}`;
+  document.getElementById("alts").textContent=(e.t==="r"&&e.a.length>1)?"также принимается: "+e.a.slice(1).join(", "):"";
+  let ya="";
+  if(!ok){
+    const chosen=s.sel!==null?tokens(e)[s.sel][1]:"—";
+    ya=e.t==="d"?`ваш ответ: ${chosen}`:`ваш ответ: ${chosen}${s.inp?" → "+s.inp:""}`;
+    if(s.sel!==ti)ya+=" (ошибка в другом слове)";
+  }
+  document.getElementById("yourans").textContent=ya;
+}
+
+function next(){
+  const s=st[cur];if(!s.flipped)return;
+  s.idx++;s.sel=null;s.inp="";s.flipped=false;
+  if(s.idx>=CARDS){
+    const pts=s.answers.filter(Boolean).length,pct=Math.round(pts*100/CARDS);
+    s.result={pts,pct,grade:pct>91?5:pct>75?4:pct>50?3:2};
+    s.locked=true;render();
+    const msg=document.getElementById("msg");
+    msg.className=s.result.grade>=4?"msg ok":"msg warn";
+    msg.textContent=`Колода ${cur+1} завершена: ${pts} из ${CARDS} (${pct}%), оценка «${s.result.grade}». Попытка использована.`;
+  } else render();
+}
+
+/* Enter: перевернуть → следующая карточка */
+document.addEventListener("keydown",ev=>{
+  if(ev.key!=="Enter")return;
+  const s=st[cur];if(s.locked)return;
+  ev.preventDefault();
+  if(!s.flipped){if(ready(s))flip();}else next();
+});
+
+render();
+</script>
+</body>
+</html>
