@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Задание 6 ЕГЭ. Лексические ошибки (Егораева)</title>
+<style>
+  :root{ --blue:#33608c; --blue-d:#274e75; --line:#94a3b8; --mut:#64748b; --bg:#e8ecf1; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);font:15px/1.45 "Segoe UI",Arial,sans-serif;color:#1e293b}
+  .wrap{max-width:900px;margin:0 auto;padding:18px}
+  .card{background:#f8fafc;border-radius:10px;padding:18px 22px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+  h2{font-size:19px;margin:0}
+  .subline{color:var(--mut);font-size:13px;margin-top:3px}
+  .gridhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:1px solid #cbd5e1;padding-bottom:10px;margin-bottom:12px}
+  .gridhead .no{color:var(--mut);font-size:13px;white-space:nowrap}
+  .task{margin:6px 0 14px}
+  .task b{color:var(--blue)}
+  .prog{display:flex;align-items:center;gap:10px;margin:10px 0 16px;color:var(--mut);font-size:13px}
+  .bar{flex:1;height:8px;background:#dbe3ea;border-radius:6px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--blue);width:0;transition:width .3s}
+  .scene{perspective:1400px;max-width:600px;margin:0 auto}
+  .card3d{position:relative;height:340px;transform-style:preserve-3d;transition:transform .6s}
+  .card3d.flipped{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);border-radius:14px;background:#fff;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px;text-align:center;overflow:auto}
+  .face.back{transform:rotateY(180deg);background:#eef4fa}
+  .type{font-size:12.5px;font-weight:700;color:var(--blue-d);background:#e3ecf6;border:1px solid #c7d8ea;padding:3px 12px;border-radius:20px}
+  .sent{font-size:16.5px;line-height:1.65;text-align:left;max-width:540px}
+  .tw{cursor:pointer;border-radius:4px;padding:0 1px}
+  .tw:hover{background:#dbeafe}
+  .tw.sel{background:var(--blue);color:#fff}
+  .tw.right{background:#dcfce7;box-shadow:inset 0 -2px 0 #22c55e}
+  .tw.wrong{background:#fee2e2;box-shadow:inset 0 -2px 0 #ef4444}
+  .ansrow{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--mut);flex-wrap:wrap;justify-content:center}
+  .ansrow input{font:inherit;font-size:16px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;width:210px;background:#fff}
+  .ansrow input:focus{outline:2px solid #bfd4ea;border-color:var(--blue)}
+  .hint{color:var(--mut);font-size:12px}
+  .src{font-size:11.5px;color:var(--mut)}
+  .answer{font-size:24px;font-weight:800;color:var(--blue-d);letter-spacing:.3px}
+  .answer s{color:#b91c1c;font-weight:700;text-decoration-thickness:2px}
+  .alts{font-size:12.5px;color:var(--mut)}
+  .expl{font-size:13.5px;color:#334155;max-width:520px}
+  .badge{font-weight:700;padding:4px 14px;border-radius:20px;font-size:14px}
+  .badge.ok{background:#dcfce7;color:#14532d;border:1px solid #86efac}
+  .badge.bad{background:#fee2e2;color:#7f1d1d;border:1px solid #fca5a5}
+  .yourans{font-size:13px;color:var(--mut)}
+  .cbtns{display:flex;justify-content:center;gap:10px;margin:16px 0 4px;flex-wrap:wrap}
+  .done{max-width:600px;margin:0 auto;text-align:center;padding:40px 20px;border:1px dashed var(--line);border-radius:14px;color:var(--mut)}
+  .results{display:none;margin:16px auto 0;max-width:600px;padding:12px 18px;border-radius:8px;background:#eef4fa;border:1px solid #c7d8ea}
+  .results .grade{font-size:24px;font-weight:800;color:var(--blue)}
+  .results .det{font-size:13px;color:var(--mut);margin-top:4px}
+  .msg{margin:10px auto 0;max-width:600px;padding:10px 14px;border-radius:8px;font-weight:600;display:none}
+  .msg.ok{display:block;background:#eafbef;color:#14532d;border:1px solid #86efac}
+  .msg.warn{display:block;background:#fef2f2;color:#7f1d1d;border:1px solid #fca5a5}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px;border-top:1px solid #cbd5e1;padding-top:14px}
+  .fields{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .fields b{margin-right:4px}
+  .pill{min-width:44px;padding:8px 6px;text-align:center;border:1px solid #cbd5e1;border-radius:8px;background:#fff;cursor:pointer;font-size:14px}
+  .pill.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .pill .g{font-weight:800;margin-left:4px}
+  .pill.on .g{color:#ffe08a}
+  button{font:inherit;padding:9px 16px;border-radius:8px;border:1px solid var(--blue);cursor:pointer}
+  .b-fill{background:var(--blue);color:#fff}
+  .b-fill:hover:not(:disabled){background:var(--blue-d)}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  @media(max-width:600px){
+    .card3d{height:420px}
+    .sent{font-size:15.5px}
+    .card{padding:16px 14px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="card">
+    <div class="gridhead">
+      <div>
+        <h2>Задание 6 ЕГЭ. Лексические ошибки</h2>
+        <div class="subline">Только задания из пособия Г. Т. Егораевой «ЕГЭ 2020. Русский язык. Супертренинг» (12 заданий)</div>
+      </div>
+      <span class="no" id="deckNo"></span>
+    </div>
+    <div class="task">Кликните слово с ошибкой. Если слово нужно <b>заменить</b> — впишите верный вариант, затем переверните карточку. <b>Каждую колоду можно пройти только один раз.</b></div>
+    <div class="prog"><span id="progTxt"></span><span class="bar"><i id="barFill"></i></span></div>
+    <div id="stage"></div>
+    <div class="results" id="results"></div>
+    <div class="msg" id="msg"></div>
+    <div class="toolbar">
+      <div class="fields"><b>Колода</b><span id="pills" style="display:contents"></span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   БАНК: только задания из пособия Г. Т. Егораевой
+   ["d", предложение, лишнее слово, [], пояснение, источник]  — исключить
+   ["r", предложение, неверное слово, [верные варианты], пояснение, источник] — заменить
+   ============================================================ */
+const BANK=[
+["r","Пётр Петрович, нельзя вести себя заносчиво, ни с кем не считаться, всех мерить под одну гребёнку.","мерить",["стричь"],"Искажён фразеологизм: правильно «стричь под одну гребёнку» — относиться ко всем одинаково.","Тренировочные задания, № 1"],
+["d","Яичный омлет с зеленью, приготовленный гостеприимной хозяйкой, показался нам необыкновенно вкусным.","яичный",[],"Плеоназм: омлет по определению готовится из яиц.","Тренировочные задания, № 2"],
+["d","Аукционный дом выставил на продажу фотографию, которая запечатлела ледяной айсберг, ставший причиной крушения «Титаника».","ледяной",[],"Плеоназм: айсберг — это и есть ледяная гора.","Тренировочные задания, № 3"],
+["r","К сожалению, наша сборная одержала поражение в игре со знаменитой канадской командой.","одержала",["потерпела"],"Нарушена сочетаемость: одержать победу, но потерпеть поражение.","Тренировочные задания, № 4"],
+["d","Благодаря современным технологиям и нескольким храбрым смельчакам мир узнал много интересного о Марсианской впадине.","храбрым",[],"Плеоназм: смельчак — уже храбрый человек.","Тренировочные задания, № 5"],
+["r","Проблеме воспитания речевой культуры придаётся особое внимание: она рассматривается на страницах периодической печати, обсуждается на телевидении.","придаётся",["уделяется"],"Внимание уделяют, а придают значение.","Тренировочные задания, № 6"],
+["r","Крупную роль в духовном развитии Льва Николаевича Толстого сыграла его дальняя родственница Татьяна Александровна Ергольская.","крупную",["большую","значительную"],"Играть роль можно большую или значительную, но не крупную.","Тренировочные задания, № 7"],
+["d","26 марта 2012 года известный кинорежиссёр Джеймс Кэмерон спустился вниз ко дну Марсианской впадины и сделал несколько фотографий.","вниз",[],"Плеоназм: спуститься — значит двигаться вниз.","Тренировочные задания, № 8"],
+["d","Знаменитая танцовщица Анна Павлова впервые дебютировала в 1899 году на сцене Петербургского императорского балета.","впервые",[],"Плеоназм: дебют — это первое выступление.","Тренировочные задания, № 9"],
+["r","При Петре Первом буйно развивалась промышленность, процветала торговля, возникло большое количество мануфактур и горных предприятий.","буйно",["бурно"],"Развиваться можно бурно; «буйный» — о человеке и его поведении.","Тренировочные задания, № 10"],
+["r","В подготовке к ЕГЭ особое внимание нужно оказать подбору сложных заданий.","оказать",["уделить"],"Внимание уделяют; оказать можно помощь, услугу, поддержку.","Контрольные задания, вариант 1, № 6"],
+["d","Огромный айсберг в считанные мгновения вспорол корпус «Титаника», сделанный из двух слоёв железной стали, и ледяная вода Атлантического океана хлынула в отсеки.","железной",[],"Плеоназм: сталь — сплав на основе железа.","Контрольные задания, вариант 2, № 6"]
+];
+
+const POOL=BANK.map(x=>({t:x[0],s:x[1],w:x[2],a:x[3]||[],e:x[4],src:x[5]}));
+const CARDS=6, DECKS=Math.floor(POOL.length/CARDS); // 2 колоды по 6 карточек
+
+/* --- колоды: последовательные куски банка, порядок внутри — детерминированный --- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const assignCache={};
+function assignment(f){
+  if(assignCache[f])return assignCache[f];
+  const base=[...Array(POOL.length).keys()].slice(f*CARDS,(f+1)*CARDS);
+  const rnd=mulberry32(f+37);
+  for(let i=base.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[base[i],base[j]]=[base[j],base[i]];}
+  return assignCache[f]=base;
+}
+
+/* --- работа с текстом --- */
+const norm=s=>(s||"").toLowerCase().replace(/ё/g,"е").replace(/[^a-zа-я]/g,"");
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+function split(tok){
+  const m=tok.match(/^([^A-Za-zА-Яа-яЁё]*)([\s\S]*?)([^A-Za-zА-Яа-яЁё]*)$/);
+  return m?[m[1],m[2],m[3]]:["",tok,""];
+}
+function tokens(e){return e.s.split(/\s+/).map(split)}
+function targetIdx(e){return tokens(e).findIndex(t=>norm(t[1])===norm(e.w))}
+
+let cur=0;
+const st=Array.from({length:DECKS},()=>({idx:0,sel:null,inp:"",flipped:false,answers:[],locked:false,result:null}));
+
+const pills=document.getElementById("pills");
+for(let i=0;i<DECKS;i++){const b=document.createElement("span");b.className="pill";b.onclick=()=>{cur=i;render()};pills.appendChild(b);}
+function updatePills(){[...pills.children].forEach((el,i)=>{el.classList.toggle("on",i===cur);el.innerHTML=(i+1)+(st[i].result?`<span class="g">${st[i].result.grade}</span>`:"");});}
+
+function sentenceHTML(e,s,mark){
+  const ti=targetIdx(e);
+  return tokens(e).map((t,i)=>{
+    let cls="tw";
+    if(mark){ if(i===ti)cls+=" right"; else if(i===s.sel)cls+=" wrong"; }
+    else if(i===s.sel)cls+=" sel";
+    return t[0]+`<span class="${cls}" data-i="${i}">${esc(t[1])}</span>`+t[2];
+  }).join(" ");
+}
+const typeLabel=t=>t==="d"?"Исключите лишнее слово":"Замените неверно употреблённое слово";
+const ready=s=>{const e=POOL[assignment(cur)[s.idx]];return s.sel!==null&&(e.t==="d"||norm(s.inp).length>0)};
+
+function render(){
+  updatePills();
+  const s=st[cur];
+  document.getElementById("deckNo").textContent="Колода № "+(cur+1)+(s.locked?" (пройдена)":"");
+  document.getElementById("progTxt").textContent=`Карточка ${Math.min(s.idx+1,CARDS)} из ${CARDS}`;
+  document.getElementById("barFill").style.width=(s.idx/CARDS*100)+"%";
+  const stage=document.getElementById("stage"),res=document.getElementById("results");
+  if(s.locked){
+    stage.innerHTML=`<div class="done">Колода пройдена за одну попытку. Результат сохранён.<br>${DECKS>1?"Выберите другую колоду ниже.":"Все колоды пройдены."}</div>`;
+    res.style.display="block";
+    res.innerHTML=`Баллы: <b>${s.result.pts}</b> из <b>${CARDS}</b> (${s.result.pct}%) &nbsp;·&nbsp; Оценка: <span class="grade">${s.result.grade}</span>
+    <div class="det">Верно отредактировано предложений: ${s.result.pts} из ${CARDS}. Шкала: свыше 91% — «5», свыше 75% — «4», свыше 50% — «3», иначе — «2».</div>`;
+    return;
+  }
+  res.style.display="none";
+  const e=POOL[assignment(cur)[s.idx]];
+  stage.innerHTML=`
+  <div class="scene"><div class="card3d${s.flipped?" flipped":""}" id="c3d">
+    <div class="face front">
+      <div class="type">${typeLabel(e.t)}</div>
+      <div class="sent">${sentenceHTML(e,s,false)}</div>
+      ${e.t==="r"&&s.sel!==null?`<div class="ansrow">заменить на: <input id="inp" autocomplete="off" spellcheck="false" value="${esc(s.inp)}" placeholder="верное слово"></div>`:`<div class="hint">кликните слово в предложении</div>`}
+      <div class="src">Пособие Егораевой: ${esc(e.src)}</div>
+    </div>
+    <div class="face back">
+      <div class="type">${typeLabel(e.t)}</div>
+      <div id="badge"></div>
+      <div class="answer" id="answer"></div>
+      <div class="alts" id="alts"></div>
+      <div class="expl">${esc(e.e)}</div>
+      <div class="yourans" id="yourans"></div>
+      <div class="src">Пособие Егораевой: ${esc(e.src)}</div>
+    </div>
+  </div></div>
+  <div class="cbtns">
+    <button class="b-fill" id="flipBtn" ${!ready(s)||s.flipped?"disabled":""}>Перевернуть</button>
+    <button class="b-fill" id="nextBtn" ${s.flipped?"":"disabled"}>${s.idx===CARDS-1?"Завершить колоду":"Следующая карточка"}</button>
+  </div>`;
+  stage.querySelectorAll(".front .tw").forEach(v=>{
+    v.onclick=()=>{if(s.flipped)return;s.sel=+v.dataset.i;render();const i=document.getElementById("inp");if(i)i.focus();};
+  });
+  const inp=document.getElementById("inp");
+  if(inp)inp.oninput=()=>{s.inp=inp.value;document.getElementById("flipBtn").disabled=!ready(s);};
+  document.getElementById("flipBtn").onclick=flip;
+  document.getElementById("nextBtn").onclick=next;
+  if(s.flipped)paintBack();
+}
+
+function flip(){
+  const s=st[cur];if(s.flipped||!ready(s))return;
+  const e=POOL[assignment(cur)[s.idx]],ti=targetIdx(e);
+  const ok=e.t==="d" ? s.sel===ti : (s.sel===ti && e.a.some(a=>norm(a)===norm(s.inp)));
+  s.answers.push(ok);s.flipped=true;
+  document.getElementById("c3d").classList.add("flipped");
+  document.getElementById("flipBtn").disabled=true;
+  document.getElementById("nextBtn").disabled=false;
+  paintBack();
+}
+
+function paintBack(){
+  const s=st[cur],e=POOL[assignment(cur)[s.idx]],ok=s.answers[s.answers.length-1],ti=targetIdx(e);
+  document.getElementById("badge").innerHTML=ok?`<span class="badge ok">✓ верно</span>`:`<span class="badge bad">✗ неверно</span>`;
+  document.getElementById("answer").innerHTML=e.t==="d"
+    ? `лишнее слово: <s>${esc(e.w)}</s>`
+    : `<s>${esc(e.w)}</s> → ${esc(e.a[0])}`;
+  document.getElementById("alts").textContent=(e.t==="r"&&e.a.length>1)?"также принимается: "+e.a.slice(1).join(", "):"";
+  let ya="";
+  if(!ok){
+    const chosen=s.sel!==null?tokens(e)[s.sel][1]:"—";
+    ya=e.t==="d"?`ваш ответ: ${chosen}`:`ваш ответ: ${chosen}${s.inp?" → "+s.inp:""}`;
+    if(s.sel!==ti)ya+=" (ошибка в другом слове)";
+  }
+  document.getElementById("yourans").textContent=ya;
+}
+
+function next(){
+  const s=st[cur];if(!s.flipped)return;
+  s.idx++;s.sel=null;s.inp="";s.flipped=false;
+  if(s.idx>=CARDS){
+    const pts=s.answers.filter(Boolean).length,pct=Math.round(pts*100/CARDS);
+    s.result={pts,pct,grade:pct>91?5:pct>75?4:pct>50?3:2};
+    s.locked=true;render();
+    const msg=document.getElementById("msg");
+    msg.className=s.result.grade>=4?"msg ok":"msg warn";
+    msg.textContent=`Колода № ${cur+1} завершена: ${pts} из ${CARDS} (${pct}%), оценка «${s.result.grade}». Попытка использована.`;
+  } else render();
+}
+
+/* Enter: перевернуть → следующая карточка */
+document.addEventListener("keydown",ev=>{
+  if(ev.key!=="Enter")return;
+  const s=st[cur];if(s.locked)return;
+  ev.preventDefault();
+  if(!s.flipped){if(ready(s))flip();}else next();
+});
+
+render();
+</script>
+</body>
+</html>
