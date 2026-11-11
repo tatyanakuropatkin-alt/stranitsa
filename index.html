@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Сообщество «Страница» — интерактивные работы по литературе и русскому языку</title>
-<meta name="description" content="Независимая страница сообщества «Страница»: интерактивные работы по литературе и русскому языку. А. С. Пушкин «Дубровский» (6 класс), И. С. Тургенев «Бирюк» (7 класс), орфоэпический минимум / сорбонки и контрольная по ударениям (ЕГЭ). Одна попытка, автопроверка, оценка по нормам Минпросвещения.">
+<meta name="description" content="Независимая страница сообщества «Страница»: интерактивные работы по литературе и русскому языку. А. С. Пушкин «Дубровский» (6 класс), И. С. Тургенев «Бирюк» (7 класс), орфоэпический минимум / сорбонки и контрольная по ударениям (ЕГЭ), задание 6 ЕГЭ — лексические нормы (9–11 класс). Одна попытка, автопроверка, оценка по нормам Минпросвещения.">
 <meta property="og:title" content="Сообщество «Страница» — интерактивные работы по литературе и русскому языку">
-<meta property="og:description" content="«Дубровский» (6 класс), «Бирюк» (7 класс) и орфоэпия: сорбонки и контрольная по ударениям (ЕГЭ). Работы с автопроверкой и разбором после финиша.">
+<meta property="og:description" content="«Дубровский» (6 класс), «Бирюк» (7 класс), орфоэпия: сорбонки и контрольная по ударениям, задание 6 ЕГЭ: лексические нормы. Работы с автопроверкой и разбором после финиша.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <style>
@@ -45,6 +45,37 @@ color:#241a06;font-weight:700;font-size:16px;padding:13px 18px;box-shadow:0 8px 
 .how span{border:1px solid var(--line);padding:9px 16px;font-size:13.5px;color:var(--ink-mut);background:rgba(12,24,16,.5)}
 footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);text-align:center;color:var(--ink-dim);font-size:13.5px}
 footer .sig{color:var(--gold);font-size:16px;letter-spacing:.1em;margin-bottom:6px}
+
+/* ===== шестой кирпичик: мягкий вход, золотая полоса прокрутки, бережность к глазам ===== */
+body{background:radial-gradient(1100px 650px at 70% -10%,#1d3a26 0%,transparent 60%),
+radial-gradient(900px 520px at 6% 108%,rgba(216,180,90,.07) 0%,transparent 62%),
+linear-gradient(180deg,var(--bg1),var(--bg0) 70%)}
+.grid{grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr))}
+::selection{background:rgba(216,180,90,.4);color:#fffdf4}
+html{scrollbar-width:thin;scrollbar-color:var(--gold-d) var(--bg0)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg0)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--gold-d),#6b5a2e);border-radius:8px;border:2px solid var(--bg0)}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+a.btn:focus-visible{outline:2px solid var(--gold-b);outline-offset:3px}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.overline{animation:fadeIn .7s ease .05s backwards}
+h1{animation:rise .8s cubic-bezier(.2,.7,.25,1) .12s backwards}
+.sub{animation:rise .8s cubic-bezier(.2,.7,.25,1) .22s backwards}
+.work{transition:transform .25s,border-color .25s,box-shadow .25s;animation:rise .65s cubic-bezier(.2,.7,.25,1) backwards}
+.work:hover{box-shadow:0 22px 48px rgba(0,0,0,.42),0 6px 28px rgba(216,180,90,.14)}
+.grid .work:nth-child(1){animation-delay:.28s}
+.grid .work:nth-child(2){animation-delay:.36s}
+.grid .work:nth-child(3){animation-delay:.44s}
+.grid .work:nth-child(4){animation-delay:.52s}
+.grid .work:nth-child(5){animation-delay:.60s}
+.grid .work:nth-child(6){animation-delay:.68s}
+.how{animation:fadeIn .8s ease .8s backwards}
+footer{animation:fadeIn .9s ease .9s backwards}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
@@ -105,16 +136,16 @@ footer .sig{color:var(--gold);font-size:16px;letter-spacing:.1em;margin-bottom:6
       <a class="btn" href="Контрольная_Задание_4_ЕГЭ_Ударения.html">Открыть работу →</a>
     </article>
 
-    <article class="work" data-roman="V">
+    <article class="work" data-roman="VI">
       <span class="cls">9–11 класс</span>
       <h2>Русский язык<br>Задание 6 ЕГЭ</h2>
-      <p class="theme">Грамматические ошибки: найди предложение с ошибкой. Тренажёр к заданию 6 ЕГЭ.</p>
+      <p class="theme">Лексические нормы: убери лишнее слово или замени неверно употреблённое. Тренажёр к заданию 6 ЕГЭ.</p>
       <ul class="meta">
         <li>Одна попытка · подсказок нет</li>
         <li>После финиша — правильные ответы и разбор</li>
         <li>Открывается на телефоне и ПК</li>
       </ul>
-      <a class="btn" href="zadanie6-ege.html">Открыть работу →</a>
+      <a class="btn" href="egoraevazadanie6-ege.html">Открыть работу →</a>
     </article>
 
     <article class="work soon">
