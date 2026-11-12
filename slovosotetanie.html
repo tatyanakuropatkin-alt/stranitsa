@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c0920">
+<title>Сборники к заданию 9 ОГЭ · Грамматическая синонимия словосочетаний</title>
+<meta name="description" content="Четыре сборника к заданию 9 ОГЭ по русскому языку. Одна попытка, автопроверка, отметка по шкале ОГЭ, результат хранится на устройстве ученика.">
+<style>
+:root{
+  --ink:#0c0920; --ink2:#140f2e;
+  --cream:#fff6e9; --muted:#b7adda;
+  --violet:#7b3dff; --magenta:#ff3d8b; --cyan:#2fd4ff; --lime:#c8ff4d; --amber:#ffb63d;
+  --ok:#3ddc97; --bad:#ff5c7a; --info:#6ea8ff; --warn:#ffb63d;
+  --line:rgba(255,246,233,.14); --surf:rgba(255,246,233,.05); --surf2:rgba(255,246,233,.09);
+  --nav-h:64px;
+  --fd:Georgia,'Times New Roman','Noto Serif',serif;
+  --fu:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--cream);font-family:var(--fu);font-size:16px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.lock{overflow:hidden}
+::selection{background:var(--magenta);color:#fff}
+*{scrollbar-width:thin;scrollbar-color:#7b3dff #160f33}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#160f33}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--magenta),var(--violet) 60%,var(--cyan));border-radius:8px;border:2px solid #160f33}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--amber),var(--magenta) 60%,var(--cyan))}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- фон ---------- */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;
+  background:
+   radial-gradient(1100px 780px at 10% -12%,rgba(123,61,255,.42),transparent 62%),
+   radial-gradient(900px 700px at 96% 4%,rgba(255,61,139,.26),transparent 60%),
+   radial-gradient(1000px 900px at 48% 112%,rgba(47,212,255,.20),transparent 62%),
+   linear-gradient(180deg,#0c0920,#130c2c 52%,#0c0920);}
+.bg::after{content:"";position:absolute;inset:0;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.6'/></svg>")}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:drift 24s ease-in-out infinite}
+.b1{width:520px;height:520px;left:-150px;top:-130px;background:radial-gradient(circle,var(--violet),transparent 70%)}
+.b2{width:460px;height:460px;right:-130px;top:18%;background:radial-gradient(circle,var(--magenta),transparent 70%);animation-delay:-8s}
+.b3{width:560px;height:560px;left:28%;bottom:-240px;background:radial-gradient(circle,var(--cyan),transparent 70%);animation-delay:-15s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,40px) scale(1.08)}66%{transform:translate(-45px,55px) scale(.94)}}
+.glyphs span{position:absolute;font-family:var(--fd);color:rgba(255,246,233,.075);user-select:none;animation:floaty 20s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-34px) rotate(5deg)}}
+
+/* ---------- навигация ---------- */
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:60;display:flex;align-items:center;gap:18px;
+  padding:0 clamp(14px,3vw,32px);background:rgba(12,9,32,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--cream);font-weight:700;letter-spacing:.2px}
+.brand .mark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font-family:var(--fd);font-size:20px;
+  background:linear-gradient(135deg,var(--magenta),var(--violet));box-shadow:0 6px 22px rgba(255,61,139,.4)}
+.brand small{display:block;font-weight:500;font-size:11px;color:var(--muted);letter-spacing:.4px}
+.nav-links{display:flex;gap:4px;margin-left:auto;align-items:center}
+.nav-links a{position:relative;color:var(--muted);text-decoration:none;font-size:14px;font-weight:600;padding:9px 13px;border-radius:10px;transition:.2s}
+.nav-links a:hover{color:var(--cream);background:var(--surf)}
+.nav-links a.active{color:var(--cream)}
+.nav-links a.active::after{content:"";position:absolute;left:13px;right:13px;bottom:3px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--magenta),var(--cyan))}
+.menu-btn{display:none;margin-left:auto;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--surf);color:var(--cream);font-size:19px;cursor:pointer}
+.nav .btn{padding:9px 16px;font-size:13px}
+
+/* ---------- кнопки ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;font-family:var(--fu);font-weight:700;
+  font-size:15px;padding:13px 22px;border-radius:14px;color:#fff;text-decoration:none;transition:transform .18s,box-shadow .18s,filter .18s;letter-spacing:.2px}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn-primary{background:linear-gradient(135deg,var(--magenta),var(--violet) 70%);box-shadow:0 10px 30px rgba(255,61,139,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(255,61,139,.5);filter:brightness(1.07)}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--violet) 80%);box-shadow:0 10px 30px rgba(47,212,255,.3);color:#08122a}
+.btn-cyan:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn-ghost{background:var(--surf2);color:var(--cream);border:1px solid var(--line)}
+.btn-ghost:hover{background:rgba(255,246,233,.14);transform:translateY(-2px)}
+.btn:focus-visible,.tab:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.icon-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surf);color:var(--cream);font-size:16px;cursor:pointer;transition:.2s}
+.icon-btn:hover{background:var(--surf2);transform:rotate(90deg)}
+
+/* ---------- секции ---------- */
+main{display:block}
+section{max-width:1180px;margin:0 auto;padding:88px clamp(16px,3vw,28px);scroll-margin-top:calc(var(--nav-h) + 14px)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--cyan);
+  border:1px solid rgba(47,212,255,.35);background:rgba(47,212,255,.08);padding:7px 14px;border-radius:999px}
+h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;margin:0}
+h1{font-size:clamp(34px,5.4vw,62px);letter-spacing:-.5px}
+h2{font-size:clamp(26px,3.6vw,40px)}
+.grad{background:linear-gradient(100deg,var(--magenta),var(--amber) 45%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:clamp(15px,1.6vw,18px);max-width:620px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:30px}
+.sec-head p{margin:8px 0 0;color:var(--muted);max-width:560px}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- герой ---------- */
+.hero{padding-top:calc(var(--nav-h) + 64px);display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
+.hero h1{margin:18px 0 16px}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:26px 0 28px}
+.feature{display:flex;gap:10px;align-items:flex-start;background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:13.5px;font-weight:600}
+.feature .tick{flex:0 0 auto;width:22px;height:22px;border-radius:8px;display:grid;place-items:center;font-size:12px;color:#08122a;background:linear-gradient(135deg,var(--lime),var(--cyan))}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.demo-card{position:relative;background:linear-gradient(160deg,rgba(255,246,233,.09),rgba(255,246,233,.03));border:1px solid var(--line);
+  border-radius:24px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.45);overflow:hidden}
+.demo-card::before{content:"";position:absolute;inset:-2px;border-radius:24px;padding:1px;pointer-events:none;
+  background:linear-gradient(140deg,rgba(255,61,139,.6),transparent 40%,rgba(47,212,255,.5));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.demo-label{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.demo-line{margin:18px 0 8px;min-height:96px}
+.demo-phrase{font-family:var(--fd);font-size:clamp(22px,2.6vw,30px);transition:opacity .3s,transform .3s}
+.demo-arrow{font-size:24px;color:var(--amber);margin:6px 0;transition:opacity .3s}
+.demo-types{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+.demo-cap{margin-top:18px;font-size:12.5px;color:var(--muted)}
+.swap{opacity:0;transform:translateY(10px)}
+.tb{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid}
+.tb::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.tb-soogl{color:var(--magenta);border-color:rgba(255,61,139,.5);background:rgba(255,61,139,.1)}
+.tb-upr{color:var(--cyan);border-color:rgba(47,212,255,.5);background:rgba(47,212,255,.1)}
+.tb-prim{color:var(--lime);border-color:rgba(200,255,77,.5);background:rgba(200,255,77,.1)}
+.arrow{color:var(--amber);font-weight:700}
+
+/* ---------- полосы ---------- */
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1180px;margin:0 auto;padding:0 clamp(16px,3vw,28px)}
+.strip .cell{background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:18px;text-align:center}
+.strip .num{font-family:var(--fd);font-size:30px;background:linear-gradient(120deg,var(--amber),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
+.strip .cap{font-size:12.5px;color:var(--muted);margin-top:4px}
+.rules{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.rule{background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:18px}
+.rule b{display:block;font-size:14px;margin:8px 0 4px}
+.rule p{margin:0;font-size:13px;color:var(--muted)}
+.rule .n{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-weight:800;color:#08122a;background:linear-gradient(135deg,var(--amber),var(--magenta))}
+
+/* ---------- карточки сборников ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:18px}
+.card{position:relative;background:linear-gradient(165deg,rgba(255,246,233,.08),rgba(255,246,233,.025));border:1px solid var(--line);
+  border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px;transition:transform .22s,box-shadow .22s,border-color .22s;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--acc)}
+.card:hover{transform:translateY(-6px);border-color:var(--acc);box-shadow:0 22px 60px rgba(0,0,0,.5)}
+.t-magenta{--acc:var(--magenta)} .t-cyan{--acc:var(--cyan)} .t-lime{--acc:var(--lime)}
+.card-top{display:flex;align-items:center;justify-content:space-between}
+.card-num{font-family:var(--fd);font-size:44px;line-height:1;color:var(--acc);text-shadow:0 0 30px var(--acc)}
+.card h3{font-size:20px}
+.card-meta{margin:0;font-size:12.5px;color:var(--muted)}
+.dir{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.pill{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:5px 11px;border-radius:999px;border:1px solid}
+.pill.new{color:var(--muted);border-color:var(--line);background:var(--surf)}
+.pill.draft{color:var(--amber);border-color:rgba(255,182,61,.5);background:rgba(255,182,61,.1)}
+.pill.done{color:var(--ok);border-color:rgba(61,220,151,.5);background:rgba(61,220,151,.1)}
+.card-res{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+.card .btn{margin-top:auto;width:100%}
+.grade{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-family:var(--fd);font-size:21px;font-weight:700;color:#08122a}
+.g5{background:linear-gradient(135deg,var(--ok),var(--lime))}
+.g4{background:linear-gradient(135deg,var(--cyan),var(--info))}
+.g3{background:linear-gradient(135deg,var(--amber),#ff8a3d)}
+.g2{background:linear-gradient(135deg,var(--bad),var(--magenta))}
+
+/* ---------- теория ---------- */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tab{border:1px solid var(--line);background:var(--surf);color:var(--muted);font-weight:700;font-size:14px;padding:10px 18px;border-radius:12px;cursor:pointer;transition:.2s}
+.tab:hover{color:var(--cream);background:var(--surf2)}
+.tab.active{color:#08122a;background:linear-gradient(135deg,var(--amber),var(--magenta));border-color:transparent;box-shadow:0 8px 24px rgba(255,61,139,.3)}
+.panel{display:none;background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:clamp(18px,3vw,30px)}
+.panel.active{display:block;animation:fadeUp .45s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.tbl-wrap{overflow:auto;border-radius:14px;border:1px solid var(--line)}
+table.tbl{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+.tbl th{background:rgba(123,61,255,.25);text-align:left;padding:12px 14px;font-size:12.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--cream)}
+.tbl td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top;color:var(--muted)}
+.tbl td b{color:var(--cream)}
+.callout{border-left:3px solid var(--amber);background:rgba(255,182,61,.09);border-radius:0 14px 14px 0;padding:14px 18px;margin:0 0 20px;font-size:14.5px}
+.callout b{color:var(--amber)}
+.steps{display:grid;gap:14px;margin:18px 0}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step-n{flex:0 0 auto;width:32px;height:32px;border-radius:11px;display:grid;place-items:center;font-weight:800;color:#08122a;background:linear-gradient(135deg,var(--cyan),var(--lime))}
+.step p{margin:0;font-size:14.5px;color:var(--muted)} .step b{color:var(--cream)}
+ul.traps{margin:10px 0 0;padding-left:20px;color:var(--muted);font-size:14.5px}
+ul.traps li{margin:7px 0} ul.traps b{color:var(--cream)}
+.subh{font-family:var(--fd);font-size:19px;margin:24px 0 10px;color:var(--amber)}
+
+/* ---------- результат ---------- */
+.result-box{background:linear-gradient(160deg,rgba(255,246,233,.08),rgba(255,246,233,.03));border:1px solid var(--line);border-radius:22px;padding:clamp(18px,3vw,30px)}
+.student-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.avatar{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-family:var(--fd);font-size:22px;color:#08122a;background:linear-gradient(135deg,var(--lime),var(--cyan));box-shadow:0 8px 26px rgba(47,212,255,.3)}
+.student-row .who b{font-size:18px} .student-row .who span{display:block;font-size:13px;color:var(--muted)}
+.overall{display:flex;align-items:center;gap:26px;flex-wrap:wrap;padding:18px;border-radius:18px;background:var(--surf);border:1px solid var(--line);margin-bottom:20px}
+.ring{width:120px;height:120px;flex:0 0 auto}
+.ring-bg{fill:none;stroke:rgba(255,246,233,.12);stroke-width:10}
+.ring-fg{fill:none;stroke:url(#ringGrad);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1s ease}
+.ring-txt{fill:var(--cream);font-family:var(--fd);font-size:24px}
+.overall .info b{font-size:17px} .overall .info p{margin:6px 0 0;color:var(--muted);font-size:13.5px}
+.rows{display:grid;gap:10px;margin-bottom:20px}
+.row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:13px 16px}
+.row .rn{font-family:var(--fd);font-size:22px;color:var(--amber);width:26px}
+.row .rd{flex:1;min-width:150px;font-size:13.5px;color:var(--muted)} .row .rd b{display:block;color:var(--cream);font-size:14.5px}
+.row .btn{padding:8px 14px;font-size:12.5px}
+.empty{text-align:center;padding:34px 10px;color:var(--muted)}
+.empty .big{font-size:44px;margin-bottom:10px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.scale-note{margin-top:20px;font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:16px}
+.scale-note b{color:var(--cream)}
+.warn-banner{background:rgba(255,92,122,.12);border:1px solid rgba(255,92,122,.45);color:#ffd3dc;border-radius:14px;padding:12px 16px;font-size:13.5px;margin-bottom:16px}
+
+/* ---------- экзаменационный лист ---------- */
+.overlay{position:fixed;inset:0;z-index:90;background:rgba(8,5,22,.92);backdrop-filter:blur(10px);display:flex;justify-content:center;
+  opacity:0;transition:opacity .22s;overflow:hidden;padding:0}
+.overlay.show{opacity:1}
+.sheet{width:min(880px,100%);height:100dvh;display:flex;flex-direction:column;background:linear-gradient(180deg,#171034,#0e0a24);
+  border-left:1px solid var(--line);border-right:1px solid var(--line);position:relative}
+.sheet-head{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--line);background:rgba(12,9,32,.7);flex:0 0 auto}
+.vnum{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-family:var(--fd);font-size:24px;color:#08122a;background:linear-gradient(135deg,var(--amber),var(--magenta))}
+.sh-title{font-family:var(--fd);font-size:19px} .sh-sub{font-size:12px;color:var(--muted)}
+.sh-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:15px;color:var(--cyan);background:rgba(47,212,255,.1);border:1px solid rgba(47,212,255,.4);padding:7px 13px;border-radius:11px}
+.sheet-body{flex:1;overflow-y:auto;padding:20px clamp(14px,3vw,26px) 30px}
+.exam-note{font-size:13.5px;color:var(--muted);background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin-bottom:16px}
+.progress{height:8px;border-radius:8px;background:rgba(255,246,233,.1);overflow:hidden;margin-bottom:8px}
+.progress .bar{height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,var(--magenta),var(--amber),var(--lime));transition:width .35s ease}
+.pmeta{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);margin-bottom:18px;flex-wrap:wrap}
+.tasks{display:grid;gap:16px}
+.task{background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:18px;transition:border-color .3s}
+.task.ok{border-color:rgba(61,220,151,.55)} .task.bad{border-color:rgba(255,92,122,.55)}
+.task-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.tnum{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:13px;color:#08122a;background:linear-gradient(135deg,var(--cyan),var(--lime))}
+.phrase{font-family:var(--fd);font-size:clamp(20px,2.6vw,26px);margin-bottom:12px}
+.answer{width:100%;font-family:var(--fu);font-size:17px;color:var(--cream);background:rgba(12,9,32,.7);border:1.5px solid var(--line);border-radius:13px;
+  padding:13px 16px;transition:.2s}
+.answer::placeholder{color:rgba(183,173,218,.55)}
+.answer:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 4px rgba(47,212,255,.15)}
+.answer:disabled{opacity:.85;cursor:not-allowed}
+.verdict{margin-top:12px;border-radius:13px;padding:12px 15px;font-size:13.5px}
+.v-ok{background:rgba(61,220,151,.1);border:1px solid rgba(61,220,151,.4)}
+.v-bad{background:rgba(255,92,122,.1);border:1px solid rgba(255,92,122,.4)}
+.v-head{font-weight:800;font-size:14px;display:flex;justify-content:space-between;gap:10px;margin-bottom:6px}
+.v-ok .v-head{color:var(--ok)} .v-bad .v-head{color:var(--bad)}
+.v-line{color:var(--muted);margin:3px 0} .v-line b{color:var(--cream)}
+.v-note{margin-top:7px;color:var(--muted);font-size:12.5px;border-top:1px dashed var(--line);padding-top:7px}
+.v-alt{font-size:11.5px}
+.sheet-foot{flex:0 0 auto;display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;padding:14px 18px;border-top:1px solid var(--line);background:rgba(12,9,32,.85)}
+.foot-info{font-size:12.5px;color:var(--muted);max-width:420px}
+.res-banner{display:flex;align-items:center;gap:20px;flex-wrap:wrap;border-radius:18px;padding:18px;margin-bottom:18px;
+  background:linear-gradient(135deg,rgba(123,61,255,.3),rgba(255,61,139,.16));border:1px solid var(--line)}
+.res-score{font-family:var(--fd);font-size:44px;line-height:1}
+.res-banner .meta{font-size:13px;color:var(--muted)}
+.lock-note{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--amber);margin-top:8px}
+.confetti{position:absolute;top:-16px;width:10px;height:15px;border-radius:3px;z-index:5;pointer-events:none;animation:fall 2.5s cubic-bezier(.2,.6,.4,1) forwards}
+@keyframes fall{to{transform:translateY(108vh) rotate(720deg);opacity:0}}
+
+/* ---------- модальные окна ---------- */
+.modal-scrim{position:fixed;inset:0;z-index:110;background:rgba(8,5,22,.8);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;
+  padding:18px;opacity:0;transition:opacity .2s}
+.modal-scrim.show{opacity:1}
+.modal{width:min(460px,100%);background:linear-gradient(170deg,#1d1440,#120c2b);border:1px solid var(--line);border-radius:22px;padding:26px;
+  box-shadow:0 40px 100px rgba(0,0,0,.6);transform:translateY(14px);transition:transform .25s}
+.modal-scrim.show .modal{transform:none}
+.modal h3{font-size:22px;margin-bottom:8px}
+.modal p{color:var(--muted);font-size:14px;margin:0 0 16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:6px}
+.field input{width:100%;font-size:16px;color:var(--cream);background:rgba(12,9,32,.7);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+.field input:focus{outline:none;border-color:var(--magenta);box-shadow:0 0 0 4px rgba(255,61,139,.15)}
+.err{color:var(--bad);font-size:12.5px;min-height:16px;margin-bottom:8px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+/* ---------- тосты ---------- */
+.toasts{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:130;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.toast{background:linear-gradient(135deg,#241a4d,#170f33);border:1px solid var(--line);color:var(--cream);font-size:13.5px;font-weight:600;
+  padding:12px 20px;border-radius:14px;box-shadow:0 16px 44px rgba(0,0,0,.5);animation:toastIn .3s ease;max-width:90vw;text-align:center}
+.toast.out{animation:toastOut .3s ease forwards}
+@keyframes toastIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateY(10px)}}
+
+/* ---------- подвал ---------- */
+footer{border-top:1px solid var(--line);margin-top:30px;padding:34px clamp(16px,3vw,28px) 46px;background:rgba(12,9,32,.6)}
+.foot-in{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tags span{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:11.5px;color:var(--cyan)}
+
+/* ---------- печать ---------- */
+#print-area{display:none}
+@media print{
+  body{background:#fff;color:#000}
+  body>*:not(#print-area){display:none!important}
+  #print-area{display:block!important;font-family:Georgia,serif;color:#000;padding:10mm}
+  #print-area h1{font-size:19pt;margin:0 0 4pt} #print-area h2{font-size:13pt;margin:16pt 0 6pt}
+  #print-area p{font-size:10.5pt;margin:4pt 0}
+  #print-area table{width:100%;border-collapse:collapse;font-size:10.5pt;margin:8pt 0}
+  #print-area th,#print-area td{border:1px solid #888;padding:5pt 7pt;text-align:left}
+  #print-area .small{font-size:8.5pt;color:#333}
+  #print-area .sign{margin-top:22pt;font-size:10.5pt}
+}
+
+/* ---------- адаптив ---------- */
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr;gap:30px;padding-top:calc(var(--nav-h) + 40px)}
+  .strip,.rules{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .menu-btn{display:block}
+  .nav .btn{display:none}
+  .nav-links{position:absolute;top:var(--nav-h);left:0;right:0;flex-direction:column;align-items:stretch;background:rgba(12,9,32,.97);
+    border-bottom:1px solid var(--line);padding:10px;display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:13px 16px}
+  section{padding:64px 16px}
+  .features{grid-template-columns:1fr}
+  .sheet{border:0}
+  .sheet-foot .btn{width:100%}
+}
+@media (max-width:480px){
+  .strip,.rules{grid-template-columns:1fr}
+  .overall{gap:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<noscript><p style="padding:90px 20px;text-align:center">Для работы сборников нужен включённый JavaScript.</p></noscript>
+
+<div class="bg" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="glyphs">
+    <span style="left:6%;top:22%;font-size:70px">«</span>
+    <span style="left:88%;top:30%;font-size:60px;animation-delay:-6s">→</span>
+    <span style="left:14%;top:74%;font-size:56px;animation-delay:-11s">ё</span>
+    <span style="left:78%;top:80%;font-size:64px;animation-delay:-3s">ъ</span>
+    <span style="left:46%;top:14%;font-size:48px;animation-delay:-9s">;</span>
+    <span style="left:62%;top:58%;font-size:58px;animation-delay:-14s">»</span>
+  </div>
+</div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top"><span class="mark">9</span><span>Сборники ОГЭ<small>русский язык · задание 9</small></span></a>
+  <button class="menu-btn" id="menuBtn" aria-label="Меню" aria-expanded="false">☰</button>
+  <nav class="nav-links" id="navLinks" aria-label="Разделы">
+    <a href="#sborniki" data-nav="sborniki">Сборники</a>
+    <a href="#theory" data-nav="theory">Теория</a>
+    <a href="#result" data-nav="result">Мой результат</a>
+  </nav>
+  <a class="btn btn-primary" href="#sborniki">Начать</a>
+</header>
+
+<main>
+  <!-- ГЕРОЙ -->
+  <section class="hero" id="top">
+    <div>
+      <span class="eyebrow">ФИПИ · проект КИМ 2027 · 9 класс</span>
+      <h1>Грамматическая <span class="grad">синонимия</span> словосочетаний</h1>
+      <p class="lead">Четыре сборника к заданию 9: управление, согласование, примыкание. Решил шесть заданий — отправил один раз — получил отметку и разбор каждого ответа.</p>
+      <div class="features">
+        <div class="feature"><span class="tick">✓</span>Одна попытка — честный результат</div>
+        <div class="feature"><span class="tick">✓</span>Автопроверка и оценка по нормам Минпросвещения</div>
+        <div class="feature"><span class="tick">✓</span>Открывается на телефоне и ПК, без установки</div>
+        <div class="feature"><span class="tick">✓</span>Результат хранится на устройстве ученика</div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#sborniki">Выбрать сборник</a>
+        <a class="btn btn-ghost" href="#theory">Сначала теория</a>
+      </div>
+    </div>
+    <div class="demo-card" aria-label="Образец замены словосочетания">
+      <div class="demo-label">Образец из демоверсии</div>
+      <div class="demo-line">
+        <div class="demo-phrase" id="demoFrom">«река без имени»</div>
+        <div class="demo-arrow" id="demoArrow">↓</div>
+        <div class="demo-phrase" id="demoTo" style="color:var(--lime)">«безымянная река»</div>
+      </div>
+      <div class="demo-types">
+        <span class="tb tb-upr" id="demoA">управление</span>
+        <span class="arrow">→</span>
+        <span class="tb tb-soogl" id="demoB">согласование</span>
+      </div>
+      <p class="demo-cap">Эталон допускает оба порядка слов: «безымянная река» и «река безымянная». Главное слово не меняется, зависимое перестраивается.</p>
+    </div>
+  </section>
+
+  <div class="strip reveal">
+    <div class="cell"><div class="num">4</div><div class="cap">сборника</div></div>
+    <div class="cell"><div class="num">24</div><div class="cap">задания</div></div>
+    <div class="cell"><div class="num">1</div><div class="cap">попытка на сборник</div></div>
+    <div class="cell"><div class="num">≈5</div><div class="cap">минут на сборник</div></div>
+  </div>
+
+  <!-- СБОРНИКИ -->
+  <section id="sborniki">
+    <div class="sec-head reveal">
+      <div><h2>Сборники</h2><p>Каждый сборник проходится один раз. Черновик сохраняется автоматически, но после отправки ответы изменить нельзя.</p></div>
+    </div>
+    <div class="cards" id="cards"></div>
+    <div class="rules reveal">
+      <div class="rule"><span class="n">1</span><b>Впиши имя</b><p>Оно попадёт в справку о результате.</p></div>
+      <div class="rule"><span class="n">2</span><b>Реши 6 заданий</b><p>Ответ — словосочетание, порядок слов свободный.</p></div>
+      <div class="rule"><span class="n">3</span><b>Отправь один раз</b><p>Повторная попытка недоступна.</p></div>
+      <div class="rule"><span class="n">4</span><b>Получи разбор</b><p>Отметка, эталоны и справка для учителя.</p></div>
+    </div>
+  </section>
+
+  <!-- ТЕОРИЯ -->
+  <section id="theory">
+    <div class="sec-head reveal">
+      <div><h2>Теория перед попыткой</h2><p>Всё, что нужно для задания 9: три типа связи, алгоритм замены, паронимы и ловушки.</p></div>
+    </div>
+    <div class="callout reveal"><b>Демоверсия ОГЭ-2027:</b> «река без имени» → «безымянная река». Задание 9: код содержания 4.28.1, требования 3.8 и 4.3, 1 балл, ориентировочно 5 минут.</div>
+    <div class="tabs reveal" role="tablist">
+      <button class="tab active" data-tab="types" role="tab" aria-selected="true">Типы связи</button>
+      <button class="tab" data-tab="algo" role="tab" aria-selected="false">Алгоритм</button>
+      <button class="tab" data-tab="paron" role="tab" aria-selected="false">Паронимы</button>
+      <button class="tab" data-tab="traps" role="tab" aria-selected="false">Ловушки</button>
+    </div>
+
+    <div class="panel active" id="tab-types">
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>Связь</th><th>Зависимое слово</th><th>Проверка</th><th>Пример</th></tr>
+        <tr><td><b>Согласование</b></td><td>прилагательное, причастие, порядковое числительное, местоимение-прилагательное</td><td>меняем форму главного — зависимое меняется: нет безымянной реки</td><td>безымянная река</td></tr>
+        <tr><td><b>Управление</b></td><td>существительное в косвенном падеже, с предлогом или без</td><td>меняем форму главного — зависимое не меняется: нет реки без имени</td><td>река без имени</td></tr>
+        <tr><td><b>Примыкание</b></td><td>наречие, деепричастие, инфинитив, сравнительная степень, его / её / их</td><td>зависимое слово неизменяемое</td><td>смотреть грустно, её книга</td></tr>
+      </table></div>
+      <p style="color:var(--muted);font-size:14px;margin-top:16px">Тип связи определяется формой зависимого слова, а не его ролью в предложении: <b style="color:var(--cream)">смотреть с грустью</b> — управление, хотя в предложении это обстоятельство образа действия.</p>
+    </div>
+
+    <div class="panel" id="tab-algo">
+      <div class="steps">
+        <div class="step"><span class="step-n">1</span><p><b>Найди главное слово:</b> река без имени.</p></div>
+        <div class="step"><span class="step-n">2</span><p><b>Задай вопрос:</b> река (какая?) без имени — несогласованное определение, замена возможна.</p></div>
+        <div class="step"><span class="step-n">3</span><p><b>Подбери прилагательное:</b> имя → безымянный.</p></div>
+        <div class="step"><span class="step-n">4</span><p><b>Поставь в род, число и падеж главного слова:</b> безымянная река.</p></div>
+        <div class="step"><span class="step-n">5</span><p><b>Проверь норму:</b> пароним, Н / НН, Ы / И после приставки.</p></div>
+      </div>
+      <div class="subh">Примыкание ↔ управление</div>
+      <p style="color:var(--muted);font-size:14.5px;margin:0 0 12px">Основная модель: наречие ↔ существительное с предлогом. Вторая модель: инфинитив при существительном ↔ отглагольное существительное с предлогом.</p>
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>Модель</th><th>Пример</th></tr>
+        <tr><td>с + творительный падеж</td><td>смотреть с грустью, слушать с вниманием</td></tr>
+        <tr><td>без + родительный падеж</td><td>жить без забот, писать без ошибок</td></tr>
+        <tr><td>о + предложный падеж</td><td>просьба о помощи, приказ об отступлении</td></tr>
+        <tr><td>на + винительный падеж</td><td>надежда на выздоровление</td></tr>
+        <tr><td>к + дательный падеж</td><td>стремление к учёбе</td></tr>
+      </table></div>
+    </div>
+
+    <div class="panel" id="tab-paron">
+      <div class="tbl-wrap"><table class="tbl">
+        <tr><th>Из чего, какой по составу</th><th>Какого цвета, похожий на что</th></tr>
+        <tr><td><b>серебряная</b> ложка</td><td>серебристый иней</td></tr>
+        <tr><td><b>золотое</b> кольцо</td><td>золотистый оттенок</td></tr>
+        <tr><td><b>глиняный</b> кувшин</td><td>глинистая почва</td></tr>
+        <tr><td><b>каменный</b> дом</td><td>каменистая тропа</td></tr>
+        <tr><td><b>песчаный</b> пляж</td><td>песочный цвет</td></tr>
+        <tr><td><b>земляной</b> вал</td><td>землистый цвет лица</td></tr>
+        <tr><td><b>водяная</b> мельница</td><td>водный транспорт</td></tr>
+        <tr><td><b>лесной</b> массив</td><td>лесистая местность</td></tr>
+      </table></div>
+      <p style="color:var(--muted);font-size:14px;margin-top:16px">В задании 9 почти всегда нужен первый столбец. Ветреный — одна Н (исключение), безветренный — НН; деревянный, стеклянный, оловянный — НН.</p>
+    </div>
+
+    <div class="panel" id="tab-traps">
+      <div class="subh" style="margin-top:0">Управление → согласование</div>
+      <ul class="traps">
+        <li>Пароним: «серебристая ложка» вместо <b>серебряная ложка</b>.</li>
+        <li>Изменена форма главного слова: «сиреневые ветки» вместо <b>сиреневая ветка</b>.</li>
+        <li>Заменено главное слово: «кирпичное здание» вместо <b>кирпичный дом</b>.</li>
+        <li>Орфография: «безсонная», «шерстянный», «безимянная».</li>
+      </ul>
+      <div class="subh">Примыкание ↔ управление</div>
+      <ul class="traps">
+        <li>Прилагательное вместо наречия: «грустный смотреть» вместо <b>грустно смотреть</b>.</li>
+        <li>Описательный оборот: «смотреть с грустным видом» вместо <b>смотреть с грустью</b>.</li>
+        <li>Неверный предлог: «просьба помощи» вместо <b>просьба о помощи</b>.</li>
+      </ul>
+      <div class="subh">Когда замена невозможна</div>
+      <ul class="traps">
+        <li>Зависимое слово — дополнение: <b>чтение книги, гордиться сыном</b>.</li>
+        <li>Наречия без соотносительного существительного: <b>исподлобья, сгоряча, наугад, по-дружески</b>.</li>
+        <li>Деепричастие, сравнительная степень, его / её / их: <b>читать лёжа, бежать быстрее, её тетрадь</b>.</li>
+      </ul>
+      <div class="callout" style="margin:20px 0 0"><b>Три вопроса перед ответом:</b> главное слово то же и в той же форме? зависимое — одно слово (или существительное с предлогом)? смысл не изменился?</div>
+    </div>
+  </section>
+
+  <!-- РЕЗУЛЬТАТ -->
+  <section id="result">
+    <div class="sec-head reveal">
+      <div><h2>Мой результат</h2><p>Данные хранятся только в этом браузере. Очистка данных сайта удалит результат.</p></div>
+    </div>
+    <div class="result-box reveal" id="resultBox"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-in">
+    <div>Сборники составлены по проекту демоверсии, спецификации и кодификатора ОГЭ-2027 по русскому языку (ФИПИ).<br>Материал для некоммерческого использования. Не является официальным материалом ФИПИ.</div>
+    <div class="tags"><span>#огэ</span><span>#русский</span><span>#задание9</span><span>#словосочетание</span></div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" hidden></div>
+
+<div class="modal-scrim" id="nameModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="nameTitle">
+    <h3 id="nameTitle">Как тебя зовут?</h3>
+    <p>Имя и класс попадут в справку о результате. Данные остаются на этом устройстве.</p>
+    <div class="field"><label for="fName">Имя и фамилия</label><input id="fName" type="text" autocomplete="name" placeholder="Например, Мария Иванова"></div>
+    <div class="field"><label for="fClass">Класс (необязательно)</label><input id="fClass" type="text" placeholder="9 «А»"></div>
+    <div class="err" id="nameErr"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="nameCancel">Отмена</button>
+      <button class="btn btn-primary" id="nameSave">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-scrim" id="confirmModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <h3 id="confirmTitle">Отправить ответы?</h3>
+    <p id="confirmText"></p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="confirmCancel">Вернуться</button>
+      <button class="btn btn-primary" id="confirmOk">Отправить навсегда</button>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<div id="print-area"></div>
+
+<script>
+'use strict';
+/* ================= ДАННЫЕ СБОРНИКОВ ================= */
+const VARIANTS=[
+ {id:1,theme:'magenta',from:'управление',to:'согласование',
+  instruction:'Замените словосочетание, построенное на основе управления, синонимичным словосочетанием со связью согласование. Напишите получившееся словосочетание, соблюдая нормы современного русского литературного языка.',
+  tasks:[
+   {src:'оладьи из кабачков',ans:['кабачковые оладьи'],note:'Оладьи (какие?) из кабачков — несогласованное определение. Главное слово сохраняется во множественном числе.'},
+   {src:'ваза из хрусталя',ans:['хрустальная ваза'],note:'Ваза (какая?) из хрусталя. Прилагательное ставится в женский род, единственное число, именительный падеж.'},
+   {src:'дорожка в саду',ans:['садовая дорожка'],note:'Дорожка (какая?) в саду → садовая дорожка. Предлог в ответе не нужен.'},
+   {src:'тишина ночи',ans:['ночная тишина'],note:'Тишина (какая?) ночи → ночная тишина. В сочетании ЧН мягкий знак не пишется.'},
+   {src:'человек без жалости',ans:['безжалостный человек'],note:'Человек (какой?) без жалости → безжалостный человек. Приставка без- перед звонким Ж пишется с З.'},
+   {src:'следы зверя',ans:['звериные следы'],note:'Следы (чьи?) зверя → звериные следы. Суффикс -ин-, одна Н; множественное число сохранено.'}
+  ]},
+ {id:2,theme:'magenta',from:'управление',to:'согласование',
+  instruction:'Замените словосочетание, построенное на основе управления, синонимичным словосочетанием со связью согласование. Напишите получившееся словосочетание, соблюдая нормы современного русского литературного языка.',
+  tasks:[
+   {src:'туфли из замши',ans:['замшевые туфли'],note:'Туфли (какие?) из замши → замшевые туфли. Главное слово во множественном числе.'},
+   {src:'пальто из драпа',ans:['драповое пальто'],note:'Пальто (какое?) из драпа → драповое пальто. Средний род сохранён.'},
+   {src:'жара в июле',ans:['июльская жара'],note:'Жара (какая?) в июле → июльская жара. Разделительный Ь перед Я.'},
+   {src:'встреча вечером',ans:['вечерняя встреча'],note:'Встреча (какая?) вечером → вечерняя встреча. Двойная Н в суффиксе -енн-.'},
+   {src:'спор без смысла',ans:['бессмысленный спор'],note:'Спор (какой?) без смысла → бессмысленный спор. На стыке приставки без- и корня -смысл- две С.'},
+   {src:'писк комара',ans:['комариный писк'],note:'Писк (чей?) комара → комариный писк. Суффикс -ин-, одна Н.'}
+  ]},
+ {id:3,theme:'cyan',from:'примыкание',to:'управление',
+  instruction:'Замените словосочетание, построенное на основе примыкания, синонимичным словосочетанием со связью управление. Напишите получившееся словосочетание, соблюдая нормы современного русского литературного языка.',
+  tasks:[
+   {src:'любовно рассматривать',ans:['рассматривать с любовью'],note:'Наречие любовно → существительное с предлогом: рассматривать (как?) с любовью.'},
+   {src:'робко спросить',ans:['спросить с робостью'],note:'Робко → с робостью. Творительный падеж с предлогом с.'},
+   {src:'бесстрашно сражаться',ans:['сражаться без страха'],note:'Бесстрашно → без страха. Родительный падеж с предлогом без.'},
+   {src:'оживлённо спорить',ans:['спорить с оживлением'],note:'Оживлённо → с оживлением. Главное слово спорить не меняется; буквы Е и Ё при проверке равноценны.'},
+   {src:'ловко управляться',ans:['управляться с ловкостью'],note:'Ловко → с ловкостью. Творительный падеж с предлогом с.'},
+   {src:'приказ наступать',ans:['приказ о наступлении'],note:'Инфинитив наступать → отглагольное существительное: приказ (о чём?) о наступлении. Предложный падеж.'}
+  ]},
+ {id:4,theme:'lime',from:'управление',to:'примыкание',
+  instruction:'Замените словосочетание, построенное на основе управления, синонимичным словосочетанием со связью примыкание. Напишите получившееся словосочетание, соблюдая нормы современного русского литературного языка.',
+  tasks:[
+   {src:'отвечать с гордостью',ans:['гордо отвечать'],note:'С гордостью → гордо. Нужно наречие, а не прилагательное.'},
+   {src:'ждать с тревогой',ans:['тревожно ждать'],note:'С тревогой → тревожно. Главное слово ждать сохранено.'},
+   {src:'работать с усердием',ans:['усердно работать'],note:'С усердием → усердно. Вид глагола не меняется.'},
+   {src:'искать без успеха',ans:['безуспешно искать'],note:'Без успеха → безуспешно. Приставка без- перед гласной сохраняет З.'},
+   {src:'слушать с сочувствием',ans:['сочувственно слушать'],note:'С сочувствием → сочувственно. В наречии от сочувственный пишется НН.'},
+   {src:'надежда на выздоровление',ans:['надежда выздороветь'],note:'На выздоровление → инфинитив выздороветь. Главное слово надежда сохраняется.'}
+  ]}
+];
+const KEY='oge9-sborniki-v1';
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+
+/* ================= ХРАНИЛИЩЕ ================= */
+let storageOk=true;
+function load(){try{const raw=localStorage.getItem(KEY);if(raw){const d=JSON.parse(raw);if(d&&typeof d==='object')return Object.assign({student:null,results:{},drafts:{}},d);}}catch(e){storageOk=false;}return{student:null,results:{},drafts:{}};}
+let DB=load();
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){storageOk=false;}}
+function typeClass(t){return t==='согласование'?'soogl':t==='управление'?'upr':'prim';}
+function dirBadges(v){return `<span class="tb tb-${typeClass(v.from)}">${v.from}</span><span class="arrow">→</span><span class="tb tb-${typeClass(v.to)}">${v.to}</span>`;}
+function norm(s){return String(s||'').toLowerCase().replace(/ё/g,'е').replace(/[«»"'’.,;]/g,'').replace(/\s+/g,' ').trim();}
+function accepted(task){
+  const set=new Set();
+  task.ans.forEach(a=>{
+    const w=a.split(' ');
+    const orders=[a];
+    if(w.length===2)orders.push(w[1]+' '+w[0]);
+    if(w.length===3)orders.push(w[1]+' '+w[2]+' '+w[0]);
+    orders.forEach(o=>{set.add(norm(o));set.add(norm(o).replace(/ /g,''));});
+  });
+  return set;
+}
+function check(task,value){const n=norm(value);if(!n)return false;const set=accepted(task);return set.has(n)||set.has(n.replace(/ /g,''));}
+/* Шкала по пропорциям официальной шкалы ОГЭ по русскому языку (37 баллов: 0–12 «2», 13–22 «3», 23–28 «4», 29–37 «5») */
+function gradeFor(score,total){const p=score/total;if(p>=.78)return 5;if(p>=.62)return 4;if(p>=.35)return 3;return 2;}
+function fmtTime(s){s=Math.max(0,Math.floor(s));const m=Math.floor(s/60),ss=s%60;return String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0');}
+function fmtDate(ts){return new Date(ts).toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'});}
+function fmtDateTime(ts){return new Date(ts).toLocaleString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});}
+
+/* ================= ТОСТЫ ================= */
+function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;$('#toasts').appendChild(t);setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),320);},3400);}
+
+/* ================= КАРТОЧКИ ================= */
+function renderCards(){
+  $('#cards').innerHTML=VARIANTS.map(v=>{
+    const r=DB.results[v.id],d=DB.drafts[v.id];
+    const status=r?'done':d?'draft':'new';
+    const pill=r?'пройден':d?'черновик':'не начат';
+    const label=r?'Смотреть результат':d?'Продолжить':'Начать попытку';
+    return `<article class="card t-${v.theme} reveal in">
+      <div class="card-top"><span class="card-num">${v.id}</span><span class="pill ${status}">${pill}</span></div>
+      <h3>Сборник ${v.id}</h3>
+      <div class="dir">${dirBadges(v)}</div>
+      <p class="card-meta">6 заданий · одна попытка · ≈5 минут</p>
+      ${r?`<div class="card-res"><span class="grade g${r.grade}">${r.grade}</span><span>${r.score}/6 баллов · ${fmtDate(r.completedAt)}</span></div>`:''}
+      <button class="btn ${r?'btn-ghost':'btn-primary'} card-btn" data-id="${v.id}">${label}</button>
+    </article>`;
+  }).join('');
+}
+
+/* ================= ЭКЗАМЕНАЦИОННЫЙ ЛИСТ ================= */
+let current=null,timerInt=null,saveT=null;
+const overlay=$('#overlay');
+function taskHTML(v,t,i,value,review,detail){
+  return `<div class="task ${review?(detail.ok?'ok':'bad'):''}">
+    <div class="task-top"><span class="tnum">${i+1}</span><span class="dir">${dirBadges(v)}</span></div>
+    <div class="phrase">«${esc(t.src)}»</div>
+    <label class="sr-only" for="a${i}">Ответ на задание ${i+1}</label>
+    <input id="a${i}" class="answer" data-i="${i}" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"
+      placeholder="Введите словосочетание" value="${esc(value)}" ${review?'disabled':''}>
+    ${review?verdictHTML(t,detail):''}
+  </div>`;
+}
+function verdictHTML(t,d){
+  return `<div class="verdict ${d.ok?'v-ok':'v-bad'}">
+    <div class="v-head"><span>${d.ok?'✓ Верно':'✕ Неверно'}</span><span>${d.ok?'+1 балл':'0 баллов'}</span></div>
+    ${!d.ok?`<div class="v-line">Ваш ответ: <b>${esc(d.given)||'— пусто —'}</b></div>`:''}
+    <div class="v-line">Эталон: <b>${esc(t.ans[0])}</b> <span class="v-alt">(порядок слов свободный)</span></div>
+    <div class="v-note">${esc(t.note)}</div>
+  </div>`;
+}
+function openTest(id){
+  const v=VARIANTS.find(x=>x.id===id);
+  let d=DB.drafts[id];
+  if(!d){d={answers:Array(v.tasks.length).fill(''),startedAt:Date.now()};DB.drafts[id]=d;persist();}
+  current={id,mode:'test'};
+  overlay.innerHTML=`<div class="sheet" role="dialog" aria-modal="true" aria-label="Сборник ${id}">
+    <div class="sheet-head">
+      <span class="vnum">${id}</span>
+      <div><div class="sh-title">Сборник ${id}</div><div class="sh-sub">${v.from} → ${v.to}</div></div>
+      <div class="sh-right"><span class="timer" id="timer">00:00</span><button class="icon-btn" id="closeOverlay" aria-label="Закрыть">✕</button></div>
+    </div>
+    <div class="sheet-body">
+      <div class="exam-note">${esc(v.instruction)}</div>
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <div class="pmeta"><span id="pcount"></span><span id="savehint">Черновик сохраняется автоматически</span></div>
+      <div class="tasks">${v.tasks.map((t,i)=>taskHTML(v,t,i,d.answers[i]||'',false)).join('')}</div>
+    </div>
+    <div class="sheet-foot">
+      <div class="foot-info">Одна попытка: после отправки ответы изменить нельзя. Пропущенные задания засчитываются как неверные.</div>
+      <button class="btn btn-primary" id="submitBtn">Отправить ответы</button>
+    </div>
+  </div>`;
+  showOverlay();startTimer(d.startedAt);updateProgress();
+  const first=overlay.querySelector('.answer');if(first)first.focus();
+}
+function openReview(id){
+  const v=VARIANTS.find(x=>x.id===id),r=DB.results[id];if(!r)return;
+  current={id,mode:'review'};stopTimer();
+  overlay.innerHTML=`<div class="sheet" role="dialog" aria-modal="true" aria-label="Результат сборника ${id}">
+    <div class="sheet-head">
+      <span class="vnum">${id}</span>
+      <div><div class="sh-title">Сборник ${id} · разбор</div><div class="sh-sub">${v.from} → ${v.to}</div></div>
+      <div class="sh-right"><button class="icon-btn" id="closeOverlay" aria-label="Закрыть">✕</button></div>
+    </div>
+    <div class="sheet-body">
+      <div class="res-banner">
+        <span class="grade g${r.grade}" style="width:64px;height:64px;font-size:34px;border-radius:18px">${r.grade}</span>
+        <div><div class="res-score">${r.score} / 6</div><div class="meta">первичный балл · отметка ${r.grade}</div></div>
+        <div class="meta" style="margin-left:auto;text-align:right">${esc(r.student?.name||DB.student?.name||'Ученик')}<br>${fmtDateTime(r.completedAt)} · время ${fmtTime(r.durationSec)}</div>
+      </div>
+      <div class="lock-note">🔒 Сборник пройден. Повторная попытка недоступна.</div>
+      <div class="tasks" style="margin-top:16px">${v.tasks.map((t,i)=>taskHTML(v,t,i,r.answers[i]||'',true,r.details[i])).join('')}</div>
+    </div>
+    <div class="sheet-foot">
+      <div class="foot-info">Результат сохранён на этом устройстве. Справку можно распечатать или сохранить в PDF.</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-cyan" id="printOne">Справка</button><button class="btn btn-ghost" id="reviewClose">Закрыть</button></div>
+    </div>
+  </div>`;
+  showOverlay();
+}
+function showOverlay(){overlay.hidden=false;document.body.classList.add('lock');requestAnimationFrame(()=>overlay.classList.add('show'));}
+function closeOverlay(){overlay.classList.remove('show');stopTimer();setTimeout(()=>{overlay.hidden=true;overlay.innerHTML='';},220);document.body.classList.remove('lock');current=null;renderCards();}
+function startTimer(startedAt){stopTimer();const tick=()=>{const el=$('#timer');if(el)el.textContent=fmtTime((Date.now()-startedAt)/1000);};tick();timerInt=setInterval(tick,1000);}
+function stopTimer(){if(timerInt){clearInterval(timerInt);timerInt=null;}}
+function updateProgress(){
+  if(!current||current.mode!=='test')return;
+  const d=DB.drafts[current.id];const n=d.answers.filter(a=>norm(a)).length;const total=d.answers.length;
+  const bar=$('#bar'),c=$('#pcount');
+  if(bar)bar.style.width=(n/total*100)+'%';
+  if(c)c.textContent=`Отвечено ${n} из ${total}`;
+  const btn=$('#submitBtn');if(btn)btn.classList.toggle('btn-cyan',n===total);
+}
+function askSubmit(){
+  const d=DB.drafts[current.id];const n=d.answers.filter(a=>norm(a)).length;const total=d.answers.length;
+  $('#confirmText').innerHTML=n===total
+    ?`Все ${total} ответов заполнены. Это единственная попытка: после отправки изменить ответы будет нельзя.`
+    :`Заполнено ${n} из ${total}. Пропущенные задания будут засчитаны как неверные. Это единственная попытка.`;
+  openModal($('#confirmModal'));
+}
+function doSubmit(){
+  const id=current.id,v=VARIANTS.find(x=>x.id===id),d=DB.drafts[id];
+  const details=v.tasks.map((t,i)=>({ok:check(t,d.answers[i]),given:(d.answers[i]||'').trim()}));
+  const score=details.filter(x=>x.ok).length,grade=gradeFor(score,v.tasks.length);
+  DB.results[id]={score,grade,details,answers:d.answers.slice(),completedAt:Date.now(),durationSec:Math.round((Date.now()-d.startedAt)/1000),student:DB.student?{...DB.student}:null};
+  delete DB.drafts[id];persist();closeModal($('#confirmModal'));
+  openReview(id);renderCards();renderResult();
+  if(grade>=4)celebrate();
+  toast(storageOk?'Результат сохранён на устройстве':'Результат показан, но хранилище недоступно');
+}
+function celebrate(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const colors=['#ff3d8b','#2fd4ff','#c8ff4d','#ffb63d','#7b3dff','#3ddc97'];
+  for(let i=0;i<40;i++){const s=document.createElement('span');s.className='confetti';
+    s.style.left=Math.random()*100+'%';s.style.background=colors[i%colors.length];
+    s.style.animationDelay=(Math.random()*.5)+'s';s.style.transform=`rotate(${Math.random()*360}deg)`;
+    overlay.appendChild(s);setTimeout(()=>s.remove(),3100);}
+}
+
+/* ================= МОДАЛЬНЫЕ ОКНА ================= */
+let pendingAfterName=null;
+function openModal(el){el.hidden=false;requestAnimationFrame(()=>el.classList.add('show'));const f=el.querySelector('input,button');if(f)f.focus();}
+function closeModal(el){el.classList.remove('show');setTimeout(()=>el.hidden=true,200);}
+function ensureStudent(cb){if(DB.student&&DB.student.name){cb();}else{pendingAfterName=cb;openNameModal(false);}}
+function openNameModal(edit){
+  $('#fName').value=edit&&DB.student?DB.student.name:'';
+  $('#fClass').value=edit&&DB.student?(DB.student.klass||''):'';
+  $('#nameErr').textContent='';openModal($('#nameModal'));
+}
+function saveStudent(){
+  const name=$('#fName').value.trim(),klass=$('#fClass').value.trim();
+  if(name.length<2){$('#nameErr').textContent='Впишите имя (не короче двух символов).';$('#fName').focus();return;}
+  DB.student={name,klass};persist();closeModal($('#nameModal'));renderResult();
+  const cb=pendingAfterName;pendingAfterName=null;if(cb)cb();
+}
+function openVariant(id){if(DB.results[id])openReview(id);else ensureStudent(()=>openTest(id));}
+
+/* ================= РЕЗУЛЬТАТ ================= */
+function overallStats(){
+  const done=VARIANTS.filter(v=>DB.results[v.id]);
+  const score=done.reduce((s,v)=>s+DB.results[v.id].score,0);
+  const total=done.length*6;
+  return{done,score,total,grade:total?gradeFor(score,total):null,pct:total?Math.round(score/total*100):0};
+}
+function renderResult(){
+  const box=$('#resultBox');const st=overallStats();
+  const warn=storageOk?'':`<div class="warn-banner">Хранилище браузера недоступно: результат будет показан, но не сохранится после закрытия страницы.</div>`;
+  if(!DB.student&&!st.done.length){
+    box.innerHTML=warn+`<div class="empty"><div class="big">✍️</div><b>Пока ни один сборник не пройден</b><p>Выберите сборник, впишите имя — и результат появится здесь.</p><a class="btn btn-primary" href="#sborniki" style="margin-top:10px">К сборникам</a></div>`;
+    return;
+  }
+  const name=DB.student?.name||'Ученик',klass=DB.student?.klass||'';
+  const initials=name.split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const C=2*Math.PI*52;
+  const rows=VARIANTS.map(v=>{
+    const r=DB.results[v.id];
+    if(!r)return `<div class="row"><span class="rn">${v.id}</span><div class="rd"><b>Сборник ${v.id}</b>${v.from} → ${v.to} · не пройден</div><button class="btn btn-ghost row-open" data-id="${v.id}">Начать</button></div>`;
+    return `<div class="row"><span class="rn">${v.id}</span><span class="grade g${r.grade}">${r.grade}</span><div class="rd"><b>Сборник ${v.id} · ${r.score}/6</b>${v.from} → ${v.to} · ${fmtDate(r.completedAt)} · ${fmtTime(r.durationSec)}</div><button class="btn btn-ghost row-open" data-id="${v.id}">Разбор</button></div>`;
+  }).join('');
+  box.innerHTML=warn+`
+    <div class="student-row">
+      <span class="avatar">${esc(initials)}</span>
+      <div class="who"><b>${esc(name)}</b><span>${esc(klass)||'класс не указан'} · результат на этом устройстве</span></div>
+      <button class="btn btn-ghost" id="editStudent" style="margin-left:auto;padding:9px 16px;font-size:13px">Изменить данные</button>
+    </div>
+    ${st.done.length?`
+    <div class="overall">
+      <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+        <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff3d8b"/><stop offset=".5" stop-color="#ffb63d"/><stop offset="1" stop-color="#2fd4ff"/></linearGradient></defs>
+        <circle class="ring-bg" cx="60" cy="60" r="52"/>
+        <circle class="ring-fg" cx="60" cy="60" r="52" transform="rotate(-90 60 60)" style="stroke-dasharray:${C};stroke-dashoffset:${C*(1-st.pct/100)}"/>
+        <text class="ring-txt" x="60" y="68" text-anchor="middle">${st.pct}%</text>
+      </svg>
+      <div class="info"><b>Итог ${st.done.length===4?'по всем сборникам':'по пройденным сборникам'}: ${st.score} из ${st.total}</b>
+        <p>Пройдено ${st.done.length} из 4 · учебная отметка ${st.grade}</p></div>
+      <span class="grade g${st.grade}" style="width:56px;height:56px;font-size:30px;border-radius:16px">${st.grade}</span>
+    </div>`:''}
+    <div class="rows">${rows}</div>
+    <div class="actions">
+      <button class="btn btn-cyan" id="printBtn">Печать справки / PDF</button>
+      <button class="btn btn-ghost" id="copyBtn">Скопировать результат</button>
+    </div>
+    <div class="scale-note"><b>Шкала перевода.</b> Отметка построена по пропорциям официальной шкалы ОГЭ по русскому языку (максимум 37 баллов в 2026 году: 0–12 — «2», 13–22 — «3», 23–28 — «4», 29–37 — «5»). Для сборника из 6 заданий: 5–6 — «5», 4 — «4», 3 — «3», 0–2 — «2». В проекте КИМ-2027 максимум всей работы — 38 баллов; на экзамене шкала применяется ко всей работе, здесь отметка учебная, за сборник.</div>`;
+}
+
+/* ================= СПРАВКА ================= */
+function reportData(){
+  const st=overallStats();
+  return{st,name:DB.student?.name||'Ученик',klass:DB.student?.klass||'',date:fmtDateTime(Date.now())};
+}
+function buildPrint(){
+  const{st,name,klass,date}=reportData();
+  const rows=st.done.map(v=>{const r=DB.results[v.id];return `<tr><td>Сборник ${v.id}</td><td>${v.from} → ${v.to}</td><td>${r.score} / 6</td><td>${r.grade}</td><td>${fmtTime(r.durationSec)}</td><td>${fmtDateTime(r.completedAt)}</td></tr>`;}).join('');
+  $('#print-area').innerHTML=`
+    <h1>Справка о результате · задание 9 ОГЭ по русскому языку</h1>
+    <p><b>Ученик:</b> ${esc(name)}${klass?', '+esc(klass):''} · <b>Дата:</b> ${esc(date)}</p>
+    <p>Грамматическая синонимия словосочетаний. Каждый сборник — одна попытка, автопроверка по эталону.</p>
+    <h2>Результаты</h2>
+    <table><tr><th>Сборник</th><th>Направление</th><th>Балл</th><th>Отметка</th><th>Время</th><th>Дата</th></tr>${rows}</table>
+    <p><b>Итог по пройденным сборникам:</b> ${st.score} из ${st.total} (${st.pct}%) · учебная отметка ${st.grade??'—'}</p>
+    <p class="small">Шкала построена по пропорциям официальной шкалы перевода баллов ОГЭ по русскому языку (0–12 — «2», 13–22 — «3», 23–28 — «4», 29–37 — «5»; максимум 37 в 2026 году). В проекте КИМ-2027 максимум работы — 38 баллов. Отметка за сборник — учебная.</p>
+    <p class="small">Сборники составлены по проекту демоверсии, спецификации и кодификатора ОГЭ-2027 (ФИПИ): задание 9, код 4.28.1, требования 3.8 и 4.3. Материал для некоммерческого использования.</p>
+    <p class="sign">Подпись учителя ____________________</p>`;
+}
+function printReport(){
+  if(!overallStats().done.length){toast('Сначала пройдите хотя бы один сборник');return;}
+  buildPrint();window.print();
+}
+function reportText(){
+  const{st,name,klass,date}=reportData();
+  const lines=[`Справка · задание 9 ОГЭ (русский язык)`,`Ученик: ${name}${klass?', '+klass:''}`,`Дата: ${date}`,''];
+  st.done.forEach(v=>{const r=DB.results[v.id];lines.push(`Сборник ${v.id} (${v.from} → ${v.to}): ${r.score}/6, отметка ${r.grade}, время ${fmtTime(r.durationSec)}, ${fmtDateTime(r.completedAt)}`);});
+  lines.push('',`Итог: ${st.score} из ${st.total} (${st.pct}%), учебная отметка ${st.grade??'—'}`);
+  return lines.join('\n');
+}
+function copyReport(){
+  if(!overallStats().done.length){toast('Сначала пройдите хотя бы один сборник');return;}
+  const text=reportText();
+  const done=()=>toast('Результат скопирован');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));}
+  else fallbackCopy(text,done);
+}
+function fallbackCopy(text,done){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){toast('Не удалось скопировать');}ta.remove();}
+
+/* ================= СОБЫТИЯ ================= */
+$('#cards').addEventListener('click',e=>{const b=e.target.closest('.card-btn');if(b)openVariant(+b.dataset.id);});
+$('#resultBox').addEventListener('click',e=>{
+  if(e.target.closest('#printBtn'))printReport();
+  else if(e.target.closest('#copyBtn'))copyReport();
+  else if(e.target.closest('#editStudent')){pendingAfterName=null;openNameModal(true);}
+  else{const b=e.target.closest('.row-open');if(b)openVariant(+b.dataset.id);}
+});
+overlay.addEventListener('click',e=>{
+  if(e.target.closest('#closeOverlay')||e.target.closest('#reviewClose'))closeOverlay();
+  else if(e.target.closest('#submitBtn'))askSubmit();
+  else if(e.target.closest('#printOne'))printReport();
+});
+overlay.addEventListener('input',e=>{
+  const inp=e.target.closest('.answer');if(!inp||!current||current.mode!=='test')return;
+  DB.drafts[current.id].answers[+inp.dataset.i]=inp.value;updateProgress();
+  clearTimeout(saveT);saveT=setTimeout(()=>{persist();const h=$('#savehint');if(h)h.textContent='Черновик сохранён в '+new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});},400);
+});
+$('#nameSave').addEventListener('click',saveStudent);
+$('#nameCancel').addEventListener('click',()=>{pendingAfterName=null;closeModal($('#nameModal'));});
+$('#fName').addEventListener('keydown',e=>{if(e.key==='Enter')saveStudent();});
+$('#confirmOk').addEventListener('click',doSubmit);
+$('#confirmCancel').addEventListener('click',()=>closeModal($('#confirmModal')));
+$$('.tab').forEach(t=>t.addEventListener('click',()=>{
+  $$('.tab').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false');});
+  $$('.panel').forEach(p=>p.classList.remove('active'));
+  t.classList.add('active');t.setAttribute('aria-selected','true');
+  $('#tab-'+t.dataset.tab).classList.add('active');
+}));
+$('#menuBtn').addEventListener('click',()=>{const l=$('#navLinks');const open=l.classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',open);});
+$$('#navLinks a').forEach(a=>a.addEventListener('click',()=>$('#navLinks').classList.remove('open')));
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(!$('#confirmModal').hidden)closeModal($('#confirmModal'));
+    else if(!$('#nameModal').hidden){pendingAfterName=null;closeModal($('#nameModal'));}
+    else if(!overlay.hidden)closeOverlay();
+  }
+  if(e.key==='Tab'){
+    const top=!$('#confirmModal').hidden?$('#confirmModal'):!$('#nameModal').hidden?$('#nameModal'):!overlay.hidden?overlay:null;
+    if(!top)return;
+    const f=Array.from(top.querySelectorAll('button,input,[href],[tabindex]:not([tabindex="-1"])')).filter(el=>!el.disabled&&el.offsetParent!==null);
+    if(!f.length)return;
+    const first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  }
+});
+
+/* ================= НАБЛЮДАТЕЛИ И АНИМАЦИИ ================= */
+if('IntersectionObserver' in window){
+  const rev=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');rev.unobserve(x.target);}}),{threshold:.12});
+  $$('.reveal').forEach(el=>rev.observe(el));
+  const nav=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){$$('#navLinks a').forEach(a=>a.classList.toggle('active',a.dataset.nav===x.target.id));}}),{rootMargin:'-40% 0px -55% 0px'});
+  ['sborniki','theory','result'].forEach(id=>nav.observe(document.getElementById(id)));
+}else{$$('.reveal').forEach(el=>el.classList.add('in'));}
+
+const demo=[
+  {f:'река без имени',t:'безымянная река',a:'управление',b:'согласование'},
+  {f:'смотреть с грустью',t:'грустно смотреть',a:'управление',b:'примыкание'},
+  {f:'грустно смотреть',t:'смотреть с грустью',a:'примыкание',b:'управление'},
+  {f:'безымянная река',t:'река без имени',a:'согласование',b:'управление'}
+];
+let di=0;
+setInterval(()=>{
+  di=(di+1)%demo.length;const d=demo[di];
+  const els=[$('#demoFrom'),$('#demoTo'),$('#demoArrow')];
+  els.forEach(el=>el.classList.add('swap'));
+  setTimeout(()=>{
+    $('#demoFrom').textContent='«'+d.f+'»';$('#demoTo').textContent='«'+d.t+'»';
+    $('#demoA').textContent=d.a;$('#demoA').className='tb tb-'+typeClass(d.a);
+    $('#demoB').textContent=d.b;$('#demoB').className='tb tb-'+typeClass(d.b);
+    els.forEach(el=>el.classList.remove('swap'));
+  },300);
+},4200);
+
+/* ================= СТАРТ ================= */
+renderCards();renderResult();
+</script>
+</body>
+</html>
