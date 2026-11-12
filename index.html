@@ -83,6 +83,43 @@ footer{animation:fadeIn .9s ease .94s backwards}
     <p class="sub">Независимая страница наших интерактивных работ: читай текст, выполняй задания, получай разбор и оценку по нормам Минпросвещения.</p>
   </header>
 
+ <style>
+.search-wrap{margin:0 0 26px;text-align:center}
+.search-input{width:100%;max-width:520px;padding:13px 18px;border:1px solid var(--line);border-radius:999px;background:rgba(12,24,16,.6);color:var(--ink);font-family:var(--serif);font-size:16px;outline:none;transition:border-color .2s,box-shadow .2s}
+.search-input::placeholder{color:var(--ink-dim);font-style:italic}
+.search-input:focus{border-color:var(--line-gold);box-shadow:0 0 0 3px rgba(216,180,90,.12)}
+.search-count{margin:12px 0 0;font-size:13.5px;color:var(--ink-mut);font-style:italic;min-height:1.2em}
+.work.is-hidden{display:none}
+@media (max-width:620px){.search-input{font-size:15px}}
+</style>
+<div class="search-wrap">
+  <input type="search" id="searchBox" class="search-input" placeholder="Поиск по витрине: автор, класс, задание…" autocomplete="off" aria-label="Поиск по витрине">
+  <p class="search-count" id="searchCount"></p>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var box=document.getElementById("searchBox");
+  var count=document.getElementById("searchCount");
+  var works=Array.prototype.slice.call(document.querySelectorAll(".work:not(.soon)"));
+  function norm(s){return (s||"").toLowerCase().replace(/ё/g,"е").replace(/\s+/g," ").trim();}
+  function render(){
+    var q=norm(box.value);
+    var shown=0;
+    works.forEach(function(w){
+      if(!q){w.classList.remove("is-hidden");shown++;return;}
+      var hit=norm(w.textContent).indexOf(q)>=0;
+      w.classList.toggle("is-hidden",!hit);
+      if(hit)shown++;
+    });
+    if(!q){count.textContent="Всего работ: "+works.length+" · ищите по автору, классу или заданию";}
+    else if(shown===0){count.textContent="Ничего не найдено · попробуйте другое слово";}
+    else{count.textContent="Найдено: "+shown+" из "+works.length;}
+  }
+  box.addEventListener("input",render);
+  render();
+});
+</script>
+
   <div class="grid">
     <article class="work" data-roman="I">
       <span class="cls">6 класс</span>
