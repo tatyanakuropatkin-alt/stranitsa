@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="night" data-density="normal" data-hints="on" data-guides="on" data-font="serif">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тарас Бульба · Развёрнутый ответ на проблемный вопрос · 7 класс</title>
+<meta name="description" content="Интерактивный лист урока развития речи: проблемный вопрос по повести Н. В. Гоголя «Тарас Бульба», банк сверенных цитат, клише, конструктор ответа и проверка по критериям.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ПАЛИТРА: ночь над степью перед боем.
+   Червонный (казакин), червонное золото, степная зелень,
+   холодное небо, фиолет — слой толкования. Лист — пергамент.
+   ============================================================ */
+:root{
+  --ink-900:#0D0A08; --ink-850:#120E0B; --ink-800:#171210; --ink-750:#1E1815;
+  --ink-700:#251E19; --ink-650:#2E2620; --ink-600:#392F27;
+  --text:#F1E6D5; --text-dim:#BCAA93; --text-mute:#8D7C69;
+  --line:rgba(240,190,85,.16); --line-2:rgba(240,190,85,.30); --line-3:rgba(240,190,85,.46);
+
+  --c-red:#E0344B; --c-red-deep:#A81730; --c-red-ink:#FF8090;
+  --c-gold:#F0BE55; --c-gold-deep:#C9922C; --c-gold-ink:#F3C871;
+  --c-green:#4FBE87; --c-green-ink:#6FD8A2;
+  --c-blue:#5AA0FF; --c-blue-ink:#8FC0FF;
+  --c-violet:#A87BFF; --c-violet-ink:#C4A5FF;
+  --c-amber:#FFA83A; --c-amber-ink:#FFC271;
+
+  --paper:#F8F0DF; --paper-2:#F2E7D2; --paper-ink:#241B12; --paper-dim:#6B5B48; --paper-line:#D9C7A6;
+
+  --serif:"Cormorant Garamond",Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+
+  --read-size:17px; --gap:20px; --pad:22px; --radius:18px;
+  --rail:296px; --topbar:64px; --subnav:52px; --head:116px;
+  --shadow:0 18px 46px rgba(0,0,0,.46);
+  --ease:cubic-bezier(.22,.75,.24,1);
+}
+html[data-theme="paper"]{
+  --ink-900:#EDE3D1; --ink-850:#F3EADA; --ink-800:#F8F1E3; --ink-750:#FFFAF0;
+  --ink-700:#FFFCF5; --ink-650:#F5EBD9; --ink-600:#EADFC9;
+  --text:#241B12; --text-dim:#5D4E3E; --text-mute:#7C6B57;
+  --line:rgba(90,60,25,.16); --line-2:rgba(90,60,25,.28); --line-3:rgba(90,60,25,.42);
+  --c-red-ink:#B01B31; --c-gold-ink:#8A6206; --c-green-ink:#1E7A4E;
+  --c-blue-ink:#1F5FBF; --c-violet-ink:#6B3FC4; --c-amber-ink:#9A5B00;
+  --shadow:0 16px 38px rgba(90,60,25,.16);
+}
+html[data-density="compact"]{--gap:13px;--pad:16px;--radius:14px}
+html[data-density="roomy"]{--gap:30px;--pad:30px;--radius:22px}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--ink-900); color:var(--text);
+  font-family:var(--sans); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+/* ---------- фон: слои, зерно, отсветы ---------- */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bg-grad{position:absolute;inset:0;
+  background:
+    radial-gradient(1100px 620px at 8% -8%, rgba(90,160,255,.16), transparent 62%),
+    radial-gradient(900px 560px at 96% 4%, rgba(240,190,85,.15), transparent 60%),
+    radial-gradient(1200px 760px at 60% 108%, rgba(224,52,75,.20), transparent 64%),
+    linear-gradient(168deg,var(--ink-900),var(--ink-850) 42%,var(--ink-800));
+}
+html[data-theme="paper"] .bg-grad{
+  background:
+    radial-gradient(1000px 600px at 6% -10%, rgba(90,160,255,.16), transparent 60%),
+    radial-gradient(900px 520px at 98% 2%, rgba(240,190,85,.28), transparent 58%),
+    radial-gradient(1100px 700px at 55% 110%, rgba(224,52,75,.13), transparent 62%),
+    linear-gradient(168deg,#EFE5D3,#F6EEDF 45%,#F1E6D2);
+}
+.bg-aurora{position:absolute;inset:-20%;opacity:.5;
+  background:conic-gradient(from 210deg at 50% 50%, rgba(224,52,75,.12), rgba(240,190,85,.10), rgba(90,160,255,.10), rgba(168,123,255,.10), rgba(224,52,75,.12));
+  filter:blur(90px); animation:spin 64s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.bg-grain{position:absolute;inset:0;opacity:.055;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+#embers{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55}
+html[data-theme="paper"] #embers{opacity:.3}
+
+/* ---------- каркас ---------- */
+.shell{position:relative;z-index:1;display:grid;grid-template-columns:var(--rail) minmax(0,1fr)}
+.content{min-width:0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,3.2vw,40px)}
+
+/* ---------- скроллбары в стиле листа ---------- */
+*{scrollbar-width:thin;scrollbar-color:var(--c-gold-deep) transparent}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:rgba(0,0,0,.18);border-radius:20px}
+html[data-theme="paper"] ::-webkit-scrollbar-track{background:rgba(120,85,40,.10)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--c-gold-deep),var(--c-red-deep));border-radius:20px;border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--c-gold),var(--c-red));background-clip:padding-box}
+
+/* ---------- пульт ---------- */
+.rail{position:sticky;top:0;height:100dvh;overflow-y:auto;overscroll-behavior:contain;
+  background:linear-gradient(180deg,rgba(23,18,16,.94),rgba(13,10,8,.97));
+  border-right:1px solid var(--line);backdrop-filter:blur(14px);padding:18px 16px 30px;z-index:60}
+html[data-theme="paper"] .rail{background:linear-gradient(180deg,rgba(255,252,245,.96),rgba(243,234,218,.97))}
+.rail-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.crest{width:38px;height:38px;flex:none;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--c-red-deep),var(--c-gold-deep));box-shadow:0 6px 18px rgba(168,23,48,.4)}
+.rail-title{font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-gold-ink)}
+.rail-sub{font-size:11.5px;color:var(--text-mute);letter-spacing:.04em}
+.rail-close{display:none;margin-left:auto;background:none;border:1px solid var(--line);color:var(--text-dim);
+  width:32px;height:32px;border-radius:9px;cursor:pointer;font-size:16px}
+
+.panel{background:var(--ink-750);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:14px}
+.panel-t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-mute);font-weight:700;margin:0 0 10px}
+
+.clock{display:flex;align-items:baseline;gap:8px}
+.clock-d{font-family:var(--sans);font-weight:800;font-size:38px;line-height:1;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;color:var(--text)}
+.clock-l{font-size:11.5px;color:var(--text-mute)}
+.clock.warn .clock-d{color:var(--c-amber-ink)} .clock.done .clock-d{color:var(--c-red-ink)}
+.track{height:7px;border-radius:20px;background:rgba(0,0,0,.32);overflow:hidden;margin:11px 0 12px;border:1px solid var(--line)}
+html[data-theme="paper"] .track{background:rgba(120,85,40,.12)}
+.track i{display:block;height:100%;width:0%;border-radius:20px;background:linear-gradient(90deg,var(--c-gold),var(--c-red));transition:width .4s var(--ease)}
+.clock-btns{display:flex;gap:7px}
+.stages{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:5px}
+.stage{display:flex;gap:9px;align-items:center;padding:7px 9px;border-radius:10px;cursor:pointer;
+  border:1px solid transparent;font-size:12.5px;color:var(--text-dim);transition:.22s var(--ease);background:none;width:100%;text-align:left;font-family:inherit}
+.stage:hover{background:var(--ink-650);color:var(--text)}
+.stage b{width:19px;height:19px;flex:none;border-radius:6px;display:grid;place-items:center;font-size:10.5px;
+  background:var(--ink-600);color:var(--text-mute);font-weight:800}
+.stage span{flex:1;min-width:0}
+.stage em{font-style:normal;font-size:11px;color:var(--text-mute);font-variant-numeric:tabular-nums}
+.stage.active{background:linear-gradient(90deg,rgba(224,52,75,.20),rgba(240,190,85,.07));border-color:var(--line-2);color:var(--text)}
+.stage.active b{background:linear-gradient(140deg,var(--c-red),var(--c-gold-deep));color:#fff}
+.stage.passed{opacity:.55}
+
+.ctrl{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0;font-size:13px}
+.ctrl+.ctrl{border-top:1px dashed var(--line)}
+.ctrl label{color:var(--text-dim);flex:1;min-width:0}
+.seg{display:flex;background:var(--ink-650);border:1px solid var(--line);border-radius:9px;padding:2px;gap:2px}
+.seg button{border:0;background:none;color:var(--text-mute);font:inherit;font-size:11.5px;font-weight:700;
+  padding:4px 9px;border-radius:7px;cursor:pointer;transition:.2s}
+.seg button.on{background:linear-gradient(140deg,var(--c-red-deep),var(--c-gold-deep));color:#fff}
+.sw{width:42px;height:23px;border-radius:20px;border:1px solid var(--line-2);background:var(--ink-650);position:relative;cursor:pointer;flex:none;transition:.24s var(--ease)}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;
+  background:var(--text-mute);transition:.24s var(--ease)}
+.sw[aria-checked="true"]{background:linear-gradient(90deg,var(--c-red-deep),var(--c-gold-deep));border-color:transparent}
+.sw[aria-checked="true"]::after{left:21px;background:#fff}
+select.mini,input[type=range]{font:inherit}
+select.mini{background:var(--ink-650);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:5px 8px;font-size:12px;cursor:pointer;max-width:130px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:112px;height:5px;border-radius:20px;background:var(--ink-600);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;
+  background:linear-gradient(140deg,var(--c-gold),var(--c-red));cursor:pointer;border:2px solid var(--ink-800);box-shadow:0 2px 8px rgba(0,0,0,.5)}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border:2px solid var(--ink-800);border-radius:50%;background:var(--c-gold);cursor:pointer}
+
+/* ---------- кнопки ---------- */
+.btn{display:inline-flex;align-items:center justify-content:center;gap:8px;font:inherit;font-weight:700;font-size:13.5px;
+  padding:10px 16px;border-radius:11px;border:1px solid var(--line-2);background:var(--ink-700);color:var(--text);
+  cursor:pointer;transition:.22s var(--ease);text-decoration:none;justify-content:center;line-height:1.2}
+.btn:hover{border-color:var(--line-3);transform:translateY(-1px);background:var(--ink-650)}
+.btn:active{transform:translateY(0)}
+.btn:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--c-gold);outline-offset:2px}
+.btn-primary{background:linear-gradient(135deg,#B81B33,#D93A2E 62%,var(--c-gold-deep));border-color:transparent;color:#FFF6EA;
+  box-shadow:0 10px 26px rgba(184,27,51,.34)}
+.btn-primary:hover{background:linear-gradient(135deg,#CE2139,#E85A34 62%,var(--c-gold));color:#fff}
+.btn-gold{background:linear-gradient(135deg,var(--c-gold-deep),var(--c-gold));border-color:transparent;color:#241B12}
+.btn-gold:hover{color:#1a130c;filter:brightness(1.07)}
+.btn-ghost{background:transparent}
+.btn-sm{padding:7px 11px;font-size:12px;border-radius:9px}
+.btn-icon{width:38px;height:38px;padding:0;flex:none}
+.btn[disabled]{opacity:.42;cursor:not-allowed;transform:none}
+.btn-row{display:flex;flex-wrap:wrap;gap:9px}
+
+/* ---------- шапка ---------- */
+.topbar{position:sticky;top:0;z-index:50;height:var(--topbar);display:flex;align-items:center;gap:12px;
+  padding:0 clamp(14px,3vw,32px);background:rgba(13,10,8,.82);backdrop-filter:blur(16px) saturate(1.3);
+  border-bottom:1px solid var(--line)}
+html[data-theme="paper"] .topbar{background:rgba(250,244,233,.86)}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand-t{font-family:var(--serif);font-weight:700;font-size:19px;line-height:1.1;white-space:nowrap}
+.brand-s{font-size:11px;color:var(--text-mute);letter-spacing:.06em;white-space:nowrap}
+.top-sp{flex:1}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:10px;border:1px solid var(--line);
+  background:var(--ink-750);font-size:12.5px;font-weight:700;color:var(--text-dim);cursor:pointer;font-family:inherit;transition:.2s}
+.chip:hover{border-color:var(--line-3);color:var(--text)}
+.chip b{color:var(--c-gold-ink);font-variant-numeric:tabular-nums}
+.chip.live b{color:var(--c-green-ink)}
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--c-red);box-shadow:0 0 0 0 rgba(224,52,75,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(224,52,75,0)}100%{box-shadow:0 0 0 0 rgba(224,52,75,0)}}
+.scroll-line{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:linear-gradient(90deg,var(--c-gold),var(--c-red),var(--c-violet))}
+.rail-toggle{display:none}
+
+.subnav{position:sticky;top:var(--topbar);z-index:45;background:rgba(18,14,11,.86);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);overflow-x:auto;overflow-y:hidden}
+html[data-theme="paper"] .subnav{background:rgba(247,240,227,.9)}
+.subnav-in{display:flex;gap:4px;padding:8px clamp(14px,3vw,32px);min-width:max-content}
+.nlink{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:9px;font-size:12.5px;font-weight:700;
+  color:var(--text-mute);text-decoration:none;border:1px solid transparent;white-space:nowrap;transition:.2s var(--ease)}
+.nlink i{font-style:normal;font-size:10.5px;opacity:.7;font-variant-numeric:tabular-nums}
+.nlink:hover{color:var(--text);background:var(--ink-700)}
+.nlink.on{color:var(--text);background:linear-gradient(120deg,rgba(224,52,75,.22),rgba(240,190,85,.12));border-color:var(--line-2)}
+.nlink.locked{opacity:.55}
+
+/* ---------- секции ---------- */
+section{padding:clamp(38px,5.4vw,74px) 0;scroll-margin-top:calc(var(--head) + 18px);position:relative}
+.sec-head{margin-bottom:var(--gap)}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--c-gold-ink);margin-bottom:12px}
+.kicker::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,var(--c-red),var(--c-gold))}
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(27px,3.5vw,42px);line-height:1.12;margin:0 0 10px;letter-spacing:-.01em}
+h3{font-family:var(--serif);font-weight:700;font-size:23px;margin:0 0 8px;line-height:1.2}
+h4{font-size:14px;font-weight:800;margin:0 0 6px;letter-spacing:.01em}
+p{margin:0 0 12px}
+.lead{font-size:17px;color:var(--text-dim);max-width:74ch}
+.dim{color:var(--text-dim)} .mute{color:var(--text-mute)}
+.ornament{height:16px;background-repeat:repeat-x;background-position:center;opacity:.85;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16' viewBox='0 0 48 16'%3E%3Cpath d='M24 1 46 8 24 15 2 8Z' fill='none' stroke='%23E7B24B' stroke-opacity='.5' stroke-width='1.1'/%3E%3Cpath d='M24 5 27 8 24 11 21 8Z' fill='%23D6273C' fill-opacity='.7'/%3E%3Cpath d='M0 8h2M46 8h2' stroke='%23E7B24B' stroke-opacity='.35'/%3E%3C/svg%3E")}
+
+.card{background:linear-gradient(160deg,var(--ink-750),var(--ink-800));border:1px solid var(--line);
+  border-radius:var(--radius);padding:var(--pad);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent)}
+.grid{display:grid;gap:var(--gap)}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- герой ---------- */
+.hero{padding-top:clamp(30px,4vw,54px)}
+.qbox{position:relative;border-radius:26px;padding:clamp(24px,3.6vw,44px);overflow:hidden;
+  background:linear-gradient(150deg,rgba(168,23,48,.30),rgba(23,18,16,.9) 46%,rgba(201,146,44,.20));
+  border:1px solid var(--line-2);box-shadow:0 30px 70px rgba(0,0,0,.5)}
+html[data-theme="paper"] .qbox{background:linear-gradient(150deg,rgba(224,52,75,.14),rgba(255,252,245,.94) 46%,rgba(240,190,85,.24))}
+.qbox::after{content:"";position:absolute;right:-90px;top:-90px;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(240,190,85,.28),transparent 66%);filter:blur(12px)}
+.qtag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  padding:6px 12px;border-radius:20px;border:1px solid var(--line-2);background:rgba(0,0,0,.24);color:var(--c-gold-ink);margin-bottom:16px}
+html[data-theme="paper"] .qtag{background:rgba(255,255,255,.6)}
+.qtext{font-family:var(--serif);font-weight:700;font-size:clamp(28px,4.6vw,54px);line-height:1.08;margin:0 0 18px;letter-spacing:-.015em;position:relative}
+.qtext .red{color:var(--c-red-ink)} .qtext .gold{color:var(--c-gold-ink)}
+.qmeta{display:flex;flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--text-dim)}
+.qmeta span{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:9px;background:rgba(0,0,0,.22);border:1px solid var(--line)}
+html[data-theme="paper"] .qmeta span{background:rgba(255,255,255,.55)}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.cmp{border-radius:16px;padding:18px;border:1px solid var(--line);background:var(--ink-750)}
+.cmp.bad{border-left:3px solid var(--c-red)} .cmp.good{border-left:3px solid var(--c-green)}
+.cmp-l{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px}
+.cmp.bad .cmp-l{color:var(--c-red-ink)} .cmp.good .cmp-l{color:var(--c-green-ink)}
+.cmp q{font-family:var(--serif);font-size:19px;line-height:1.4;quotes:"«" "»";color:var(--text)}
+
+.note{display:flex;gap:13px;padding:16px 18px;border-radius:14px;border:1px solid var(--line-2);
+  background:linear-gradient(120deg,rgba(90,160,255,.13),rgba(168,123,255,.09));font-size:14.5px;color:var(--text-dim)}
+.note b{color:var(--text)}
+.note .ic{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:rgba(90,160,255,.2);color:var(--c-blue-ink);font-weight:800;font-size:13px}
+
+/* ---------- позиции ---------- */
+.pos{cursor:pointer;text-align:left;font:inherit;color:inherit;border-radius:var(--radius);padding:var(--pad);
+  border:1px solid var(--line);background:linear-gradient(160deg,var(--ink-750),var(--ink-800));
+  transition:.28s var(--ease);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:10px}
+.pos:hover{transform:translateY(-3px);border-color:var(--line-3)}
+.pos .letter{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-family:var(--serif);
+  font-size:24px;font-weight:700;color:#fff}
+.pos[data-p="a"] .letter{background:linear-gradient(140deg,var(--c-red-deep),var(--c-red))}
+.pos[data-p="b"] .letter{background:linear-gradient(140deg,var(--c-gold-deep),var(--c-gold));color:#241B12}
+.pos[data-p="c"] .letter{background:linear-gradient(140deg,#6B3FC4,var(--c-violet))}
+.pos h3{margin:0;font-size:21px}
+.pos p{margin:0;font-size:14px;color:var(--text-dim);flex:1}
+.pos .pick{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute);display:flex;align-items:center;gap:7px}
+.pos.on{border-color:var(--line-3);box-shadow:0 0 0 1px var(--line-3),0 22px 50px rgba(0,0,0,.44)}
+.pos.on::after{content:"";position:absolute;inset:auto 0 0;height:3px;background:linear-gradient(90deg,var(--c-red),var(--c-gold))}
+.pos.on .pick{color:var(--c-green-ink)}
+.pos[data-p="a"].on{background:linear-gradient(160deg,rgba(168,23,48,.24),var(--ink-800))}
+.pos[data-p="b"].on{background:linear-gradient(160deg,rgba(201,146,44,.22),var(--ink-800))}
+.pos[data-p="c"].on{background:linear-gradient(160deg,rgba(107,63,196,.24),var(--ink-800))}
+
+/* ---------- конструктор ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:s}
+.step{background:var(--ink-750);border:1px solid var(--line);border-radius:15px;padding:16px;position:relative}
+.step b{display:block;font-family:var(--serif);font-size:34px;line-height:1;color:transparent;-webkit-text-stroke:1px var(--c-gold-deep);margin-bottom:8px}
+.step h4{font-size:14.5px} .step p{font-size:13px;color:var(--text-dim);margin:0}
+.step::after{content:"→";position:absolute;right:-11px;top:50%;transform:translateY(-50%);color:var(--c-gold-deep);font-size:16px;z-index:2}
+.step:last-child::after{display:none}
+
+.model{border-radius:var(--radius);border:1px solid var(--line-2);overflow:hidden;background:var(--ink-750)}
+.model-bar{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;background:none;border:0;width:100%;
+  font:inherit;color:var(--text);text-align:left}
+.model-bar h3{margin:0;flex:1;font-size:20px}
+.model-body{display:none;padding:0 18px 18px}
+.model.open .model-body{display:block}
+.model.open .chev{transform:rotate(180deg)}
+.chev{transition:.3s var(--ease);color:var(--c-gold-ink)}
+.mpart{border-left:2px solid var(--line-2);padding:4px 0 4px 15px;margin-bottom:13px;position:relative}
+.mpart .tag{font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--text-mute);display:block;margin-bottom:4px}
+.mpart p{font-family:var(--serif);font-size:19.5px;line-height:1.5;margin:0;color:var(--text)}
+.mpart.t{border-color:var(--c-red)} .mpart.t .tag{color:var(--c-red-ink)}
+.mpart.a1{border-color:var(--c-gold)} .mpart.a1 .tag{color:var(--c-gold-ink)}
+.mpart.a2{border-color:var(--c-green)} .mpart.a2 .tag{color:var(--c-green-ink)}
+.mpart.c{border-color:var(--c-blue)} .mpart.c .tag{color:var(--c-blue-ink)}
+.mpart.k{border-color:var(--c-violet)} .mpart.k .tag{color:var(--c-violet-ink)}
+
+.traps{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.trap{display:flex;gap:11px;padding:13px 15px;border-radius:13px;background:var(--ink-750);border:1px solid var(--line);font-size:13.5px;color:var(--text-dim)}
+.trap .x{flex:none;width:22px;height:22px;border-radius:7px;background:rgba(224,52,75,.18);color:var(--c-red-ink);display:grid;place-items:center;font-weight:800;font-size:12px}
+
+.rules{display:grid;gap:9px}
+.rule{font-family:var(--serif);font-size:19px;padding:11px 15px;border-radius:11px;background:var(--ink-700);border:1px dashed var(--line-2)}
+
+/* ---------- банк цитат ---------- */
+.bank-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:var(--gap)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.f{border:1px solid var(--line);background:var(--ink-750);color:var(--text-dim);font:inherit;font-size:12.5px;font-weight:700;
+  padding:7px 13px;border-radius:20px;cursor:pointer;transition:.2s}
+.f:hover{color:var(--text);border-color:var(--line-3)}
+.f.on{background:linear-gradient(135deg,var(--c-red-deep),var(--c-gold-deep));color:#fff;border-color:transparent}
+.search{flex:1;min-width:180px;display:flex;align-items:center;gap:9px;background:var(--ink-750);border:1px solid var(--line);
+  border-radius:11px;padding:8px 13px}
+.search input{flex:1;background:none;border:0;color:var(--text);font:inherit;font-size:13.5px;outline:none;min-width:0}
+.search input::placeholder{color:var(--text-mute)}
+.target-sel{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-mute)}
+
+.quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)}
+.q{background:linear-gradient(160deg,var(--ink-750),var(--ink-800));border:1px solid var(--line);border-radius:16px;
+  padding:18px 18px 15px;position:relative;overflow:hidden;transition:.26s var(--ease);display:flex;flex-direction:column;gap:12px}
+.q:hover{transform:translateY(-2px);border-color:var(--line-3);box-shadow:0 18px 40px rgba(0,0,0,.4)}
+.q::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+.q[data-p="a"]::before{background:linear-gradient(180deg,var(--c-red),var(--c-red-deep))}
+.q[data-p="b"]::before{background:linear-gradient(180deg,var(--c-gold),var(--c-gold-deep))}
+.q[data-p="c"]::before{background:linear-gradient(180deg,var(--c-violet),#6B3FC4)}
+.q[data-p="x"]::before{background:linear-gradient(180deg,var(--c-blue),#2C63B8)}
+.q-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.medal{width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;font-size:11px;font-weight:800;
+  background:var(--ink-600);color:var(--c-gold-ink);border:1px solid var(--line);letter-spacing:.02em}
+.who{font-size:12.5px;font-weight:700;color:var(--text)}
+.where{font-size:11.5px;color:var(--text-mute)}
+.q-text{font-family:var(--serif);font-size:var(--read-size);line-height:1.45;color:var(--text);flex:1;
+  padding-left:2px;border-left:none}
+.q-text::before{content:"«";color:var(--c-gold-deep);margin-right:1px}
+.q-text::after{content:"»";color:var(--c-gold-deep);margin-left:1px}
+.q-note{font-size:12px;color:var(--text-dim);padding:9px 11px;border-radius:10px;background:rgba(90,160,255,.10);border:1px solid rgba(90,160,255,.22)}
+.q-note.warn{background:rgba(255,168,58,.10);border-color:rgba(255,168,58,.28);color:var(--c-amber-ink)}
+.q-acts{display:flex;gap:7px;flex-wrap:wrap}
+.used-badge{position:absolute;top:12px;right:12px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--c-green-ink);background:rgba(79,190,135,.14);border:1px solid rgba(79,190,135,.3);padding:3px 8px;border-radius:20px;display:none}
+.q.used .used-badge{display:block}
+
+/* ---------- клише ---------- */
+.cliches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
+.cl-group{background:var(--ink-750);border:1px solid var(--line);border-radius:16px;padding:16px}
+.cl-group h4{display:flex;align-items:center;gap:8px;margin-bottom:11px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--c-gold-ink)}
+.cl{display:block;width:100%;text-align:left;font:inherit;font-size:13.5px;color:var(--text-dim);background:var(--ink-700);
+  border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:7px;cursor:pointer;transition:.2s var(--ease);line-height:1.4}
+.cl:hover{color:var(--text);border-color:var(--line-3);transform:translateX(3px);background:var(--ink-650)}
+.cl:last-child{margin-bottom:0}
+
+/* ---------- редактор ---------- */
+.work{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:var(--gap);align-items:start}
+.editor{display:flex;flex-direction:column;gap:14px}
+.block{background:var(--paper);border-radius:16px;border:1px solid var(--paper-line);overflow:hidden;
+  box-shadow:0 16px 40px rgba(0,0,0,.34);transition:.24s var(--ease)}
+.block.focus{box-shadow:0 0 0 2px var(--c-gold-deep),0 20px 46px rgba(0,0,0,.42)}
+.b-head{display:flex;align-items:center;gap:10px;padding:11px 15px;background:var(--paper-2);border-bottom:1px solid var(--paper-line);flex-wrap:wrap}
+.b-num{width:24px;height:24px;flex:none;border-radius:7px;display:grid;place-items:center;font-size:11.5px;font-weight:800;color:#fff;background:var(--c-red-deep)}
+.block[data-b="arg1"] .b-num{background:var(--c-gold-deep)}
+.block[data-b="arg2"] .b-num{background:#2E8B5C}
+.block[data-b="counter"] .b-num{background:#2C63B8}
+.block[data-b="conclusion"] .b-num{background:#6B3FC4}
+.b-title{font-size:13.5px;font-weight:800;color:var(--paper-ink)}
+.b-count{margin-left:auto;font-size:11.5px;color:var(--paper-dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+.b-tools{display:flex;gap:5px}
+.tool{border:1px solid var(--paper-line);background:#fff;color:var(--paper-dim);font:inherit;font-size:11.5px;font-weight:700;
+  padding:5px 9px;border-radius:8px;cursor:pointer;transition:.2s}
+.tool:hover{color:var(--paper-ink);border-color:var(--c-gold-deep);background:#FFF8E8}
+.b-hint{padding:9px 15px;font-size:12.5px;color:var(--paper-dim);background:rgba(217,199,166,.22);border-bottom:1px solid var(--paper-line)}
+html[data-hints="off"] .b-hint{display:none}
+.block textarea{display:block;width:100%;border:0;outline:none;resize:none;background:transparent;color:var(--paper-ink);
+  padding:15px;font-size:var(--read-size);line-height:1.62;min-height:88px;overflow:hidden}
+html[data-font="serif"] .block textarea{font-family:var(--serif);font-size:calc(var(--read-size) + 2px)}
+html[data-font="sans"] .block textarea{font-family:var(--sans)}
+.block textarea::placeholder{color:#A08F79}
+.b-foot{padding:0 15px 12px;display:flex;gap:6px;flex-wrap:wrap}
+.qtag-mini{font-size:11px;padding:3px 8px;border-radius:20px;border:1px solid var(--paper-line);color:var(--paper-dim);background:#fff}
+.qtag-mini.ok{color:#1E7A4E;border-color:#9FD9BC;background:#F0FBF5}
+.qtag-mini.warn{color:#9A5B00;border-color:#F0CE93;background:#FFF8EC}
+
+.side{position:sticky;top:calc(var(--head) + 14px);display:flex;flex-direction:column;gap:14px}
+.score-card{display:flex;gap:15px;align-items:center;padding:16px;border-radius:16px;border:1px solid var(--line-2);
+  background:linear-gradient(150deg,rgba(201,146,44,.16),var(--ink-750))}
+.ring-wrap{position:relative;width:92px;height:92px;flex:none}
+.ring{width:92px;height:92px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:9;stroke-linecap:round}
+.ring .bgc{stroke:rgba(0,0,0,.3)}
+html[data-theme="paper"] .ring .bgc{stroke:rgba(120,85,40,.16)}
+.ring .fg{stroke:url(#ringGrad);stroke-dasharray:326.7;stroke-dashoffset:326.7;transition:stroke-dashoffset .7s var(--ease)}
+.ring-txt{position:absolute;inset:0;display:grid;place-items:center;text-align:center;line-height:1}
+.ring-txt b{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}
+.ring-txt span{font-size:10.5px;color:var(--text-mute);display:block;margin-top:3px}
+.mark{font-family:var(--serif);font-size:40px;font-weight:700;line-height:1;color:var(--c-gold-ink)}
+.mark-l{font-size:11.5px;color:var(--text-mute)}
+
+.meter{margin-top:4px}
+.meter-track{position:relative;height:9px;border-radius:20px;background:rgba(0,0,0,.3);border:1px solid var(--line);overflow:hidden}
+html[data-theme="paper"] .meter-track{background:rgba(120,85,40,.12)}
+.meter-zone{position:absolute;top:0;bottom:0;left:50%;width:14.3%;background:rgba(79,190,135,.35)}
+.meter-fill{position:absolute;top:0;bottom:0;left:0;width:0;background:linear-gradient(90deg,var(--c-gold),var(--c-red));transition:width .5s var(--ease);opacity:.85}
+.meter-l{display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-mute);margin-top:6px}
+
+.checks{display:flex;flex-direction:column;gap:7px}
+.chk{display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--text-dim);line-height:1.45}
+.chk .dot{flex:none;width:17px;height:17px;border-radius:6px;display:grid;place-items:center;font-size:10px;font-weight:800;margin-top:1px;
+  background:var(--ink-600);color:var(--text-mute)}
+.chk.ok .dot{background:rgba(79,190,135,.2);color:var(--c-green-ink)}
+.chk.no .dot{background:rgba(224,52,75,.18);color:var(--c-red-ink)}
+.chk.warn .dot{background:rgba(255,168,58,.18);color:var(--c-amber-ink)}
+
+.qcheck{display:flex;flex-direction:column;gap:8px;max-height:230px;overflow-y:auto;padding-right:4px}
+.qc{font-size:12px;padding:9px 11px;border-radius:10px;background:var(--ink-700);border:1px solid var(--line);color:var(--text-dim)}
+.qc b{display:block;font-family:var(--serif);font-size:15px;color:var(--text);font-weight:600;margin-bottom:4px;line-height:1.3}
+.qc.ok{border-color:rgba(79,190,135,.3)} .qc.ok .st{color:var(--c-green-ink)}
+.qc.part{border-color:rgba(255,168,58,.3)} .qc.part .st{color:var(--c-amber-ink)}
+.qc.unk .st{color:var(--text-mute)}
+.st{font-size:11px;font-weight:700}
+
+/* ---------- превью ---------- */
+.paper-view{background:var(--paper);color:var(--paper-ink);border-radius:18px;padding:clamp(22px,3vw,38px);
+  border:1px solid var(--paper-line);box-shadow:0 24px 60px rgba(0,0,0,.42);position:relative}
+.paper-view::before{content:"";position:absolute;inset:9px;border:1px solid rgba(217,199,166,.7);border-radius:12px;pointer-events:none}
+html[data-guides="off"] .paper-view::before{display:none}
+.pv-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--paper-line)}
+.pv-head h3{color:var(--paper-ink);margin:0;flex:1;font-size:22px}
+.pv-meta{font-size:11.5px;color:var(--paper-dim)}
+.pv-body{font-family:var(--serif);font-size:calc(var(--read-size) + 2px);line-height:1.62}
+.pv-body p{margin:0 0 12px;text-indent:1.4em}
+.pv-body p:first-child{text-indent:0}
+.pv-body mark{background:rgba(240,190,85,.34);color:inherit;padding:0 2px;border-radius:3px}
+html[data-guides="off"] .pv-body mark{background:none}
+.pv-empty{color:#9C8B75;font-style:italic;text-indent:0!important}
+.pv-label{display:inline-block;font-family:var(--sans);font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--paper-dim);border:1px solid var(--paper-line);border-radius:5px;padding:1px 6px;margin-right:8px;vertical-align:2px}
+html[data-guides="off"] .pv-label{display:none}
+
+/* ---------- критерии ---------- */
+.crit-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.crit-table th{text-align:left;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mute);
+  padding:0 12px 10px;font-weight:800;border-bottom:1px solid var(--line-2)}
+.crit-table td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.crit-table tr:last-child td{border-bottom:0}
+.crit-name{font-weight:700;color:var(--text);display:block;margin-bottom:3px}
+.crit-why{font-size:12.5px;color:var(--text-dim)}
+.crit-max{color:var(--text-mute);font-variant-numeric:tabular-nums;white-space:nowrap}
+.sc{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;font-weight:800;font-size:15px;
+  background:var(--ink-650);color:var(--text-mute);border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.sc.full{background:linear-gradient(140deg,rgba(79,190,135,.24),rgba(79,190,135,.1));color:var(--c-green-ink);border-color:rgba(79,190,135,.36)}
+.sc.part{background:rgba(255,168,58,.16);color:var(--c-amber-ink);border-color:rgba(255,168,58,.34)}
+.sc.zero{background:rgba(224,52,75,.14);color:var(--c-red-ink);border-color:rgba(224,52,75,.3)}
+.manual{display:none;gap:4px;margin-top:7px}
+html[data-teacher="on"] .manual{display:flex}
+.manual button{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background:var(--ink-700);color:var(--text-mute);
+  font:inherit;font-size:11.5px;font-weight:800;cursor:pointer}
+.manual button.on{background:linear-gradient(140deg,var(--c-red-deep),var(--c-gold-deep));color:#fff;border-color:transparent}
+.manual button.auto{width:auto;padding:0 8px;font-size:10.5px}
+.scale{display:flex;gap:9px;flex-wrap:wrap}
+.sc-item{flex:1;min-width:120px;padding:13px;border-radius:13px;border:1px solid var(--line);background:var(--ink-750);text-align:center}
+.sc-item b{display:block;font-family:var(--serif);font-size:28px;line-height:1;margin-bottom:5px}
+.sc-item span{font-size:11.5px;color:var(--text-mute)}
+.sc-item.hit{border-color:var(--line-3);background:linear-gradient(150deg,rgba(240,190,85,.18),var(--ink-750))}
+.fixes{display:flex;flex-direction:column;gap:9px}
+.fix{display:flex;gap:11px;padding:12px 14px;border-radius:12px;background:var(--ink-750);border:1px solid var(--line);font-size:13.5px;color:var(--text-dim)}
+.fix b{color:var(--text)}
+.fix .n{flex:none;width:22px;height:22px;border-radius:7px;background:linear-gradient(140deg,var(--c-red-deep),var(--c-gold-deep));color:#fff;
+  display:grid;place-items:center;font-size:11px;font-weight:800}
+
+/* ---------- итог / учитель ---------- */
+.final{border-radius:24px;padding:clamp(24px,3.4vw,42px);border:1px solid var(--line-2);
+  background:linear-gradient(140deg,rgba(107,63,196,.22),var(--ink-800) 52%,rgba(201,146,44,.2))}
+.final q{font-family:var(--serif);font-size:clamp(22px,3vw,34px);line-height:1.24;quotes:"«" "»";display:block;margin-bottom:18px}
+.ttable{width:100%;border-collapse:collapse;font-size:13.5px}
+.ttable th,.ttable td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}
+.ttable th{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--text-mute);font-weight:800}
+.ttable td:last-child,.ttable th:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ttable tr.total td{font-weight:800;color:var(--c-gold-ink);border-bottom:0;border-top:1px solid var(--line-2)}
+.locked-card{display:flex;gap:14px;align-items:center;padding:22px;border-radius:16px;border:1px dashed var(--line-2);background:var(--ink-750)}
+.teacher-body{display:none}
+html[data-teacher="on"] .teacher-body{display:block}
+html[data-teacher="on"] .locked-card{display:none}
+.report{counter-reset:r;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px}
+.report li{counter-increment:r;position:relative;padding-left:36px;font-size:13.5px;color:var(--text-dim)}
+.report li::before{content:counter(r);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:8px;
+  background:var(--ink-650);border:1px solid var(--line);color:var(--c-gold-ink);display:grid;place-items:center;font-size:11.5px;font-weight:800}
+.report b{color:var(--text)}
+
+footer{padding:30px 0 46px;border-top:1px solid var(--line);margin-top:20px}
+.foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--text-mute)}
+
+/* ---------- тосты, модалка, поповер ---------- */
+.toasts{position:fixed;right:18px;bottom:18px;z-index:120;display:flex;flex-direction:column;gap:9px;max-width:min(380px,92vw)}
+.toast{display:flex;gap:11px;align-items:center;padding:13px 15px;border-radius:13px;border:1px solid var(--line-2);
+  background:rgba(30,24,21,.97);backdrop-filter:blur(12px);box-shadow:0 18px 44px rgba(0,0,0,.5);font-size:13.5px;
+  animation:tin .34s var(--ease);color:var(--text)}
+html[data-theme="paper"] .toast{background:rgba(255,252,245,.98)}
+.toast.out{animation:tout .3s var(--ease) forwards}
+@keyframes tin{from{opacity:0;transform:translateY(14px) scale(.96)}}
+@keyframes tout{to{opacity:0;transform:translateX(24px)}}
+.toast .bar{width:3px;align-self:stretch;border-radius:3px;background:var(--c-gold)}
+.toast.ok .bar{background:var(--c-green)} .toast.warn .bar{background:var(--c-amber)} .toast.bad .bar{background:var(--c-red)}
+.toast button{margin-left:auto;background:none;border:1px solid var(--line-2);color:var(--c-gold-ink);font:inherit;font-size:12px;
+  font-weight:800;padding:5px 10px;border-radius:8px;cursor:pointer;white-space:nowrap}
+
+.scrim{position:fixed;inset:0;background:rgba(6,4,3,.68);backdrop-filter:blur(4px);z-index:100;display:none;opacity:0;transition:.28s}
+.scrim.on{display:block;opacity:1}
+.modal{position:fixed;z-index:110;left:50%;top:50%;transform:translate(-50%,-46%);width:min(460px,92vw);
+  background:var(--ink-750);border:1px solid var(--line-2);border-radius:20px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.6);
+  display:none;opacity:0;transition:.28s var(--ease)}
+.modal.on{display:block;opacity:1;transform:translate(-50%,-50%)}
+.modal h3{margin-bottom:9px} .modal p{font-size:14px;color:var(--text-dim)}
+
+.pop{position:absolute;z-index:80;width:min(420px,92vw);max-height:330px;overflow-y:auto;background:var(--ink-750);
+  border:1px solid var(--line-2);border-radius:14px;padding:10px;box-shadow:0 24px 60px rgba(0,0,0,.55);display:none}
+.pop.on{display:block}
+.pop button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);color:var(--text-dim);
+  font:inherit;font-size:13px;padding:9px 10px;cursor:pointer;line-height:1.4}
+.pop button:last-child{border-bottom:0}
+.pop button:hover{background:var(--ink-650);color:var(--text)}
+.pop .pt{font-family:var(--serif);font-size:16px;color:var(--text)}
+.pop .pw{font-size:11px;color:var(--text-mute)}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#printSheet{display:none}
+
+/* ---------- адаптив ---------- */
+@media (max-width:1240px){
+  .work{grid-template-columns:1fr}
+  .side{position:static}
+  .quotes{grid-template-columns:1fr}
+  .cliches{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:1080px){
+  :root{--rail:0px}
+  .shell{grid-template-columns:1fr}
+  .rail{position:fixed;left:0;top:0;bottom:0;width:300px;transform:translateX(-103%);transition:transform .34s var(--ease);z-index:105;
+    box-shadow:0 0 70px rgba(0,0,0,.6)}
+  .rail.open{transform:none}
+  .rail-close{display:grid;place-items:center}
+  .rail-toggle{display:inline-flex}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .step::after{display:none}
+  .traps{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  :root{--topbar:60px;--subnav:48px;--head:108px;--pad:17px}
+  .brand-s{display:none}
+  .brand-t{font-size:16px}
+  .g2,.g3,.compare,.cliches,.traps,.steps{grid-template-columns:1fr}
+  .hide-sm{display:none!important}
+  .qtext{font-size:clamp(25px,7vw,34px)}
+  .toasts{right:10px;left:10px;bottom:10px;max-width:none}
+  .crit-table td:nth-child(3),.crit-table th:nth-child(3){display:none}
+  section{padding:34px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+}
+
+/* ---------- печать: А4, поля 20 мм ---------- */
+@media print{
+  @page{size:A4;margin:18mm 20mm}
+  html,body{background:#fff!important;color:#000!important}
+  .bg,#embers,.rail,.topbar,.subnav,.toasts,.scrim,.modal,.pop,main,footer{display:none!important}
+  #printSheet{display:block!important;font-family:Georgia,"Times New Roman",serif;color:#000;font-size:12pt;line-height:1.5}
+  #printSheet h1{font-size:15pt;margin:0 0 4pt;line-height:1.25}
+  #printSheet .ps-sub{font-size:10.5pt;color:#333;margin:0 0 12pt}
+  #printSheet .ps-line{font-size:10.5pt;margin:0 0 14pt;border-bottom:1px solid #999;padding-bottom:8pt}
+  #printSheet .ps-q{font-size:12.5pt;font-weight:bold;margin:0 0 10pt;padding:8pt 10pt;border:1px solid #666;background:#f4f0e6}
+  #printSheet .ps-pos{font-size:10.5pt;margin:0 0 12pt}
+  #printSheet .ps-body p{margin:0 0 8pt;text-indent:1.2cm;text-align:justify}
+  #printSheet .ps-body p:first-child{text-indent:0}
+  #printSheet table{width:100%;border-collapse:collapse;font-size:10pt;margin-top:12pt}
+  #printSheet th,#printSheet td{border:1px solid #999;padding:5pt 6pt;text-align:left}
+  #printSheet th{background:#f0ece2}
+  #printSheet td.n{text-align:center;width:52pt}
+  #printSheet .ps-foot{margin-top:12pt;font-size:9pt;color:#444;border-top:1px solid #bbb;padding-top:6pt}
+  #printSheet .ps-break{page-break-before:always}
+}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <div class="bg-grad"></div><div class="bg-aurora"></div><div class="bg-grain"></div>
+</div>
+<canvas id="embers" aria-hidden="true"></canvas>
+
+<div class="shell">
+  <!-- ================= ПУЛЬТ ================= -->
+  <aside class="rail" id="rail" aria-label="Пульт урока">
+    <div class="rail-head">
+      <div class="crest" aria-hidden="true">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M3 20c6-1 11-5 15-13" stroke="#FFF3E0" stroke-width="1.9" stroke-linecap="round"/><path d="M18 7l3-4-1 5-2 1z" fill="#FFF3E0"/><path d="M4 19l3 1" stroke="#FFF3E0" stroke-width="1.9" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="rail-title">Пульт урока</div>
+        <div class="rail-sub">7 класс · 20 минут</div>
+      </div>
+      <button class="rail-close" id="railClose" aria-label="Закрыть пульт">✕</button>
+    </div>
+
+    <div class="panel">
+      <p class="panel-t">Хронометраж</p>
+      <div class="clock" id="clock">
+        <div class="clock-d" id="clockDigits">20:00</div>
+        <div class="clock-l" id="clockLabel">осталось</div>
+      </div>
+      <div class="track"><i id="clockBar"></i></div>
+      <div class="clock-btns">
+        <button class="btn btn-primary btn-sm" id="timerToggle" style="flex:1">▶ Пуск</button>
+        <button class="btn btn-sm btn-icon" id="timerPlus" title="Добавить минуту" aria-label="Добавить минуту">+1</button>
+        <button class="btn btn-sm btn-icon" id="timerReset" title="Сбросить таймер" aria-label="Сбросить таймер">↺</button>
+      </div>
+      <div class="stages" id="stages"></div>
+    </div>
+
+    <div class="panel">
+      <p class="panel-t">Настройки листа</p>
+      <div class="ctrl"><label>Тема</label>
+        <div class="seg" id="segTheme"><button data-v="night" class="on">Ночь</button><button data-v="paper">Пергамент</button></div>
+      </div>
+      <div class="ctrl"><label for="rngSize">Кегль <b id="sizeVal" class="mute">17</b></label>
+        <input type="range" id="rngSize" min="15" max="23" step="1" value="17">
+      </div>
+      <div class="ctrl"><label for="selDensity">Плотность</label>
+        <select class="mini" id="selDensity"><option value="compact">Плотно</option><option value="normal" selected>Обычно</option><option value="roomy">Свободно</option></select>
+      </div>
+      <div class="ctrl"><label for="selFont">Шрифт листа</label>
+        <select class="mini" id="selFont"><option value="serif" selected>С засечками</option><option value="sans">Без засечек</option></select>
+      </div>
+      <div class="ctrl"><label id="lbHints">Подсказки в блоках</label><button class="sw" id="swHints" role="switch" aria-checked="true" aria-labelledby="lbHints"></button></div>
+      <div class="ctrl"><label id="lbGuides">Разметка и подсветка</label><button class="sw" id="swGuides" role="switch" aria-checked="true" aria-labelledby="lbGuides"></button></div>
+      <div class="ctrl"><label id="lbAuto">Автопроверка</label><button class="sw" id="swAuto" role="switch" aria-checked="true" aria-labelledby="lbAuto"></button></div>
+      <div class="ctrl"><label id="lbMotion">Живой фон</label><button class="sw" id="swMotion" role="switch" aria-checked="true" aria-labelledby="lbMotion"></button></div>
+      <div class="ctrl"><label id="lbTeacher">Режим учителя</label><button class="sw" id="swTeacher" role="switch" aria-checked="false" aria-labelledby="lbTeacher"></button></div>
+    </div>
+
+    <div class="panel">
+      <p class="panel-t">Действия</p>
+      <div class="btn-row">
+        <button class="btn btn-sm" id="btnRandom" style="flex:1">🎲 Позиция</button>
+        <button class="btn btn-sm" id="btnReset" style="flex:1">↺ Сброс</button>
+      </div>
+      <div class="btn-row" style="margin-top:8px">
+        <button class="btn btn-gold btn-sm" id="btnPrint2" style="flex:1">Печать / PDF</button>
+      </div>
+      <div class="btn-row" style="margin-top:8px">
+        <button class="btn btn-sm" id="btnTxt" style="flex:1">.txt</button>
+        <button class="btn btn-sm" id="btnHtml" style="flex:1">.html</button>
+        <button class="btn btn-sm" id="btnCopy2" style="flex:1">Копия</button>
+      </div>
+      <p class="mute" style="font-size:11.5px;margin:11px 0 0" id="saveState">Черновик сохраняется в этом браузере.</p>
+    </div>
+  </aside>
+
+  <div class="content">
+    <!-- ================= ШАПКА ================= -->
+    <header class="topbar">
+      <button class="btn btn-icon btn-ghost rail-toggle" id="railToggle" aria-label="Открыть пульт">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="brand">
+        <div>
+          <div class="brand-t">Тарас Бульба · развёрнутый ответ</div>
+          <div class="brand-s">Н. В. Гоголь · повесть, редакция 1842 года · развитие речи</div>
+        </div>
+      </div>
+      <div class="top-sp"></div>
+      <button class="chip" id="chipTimer" title="Пуск / пауза таймера"><span class="pulse-dot"></span><b id="chipTime">20:00</b></button>
+      <button class="chip hide-sm" id="chipScore" title="К проверке">Баллы <b id="chipScoreVal">— / 8</b></button>
+      <button class="btn btn-icon btn-ghost hide-sm" id="btnTheme" title="Сменить тему" aria-label="Сменить тему">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="btn btn-primary btn-sm hide-sm" id="btnPrint">Печать</button>
+      <div class="scroll-line" id="scrollLine"></div>
+    </header>
+
+    <nav class="subnav" aria-label="Разделы листа">
+      <div class="subnav-in" id="subnav">
+        <a class="nlink" href="#vopros"><i>01</i>Вопрос</a>
+        <a class="nlink" href="#konstruktor"><i>02</i>Конструктор</a>
+        <a class="nlink" href="#tsitaty"><i>03</i>Цитаты</a>
+        <a class="nlink" href="#klishe"><i>04</i>Клише</a>
+        <a class="nlink" href="#pishem"><i>05</i>Пишем</a>
+        <a class="nlink" href="#proverka"><i>06</i>Проверка</a>
+        <a class="nlink" href="#itog"><i>07</i>Итог</a>
+        <a class="nlink locked" href="#uchitelyu" id="navTeacher"><i>08</i>Учителю 🔒</a>
+      </div>
+    </nav>
+
+    <main>
+      <!-- ================= 01 ВОПРОС ================= -->
+      <section id="vopros" class="hero">
+        <div class="wrap">
+          <div class="qbox reveal">
+            <span class="qtag"><span class="pulse-dot"></span>Проблемный вопрос урока</span>
+            <h1 class="qtext">Тарас Бульба убивает Андрия.<br>Это <span class="red">жестокость отца</span> или <span class="gold">верность товариществу</span>?</h1>
+            <div class="qmeta">
+              <span>Этап 1 · 2 минуты</span>
+              <span>7–9 предложений</span>
+              <span>2 аргумента</span>
+              <span>2 цитаты минимум</span>
+              <span>8 баллов</span>
+            </div>
+          </div>
+
+          <div class="grid reveal" style="margin-top:var(--gap)">
+            <p class="lead">Вопрос называется проблемным, потому что в самой повести есть основания для разных ответов. Тарас привёз сыновей на Сечь и гордится ими: «А старому Тарасу любо было видеть, как оба сына его были одни из первых» (глава V). Он же снимает ружьё и стреляет в младшего. Одни увидят здесь расправу жестокого отца, другие — казнь изменника по закону товарищества. Правы будут и те и другие — но только те, кто докажет свою мысль текстом.</p>
+            <div class="note"><span class="ic">!</span><span><b>Объяснить поступок героя — не значит его оправдать.</b> Мы разбираем, чем он руководствовался, а не выносим приговор.</span></div>
+          </div>
+
+          <div class="compare reveal" style="margin-top:var(--gap)">
+            <div class="cmp bad">
+              <div class="cmp-l">Пересказ — не ответ</div>
+              <q>Андрий влюбился в панночку, перешёл на сторону поляков, и отец его убил.</q>
+              <p class="mute" style="font-size:12.5px;margin:10px 0 0">Отвечает на вопрос «что было». Балл за тезис не ставится.</p>
+            </div>
+            <div class="cmp good">
+              <div class="cmp-l">Ответ — рассуждение</div>
+              <q>Тарас убивает Андрия как атаман, потому что закон товарищества для него выше родства по крови. Это видно из его слов перед боем…</q>
+              <p class="mute" style="font-size:12.5px;margin:10px 0 0">Отвечает на вопросы «почему» и «как ты это понимаешь».</p>
+            </div>
+          </div>
+
+          <div class="sec-head reveal" style="margin-top:calc(var(--gap) + 12px)">
+            <div class="kicker">Выбор позиции</div>
+            <h2>Три позиции: выбери одну</h2>
+            <p class="lead">Позиция В — не «серединка»: в ней нужно показать обе стороны, а не смешать их. Выбор ничего не блокирует: банк цитат и критерии одинаковы для всех.</p>
+          </div>
+          <div class="grid g3 reveal" id="positions"></div>
+          <div class="btn-row reveal" style="margin-top:14px">
+            <button class="btn btn-sm" id="btnThesis">Вставить заготовку тезиса</button>
+            <a class="btn btn-sm btn-ghost" href="#pishem">Перейти к письму →</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap"><div class="ornament"></div></div>
+
+      <!-- ================= 02 КОНСТРУКТОР ================= -->
+      <section id="konstruktor">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="kicker">Этап 2 · 4 минуты</div>
+            <h2>Из чего состоит ответ</h2>
+            <p class="lead">Объём — 7–9 предложений, примерно 80–120 слов. Цитаты короткие: полстроки, не больше. Схема работает на любом проблемном вопросе.</p>
+          </div>
+
+          <div class="steps reveal">
+            <div class="step"><b>01</b><h4>Тезис</h4><p>Прямой ответ на вопрос. Одно предложение, в нём названа позиция.</p></div>
+            <div class="step"><b>02</b><h4>Аргумент 1</h4><p>Эпизод или речь героя + цитата + пояснение, почему это доказывает тезис.</p></div>
+            <div class="step"><b>03</b><h4>Аргумент 2</h4><p>Другой эпизод или другая речь + цитата + пояснение.</p></div>
+            <div class="step"><b>04</b><h4>Вывод</h4><p>Возвращаемся к вопросу, но не повторяем тезис слово в слово.</p></div>
+          </div>
+          <div class="note reveal" style="margin-top:var(--gap)"><span class="ic">+</span><span>Можно добавить <b>уступку</b>: «Правда, можно возразить… Однако…» — она делает ответ сильнее и входит в объём.</span></div>
+
+          <div class="model reveal" id="model" style="margin-top:var(--gap)">
+            <button class="model-bar" id="modelBar" aria-expanded="false">
+              <h3>Образец ответа · позиция А</h3>
+              <span class="mute hide-sm" style="font-size:12px">8 предложений · 3 цитаты</span>
+              <span class="chev">▾</span>
+            </button>
+            <div class="model-body">
+              <div class="mpart t"><span class="tag">Тезис</span><p id="mThesis"></p></div>
+              <div class="mpart a1"><span class="tag">Аргумент 1 · речь Тараса + пояснение</span><p id="mArg1"></p></div>
+              <div class="mpart a2"><span class="tag">Аргумент 2 · рада и поступок Андрия</span><p id="mArg2"></p></div>
+              <div class="mpart c"><span class="tag">Уступка · слово рассказчика</span><p id="mCounter"></p></div>
+              <div class="mpart k"><span class="tag">Вывод</span><p id="mConc"></p></div>
+              <div class="btn-row">
+                <button class="btn btn-gold btn-sm" id="btnLoadModel">Разложить образец по частям</button>
+                <button class="btn btn-sm" id="btnCopyModel">Скопировать образец</button>
+              </div>
+              <p class="mute" style="font-size:12.5px;margin:11px 0 0">Это образец учителя. Разбери его как модель построения, а свой ответ напиши своими словами и со своими цитатами.</p>
+            </div>
+          </div>
+
+          <div class="grid g2 reveal" style="margin-top:var(--gap)">
+            <div class="card">
+              <h3>Как вводить цитату</h3>
+              <div class="rules">
+                <div class="rule">Тарас восклицает: «Нет уз святее товарищества!»</div>
+                <div class="rule">Рассказчик называет Тараса «сыноубийцей».</div>
+                <div class="rule">По словам Бовдюга, «первый долг и первая честь козака есть соблюсти товарищество».</div>
+              </div>
+              <p class="dim" style="font-size:13.5px;margin:13px 0 0">Кавычки — «ёлочки». Если цитата заканчивается восклицательным или вопросительным знаком, он остаётся внутри кавычек, а точка после кавычек не ставится. Встроенная в предложение цитата начинается со строчной буквы. Слова не меняем и не дописываем.</p>
+            </div>
+            <div class="card">
+              <h3>Что портит ответ</h3>
+              <div class="traps" style="grid-template-columns:1fr">
+                <div class="trap"><span class="x">✕</span><span>Пересказ вместо рассуждения.</span></div>
+                <div class="trap"><span class="x">✕</span><span>«Гоголь хотел сказать…» без опоры на текст.</span></div>
+                <div class="trap"><span class="x">✕</span><span>Цитата по памяти с изменёнными словами.</span></div>
+                <div class="trap"><span class="x">✕</span><span>Слова, приписанные не тому: «Нет уз святее товарищества!» говорит Тарас, а «сыноубийца» — слово рассказчика.</span></div>
+                <div class="trap"><span class="x">✕</span><span>Общие слова: «это грустно и актуально».</span></div>
+                <div class="trap"><span class="x">✕</span><span>Вывод, который слово в слово повторяет тезис.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap"><div class="ornament"></div></div>
+
+      <!-- ================= 03 ЦИТАТЫ ================= -->
+      <section id="tsitaty">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="kicker">Этап 3 · 3 минуты · часть первая</div>
+            <h2>Банк цитат</h2>
+            <p class="lead">Все цитаты сверены дословно по приложенному тексту повести в редакции 1842 года. Указаны говорящий и глава. Нажми «Цитата» — она встанет в выбранный блок; «С оборотом» добавит слова, которые вводят цитату.</p>
+          </div>
+          <div class="bank-bar reveal">
+            <div class="filters" id="qFilters">
+              <button class="f on" data-f="all">Все</button>
+              <button class="f" data-f="a">А · долг товарищества</button>
+              <button class="f" data-f="b">Б · власть отца</button>
+              <button class="f" data-f="c">В · горе отца</button>
+              <button class="f" data-f="x">Контекст</button>
+            </div>
+            <div class="search">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <input id="qSearch" type="search" placeholder="Поиск по цитатам и героям…" aria-label="Поиск по банку цитат">
+            </div>
+            <div class="target-sel">
+              <label for="targetSel">Вставлять в:</label>
+              <select class="mini" id="targetSel">
+                <option value="thesis">Тезис</option>
+                <option value="arg1" selected>Аргумент 1</option>
+                <option value="arg2">Аргумент 2</option>
+                <option value="counter">Уступка</option>
+                <option value="conclusion">Вывод</option>
+              </select>
+            </div>
+          </div>
+          <div class="quotes reveal" id="quoteBank"></div>
+          <p class="mute reveal" style="font-size:12.5px;margin-top:14px" id="qCount"></p>
+        </div>
+      </section>
+
+      <div class="wrap"><div class="ornament"></div></div>
+
+      <!-- ================= 04 КЛИШЕ ================= -->
+      <section id="klishe">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="kicker">Этап 3 · часть вторая</div>
+            <h2>Клише к ответу</h2>
+            <p class="lead">Клише — опора, а не украшение. Не начинай с них каждое предложение: два-три на весь ответ достаточно. Нажми на строку — она встанет в нужный блок.</p>
+          </div>
+          <div class="cliches reveal" id="clicheBank"></div>
+        </div>
+      </section>
+
+      <div class="wrap"><div class="ornament"></div></div>
+
+      <!-- ================= 05 ПИШЕМ ================= -->
+      <section id="pishem">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="kicker">Этап 4 · 8 минут</div>
+            <h2>Пишем ответ</h2>
+            <p class="lead">Выбери позицию, приведи два аргумента и не меньше двух цитат. Указывай, кто говорит. Объём — 7–9 предложений; цитаты в счёт предложений не идут.</p>
+          </div>
+
+          <div class="work">
+            <div>
+              <div class="editor" id="editor">
+                <div class="block" data-b="thesis">
+                  <div class="b-head"><span class="b-num">1</span><span class="b-title">Тезис</span><span class="b-count" data-c="thesis">0 слов</span>
+                    <span class="b-tools"><button class="tool" data-pop="q" data-b="thesis">+ цитата</button><button class="tool" data-pop="c" data-b="thesis">+ клише</button><button class="tool" data-clear="thesis">очистить</button></span>
+                  </div>
+                  <div class="b-hint">Прямой ответ на вопрос. Одно предложение: назови позицию — атаман, отец или столкновение того и другого.</div>
+                  <textarea data-t="thesis" rows="3" placeholder="Я считаю, что Тарас Бульба убивает Андрия прежде всего как…" aria-label="Тезис"></textarea>
+                  <div class="b-foot" data-f="thesis"></div>
+                </div>
+
+                <div class="block" data-b="arg1">
+                  <div class="b-head"><span class="b-num">2</span><span class="b-title">Аргумент 1</span><span class="b-count" data-c="arg1">0 слов</span>
+                    <span class="b-tools"><button class="tool" data-pop="q" data-b="arg1">+ цитата</button><button class="tool" data-pop="c" data-b="arg1">+ клише</button><button class="tool" data-clear="arg1">очистить</button></span>
+                  </div>
+                  <div class="b-hint">Эпизод или речь героя + цитата + пояснение. Пояснение — самое важное: объясни, почему цитата доказывает твой тезис.</div>
+                  <textarea data-t="arg1" rows="4" placeholder="Этот закон он называет сам в речи перед боем: «…»" aria-label="Аргумент 1"></textarea>
+                  <div class="b-foot" data-f="arg1"></div>
+                </div>
+
+                <div class="block" data-b="arg2">
+                  <div class="b-head"><span class="b-num">3</span><span class="b-title">Аргумент 2</span><span class="b-count" data-c="arg2">0 слов</span>
+                    <span class="b-tools"><button class="tool" data-pop="q" data-b="arg2">+ цитата</button><button class="tool" data-pop="c" data-b="arg2">+ клише</button><button class="tool" data-clear="arg2">очистить</button></span>
+                  </div>
+                  <div class="b-hint">Другой эпизод или другая речь + цитата + пояснение. Не повторяй первый аргумент другими словами.</div>
+                  <textarea data-t="arg2" rows="4" placeholder="Так думает не он один: на раде старый Бовдюг говорит, что «…»" aria-label="Аргумент 2"></textarea>
+                  <div class="b-foot" data-f="arg2"></div>
+                </div>
+
+                <div class="block" data-b="counter">
+                  <div class="b-head"><span class="b-num">4</span><span class="b-title">Уступка · по желанию</span><span class="b-count" data-c="counter">0 слов</span>
+                    <span class="b-tools"><button class="tool" data-pop="q" data-b="counter">+ цитата</button><button class="tool" data-pop="c" data-b="counter">+ клише</button><button class="tool" data-clear="counter">очистить</button></span>
+                  </div>
+                  <div class="b-hint">«Правда, можно возразить… Однако…» Покажи сильную сторону другой позиции — и вернись к своей.</div>
+                  <textarea data-t="counter" rows="3" placeholder="Правда, рассказчик называет Тараса «сыноубийцей»…" aria-label="Уступка"></textarea>
+                  <div class="b-foot" data-f="counter"></div>
+                </div>
+
+                <div class="block" data-b="conclusion">
+                  <div class="b-head"><span class="b-num">5</span><span class="b-title">Вывод</span><span class="b-count" data-c="conclusion">0 слов</span>
+                    <span class="b-tools"><button class="tool" data-pop="c" data-b="conclusion">+ клише</button><button class="tool" data-clear="conclusion">очистить</button></span>
+                  </div>
+                  <div class="b-hint">Ответь на вопрос ещё раз — но другими словами и с итогом рассуждения.</div>
+                  <textarea data-t="conclusion" rows="3" placeholder="Итак, для Тараса…" aria-label="Вывод"></textarea>
+                  <div class="b-foot" data-f="conclusion"></div>
+                </div>
+              </div>
+
+              <div class="paper-view reveal" style="margin-top:var(--gap)">
+                <div class="pv-head">
+                  <h3>Собранный ответ</h3>
+                  <span class="pv-meta" id="pvMeta">0 предложений · 0 слов · 0 цитат</span>
+                </div>
+                <div class="pv-body" id="pvBody"><p class="pv-empty">Здесь появится цельный текст. Пиши в блоках выше — ответ собирается автоматически.</p></div>
+                <div class="btn-row" style="margin-top:16px">
+                  <button class="btn btn-gold btn-sm" id="btnCopy">Скопировать ответ</button>
+                  <button class="btn btn-sm" id="btnCheck2">Проверить себя</button>
+                  <button class="btn btn-sm btn-ghost" id="btnPrint3">Печать / PDF</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- боковая проверка -->
+            <div class="side">
+              <div class="card" style="padding:16px">
+                <div class="score-card">
+                  <div class="ring-wrap">
+                    <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+                      <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#F0BE55"/><stop offset="1" stop-color="#E0344B"/></linearGradient></defs>
+                      <circle class="bgc" cx="60" cy="60" r="52"/><circle class="fg" id="ringFg" cx="60" cy="60" r="52"/>
+                    </svg>
+                    <div class="ring-txt"><div><b id="scoreNum">0</b><span>из 8</span></div></div>
+                  </div>
+                  <div>
+                    <div class="mark" id="markVal">—</div>
+                    <div class="mark-l" id="markLabel">ответ не проверен</div>
+                  </div>
+                </div>
+                <div class="meter">
+                  <div class="meter-track"><div class="meter-zone"></div><div class="meter-fill" id="meterFill"></div></div>
+                  <div class="meter-l"><span id="meterTxt">Предложений: 0</span><span>цель 7–9</span></div>
+                </div>
+              </div>
+
+              <div class="card" style="padding:16px">
+                <p class="panel-t">Быстрая проверка</p>
+                <div class="checks" id="quickChecks"></div>
+              </div>
+
+              <div class="card" style="padding:16px">
+                <p class="panel-t">Сверка цитат с текстом повести</p>
+                <div class="qcheck" id="qCheck"><p class="mute" style="font-size:12.5px;margin:0">Цитат пока нет. Возьми их из банка — сверка появится здесь.</p></div>
+              </div>
+
+              <div class="card" style="padding:16px" id="trapCard">
+                <p class="panel-t">Ловушки в тексте</p>
+                <div class="checks" id="trapChecks"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap"><div class="ornament"></div></div>
+
+      <!-- ================= 06 ПРОВЕРКА ================= -->
+      <section id="proverka">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="kicker">Этап 5 · 2 минуты</div>
+            <h2>Самопроверка по критериям</h2>
+            <p class="lead">Максимум — 8 баллов. Найди самое слабое место и исправь его: чаще всего это пропущенное пояснение после цитаты.</p>
+          </div>
+
+          <div class="card reveal">
+            <table class="crit-table">
+              <thead><tr><th style="width:56px">Балл</th><th>Критерий и что засчитано</th><th style="width:70px">Макс.</th></tr></thead>
+              <tbody id="critBody"></tbody>
+            </table>
+          </div>
+
+          <div class="grid g2 reveal" style="margin-top:var(--gap)">
+            <div class="card">
+              <h3>Шкала отметок</h3>
+              <div class="scale" id="scale"></div>
+              <p class="mute" style="font-size:12.5px;margin:13px 0 0">0–2 балла — отметка не ставится, ответ нужно доработать. Диапазоны не пересекаются.</p>
+              <div class="btn-row" style="margin-top:14px">
+                <button class="btn btn-primary btn-sm" id="btnCheck">Проверить себя</button>
+                <button class="btn btn-sm btn-ghost" id="btnFixScroll">Что исправить ↓</button>
+              </div>
+            </div>
+            <div class="card" id="fixCard">
+              <h3>Что исправить</h3>
+              <div class="fixes" id="fixes"><p class="mute" style="font-size:13.5px;margin:0">Напиши ответ — здесь появятся точные подсказки по каждому недобранному баллу.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap"><div class="ornament"></div></div>
+
+      <!-- ================= 07 ИТОГ ================= -->
+      <section id="itog">
+        <div class="wrap">
+          <div class="sec-head reveal"><div class="kicker">Этап 6 · 1 минута</div></div>
+          <div class="final reveal">
+            <q>Схема «тезис — доказательство из текста — пояснение — вывод» работает на любом проблемном вопросе. Меняется вопрос, схема остаётся.</q>
+            <p class="lead" style="margin-bottom:18px">Забери работу с собой: распечатай лист, скачай текст или сохрани страницу с ответом.</p>
+            <div class="btn-row">
+              <button class="btn btn-primary" id="btnPrint4">Печать / PDF · А4</button>
+              <button class="btn btn-gold" id="btnTxt2">Скачать .txt</button>
+              <button class="btn" id="btnHtml2">Скачать .html</button>
+              <button class="btn btn-ghost" id="btnCopy3">Скопировать ответ</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 08 УЧИТЕЛЮ ================= -->
+      <section id="uchitelyu">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="kicker">Служебная часть</div>
+            <h2>Учителю</h2>
+          </div>
+
+          <div class="locked-card reveal">
+            <div class="crest" aria-hidden="true">🔒</div>
+            <div>
+              <h4>Раздел для учителя</h4>
+              <p class="dim" style="font-size:13.5px;margin:0">Включите «Режим учителя» в пульте слева — откроются хронометраж, примечания об атрибуции, ручная правка баллов и отчёт о проверке. В печатный лист ученика этот раздел не попадает.</p>
+            </div>
+            <button class="btn btn-gold btn-sm" id="btnTeacherOn">Включить</button>
+          </div>
+
+          <div class="teacher-body">
+            <div class="grid g2">
+              <div class="card">
+                <h3>Хронометраж · 20 минут</h3>
+                <table class="ttable">
+                  <thead><tr><th>Этап</th><th>Что делаем</th><th>Время</th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td>Вопрос. Чем ответ отличается от пересказа</td><td>2 мин</td></tr>
+                    <tr><td>2</td><td>Структура ответа. Разбор образца</td><td>4 мин</td></tr>
+                    <tr><td>3</td><td>Выбор позиции. Клише. Две цитаты из банка</td><td>3 мин</td></tr>
+                    <tr><td>4</td><td>Пишем ответ (7–9 предложений)</td><td>8 мин</td></tr>
+                    <tr><td>5</td><td>Самопроверка по критериям, правка одного места</td><td>2 мин</td></tr>
+                    <tr><td>6</td><td>Итог</td><td>1 мин</td></tr>
+                    <tr class="total"><td></td><td>Всего</td><td>20 мин</td></tr>
+                  </tbody>
+                </table>
+                <p class="mute" style="font-size:12.5px;margin:12px 0 0">Запасной вариант для медленно пишущих: тезис и один аргумент письменно, второй — устно.</p>
+              </div>
+
+              <div class="card">
+                <h3>Атрибуция, за которой следить</h3>
+                <div class="fixes">
+                  <div class="fix"><span class="n">1</span><span><b>«Нет уз святее товарищества!»</b> — слова Тараса в речи перед боем (глава IX), не пословица и не авторская мысль.</span></div>
+                  <div class="fix"><span class="n">2</span><span><b>«Сыноубийца»</b> — слово рассказчика (глава IX), а не оценка кого-то из героев.</span></div>
+                  <div class="fix"><span class="n">3</span><span><b>«отец – теперь не отец мне…»</b> — речь Андрия в передаче Янкеля (глава VII). Так и оформлять: «Янкель передаёт слова Андрия…».</span></div>
+                  <div class="fix"><span class="n">4</span><span>Тарас к моменту убийства сына — <b>наказной атаман</b>, избран на раде (глава VIII). Бовдюг произносит свою речь там же.</span></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3>Вымысел, история, толкование</h3>
+                <p class="dim" style="font-size:14px">В повести есть историческая основа, но Тарас, Остап и Андрий — художественные образы. Судим героев по тексту, а не по учебнику истории.</p>
+                <p class="dim" style="font-size:14px">Слово рассказчика — факт текста. Вывод о том, осуждает ли автор Тараса, — толкование ученика, и его нужно обосновывать. Третья позиция допустима и не снижает балл.</p>
+                <p class="dim" style="font-size:14px;margin:0">В режиме учителя в таблице критериев открывается ручная правка: кнопка «Авто» возвращает машинную оценку. Итоговый балл и отметка пересчитываются сразу.</p>
+              </div>
+
+              <div class="card">
+                <h3>Отчёт о проверке</h3>
+                <ol class="report">
+                  <li><b>Что проверено.</b> Тринадцать цитат банка и все цитаты образца сверены дословно по приложенному тексту повести (редакция 1842 года), указаны говорящий и глава по нумерации файла. Хронометраж: 2 + 4 + 3 + 8 + 2 + 1 = 20 минут. Максимальный балл: 1 + 2 + 2 + 1 + 1 + 1 = 8; диапазоны 7–8, 5–6, 3–4, 0–2 не пересекаются и покрывают все значения. Образец ответа проверен по критериям: 8 баллов из 8, восемь предложений. Заданий на личный или исповедальный опыт нет.</li>
+                  <li><b>Что уточнено при подготовке.</b> Атрибуция закреплена за говорящими и рассказчиком; в банк взяты короткие фрагменты без пропусков внутри цитаты; формулировка вопроса выстроена так, чтобы третья позиция была допустима. Автоматическая сверка цитат сравнивает текст ученика с банком без учёта регистра, ё/е и тире — она подсказывает, но не заменяет проверку учителем.</li>
+                  <li><b>Что не проверено.</b> Соответствие конкретным пунктам ФОП ООО и ФГОС: документы не приложены. Цитаты даны в орфографии приложенного издания и не сверялись с академическим полным собранием сочинений. Автоматический прогон страницы в браузере не выполнялся: код проверен чтением, реальная скорость письма класса не измерялась.</li>
+                  <li><b>Нерешённые вопросы.</b> Успеют ли медленно пишущие ученики за 8 минут. Нужен ли банк цитат отдельным печатным листом — сейчас он печатается только в режиме учителя.</li>
+                </ol>
+                <p class="dim" style="font-size:13.5px;margin:14px 0 0"><b>В пределах перечисленных проверок выявленные ошибки исправлены. Непроверенные и нерешённые вопросы указаны отдельно.</b></p>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:var(--gap)">
+              <h3>Печать</h3>
+              <p class="dim" style="font-size:14px;margin:0">Кнопка «Печать» формирует лист А4 с полями 18–20 мм: шапка, проблемный вопрос, выбранная позиция, цельный ответ, таблица критериев с баллами и строка для имени и класса. В режиме учителя добавляется вторая страница с банком цитат. Интерфейс, пульт и фон на печать не выводятся.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="wrap foot">
+          <span>Н. В. Гоголь. «Тарас Бульба» · редакция 1842 года · развитие речи, 7 класс</span>
+          <span>Материал для некоммерческого учебного использования. Черновик хранится только в этом браузере.</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <h3 id="modalTitle">Подтвердите</h3>
+  <p id="modalText"></p>
+  <div class="btn-row" style="margin-top:18px;justify-content:flex-end">
+    <button class="btn btn-ghost" id="modalCancel">Отмена</button>
+    <button class="btn btn-primary" id="modalOk">Продолжить</button>
+  </div>
+</div>
+<div class="pop" id="pop" role="menu"></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<div id="printSheet"></div>
+
+<script>
+(function(){
+"use strict";
+const $=(s,r)=>(r||document).querySelector(s), $$=(s,r)=>Array.from((r||document).querySelectorAll(s));
+const root=document.documentElement;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ============================ ДАННЫЕ ============================ */
+const QUOTES=[
+ {id:'q1',p:'a',ch:'IX',who:'Тарас Бульба',where:'речь перед боем',text:'Нет уз святее товарищества!',
+  frame:'Тарас восклицает: «Нет уз святее товарищества!»',note:'Не пословица и не слова автора: это говорит Тарас.'},
+ {id:'q2',p:'a',ch:'IX',who:'Тарас Бульба',where:'речь перед боем',text:'Но породниться родством по душе, а не по крови, может один только человек',
+  frame:'Тарас объясняет: «Но породниться родством по душе, а не по крови, может один только человек».'},
+ {id:'q3',p:'a',ch:'VIII',who:'Касьян Бовдюг',where:'рада, раздел войска',text:'Первый долг и первая честь козака есть соблюсти товарищество',
+  frame:'По словам Бовдюга, «первый долг и первая честь козака есть соблюсти товарищество».',note:'Закон товарищества признаёт всё войско, а не только Тарас.'},
+ {id:'q4',p:'a',ch:'IX',who:'Тарас Бульба',where:'перед выстрелом',text:'Так продать? продать веру? продать своих?',
+  frame:'Отец спрашивает Андрия: «Так продать? продать веру? продать своих?»'},
+ {id:'q5',p:'b',ch:'IX',who:'Тарас Бульба',where:'приговор сыну',text:'Я тебя породил, я тебя и убью!',
+  frame:'Тарас произносит приговор: «Я тебя породил, я тебя и убью!»'},
+ {id:'q6',p:'b',ch:'IX',who:'Тарас Бульба',where:'над телом сына',text:'Пропал, пропал бесславно, как подлая собака!',
+  frame:'Над телом сына Тарас говорит: «Пропал, пропал бесславно, как подлая собака!»'},
+ {id:'q7',p:'b',ch:'IX',who:'Тарас Бульба',where:'ответ Остапу',text:'Погребут его и без нас!',
+  frame:'Остапу отец отвечает: «Погребут его и без нас!»'},
+ {id:'q8',p:'b',ch:'I',who:'Тарас Бульба',where:'благословение перед дорогой',text:'…а не то – пусть лучше пропадут, чтобы и духу их не было на свете!',
+  frame:'Тарас благословляет сыновей словами: «…а не то – пусть лучше пропадут, чтобы и духу их не было на свете!»',
+  note:'Отец сам ставит веру и долг выше жизни сыновей — задолго до измены Андрия.'},
+ {id:'q9',p:'c',ch:'V',who:'рассказчик',where:'первые бои сыновей',text:'А старому Тарасу любо было видеть, как оба сына его были одни из первых',
+  frame:'Рассказчик замечает: «А старому Тарасу любо было видеть, как оба сына его были одни из первых».'},
+ {id:'q10',p:'c',ch:'IX',who:'рассказчик',where:'сразу после выстрела',text:'Остановился сыноубийца и глядел долго на бездыханный труп',
+  frame:'Рассказчик сообщает: «Остановился сыноубийца и глядел долго на бездыханный труп».',
+  note:'«Сыноубийца» — слово рассказчика, а не оценка кого-то из героев.'},
+ {id:'q11',p:'c',ch:'IX',who:'рассказчик об Остапе',where:'сцена у тела Андрия',text:'Жалко ему стало брата',
+  frame:'Об Остапе рассказчик говорит: «Жалко ему стало брата».'},
+ {id:'q12',p:'x',ch:'VI',who:'Андрий',where:'признание панночке',text:'Отчизна моя – ты! Вот моя отчизна!',
+  frame:'Андрий признаётся панночке: «Отчизна моя – ты! Вот моя отчизна!»'},
+ {id:'q13',p:'x',ch:'VII',who:'Андрий в передаче Янкеля',where:'Янкель пересказывает услышанное',text:'отец – теперь не отец мне, брат – не брат, товарищ – не товарищ',
+  frame:'Янкель передаёт слова Андрия: «отец – теперь не отец мне, брат – не брат, товарищ – не товарищ».',
+  warn:'Двойная атрибуция: слова принадлежат Андрию, но передаёт их Янкель. Так и пиши: «Янкель передаёт слова Андрия…»'}
+];
+const POSITIONS={
+ a:{letter:'А',title:'Верность товариществу',desc:'Тарас поступает как атаман: закон товарищества для него сильнее кровного родства.',
+    thesis:'Я считаю, что Тарас Бульба убивает Андрия прежде всего как атаман: закон товарищества для него сильнее кровного родства.'},
+ b:{letter:'Б',title:'Жестокость отца',desc:'Тарас поступает как отец, который не прощает позора: он распоряжается жизнью сына по праву родителя.',
+    thesis:'Я думаю, в этой сцене Тарас — прежде всего отец, который не прощает позора и распоряжается жизнью сына по праву родителя.'},
+ c:{letter:'В',title:'Столкновение двух начал',desc:'Атаман исполняет долг, отец теряет сына — потому сцена трагична. Нужно показать обе стороны.',
+    thesis:'Мне кажется, в этом выстреле сталкиваются оба начала: атаман исполняет долг, а отец теряет сына, и потому сцена трагична.'}
+};
+const CLICHES=[
+ {t:'Тезис',b:'thesis',items:['Я считаю, что Тарас убивает Андрия прежде всего как…','На мой взгляд, в этой сцене Тарас — не столько…, сколько…','Отвечая на вопрос, скажу прямо: ']},
+ {t:'Ввод аргумента',b:'arg1',items:['Это видно в сцене…','Подтверждение нахожу в главе…','Об этом говорит поступок…']},
+ {t:'Ввод цитаты',b:'arg1',items:['Тарас произносит слова: «…»','Рассказчик называет Тараса «…»','По словам Бовдюга, «…»']},
+ {t:'Пояснение цитаты',b:'arg2',items:['Эти слова значат, что…','Здесь важно, что…','Значит, для героя…']},
+ {t:'Уступка',b:'counter',items:['Правда, можно возразить, что… Однако…','Казалось бы, … но рассказчик замечает…']},
+ {t:'Вывод',b:'conclusion',items:['Итак, для Тараса … оказалось дороже, чем…','Таким образом, этот поступок объясняется…']}
+];
+const MODEL={
+ thesis:'Я считаю, что Тарас Бульба убивает Андрия прежде всего как атаман: закон товарищества для него сильнее кровного родства.',
+ arg1:'Этот закон он называет сам в речи перед боем: «Нет уз святее товарищества!» Верность своим для Тараса дороже родства по крови, и сын, изменивший товарищам, перестаёт быть для него сыном.',
+ arg2:'Так думает не он один: на раде старый Бовдюг говорит, что «первый долг и первая честь козака есть соблюсти товарищество». Значит, Тарас не выдумал правило под свой гнев — им живёт вся Сечь. Андрий нарушил этот закон: он перешёл к неприятелю и рубит своих, и отец спрашивает его перед выстрелом: «Так продать? продать веру? продать своих?»',
+ counter:'Правда, рассказчик называет Тараса «сыноубийцей» и говорит, что он долго глядел на бездыханный труп: долг исполнен, а отцовское горе осталось.',
+ conclusion:'Итак, для Тараса долг перед товариществом оказался сильнее отцовской любви — и приговор он привёл в исполнение сам.'
+};
+const BLOCKS=[
+ {id:'thesis',label:'Тезис'},{id:'arg1',label:'Аргумент 1'},{id:'arg2',label:'Аргумент 2'},
+ {id:'counter',label:'Уступка'},{id:'conclusion',label:'Вывод'}
+];
+const CRITERIA=[
+ {id:'k1',max:1,name:'К1. Тезис: есть прямой ответ на вопрос',hint:'Одно предложение, названа позиция.'},
+ {id:'k2',max:2,name:'К2. Аргумент 1: опора на текст + пояснение',hint:'2 — опора и пояснение; 1 — опора без пояснения; 0 — аргумента нет.'},
+ {id:'k3',max:2,name:'К3. Аргумент 2: другой эпизод или речь + пояснение',hint:'2 — опора и пояснение; 1 — опора без пояснения или повтор первого; 0 — аргумента нет.'},
+ {id:'k4',max:1,name:'К4. Цитаты: не меньше двух, дословные, указан говорящий',hint:'Слова героя или рассказчика названы рядом с цитатой.'},
+ {id:'k5',max:1,name:'К5. Вывод отвечает на вопрос и не повторяет тезис дословно',hint:'Другими словами, с итогом рассуждения.'},
+ {id:'k6',max:1,name:'К6. Связность: части соединены, пересказа вместо рассуждения нет',hint:'Все части на месте, есть связки, объём не меньше шести предложений.'}
+];
+const STAGES=[
+ {n:1,t:'Вопрос и пересказ',sec:2,d:'vopros'},
+ {n:2,t:'Структура и образец',sec:4,d:'konstruktor'},
+ {n:3,t:'Позиция, клише, цитаты',sec:3,d:'tsitaty'},
+ {n:4,t:'Пишем ответ',sec:8,d:'pishem'},
+ {n:5,t:'Самопроверка',sec:2,d:'proverka'},
+ {n:6,t:'Итог',sec:1,d:'itog'}
+];
+const TOTAL=STAGES.reduce((a,s)=>a+s.sec*60,0);
+const BOUNDS=STAGES.reduce((a,s)=>{a.push((a.length?a[a.length-1]:0)+s.sec*60);return a;},[]);
+
+/* ============================ СОСТОЯНИЕ ============================ */
+const KEY='bulba.lesson.v1';
+const state={
+ position:null,
+ blocks:{thesis:'',arg1:'',arg2:'',counter:'',conclusion:''},
+ target:'arg1',
+ manual:{},
+ checked:false,
+ extra:0,
+ elapsed:0,
+ settings:{theme:'night',size:17,density:'normal',font:'serif',hints:true,guides:true,auto:true,motion:true,teacher:false}
+};
+let undoSnapshot=null, saveTimer=null, filter='all', search='';
+
+function save(){
+  clearTimeout(saveTimer);
+  const st=$('#saveState'); if(st) st.textContent='Сохраняю…';
+  saveTimer=setTimeout(()=>{
+    try{
+      localStorage.setItem(KEY,JSON.stringify({position:state.position,blocks:state.blocks,manual:state.manual,
+        settings:state.settings,extra:state.extra,elapsed:Math.floor(state.elapsed)}));
+      if(st) st.textContent='Черновик сохранён в этом браузере.';
+    }catch(e){ if(st) st.textContent='Сохранение недоступно в этом браузере — скачайте ответ файлом.'; }
+  },420);
+}
+function load(){
+  try{
+    const raw=localStorage.getItem(KEY); if(!raw) return;
+    const d=JSON.parse(raw);
+    if(d.blocks) BLOCKS.forEach(b=>{ if(typeof d.blocks[b.id]==='string') state.blocks[b.id]=d.blocks[b.id]; });
+    if(d.position&&POSITIONS[d.position]) state.position=d.position;
+    if(d.manual) state.manual=d.manual;
+    if(d.settings) Object.assign(state.settings,d.settings);
+    if(typeof d.extra==='number') state.extra=d.extra;
+    if(typeof d.elapsed==='number') state.elapsed=Math.min(d.elapsed,TOTAL+state.extra);
+    if(BLOCKS.some(b=>state.blocks[b.id].trim())) state.checked=true;
+  }catch(e){}
+}
+
+/* ============================ ТЕКСТОВЫЙ АНАЛИЗ ============================ */
+const WORD_RE=/[A-Za-zА-Яа-яЁё0-9]+(?:[-'’][A-Za-zА-Яа-яЁё0-9]+)*/g;
+const words=t=>(String(t).match(WORD_RE)||[]).length;
+const stripQuotes=t=>String(t).replace(/«[^»]*»/g,' Ц ').replace(/"[^"]*"/g,' Ц ');
+function sentences(t){
+  const s=stripQuotes(t).replace(/\s+/g,' ').trim();
+  if(!s) return 0;
+  const parts=s.match(/[^.!?…]+[.!?…]+[»"')\]]*|[^.!?…]+$/g)||[];
+  return parts.filter(p=>words(p)>0).length;
+}
+const quotesIn=t=>(String(t).match(/«[^»]+»/g)||[]).map(q=>q.slice(1,-1).trim());
+const norm=t=>String(t).toLowerCase().replace(/ё/g,'е').replace(/[–—−]/g,'-')
+  .replace(/[«»„“”"']/g,'').replace(/[.,!?;:…]/g,'').replace(/\s+/g,' ').trim();
+const EXPLAIN=/(значит|поэтому|следовательно|таким образом|это значит|здесь важно|потому что|так как|отсюда|выходит|то есть|для него|для героя)/i;
+const CONNECT=/(итак|таким образом|значит|поэтому|однако|правда|во-первых|во-вторых|кроме того|так |следовательно|здесь важно)/i;
+const NAMES=/(тарас|бульба|бовдюг|андрий|остап|рассказчик|янкель|отец|атаман|козак)/i;
+const RETELL=/(сначала[\s\S]{0,120}потом[\s\S]{0,120}(затем|после))/i;
+
+function tokens(t){return new Set(norm(t).split(' ').filter(w=>w.length>2));}
+function similarity(a,b){
+  const A=tokens(a),B=tokens(b); if(!A.size||!B.size) return 0;
+  let inter=0; A.forEach(w=>{if(B.has(w))inter++;});
+  return inter/Math.min(A.size,B.size);
+}
+function allText(){return BLOCKS.map(b=>state.blocks[b.id]).filter(Boolean).join(' ');}
+
+function verifyQuote(q){
+  const n=norm(q);
+  for(const item of QUOTES){
+    const m=norm(item.text);
+    if(n===m) return {status:'ok',src:item,label:'Дословно · '+item.who+', глава '+item.ch};
+    if(n.length>14&&(m.indexOf(n)>-1||n.indexOf(m)>-1))
+      return {status:'part',src:item,label:'Похоже на цитату · сверь по главе '+item.ch};
+  }
+  return {status:'unk',src:null,label:'Нет в банке · сверь дословность по повести'};
+}
+function argScore(text){
+  const w=words(text), q=quotesIn(text).length, ref=NAMES.test(text)||/(глав|сцен|эпизод|рад[аеуы]|бой|поход)/i.test(text);
+  const expl=EXPLAIN.test(text)||w>=34;
+  if(w<10) return {v:0,why:'Аргумента нет или он короче десяти слов.'};
+  if((q>0||ref)&&expl) return {v:2,why:'Есть опора на текст'+(q?' и цитата':'')+' и пояснение.'};
+  if(q>0||ref) return {v:1,why:'Опора на текст есть, пояснения нет: добавь «эти слова значат, что…».'};
+  return {v:1,why:'Есть мысль, но нет опоры на текст: назови эпизод или речь героя.'};
+}
+function analyze(){
+  const b=state.blocks, full=allText();
+  const qs=quotesIn(full), sents=sentences(full), w=words(full);
+  const a1=argScore(b.arg1), a2=argScore(b.arg2);
+  const same=similarity(b.arg1,b.arg2)>0.82&&words(b.arg2)>10;
+  if(same&&a2.v===2){a2.v=1;a2.why='Второй аргумент повторяет первый: нужен другой эпизод или другая речь.';}
+  const named=NAMES.test(b.arg1+' '+b.arg2+' '+b.counter);
+  const thesisW=words(b.thesis), concW=words(b.conclusion);
+  const k5same=similarity(b.thesis,b.conclusion)>0.86;
+  const retell=RETELL.test(full);
+  const filled=['thesis','arg1','arg2','conclusion'].every(k=>words(b[k])>3);
+  const res={
+    k1:{v:thesisW>=6?1:0,why:thesisW>=6?'Тезис сформулирован: '+thesisW+' сл.':'Тезис короче шести слов или пуст — прямого ответа на вопрос нет.'},
+    k2:a1,k3:a2,
+    k4:{v:(qs.length>=2&&named)?1:0,why:qs.length<2?('Цитат найдено: '+qs.length+'. Нужно не меньше двух.'):
+        (!named?'Цитаты есть, но не названо, кто говорит.':'Две цитаты и более, говорящий назван.')},
+    k5:{v:(concW>=6&&!k5same)?1:0,why:concW<6?'Вывод короче шести слов или пуст.':(k5same?'Вывод почти дословно повторяет тезис.':'Вывод отвечает на вопрос своими словами.')},
+    k6:{v:(filled&&sents>=6&&CONNECT.test(full)&&!retell)?1:0,
+        why:!filled?'Не все основные части заполнены.':(sents<6?'Предложений меньше шести.':(!CONNECT.test(full)?'Нет связок между частями: «итак», «значит», «однако».':(retell?'Похоже на пересказ: цепочка «сначала — потом — затем».':'Части соединены, пересказа нет.')))}
+  };
+  const auto=Object.keys(res).reduce((a,k)=>a+res[k].v,0);
+  const total=CRITERIA.reduce((a,c)=>a+(state.manual[c.id]!=null?state.manual[c.id]:res[c.id].v),0);
+  const verified=qs.map(q=>Object.assign({text:q},verifyQuote(q)));
+  return {res,auto,total,qs,sents,w,verified,retell,named};
+}
+function markOf(t){return t>=7?'5':t>=5?'4':t>=3?'3':'—';}
+function markLabel(t){return t>=7?'отлично':t>=5?'хорошо':t>=3?'удовлетворительно':'нужно доработать';}
+
+/* ============================ ТОСТЫ / МОДАЛКА ============================ */
+function toast(msg,opt){
+  opt=opt||{};
+  const box=$('#toasts'), el=document.createElement('div');
+  el.className='toast '+(opt.tone||'');
+  el.innerHTML='<span class="bar"></span><span>'+esc(msg)+'</span>';
+  if(opt.action){
+    const b=document.createElement('button'); b.textContent=opt.action;
+    b.onclick=()=>{ if(opt.onAction)opt.onAction(); close(); };
+    el.appendChild(b);
+  }
+  box.appendChild(el);
+  const t=setTimeout(close,opt.action?7000:3600);
+  function close(){clearTimeout(t);el.classList.add('out');setTimeout(()=>el.remove(),300);}
+  return el;
+}
+let modalCb=null;
+function confirmBox(title,text,cb,okLabel){
+  $('#modalTitle').textContent=title; $('#modalText').textContent=text;
+  $('#modalOk').textContent=okLabel||'Продолжить';
+  modalCb=cb; $('#modal').classList.add('on'); $('#scrim').classList.add('on');
+  setTimeout(()=>$('#modalOk').focus(),60);
+}
+function closeModal(){$('#modal').classList.remove('on');if(!$('#rail').classList.contains('open'))$('#scrim').classList.remove('on');modalCb=null;}
+$('#modalOk').onclick=()=>{const cb=modalCb;closeModal();if(cb)cb();};
+$('#modalCancel').onclick=closeModal;
+$('#scrim').onclick=()=>{closeModal();closeRail();};
+
+/* ============================ ВСТАВКА ТЕКСТА ============================ */
+function ta(id){return $('textarea[data-t="'+id+'"]');}
+function insertInto(id,text){
+  const t=ta(id); if(!t) return;
+  const cur=state.blocks[id]||'';
+  const pos=(t.selectionStart!=null&&document.activeElement===t)?t.selectionStart:cur.length;
+  const before=cur.slice(0,pos), after=cur.slice(pos);
+  const needSpace=before&&!/\s$/.test(before);
+  const ins=(needSpace?' ':'')+text;
+  const next=before+ins+after;
+  state.blocks[id]=next; t.value=next; grow(t);
+  t.focus(); const caret=(before+ins).length; t.setSelectionRange(caret,caret);
+  state.checked=state.settings.auto?state.checked:false;
+  render(); save();
+}
+function grow(t){t.style.height='auto';t.style.height=Math.max(88,t.scrollHeight+2)+'px';}
+function setTarget(id){
+  state.target=id; const s=$('#targetSel'); if(s&&s.value!==id) s.value=id;
+}
+function snapshot(label){
+  undoSnapshot={label,blocks:Object.assign({},state.blocks),position:state.position};
+}
+function restoreUndo(){
+  if(!undoSnapshot) return;
+  Object.assign(state.blocks,undoSnapshot.blocks); state.position=undoSnapshot.position;
+  BLOCKS.forEach(b=>{const t=ta(b.id);if(t){t.value=state.blocks[b.id];grow(t);}});
+  renderPositions(); render(); save(); toast('Действие отменено: '+undoSnapshot.label,{tone:'ok'}); undoSnapshot=null;
+}
+
+/* ============================ РЕНДЕР: ПОЗИЦИИ ============================ */
+function renderPositions(){
+  const box=$('#positions');
+  box.innerHTML=Object.keys(POSITIONS).map(k=>{
+    const p=POSITIONS[k];
+    return '<button class="pos'+(state.position===k?' on':'')+'" data-p="'+k+'">'+
+      '<span class="letter">'+p.letter+'</span>'+
+      '<h3>'+esc(p.title)+'</h3><p>'+esc(p.desc)+'</p>'+
+      '<span class="pick">'+(state.position===k?'✓ выбрано':'выбрать позицию →')+'</span></button>';
+  }).join('');
+  $$('.pos',box).forEach(el=>el.onclick=()=>{
+    state.position=el.dataset.p; renderPositions(); render(); save();
+    toast('Позиция '+POSITIONS[state.position].letter+' · '+POSITIONS[state.position].title,{tone:'ok'});
+  });
+}
+
+/* ============================ РЕНДЕР: БАНК ЦИТАТ ============================ */
+function renderQuotes(){
+  const box=$('#quoteBank');
+  const used=new Set(quotesIn(allText()).map(norm));
+  const list=QUOTES.filter(q=>{
+    if(filter!=='all'&&q.p!==filter) return false;
+    if(search){const hay=norm(q.text+' '+q.who+' '+q.where+' '+q.ch);if(hay.indexOf(norm(search))<0)return false;}
+    return true;
+  });
+  box.innerHTML=list.map(q=>{
+    const isUsed=used.has(norm(q.text));
+    return '<article class="q'+(isUsed?' used':'')+'" data-p="'+q.p+'" data-id="'+q.id+'">'+
+      '<span class="used-badge">в ответе</span>'+
+      '<div class="q-top"><span class="medal">'+q.ch+'</span><span class="who">'+esc(q.who)+'</span><span class="where">· '+esc(q.where)+'</span></div>'+
+      '<div class="q-text">'+esc(q.text)+'</div>'+
+      (q.note?'<div class="q-note">'+esc(q.note)+'</div>':'')+
+      (q.warn?'<div class="q-note warn">'+esc(q.warn)+'</div>':'')+
+      '<div class="q-acts"><button class="btn btn-sm btn-gold" data-act="bare">Цитата</button>'+
+      '<button class="btn btn-sm" data-act="frame">С оборотом</button>'+
+      '<button class="btn btn-sm btn-ghost" data-act="copy">Копия</button></div></article>';
+  }).join('');
+  $('#qCount').textContent='Показано цитат: '+list.length+' из '+QUOTES.length+'. Все сверены по редакции 1842 года.';
+  $$('.q',box).forEach(card=>{
+    const q=QUOTES.find(x=>x.id===card.dataset.id);
+    $$('button',card).forEach(b=>b.onclick=()=>{
+      const act=b.dataset.act;
+      if(act==='copy'){copyText('«'+q.text+'»');return;}
+      insertInto(state.target,act==='bare'?'«'+q.text+'»':q.frame);
+      toast('Цитата добавлена в блок «'+BLOCKS.find(x=>x.id===state.target).label+'»',{tone:'ok',action:'Другой блок',onAction:()=>{}});
+      renderQuotes();
+    });
+  });
+}
+function renderCliches(){
+  $('#clicheBank').innerHTML=CLICHES.map((g,i)=>
+    '<div class="cl-group"><h4>'+esc(g.t)+'</h4>'+
+    g.items.map((s,j)=>'<button class="cl" data-g="'+i+'" data-i="'+j+'">'+esc(s)+'</button>').join('')+'</div>').join('');
+  $$('.cl').forEach(b=>b.onclick=()=>{
+    const g=CLICHES[+b.dataset.g], s=g.items[+b.dataset.i];
+    insertInto(g.b,s); toast('Клише добавлено в блок «'+BLOCKS.find(x=>x.id===g.b).label+'»',{tone:'ok'});
+  });
+}
+
+/* ============================ РЕНДЕР: ЖИВАЯ ПРОВЕРКА ============================ */
+function render(){
+  const A=analyze();
+  const show=state.settings.auto||state.checked;
+
+  BLOCKS.forEach(b=>{
+    const t=state.blocks[b.id], c=$('[data-c="'+b.id+'"]'), f=$('[data-f="'+b.id+'"]');
+    if(c) c.textContent=words(t)+' сл · '+sentences(t)+' предл'+(quotesIn(t).length?' · '+quotesIn(t).length+' цит':'');
+    if(f){
+      const qs=quotesIn(t);
+      f.innerHTML=qs.map(q=>{
+        const v=verifyQuote(q);
+        const cls=v.status==='ok'?'ok':v.status==='part'?'warn':'';
+        const lbl=v.status==='ok'?('гл. '+v.src.ch):v.status==='part'?'сверь':'нет в банке';
+        const short=q.length>34?q.slice(0,34)+'…':q;
+        return '<span class="qtag-mini '+cls+'">«'+esc(short)+'» · '+lbl+'</span>';
+      }).join('');
+    }
+  });
+
+  // превью
+  const pv=$('#pvBody');
+  const parts=BLOCKS.filter(b=>state.blocks[b.id].trim());
+  if(!parts.length){
+    pv.innerHTML='<p class="pv-empty">Здесь появится цельный текст. Пиши в блоках выше — ответ собирается автоматически.</p>';
+  }else{
+    pv.innerHTML=parts.map(b=>{
+      const html=esc(state.blocks[b.id]).replace(/«[^»]+»/g,m=>'<mark>'+m+'</mark>');
+      return '<p><span class="pv-label">'+b.label+'</span>'+html+'</p>';
+    }).join('');
+  }
+  $('#pvMeta').textContent=A.sents+' предл. · '+A.w+' слов · '+A.qs.length+' цитат';
+
+  // кольцо и отметка
+  const shown=show?A.total:0;
+  $('#ringFg').style.strokeDashoffset=String(326.7*(1-shown/8));
+  $('#scoreNum').textContent=show?A.total:'—';
+  $('#markVal').textContent=show?markOf(A.total):'—';
+  $('#markLabel').textContent=show?markLabel(A.total):(state.settings.auto?'ответ не проверен':'автопроверка выключена');
+  $('#chipScoreVal').textContent=(show?A.total:'—')+' / 8';
+  $('#chipScore').classList.toggle('live',show&&A.total>=7);
+
+  // объём
+  $('#meterFill').style.width=Math.min(100,A.sents/14*100)+'%';
+  $('#meterTxt').textContent='Предложений: '+A.sents+(A.sents>=7&&A.sents<=9?' · в цели':'');
+
+  // быстрые проверки
+  const checks=[
+    {ok:!!state.position,t:state.position?('Позиция '+POSITIONS[state.position].letter+' выбрана'):'Позиция не выбрана'},
+    {ok:words(state.blocks.thesis)>=6,t:'Тезис — прямой ответ на вопрос'},
+    {ok:quotesIn(state.blocks.arg1).length>0||NAMES.test(state.blocks.arg1),t:'Аргумент 1 опирается на текст'},
+    {ok:quotesIn(state.blocks.arg2).length>0||NAMES.test(state.blocks.arg2),t:'Аргумент 2 опирается на текст'},
+    {ok:A.qs.length>=2,t:'Цитат: '+A.qs.length+' из двух нужных'},
+    {ok:A.named,t:'Названо, кто говорит'},
+    {ok:A.sents>=7&&A.sents<=9,t:'Объём 7–9 предложений',warn:A.sents>0&&(A.sents<7||A.sents>9)},
+    {ok:words(state.blocks.conclusion)>=6,t:'Вывод отвечает на вопрос'}
+  ];
+  $('#quickChecks').innerHTML=checks.map(c=>
+    '<div class="chk '+(c.ok?'ok':(c.warn?'warn':'no'))+'"><span class="dot">'+(c.ok?'✓':(c.warn?'!':'·'))+'</span><span>'+esc(c.t)+'</span></div>').join('');
+
+  // сверка цитат
+  const qc=$('#qCheck');
+  if(!A.verified.length){
+    qc.innerHTML='<p class="mute" style="font-size:12.5px;margin:0">Цитат пока нет. Возьми их из банка — сверка появится здесь.</p>';
+  }else{
+    qc.innerHTML=A.verified.map(v=>
+      '<div class="qc '+(v.status==='ok'?'ok':v.status==='part'?'part':'unk')+'"><b>«'+esc(v.text)+'»</b><span class="st">'+esc(v.label)+'</span></div>').join('');
+  }
+
+  // ловушки
+  const full=allText();
+  const traps=[];
+  if(/гоголь хотел сказать|автор хотел сказать/i.test(full)) traps.push('«Гоголь хотел сказать…» — сначала покажи, что есть в тексте.');
+  if(/актуальн|в наше время|в наши дни/i.test(full)) traps.push('Общие слова про актуальность не доказывают тезис.');
+  if(/мне (понравил|нравитс)/i.test(full)) traps.push('Оценка «понравилось» вместо анализа.');
+  if(A.retell) traps.push('Цепочка «сначала — потом — затем»: это пересказ, а не рассуждение.');
+  const sentList=full.split(/(?<=[.!?…])\s+/);
+  sentList.forEach(s=>{
+    if(/нет уз святее товарищества/i.test(s)&&/(рассказчик|автор|гоголь)/i.test(s))
+      traps.push('«Нет уз святее товарищества!» говорит Тарас, а не рассказчик.');
+    if(/сыноубийц/i.test(s)&&/(тарас (говорит|называет|сказал)|остап (говорит|сказал))/i.test(s))
+      traps.push('«Сыноубийца» — слово рассказчика, а не реплика героя.');
+  });
+  const badQuotes=A.verified.filter(v=>v.status!=='ok');
+  if(badQuotes.length) traps.push(badQuotes.length+' цитат(ы) не совпали дословно с банком — сверь по тексту повести.');
+  $('#trapChecks').innerHTML=traps.length
+    ? traps.map(t=>'<div class="chk warn"><span class="dot">!</span><span>'+esc(t)+'</span></div>').join('')
+    : '<div class="chk ok"><span class="dot">✓</span><span>Ловушек не найдено.</span></div>';
+
+  renderCriteria(A,show);
+  renderScale(A,show);
+  renderFixes(A,show);
+  renderQuotes();
+}
+function renderCriteria(A,show){
+  $('#critBody').innerHTML=CRITERIA.map(c=>{
+    const auto=A.res[c.id].v;
+    const val=state.manual[c.id]!=null?state.manual[c.id]:auto;
+    const cls=!show?'':(val===c.max?'full':val>0?'part':'zero');
+    const why=state.manual[c.id]!=null?('Балл выставлен учителем. Автооценка: '+auto+'. '+A.res[c.id].why):A.res[c.id].why;
+    let man='<div class="manual">';
+    for(let i=0;i<=c.max;i++) man+='<button data-k="'+c.id+'" data-v="'+i+'" class="'+(state.manual[c.id]===i?'on':'')+'">'+i+'</button>';
+    man+='<button class="auto'+(state.manual[c.id]==null?' on':'')+'" data-k="'+c.id+'" data-v="auto">Авто</button></div>';
+    return '<tr><td><span class="sc '+cls+'">'+(show?val:'·')+'</span>'+man+'</td>'+
+      '<td><span class="crit-name">'+esc(c.name)+'</span><span class="crit-why">'+esc(show?why:c.hint)+'</span></td>'+
+      '<td class="crit-max">'+c.max+'</td></tr>';
+  }).join('');
+  $$('#critBody .manual button').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.k,v=b.dataset.v;
+    if(v==='auto') delete state.manual[k]; else state.manual[k]=+v;
+    state.checked=true; render(); save();
+  });
+}
+function renderScale(A,show){
+  const items=[{r:'7–8',m:'5'},{r:'5–6',m:'4'},{r:'3–4',m:'3'},{r:'0–2',m:'—'}];
+  const cur=show?markOf(A.total):null;
+  $('#scale').innerHTML=items.map(i=>
+    '<div class="sc-item'+(cur===i.m?' hit':'')+'"><b>'+i.m+'</b><span>'+i.r+' баллов</span></div>').join('');
+}
+function renderFixes(A,show){
+  const box=$('#fixes');
+  if(!show){box.innerHTML='<p class="mute" style="font-size:13.5px;margin:0">Нажми «Проверить себя» — появятся точные подсказки.</p>';return;}
+  const tips=[];
+  CRITERIA.forEach(c=>{
+    const val=state.manual[c.id]!=null?state.manual[c.id]:A.res[c.id].v;
+    if(val<c.max) tips.push({t:c.name.replace(/^К\d\.\s*/,''),w:A.res[c.id].why});
+  });
+  if(A.sents<7) tips.push({t:'Объём',w:'Сейчас '+A.sents+' предл. Доведи до 7–9: чаще всего не хватает пояснения после цитаты.'});
+  if(A.sents>9) tips.push({t:'Объём',w:'Сейчас '+A.sents+' предл. Убери лишнее: цель 7–9 предложений.'});
+  if(!tips.length){box.innerHTML='<div class="fix"><span class="n">✓</span><span><b>Все критерии набраны.</b> Перечитай ответ вслух: проверь кавычки и имена говорящих.</span></div>';return;}
+  box.innerHTML=tips.slice(0,6).map((t,i)=>
+    '<div class="fix"><span class="n">'+(i+1)+'</span><span><b>'+esc(t.t)+'.</b> '+esc(t.w)+'</span></div>').join('');
+}
+
+/* ============================ ТАЙМЕР ============================ */
+let tick=null,startedAt=0,base=0,lastStage=-1;
+function fmt(s){s=Math.max(0,Math.round(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+function stageIndex(el){for(let i=0;i<BOUNDS.length;i++){if(el<BOUNDS[i])return i;}return STAGES.length-1;}
+function renderStages(){
+  const el=state.elapsed,idx=stageIndex(el);
+  $('#stages').innerHTML=STAGES.map((s,i)=>
+    '<button class="stage'+(i===idx?' active':'')+(i<idx?' passed':'')+'" data-i="'+i+'"><b>'+s.n+'</b><span>'+esc(s.t)+'</span><em>'+s.sec+'м</em></button>').join('');
+  $$('.stage').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i; state.elapsed=i?BOUNDS[i-1]:0; base=state.elapsed; startedAt=Date.now();
+    lastStage=i; updateClock(); goTo(STAGES[i].d); save();
+  });
+}
+function updateClock(){
+  const total=TOTAL+state.extra, left=Math.max(0,total-state.elapsed), idx=stageIndex(state.elapsed);
+  $('#clockDigits').textContent=fmt(left);
+  $('#chipTime').textContent=fmt(left);
+  $('#clockBar').style.width=Math.min(100,state.elapsed/total*100)+'%';
+  const c=$('#clock'); c.classList.toggle('warn',left<=120&&left>0); c.classList.toggle('done',left<=0);
+  $('#clockLabel').textContent=left<=0?'время вышло':('этап '+(idx+1)+' · '+STAGES[idx].t.toLowerCase());
+  if(idx!==lastStage){
+    if(lastStage>=0&&state.elapsed>0&&left>0) toast('Этап '+(idx+1)+': '+STAGES[idx].t,{tone:'ok'});
+    lastStage=idx; renderStages();
+  }
+}
+function startTimer(){
+  if(tick) return;
+  base=state.elapsed; startedAt=Date.now();
+  tick=setInterval(()=>{
+    state.elapsed=base+(Date.now()-startedAt)/1000;
+    if(state.elapsed>=TOTAL+state.extra){state.elapsed=TOTAL+state.extra;pauseTimer();toast('20 минут прошли. Переходим к итогу.',{tone:'warn'});}
+    updateClock();
+  },250);
+  $('#timerToggle').innerHTML='❚❚ Пауза'; $('#chipTimer').classList.add('live');
+}
+function pauseTimer(){
+  if(tick){clearInterval(tick);tick=null;}
+  $('#timerToggle').innerHTML='▶ Пуск'; $('#chipTimer').classList.remove('live'); save();
+}
+function toggleTimer(){tick?pauseTimer():startTimer();}
+$('#timerToggle').onclick=toggleTimer;
+$('#chipTimer').onclick=toggleTimer;
+$('#timerReset').onclick=()=>{pauseTimer();state.elapsed=0;base=0;lastStage=-1;updateClock();renderStages();save();toast('Таймер сброшен на 20:00');};
+$('#timerPlus').onclick=()=>{state.extra+=60;updateClock();save();toast('Добавлена минута');};
+
+/* ============================ НАСТРОЙКИ ============================ */
+function applySettings(){
+  const s=state.settings;
+  root.dataset.theme=s.theme; root.dataset.density=s.density; root.dataset.font=s.font;
+  root.dataset.hints=s.hints?'on':'off'; root.dataset.guides=s.guides?'on':'off'; root.dataset.teacher=s.teacher?'on':'off';
+  root.style.setProperty('--read-size',s.size+'px');
+  $('#sizeVal').textContent=s.size; $('#rngSize').value=s.size; $('#selDensity').value=s.density; $('#selFont').value=s.font;
+  $('#swHints').setAttribute('aria-checked',String(s.hints));
+  $('#swGuides').setAttribute('aria-checked',String(s.guides));
+  $('#swAuto').setAttribute('aria-checked',String(s.auto));
+  $('#swMotion').setAttribute('aria-checked',String(s.motion));
+  $('#swTeacher').setAttribute('aria-checked',String(s.teacher));
+  $$('#segTheme button').forEach(b=>b.classList.toggle('on',b.dataset.v===s.theme));
+  $('#navTeacher').classList.toggle('locked',!s.teacher);
+  $('#navTeacher').innerHTML='<i>08</i>Учителю'+(s.teacher?'':' 🔒');
+  BLOCKS.forEach(b=>{const t=ta(b.id);if(t)grow(t);});
+  motionOn=s.motion&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(motionOn) startEmbers(); else stopEmbers();
+}
+function setSetting(k,v){state.settings[k]=v;applySettings();render();save();}
+$$('#segTheme button').forEach(b=>b.onclick=()=>setSetting('theme',b.dataset.v));
+$('#btnTheme').onclick=()=>setSetting('theme',state.settings.theme==='night'?'paper':'night');
+$('#rngSize').oninput=e=>setSetting('size',+e.target.value);
+$('#selDensity').onchange=e=>setSetting('density',e.target.value);
+$('#selFont').onchange=e=>setSetting('font',e.target.value);
+[['swHints','hints'],['swGuides','guides'],['swAuto','auto'],['swMotion','motion'],['swTeacher','teacher']].forEach(([id,key])=>{
+  $('#'+id).onclick=()=>setSetting(key,!state.settings[key]);
+});
+$('#btnTeacherOn').onclick=()=>{setSetting('teacher',true);toast('Режим учителя включён',{tone:'ok'});};
+
+/* ============================ ПУЛЬТ (мобильный) ============================ */
+function openRail(){$('#rail').classList.add('open');$('#scrim').classList.add('on');}
+function closeRail(){$('#rail').classList.remove('open');if(!$('#modal').classList.contains('on'))$('#scrim').classList.remove('on');}
+$('#railToggle').onclick=openRail; $('#railClose').onclick=closeRail;
+
+/* ============================ ПОПОВЕРЫ ============================ */
+const pop=$('#pop'); let popOwner=null;
+function openPop(anchor,kind,blockId){
+  popOwner=anchor;
+  let html='';
+  if(kind==='q'){
+    html=QUOTES.map(q=>'<button data-id="'+q.id+'"><span class="pt">«'+esc(q.text.length>62?q.text.slice(0,62)+'…':q.text)+'»</span><br><span class="pw">'+esc(q.who)+' · глава '+q.ch+'</span></button>').join('');
+  }else{
+    html=CLICHES.map((g,i)=>g.items.map((s,j)=>'<button data-g="'+i+'" data-i="'+j+'"><span class="pw">'+esc(g.t)+'</span><br>'+esc(s)+'</button>').join('')).join('');
+  }
+  pop.innerHTML=html; pop.classList.add('on');
+  const r=anchor.getBoundingClientRect(), pw=Math.min(420,window.innerWidth*0.92);
+  let left=Math.min(window.innerWidth-pw-12,Math.max(12,r.left+window.scrollX));
+  let top=r.bottom+window.scrollY+8;
+  if(r.bottom+340>window.innerHeight) top=Math.max(window.scrollY+70,r.top+window.scrollY-338);
+  pop.style.left=left+'px'; pop.style.top=top+'px'; pop.style.width=pw+'px';
+  $$('button',pop).forEach(b=>b.onclick=()=>{
+    if(kind==='q'){const q=QUOTES.find(x=>x.id===b.dataset.id);insertInto(blockId,'«'+q.text+'»');}
+    else{const g=CLICHES[+b.dataset.g];insertInto(blockId,g.items[+b.dataset.i]);}
+    closePop(); toast('Добавлено в блок «'+BLOCKS.find(x=>x.id===blockId).label+'»',{tone:'ok'});
+  });
+}
+function closePop(){pop.classList.remove('on');popOwner=null;}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-pop]');
+  if(t){e.stopPropagation();if(popOwner===t){closePop();return;}setTarget(t.dataset.b);openPop(t,t.dataset.pop,t.dataset.b);return;}
+  if(!e.target.closest('#pop')) closePop();
+});
+window.addEventListener('resize',closePop);
+
+/* ============================ РЕДАКТОР ============================ */
+BLOCKS.forEach(b=>{
+  const t=ta(b.id); if(!t) return;
+  t.addEventListener('input',()=>{
+    state.blocks[b.id]=t.value; grow(t);
+    if(!state.settings.auto) state.checked=false;
+    render(); save();
+  });
+  t.addEventListener('focus',()=>{
+    setTarget(b.id);
+    $$('.block').forEach(x=>x.classList.toggle('focus',x.dataset.b===b.id));
+  });
+  t.addEventListener('blur',()=>{setTimeout(()=>{if(!document.activeElement||!document.activeElement.closest('.block'))$$('.block').forEach(x=>x.classList.remove('focus'));},120);});
+});
+$('#targetSel').onchange=e=>setTarget(e.target.value);
+$$('[data-clear]').forEach(b=>b.onclick=()=>{
+  const id=b.dataset.clear; if(!state.blocks[id].trim())return;
+  snapshot('очистка блока «'+BLOCKS.find(x=>x.id===id).label+'»');
+  state.blocks[id]=''; const t=ta(id); t.value=''; grow(t); render(); save();
+  toast('Блок очищен',{tone:'warn',action:'Вернуть',onAction:restoreUndo});
+});
+$('#btnThesis').onclick=()=>{
+  if(!state.position){toast('Сначала выбери позицию А, Б или В',{tone:'warn'});goTo('vopros');return;}
+  insertInto('thesis',POSITIONS[state.position].thesis);
+  toast('Заготовка тезиса добавлена — дополни её своими словами',{tone:'ok'});
+  goTo('pishem');
+};
+$('#btnRandom').onclick=()=>{
+  const keys=Object.keys(POSITIONS);
+  state.position=keys[Math.floor(Math.random()*keys.length)];
+  renderPositions(); render(); save(); goTo('vopros');
+  toast('Выпала позиция '+POSITIONS[state.position].letter+' · '+POSITIONS[state.position].title,{tone:'ok'});
+};
+$('#btnReset').onclick=()=>confirmBox('Сбросить работу?','Ответ, позиция и баллы будут очищены. Действие можно отменить сразу после сброса.',()=>{
+  snapshot('сброс работы');
+  BLOCKS.forEach(b=>{state.blocks[b.id]='';const t=ta(b.id);t.value='';grow(t);});
+  state.position=null;state.manual={};state.checked=false;
+  renderPositions();render();save();
+  toast('Работа очищена',{tone:'bad',action:'Вернуть',onAction:restoreUndo});
+},'Сбросить');
+
+/* ============================ ОБРАЗЕЦ ============================ */
+$('#mThesis').textContent=MODEL.thesis; $('#mArg1').textContent=MODEL.arg1;
+$('#mArg2').textContent=MODEL.arg2; $('#mCounter').textContent=MODEL.counter; $('#mConc').textContent=MODEL.conclusion;
+$('#modelBar').onclick=()=>{
+  const m=$('#model'), open=m.classList.toggle('open');
+  $('#modelBar').setAttribute('aria-expanded',String(open));
+};
+$('#btnLoadModel').onclick=()=>{
+  const apply=()=>{
+    snapshot('загрузка образца');
+    BLOCKS.forEach(b=>{state.blocks[b.id]=MODEL[b.id]||'';const t=ta(b.id);t.value=state.blocks[b.id];grow(t);});
+    state.position='a'; state.checked=true; renderPositions(); render(); save(); goTo('pishem');
+    toast('Образец разложен по блокам. Замени его своими словами.',{tone:'warn',action:'Вернуть',onAction:restoreUndo});
+  };
+  if(allText().trim()) confirmBox('Заменить свой текст образцом?','Текущий черновик будет заменён образцом учителя. Сразу после этого можно нажать «Вернуть».',apply,'Заменить');
+  else apply();
+};
+$('#btnCopyModel').onclick=()=>copyText(BLOCKS.map(b=>MODEL[b.id]).join('\n\n'));
+
+/* ============================ ЭКСПОРТ ============================ */
+function answerPlain(){
+  return BLOCKS.filter(b=>state.blocks[b.id].trim()).map(b=>state.blocks[b.id].trim()).join('\n\n');
+}
+function copyText(t){
+  if(!t){toast('Пока нечего копировать',{tone:'warn'});return;}
+  const done=()=>toast('Скопировано в буфер обмена',{tone:'ok'});
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(done).catch(()=>fallback());
+  }else fallback();
+  function fallback(){
+    const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');done();}catch(e){toast('Не удалось скопировать — выдели текст вручную',{tone:'bad'});}
+    ta.remove();
+  }
+}
+['btnCopy','btnCopy2','btnCopy3'].forEach(id=>{const b=$('#'+id);if(b)b.onclick=()=>copyText(answerPlain());});
+function download(name,text,mime){
+  const blob=new Blob([text],{type:mime||'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob), a=document.createElement('a');
+  a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+  toast('Файл «'+name+'» скачан',{tone:'ok'});
+}
+function exportTxt(){
+  const A=analyze();
+  const pos=state.position?('Позиция '+POSITIONS[state.position].letter+' — '+POSITIONS[state.position].title):'Позиция не выбрана';
+  const head=['Развитие речи. Развёрнутый ответ на проблемный вопрос',
+    'Н. В. Гоголь. «Тарас Бульба» (повесть, редакция 1842 года). 7 класс.',
+    '','Проблемный вопрос: Тарас Бульба убивает Андрия. Это жестокость отца или верность товариществу?',
+    pos,'','——— ОТВЕТ ———',''].join('\n');
+  const body=answerPlain()||'(ответ пока не написан)';
+  const tail=['','','——— ПРОВЕРКА ———',
+    'Предложений: '+A.sents+' · слов: '+A.w+' · цитат: '+A.qs.length,
+    CRITERIA.map(c=>{const v=state.manual[c.id]!=null?state.manual[c.id]:A.res[c.id].v;return c.name+' — '+v+' из '+c.max;}).join('\n'),
+    'Итого: '+A.total+' из 8. Отметка по шкале урока: '+markOf(A.total)+'.',
+    '','Цитаты сверены по приложенному тексту повести в редакции 1842 года.'].join('\n');
+  download('Тарас_Бульба_ответ.txt',head+body+tail);
+}
+function exportHtml(){
+  const A=analyze();
+  const pos=state.position?('Позиция '+POSITIONS[state.position].letter+' — '+POSITIONS[state.position].title):'Позиция не выбрана';
+  const body=BLOCKS.filter(b=>state.blocks[b.id].trim()).map(b=>'<p>'+esc(state.blocks[b.id])+'</p>').join('')||'<p><i>Ответ пока не написан.</i></p>';
+  const rows=CRITERIA.map(c=>{const v=state.manual[c.id]!=null?state.manual[c.id]:A.res[c.id].v;
+    return '<tr><td>'+esc(c.name)+'</td><td class="n">'+v+' / '+c.max+'</td></tr>';}).join('');
+  const doc='<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><title>Ответ · Тарас Бульба</title>'+
+  '<style>body{max-width:800px;margin:40px auto;padding:0 24px;font-family:Georgia,serif;line-height:1.6;color:#241b12;background:#f8f0df}'+
+  'h1{font-size:22px;margin:0 0 6px}.s{color:#6b5b48;font-size:14px;margin:0 0 20px}'+
+  '.q{border:1px solid #d9c7a6;background:#fff;padding:14px 16px;font-weight:bold;margin-bottom:14px}'+
+  'p{text-indent:1.2cm;margin:0 0 10px}p:first-of-type{text-indent:0}'+
+  'table{width:100%;border-collapse:collapse;margin-top:22px;font-size:14px}td,th{border:1px solid #d9c7a6;padding:7px 9px;text-align:left}'+
+  'td.n{text-align:center;width:90px}.f{margin-top:20px;font-size:12px;color:#6b5b48;border-top:1px solid #d9c7a6;padding-top:10px}</style></head><body>'+
+  '<h1>Развёрнутый ответ на проблемный вопрос</h1><div class="s">Н. В. Гоголь. «Тарас Бульба», редакция 1842 года · 7 класс</div>'+
+  '<div class="q">Тарас Бульба убивает Андрия. Это жестокость отца или верность товариществу?</div>'+
+  '<div class="s">'+esc(pos)+'</div>'+body+
+  '<table><tr><th>Критерий</th><th class="n">Балл</th></tr>'+rows+
+  '<tr><td><b>Итого · отметка '+markOf(A.total)+'</b></td><td class="n"><b>'+A.total+' / 8</b></td></tr></table>'+
+  '<div class="f">Предложений: '+A.sents+' · слов: '+A.w+' · цитат: '+A.qs.length+'. Цитаты сверены по редакции 1842 года.</div>'+
+  '</body></html>';
+  download('Тарас_Бульба_ответ.html',doc,'text/html;charset=utf-8');
+}
+['btnTxt','btnTxt2'].forEach(id=>{const b=$('#'+id);if(b)b.onclick=exportTxt;});
+['btnHtml','btnHtml2'].forEach(id=>{const b=$('#'+id);if(b)b.onclick=exportHtml;});
+
+function buildPrint(){
+  const A=analyze();
+  const pos=state.position?('Позиция '+POSITIONS[state.position].letter+' — '+POSITIONS[state.position].title):'Позиция не выбрана';
+  const body=BLOCKS.filter(b=>state.blocks[b.id].trim()).map(b=>'<p>'+esc(state.blocks[b.id])+'</p>').join('')||'<p>Ответ не написан.</p>';
+  const rows=CRITERIA.map(c=>{const v=state.manual[c.id]!=null?state.manual[c.id]:A.res[c.id].v;
+    return '<tr><td>'+esc(c.name)+'</td><td class="n">'+v+' / '+c.max+'</td></tr>';}).join('');
+  let bank='';
+  if(state.settings.teacher){
+    bank='<div class="ps-break"></div><h1>Банк цитат · для учителя</h1>'+
+      '<div class="ps-sub">Редакция 1842 года. Главы указаны по нумерации приложенного текста.</div>'+
+      '<table><tr><th>Цитата</th><th>Кто говорит</th><th class="n">Глава</th></tr>'+
+      QUOTES.map(q=>'<tr><td>«'+esc(q.text)+'»</td><td>'+esc(q.who)+' · '+esc(q.where)+'</td><td class="n">'+q.ch+'</td></tr>').join('')+
+      '</table><div class="ps-foot">Хронометраж: 2 + 4 + 3 + 8 + 2 + 1 = 20 минут. Максимум 8 баллов: 7–8 → «5», 5–6 → «4», 3–4 → «3», 0–2 → доработать.</div>';
+  }
+  $('#printSheet').innerHTML=
+    '<h1>Развитие речи. Развёрнутый ответ на проблемный вопрос</h1>'+
+    '<div class="ps-sub">Н. В. Гоголь. «Тарас Бульба» (повесть, редакция 1842 года) · 7 класс · 20 минут</div>'+
+    '<div class="ps-line">Имя, класс _______________________________ Дата ____________</div>'+
+    '<div class="ps-q">Тарас Бульба убивает Андрия. Это жестокость отца или верность товариществу?</div>'+
+    '<div class="ps-pos">'+esc(pos)+' · объём 7–9 предложений · два аргумента · не меньше двух цитат</div>'+
+    '<div class="ps-body">'+body+'</div>'+
+    '<table><tr><th>Критерий</th><th class="n">Балл</th></tr>'+rows+
+    '<tr><td><b>Итого · отметка по шкале урока: '+markOf(A.total)+'</b></td><td class="n"><b>'+A.total+' / 8</b></td></tr></table>'+
+    '<div class="ps-foot">Предложений: '+A.sents+' · слов: '+A.w+' · цитат: '+A.qs.length+
+    '. Шкала: 7–8 → «5», 5–6 → «4», 3–4 → «3», 0–2 → ответ нужно доработать. Цитаты сверены по редакции 1842 года.</div>'+bank;
+}
+function doPrint(){buildPrint();setTimeout(()=>window.print(),60);}
+['btnPrint','btnPrint2','btnPrint3','btnPrint4'].forEach(id=>{const b=$('#'+id);if(b)b.onclick=doPrint;});
+window.addEventListener('beforeprint',buildPrint);
+
+/* ============================ ПРОВЕРКА / НАВИГАЦИЯ ============================ */
+function runCheck(){
+  state.checked=true; render(); goTo('proverka');
+  const A=analyze();
+  toast('Проверено: '+A.total+' из 8 · '+markLabel(A.total),{tone:A.total>=7?'ok':A.total>=5?'':'warn'});
+}
+['btnCheck','btnCheck2'].forEach(id=>{const b=$('#'+id);if(b)b.onclick=runCheck;});
+$('#chipScore').onclick=()=>goTo('proverka');
+$('#btnFixScroll').onclick=()=>$('#fixCard').scrollIntoView({behavior:'smooth',block:'center'});
+function goTo(id){
+  const el=document.getElementById(id); if(!el) return;
+  const head=parseInt(getComputedStyle(root).getPropertyValue('--head'))||116;
+  const y=el.getBoundingClientRect().top+window.scrollY-head-14;
+  window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+  closeRail();
+}
+$$('.nlink').forEach(a=>a.onclick=e=>{
+  e.preventDefault();
+  const id=a.getAttribute('href').slice(1);
+  if(id==='uchitelyu'&&!state.settings.teacher){
+    goTo(id); toast('Раздел закрыт: включите «Режим учителя» в пульте',{tone:'warn'}); return;
+  }
+  goTo(id);
+});
+$$('a[href^="#"]').forEach(a=>{
+  if(a.classList.contains('nlink'))return;
+  a.onclick=e=>{e.preventDefault();goTo(a.getAttribute('href').slice(1));};
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closePop();closeModal();closeRail();}
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();save();toast('Черновик сохранён',{tone:'ok'});}
+  if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();runCheck();}
+});
+
+/* ============================ НАБЛЮДАТЕЛИ ============================ */
+const revealIO=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');revealIO.unobserve(en.target);}}),{threshold:.08});
+$$('.reveal').forEach((el,i)=>{el.style.transitionDelay=(Math.min(i,4)*60)+'ms';revealIO.observe(el);});
+const navIO=new IntersectionObserver(es=>{
+  es.forEach(en=>{
+    if(en.isIntersecting){
+      $$('.nlink').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id));
+    }
+  });
+},{rootMargin:'-130px 0px -62% 0px',threshold:0});
+$$('main section').forEach(s=>navIO.observe(s));
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  $('#scrollLine').style.width=(h>0?(window.scrollY/h*100):0)+'%';
+},{passive:true});
+
+/* ============================ УГЛИ НАД СТЕПЬЮ ============================ */
+const cv=$('#embers'), ctx=cv.getContext('2d');
+let parts=[],raf=null,motionOn=true,dpr=1;
+function sizeCanvas(){
+  dpr=Math.min(window.devicePixelRatio||1,2);
+  cv.width=Math.floor(window.innerWidth*dpr); cv.height=Math.floor(window.innerHeight*dpr);
+  cv.style.width=window.innerWidth+'px'; cv.style.height=window.innerHeight+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  const n=Math.max(18,Math.min(46,Math.round(window.innerWidth/30)));
+  parts=[];
+  for(let i=0;i<n;i++)parts.push(newPart(true));
+}
+function newPart(init){
+  return {x:Math.random()*window.innerWidth,y:init?Math.random()*window.innerHeight:window.innerHeight+12,
+    r:.7+Math.random()*2.1,vy:.12+Math.random()*.42,vx:(Math.random()-.5)*.22,
+    a:.16+Math.random()*.5,ph:Math.random()*6.28,gold:Math.random()>.42};
+}
+function frame(){
+  ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+  for(let i=0;i<parts.length;i++){
+    const p=parts[i];
+    p.y-=p.vy; p.ph+=.012; p.x+=p.vx+Math.sin(p.ph)*.24;
+    if(p.y<-14||p.x<-20||p.x>window.innerWidth+20)parts[i]=newPart(false);
+    const col=p.gold?'240,190,85':'224,52,75';
+    const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4.5);
+    g.addColorStop(0,'rgba('+col+','+p.a+')'); g.addColorStop(1,'rgba('+col+',0)');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,p.r*4.5,0,6.2832); ctx.fill();
+  }
+  raf=requestAnimationFrame(frame);
+}
+function startEmbers(){if(raf||!motionOn)return;sizeCanvas();raf=requestAnimationFrame(frame);}
+function stopEmbers(){if(raf){cancelAnimationFrame(raf);raf=null;}ctx.clearRect(0,0,cv.width,cv.height);}
+let rz=null;
+window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(motionOn)sizeCanvas();},180);});
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){if(raf){cancelAnimationFrame(raf);raf=null;}}
+  else if(motionOn)startEmbers();
+});
+
+/* ============================ СТАРТ ============================ */
+load();
+applySettings();
+renderPositions();
+renderCliches();
+BLOCKS.forEach(b=>{const t=ta(b.id);if(t){t.value=state.blocks[b.id];grow(t);}});
+renderStages(); updateClock(); render();
+if(!allText().trim()){
+  setTimeout(()=>toast('Начни с позиции А, Б или В — и запусти таймер в пульте.',{tone:'ok',action:'К вопросу',onAction:()=>goTo('vopros')}),900);
+}else{
+  setTimeout(()=>toast('Черновик восстановлен из этого браузера.',{tone:'ok'}),700);
+}
+window.addEventListener('beforeunload',()=>{try{localStorage.setItem(KEY,JSON.stringify({position:state.position,blocks:state.blocks,manual:state.manual,settings:state.settings,extra:state.extra,elapsed:Math.floor(state.elapsed)}));}catch(e){}});
+})();
+</script>
+</body>
+</html>
