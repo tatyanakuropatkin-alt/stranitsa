@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Муму · Контрольный рабочий лист · 5 класс</title>
+<style>
+:root{
+  --ink:#2b2118;--ink-soft:#5d5044;--ink-faint:#8a7b6a;
+  --paper:#f7f0e1;--paper-2:#efe4cf;--paper-3:#e5d7bd;--paper-edge:#d9c8a8;
+  --burgundy:#8e2f3c;--burgundy-deep:#6d2130;--burgundy-soft:#f3dcd9;
+  --amber:#b97e24;--amber-bright:#d99a33;--amber-soft:#f4e3c2;
+  --river:#2f6f7e;--river-soft:#dcebea;
+  --village:#5c7a45;--village-soft:#e4ead6;
+  --success:#3f7d4e;--danger:#a83232;--warn:#b97e24;--info:#2f6f7e;
+  --desk-1:#171210;--desk-2:#26190f;--desk-3:#1d232a;
+  --serif:Georgia,"Palatino Linotype","Book Antiqua","Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{font-family:var(--serif);color:var(--ink);background:var(--desk-1);min-height:100vh;line-height:1.55;overflow-x:hidden}
+.desk{position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(1100px 600px at 12% -8%,rgba(217,154,51,.16),transparent 60%),
+  radial-gradient(900px 700px at 96% 108%,rgba(47,111,126,.20),transparent 62%),
+  radial-gradient(700px 500px at 78% 12%,rgba(142,47,60,.14),transparent 60%),
+  linear-gradient(150deg,var(--desk-2) 0%,var(--desk-1) 46%,var(--desk-3) 100%)}
+.desk::after{content:"";position:absolute;inset:0;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.glow{position:fixed;border-radius:50%;filter:blur(70px);z-index:-1;pointer-events:none;opacity:.5}
+.glow.a{width:420px;height:420px;left:-120px;top:8%;background:radial-gradient(circle,rgba(217,154,51,.35),transparent 70%);animation:drift 26s ease-in-out infinite alternate}
+.glow.b{width:520px;height:520px;right:-160px;bottom:-6%;background:radial-gradient(circle,rgba(47,111,126,.35),transparent 70%);animation:drift 32s ease-in-out infinite alternate-reverse}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,-40px) scale(1.12)}}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--desk-1)}
+::-webkit-scrollbar-thumb{background:var(--burgundy);border-radius:8px;border:2px solid var(--desk-1)}
+::-webkit-scrollbar-thumb:hover{background:var(--amber)}
+*{scrollbar-width:thin;scrollbar-color:var(--burgundy) var(--desk-1)}
+.toolbar{position:fixed;top:0;left:0;right:0;z-index:50;background:linear-gradient(180deg,rgba(23,18,16,.97),rgba(23,18,16,.9));backdrop-filter:blur(8px);border-bottom:1px solid rgba(217,154,51,.35);display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 18px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--paper)}
+.brand b{font-size:15px;letter-spacing:.06em}
+.brand small{display:block;color:var(--amber-bright);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.hud{display:flex;align-items:center;gap:14px;margin-left:auto;flex-wrap:wrap}
+.hudbox{display:flex;align-items:center;gap:7px;font:600 12px var(--sans);color:var(--paper-3);background:rgba(247,240,225,.06);border:1px solid rgba(217,154,51,.3);border-radius:8px;padding:5px 10px}
+.hudbox .lbl{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+#timer{font:700 15px var(--sans);color:var(--amber-bright);min-width:52px;text-align:center}
+#timer.warn{color:var(--warn)}#timer.danger{color:var(--danger);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.35}}
+.pips{display:flex;gap:4px}
+.pip{width:11px;height:11px;border-radius:50%;border:1.5px solid var(--ink-faint);background:transparent}
+.pip.on{background:var(--danger);border-color:var(--danger);box-shadow:0 0 6px rgba(168,50,50,.7)}
+.pbar{width:90px;height:6px;border-radius:4px;background:rgba(247,240,225,.15);overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--burgundy));transition:width .5s}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{font:600 12.5px var(--sans);letter-spacing:.03em;cursor:pointer;border-radius:8px;padding:8px 13px;border:1px solid rgba(217,154,51,.5);background:rgba(247,240,225,.06);color:var(--paper);transition:.2s}
+.btn:hover:not(:disabled){background:rgba(217,154,51,.18);border-color:var(--amber-bright);transform:translateY(-1px)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn.primary{background:linear-gradient(135deg,var(--burgundy),var(--burgundy-deep));border-color:var(--burgundy);color:#fff;box-shadow:0 4px 14px rgba(142,47,60,.4)}
+.btn.primary:hover:not(:disabled){background:linear-gradient(135deg,#a03a48,var(--burgundy))}
+.btn.gold{background:linear-gradient(135deg,var(--amber),#9a6716);border-color:var(--amber);color:#fff}
+select.btn{appearance:none;padding-right:26px;background-image:linear-gradient(45deg,transparent 50%,var(--amber-bright) 50%),linear-gradient(135deg,var(--amber-bright) 50%,transparent 50%);background-position:calc(100% - 14px) 55%,calc(100% - 9px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+select.btn option{color:var(--ink);background:var(--paper)}
+.save{font:italic 11px var(--serif);color:var(--village-soft);opacity:0;transition:.4s}
+.save.on{opacity:1}
+.cover{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:90px 16px 30px;overflow:auto}
+body[data-phase="intro"] .cover{display:flex}
+.covercard{max-width:640px;width:100%;background:var(--paper);border-radius:8px;padding:40px 44px;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 0 0 1px var(--paper-edge);position:relative;animation:rise .7s ease}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.covercard::after{content:"";position:absolute;inset:12px;border:1px solid var(--paper-edge);border-radius:4px;pointer-events:none;box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 4px var(--paper-edge)}
+.covercard>*{position:relative;z-index:1}
+.seal{width:74px;height:74px;margin:0 auto 14px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#a8434f,var(--burgundy-deep));display:grid;place-items:center;color:#fff;box-shadow:0 6px 18px rgba(109,33,48,.5),inset 0 0 0 3px rgba(255,255,255,.25);font:700 26px var(--serif)}
+.covercard h1{text-align:center;font-size:24px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.covercard .sub{text-align:center;font-style:italic;color:var(--ink-soft);margin-bottom:18px}
+.rules{list-style:none;margin:0 0 20px;display:grid;gap:9px}
+.rules li{display:flex;gap:10px;font-size:14.5px;background:var(--paper-2);border-radius:8px;padding:9px 13px;border-left:3px solid var(--burgundy)}
+.rules li b{color:var(--burgundy-deep)}
+.rules .ic{flex:none;font-size:16px}
+.coverfields{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.coverfields label{flex:1;min-width:180px;font:600 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.coverfields input{display:block;width:100%;margin-top:5px;border:none;border-bottom:1.5px solid var(--ink-faint);background:transparent;font:17px var(--serif);color:var(--ink);padding:4px 2px;outline:none}
+.coverfields input:focus{border-color:var(--burgundy)}
+#btnStart{width:100%;font:700 15px var(--sans);letter-spacing:.06em;padding:14px;border-radius:10px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--burgundy),var(--burgundy-deep));color:#fff;box-shadow:0 6px 20px rgba(142,47,60,.45);transition:.2s}
+#btnStart:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(142,47,60,.6)}
+.covernote{font:italic 12px var(--serif);color:var(--ink-faint);text-align:center;margin-top:12px}
+#startErr{color:var(--danger);font:600 13px var(--sans);text-align:center;margin-top:8px;min-height:18px}
+.wrap{max-width:920px;margin:0 auto;padding:110px 18px 70px;display:none}
+body[data-phase="working"] .wrap,body[data-phase="finished"] .wrap{display:block}
+.sheet{position:relative;background:var(--paper);border-radius:6px;padding:44px 52px 40px;box-shadow:0 30px 80px rgba(0,0,0,.55),0 4px 18px rgba(0,0,0,.4),inset 0 0 0 1px var(--paper-edge)}
+.sheet::before{content:"";position:absolute;inset:0;border-radius:6px;pointer-events:none;opacity:.4;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23p)'/%3E%3C/svg%3E")}
+.sheet::after{content:"";position:absolute;inset:12px;border:1px solid var(--paper-edge);border-radius:3px;pointer-events:none;box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 4px var(--paper-edge)}
+.sheet>*{position:relative;z-index:1}
+.eyebrow{font:600 10.5px var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--burgundy);text-align:center}
+h1.title{font-size:clamp(21px,3.2vw,28px);text-align:center;letter-spacing:.05em;margin:10px 0 4px;text-transform:uppercase}
+.subtitle{text-align:center;font-style:italic;font-size:16.5px;color:var(--ink-soft)}
+.meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0 6px}
+.chipmeta{font:600 11px var(--sans);letter-spacing:.06em;padding:4px 11px;border-radius:20px;border:1px solid var(--paper-edge);background:var(--paper-2);color:var(--ink-soft)}
+.chipmeta.b{border-color:var(--burgundy);color:var(--burgundy);background:var(--burgundy-soft)}
+.chipmeta.r{border-color:var(--river);color:var(--river);background:var(--river-soft)}
+.studentline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0 4px;padding:10px 16px;background:var(--paper-2);border-radius:8px;font-size:15px}
+.studentline b{color:var(--burgundy-deep)}
+.pblank-fields{margin:12px 0;font-size:12pt}
+.statusbadge{font:700 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:16px}
+.statusbadge.work{background:var(--amber-soft);color:var(--warn);border:1px solid var(--amber)}
+.statusbadge.done{background:var(--village-soft);color:var(--success);border:1px solid var(--village)}
+.vignette{margin:12px auto 4px;display:block;width:100%;max-width:760px}
+.vignette .wave{stroke-dasharray:6 7;animation:flow 9s linear infinite}
+.vignette .wave.w2{animation-duration:12s;animation-direction:reverse}
+@keyframes flow{to{stroke-dashoffset:-130}}
+.vcaption{text-align:center;font:italic 12px var(--serif);color:var(--ink-faint);letter-spacing:.06em;margin-bottom:6px}
+.flourish{display:block;margin:14px auto;width:220px;color:var(--amber)}
+.reference{background:linear-gradient(120deg,var(--paper-2),var(--paper));border-left:4px solid var(--burgundy);border-radius:0 8px 8px 0;padding:18px 22px;margin:14px 0 8px;box-shadow:0 2px 10px rgba(43,33,24,.08)}
+.reference .tag{font:700 10px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--burgundy);margin-bottom:6px}
+.reference p{font-style:italic;font-size:15.5px}
+.reference p::first-letter{font-size:2.1em;font-style:normal;font-weight:700;color:var(--burgundy);float:left;line-height:.9;padding:2px 6px 0 0}
+.task{margin:24px 0;padding:20px 22px;border:1px solid var(--paper-edge);border-radius:10px;background:rgba(255,255,255,.35);transition:box-shadow .3s,border-color .3s}
+.task.ok{border-color:var(--success);box-shadow:0 0 0 1px var(--success)}
+.task.bad{border-color:var(--danger)}
+.task.part{border-color:var(--warn)}
+.thead{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.medal{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 15px var(--serif);background:radial-gradient(circle at 32% 28%,#a8434f,var(--burgundy-deep));color:#fff;box-shadow:0 3px 8px rgba(109,33,48,.4),inset 0 0 0 2px rgba(255,255,255,.25)}
+.thead h2{font-size:17.5px}
+.fb{margin-left:auto;font:700 11px var(--sans);letter-spacing:.05em;padding:4px 10px;border-radius:14px;display:none}
+.fb.show{display:inline-block;animation:pop .35s ease}
+.fb.ok{background:var(--village-soft);color:var(--success)}
+.fb.bad{background:var(--burgundy-soft);color:var(--danger)}
+.fb.part{background:var(--amber-soft);color:var(--warn)}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.instr{font-style:italic;font-size:14px;color:var(--ink-soft);margin-bottom:12px}
+.err{margin:10px 0}
+.err .s{font-size:15px}
+.err .s b{color:var(--burgundy);text-decoration:underline wavy var(--burgundy) 1px;text-underline-offset:3px}
+.fix{display:flex;align-items:baseline;gap:8px;margin:4px 0 0 18px}
+.fix span{font:italic 13px var(--serif);color:var(--ink-soft)}
+.fix input{flex:1;border:none;border-bottom:1.5px solid var(--ink-faint);background:transparent;font:15px var(--serif);padding:3px 6px;outline:none}
+.fix input:focus{border-color:var(--river);background:var(--river-soft)}
+.fix input.good{border-color:var(--success);background:var(--village-soft)}
+.fix input.wrong{border-color:var(--danger);background:var(--burgundy-soft)}
+.matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 26px;margin-bottom:12px;font-size:14.5px}
+.mright b{color:var(--river)}
+.mrows{display:grid;gap:8px}
+.mrow{display:flex;align-items:center;gap:10px;font-size:14.5px;background:var(--paper-2);border-radius:8px;padding:7px 12px}
+.mrow .n{font-weight:700;color:var(--burgundy)}
+.mrow select{margin-left:auto}
+select.pick{font:700 14px var(--serif);color:var(--ink);background:var(--paper);border:1.5px solid var(--paper-edge);border-radius:8px;padding:5px 10px;cursor:pointer;outline:none}
+select.pick.good{border-color:var(--success);background:var(--village-soft)}
+select.pick.wrong{border-color:var(--danger);background:var(--burgundy-soft)}
+.statements{font-size:14.5px;display:grid;gap:6px;margin-bottom:12px}
+.statements b{color:var(--burgundy)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:46px;padding:10px;border:1.5px dashed var(--ink-faint);border-radius:10px;background:rgba(255,255,255,.4)}
+.pool.over,.zone.over{border-color:var(--amber);background:var(--amber-soft)}
+.chip{display:inline-flex;align-items:center;gap:8px;font:13.5px var(--serif);color:var(--ink);cursor:grab;background:var(--paper);border:1.5px solid var(--paper-edge);border-radius:20px;padding:6px 13px 6px 7px;transition:.2s;box-shadow:0 2px 6px rgba(43,33,24,.1)}
+.chip:hover{border-color:var(--amber);transform:translateY(-2px)}
+.chip.sel{border-color:var(--burgundy);background:var(--burgundy-soft);box-shadow:0 0 0 2px var(--burgundy)}
+.chip .num{flex:none;width:22px;height:22px;border-radius:50%;background:var(--burgundy);color:#fff;font:700 11px var(--sans);display:grid;place-items:center}
+.chip.good{border-color:var(--success);background:var(--village-soft)}.chip.good .num{background:var(--success)}
+.chip.wrong{border-color:var(--danger);background:var(--burgundy-soft)}.chip.wrong .num{background:var(--danger)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.zone{border:1.5px dashed var(--paper-edge);border-radius:10px;padding:10px;min-height:96px;cursor:pointer;background:rgba(255,255,255,.3)}
+.zone h3{font:700 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;text-align:center;padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--paper-edge)}
+.zone.fact h3{color:var(--river)}.zone.story h3{color:var(--burgundy)}
+.zone .chips{display:flex;flex-wrap:wrap;gap:8px}
+.zone .empty{font:italic 12px var(--serif);color:var(--ink-faint);text-align:center;padding:8px 0}
+.t3hint{font:12px var(--sans);color:var(--ink-faint);margin-top:8px}
+.seq{display:grid;gap:8px}
+.seqrow{display:flex;align-items:center;gap:12px;font-size:14.5px;background:var(--paper-2);border-radius:8px;padding:8px 12px}
+.quote{border-left:3px solid var(--amber);background:var(--amber-soft);border-radius:0 8px 8px 0;padding:10px 16px;margin:8px 0;font-style:italic;font-size:14.5px}
+.quote .src{display:block;text-align:right;font:italic 11.5px var(--serif);color:var(--ink-soft);margin-top:4px}
+.qs{font-size:14.5px;margin:10px 0 8px}
+textarea{width:100%;min-height:110px;resize:vertical;border:1.5px solid var(--paper-edge);border-radius:8px;background:repeating-linear-gradient(transparent,transparent 27px,var(--paper-edge) 28px),var(--paper);font:15px/28px var(--serif);color:var(--ink);padding:6px 12px;outline:none}
+textarea:focus{border-color:var(--burgundy);box-shadow:0 0 0 3px var(--burgundy-soft)}
+.count{font:11px var(--sans);color:var(--ink-faint);text-align:right;margin-top:3px}
+.submitarea{margin:28px 0 8px;text-align:center}
+#btnSubmitBig{font:700 16px var(--sans);letter-spacing:.06em;padding:15px 40px;border-radius:12px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--burgundy),var(--burgundy-deep));color:#fff;box-shadow:0 8px 24px rgba(142,47,60,.45);transition:.2s}
+#btnSubmitBig:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 30px rgba(142,47,60,.6)}
+#btnSubmitBig:disabled{opacity:.4;cursor:not-allowed}
+.submitnote{font:italic 13px var(--serif);color:var(--ink-soft);margin-top:10px}
+.results{display:none;margin:28px 0 8px;border:2px solid var(--burgundy);border-radius:12px;padding:24px;background:linear-gradient(140deg,var(--burgundy-soft),var(--paper))}
+.results.show{display:block;animation:pop .4s ease}
+.results h2{font-size:18px;letter-spacing:.04em;text-transform:uppercase;color:var(--burgundy-deep);margin-bottom:14px}
+.resgrid{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.stamp{flex:none;width:120px;height:120px;border-radius:50%;border:3px double var(--burgundy);display:grid;place-items:center;transform:rotate(-8deg);color:var(--burgundy);background:rgba(255,255,255,.5);box-shadow:0 0 0 4px rgba(142,47,60,.12)}
+.stamp.thud{animation:thud .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes thud{0%{transform:rotate(-8deg) scale(1.9);opacity:0}60%{transform:rotate(-8deg) scale(.94);opacity:1}100%{transform:rotate(-8deg) scale(1)}}
+.stamp .g{font:700 46px var(--serif);line-height:1}
+.stamp .p{font:700 12px var(--sans);letter-spacing:.1em}
+.stamp .w{font:italic 10px var(--serif);letter-spacing:.14em;text-transform:uppercase}
+.restable{flex:1;min-width:240px;border-collapse:collapse;font-size:14px}
+.restable td{padding:5px 8px;border-bottom:1px solid var(--paper-edge)}
+.restable td:last-child{text-align:right;font-weight:700}
+.resmeta{font:13px var(--sans);color:var(--ink-soft);margin-top:8px}
+.resmeta .vio{color:var(--danger);font-weight:700}
+.scale{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.scale span{font:600 11.5px var(--sans);padding:4px 10px;border-radius:14px;background:var(--paper);border:1px solid var(--paper-edge)}
+.detail{margin-top:16px;display:grid;gap:12px}
+.dcard{border:1px solid var(--paper-edge);border-radius:10px;padding:14px 16px;background:rgba(255,255,255,.5)}
+.dcard h4{font-size:14.5px;margin-bottom:6px;color:var(--burgundy-deep)}
+.dcard .ans{font-style:italic;font-size:14px;background:var(--paper-2);border-radius:6px;padding:8px 12px;margin:6px 0;white-space:pre-wrap}
+.crit{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;padding:3px 0}
+.crit .mark{flex:none;font-weight:700}
+.crit.yes .mark{color:var(--success)}.crit.no .mark{color:var(--danger)}
+.keys{display:none;margin-top:26px;border:2px solid var(--river);border-radius:12px;padding:22px;background:var(--river-soft)}
+.keys.show{display:block}
+.keys h2{color:var(--river);font-size:17px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.keys h3{font-size:14.5px;margin:12px 0 4px;color:var(--burgundy-deep)}
+.keys p,.keys li{font-size:14px}
+.keys ul{margin-left:20px}
+.keys .ex{font-style:italic;background:rgba(255,255,255,.55);border-radius:6px;padding:8px 12px;margin:6px 0}
+footer{margin-top:30px;text-align:center;font:12px var(--sans);color:var(--ink-faint)}
+footer .tags{color:var(--river);margin-top:4px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.warnoverlay{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;background:rgba(23,18,16,.82);backdrop-filter:blur(4px);padding:20px}
+.warnoverlay.show{display:flex}
+.warncard{max-width:460px;width:100%;background:var(--paper);border:3px solid var(--danger);border-radius:12px;padding:32px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);animation:shake .5s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.warncard .big{font-size:44px;margin-bottom:8px}
+.warncard h2{color:var(--danger);font-size:20px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.warncard p{font-size:15px;margin-bottom:8px}
+.warncard .cnt{font:700 15px var(--sans);color:var(--danger);margin:10px 0}
+#btnWarnOk{margin-top:14px;font:700 14px var(--sans);padding:12px 28px;border-radius:10px;border:none;cursor:pointer;background:var(--burgundy);color:#fff}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);z-index:95;display:flex;gap:12px;align-items:center;background:var(--ink);color:var(--paper);border:1px solid var(--amber);border-radius:10px;padding:12px 18px;font:14px var(--sans);box-shadow:0 12px 34px rgba(0,0,0,.5);opacity:0;transition:.35s;pointer-events:none}
+.toast.on{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+.print-only{display:none}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+body[data-phase="finished"] .lockable{pointer-events:none;opacity:.85}
+body[data-phase="finished"] .chip{cursor:default}
+@media (max-width:720px){
+  .wrap{padding:150px 10px 50px}.sheet{padding:30px 20px}.sheet::after{inset:7px}
+  .matchgrid,.cols{grid-template-columns:1fr}.hud{margin-left:0;order:3;width:100%}
+  .toolbar{gap:8px;padding:8px 10px}.resgrid{flex-direction:column}.covercard{padding:30px 22px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+@page{size:A4;margin:15mm 14mm}
+@media print{
+  body{background:#fff;color:#000;font-size:12pt}
+  .desk,.glow,.toolbar,.toast,.no-print,.screen-only,.cover,.warnoverlay{display:none!important}
+  .print-only{display:block}.wrap{padding:0;max-width:none;display:block!important}
+  .sheet{box-shadow:none;border-radius:0;padding:0;background:#fff}
+  .sheet::before,.sheet::after{display:none}.reveal{opacity:1;transform:none}
+  .task{border:1px solid #999;background:#fff;box-shadow:none;margin:14px 0;padding:12px 14px;break-inside:avoid}
+  .medal{background:#fff;color:#000;border:1.5px solid #000;box-shadow:none}
+  .reference{background:#fff;border-left:3px solid #000;box-shadow:none}
+  .quote{background:#fff;border-left:3px solid #666}
+  .fb,.results,.keys,.count,.t3hint,.submitarea,.statusbadge{display:none!important}
+  .mirror{font-style:normal}.pline{display:inline-block;min-width:180px;border-bottom:1px solid #000;height:1em}
+  .pblock{white-space:pre-wrap;min-height:3.4em;background:repeating-linear-gradient(transparent,transparent 1.55em,#999 1.6em);padding:0 2px}
+  table.pgrid{width:100%;border-collapse:collapse;margin-top:8px}
+  table.pgrid td,table.pgrid th{border:1px solid #000;padding:8px;font-size:11pt;vertical-align:top}
+  body[data-pm="blank"] .mirror{display:none}
+  body[data-pm="blank"] .panswer{display:none}
+  body[data-pm="blank"] .studentline{display:none!important}
+  body[data-pm="answers"] .pblank{display:none}
+  body[data-pm="answers"] .pblank-line{display:none}
+  body[data-pm="answers"] .pblank-fields{display:none!important}
+  body[data-pm="key"] .student-part{display:none}
+  body[data-pm="key"] .studentline,body[data-pm="key"] .pblank-fields{display:none!important}
+  body[data-pm="key"] .keys{display:block!important;border:1.5px solid #000;background:#fff}
+  body[data-pm="key"] .keys h2{color:#000}
+  body[data-pm="answers"] .pscore{display:block;font-weight:700;margin-top:10px}
+  .pscore{display:none}footer{color:#444}
+}
+</style>
+</head>
+<body data-phase="intro" data-pm="blank">
+<div class="desk"></div><div class="glow a"></div><div class="glow b"></div>
+
+<header class="toolbar no-print">
+  <div class="brand">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M20 3c-6 1-11 6-13 13l-3 7 7-3c7-2 12-7 13-13l-4-4z" stroke="#d99a33" stroke-width="1.6"/><path d="M7 19L18 8" stroke="#f7f0e1" stroke-width="1.2"/></svg>
+    <div><b>Страница</b><small>Русский язык и литература</small></div>
+  </div>
+  <div class="hud">
+    <div class="hudbox"><span class="lbl">Время</span><span id="timer">20:00</span></div>
+    <div class="hudbox"><span class="lbl">Вкладки</span><span class="pips" id="vioPips"><span class="pip"></span><span class="pip"></span><span class="pip"></span></span></div>
+    <div class="hudbox"><span class="lbl">Готово</span><span class="pbar"><i id="pbarFill"></i></span><span id="progText">0/6</span></div>
+  </div>
+  <div class="tools">
+    <span class="save" id="saveState">сохранено ✓</span>
+    <select class="btn" id="printMode" disabled aria-label="Режим печати">
+      <option value="blank">Печать: пустой лист</option>
+      <option value="answers">Печать: с ответами</option>
+      <option value="key">Печать: ключи</option>
+    </select>
+    <button class="btn" id="btnPrint" disabled>🖨 Печать / PDF</button>
+    <button class="btn" id="btnKeys" disabled>📖 Ключи</button>
+    <button class="btn" id="btnExport" disabled>⬇ Ответы</button>
+    <button class="btn gold" id="btnTeacher">🔑 Учитель</button>
+    <button class="btn" id="btnNewStudent" style="display:none">↺ Новый ученик</button>
+    <button class="btn primary" id="btnSubmit" disabled>✓ Завершить</button>
+  </div>
+</header>
+
+<div class="cover no-print" id="cover">
+  <div class="covercard">
+    <div class="seal">М</div>
+    <h1>Контрольный рабочий лист</h1>
+    <p class="sub">И. С. Тургенев. Рассказ «Муму»: история создания и прототипы героев · 5 класс</p>
+    <ul class="rules">
+      <li><span class="ic">🔒</span><span><b>Одна попытка.</b> После завершения работа проверяется автоматически и блокируется. Пройти повторно нельзя.</span></li>
+      <li><span class="ic">👁</span><span><b>Не покидайте вкладку.</b> Переключение вкладок и окон фиксируется. Три нарушения — работа завершается досрочно.</span></li>
+      <li><span class="ic">⏱</span><span><b>20 минут.</b> По истечении времени работа отправляется на проверку автоматически.</span></li>
+      <li><span class="ic">🖨</span><span><b>Печать после проверки.</b> Три варианта: пустой лист, лист с ответами, ключи для учителя.</span></li>
+      <li><span class="ic">💾</span><span><b>Автосохранение.</b> Ответы сохраняются в этом браузере; при перезагрузке работа продолжится с того же места.</span></li>
+    </ul>
+    <div class="coverfields">
+      <label>Фамилия<input id="inSurname" autocomplete="off" maxlength="40"></label>
+      <label>Имя<input id="inName" autocomplete="off" maxlength="30"></label>
+    </div>
+    <button id="btnStart">Начать работу →</button>
+    <div id="startErr"></div>
+    <p class="covernote">Максимум 10 баллов. Развёрнутые ответы (задания 5–6) проверяются по смысловым критериям.</p>
+  </div>
+</div>
+
+<div class="wrap">
+<main class="sheet">
+  <div class="eyebrow">«Страница. Русский язык и литература. Материалы»</div>
+  <h1 class="title">Рабочий лист · 5 класс</h1>
+  <p class="subtitle">И. С. Тургенев. Рассказ «Муму»: история создания и прототипы героев</p>
+  <div class="meta">
+    <span class="chipmeta b">литература · 5 класс</span>
+    <span class="chipmeta r">20 минут · одна попытка</span>
+    <span class="chipmeta">максимум 10 баллов</span>
+  </div>
+  <p class="print-only pblank-fields">Фамилия ______________________________ Имя ______________ Дата __________</p>
+  <div class="studentline">
+    <span>Ученик: <b id="dispName">—</b> · Дата: <b id="dispDate">—</b></span>
+    <span class="statusbadge work" id="statusBadge">Идёт работа</span>
+  </div>
+
+  <svg class="vignette" viewBox="0 0 900 200" fill="none" aria-hidden="true">
+    <circle cx="795" cy="44" r="22" fill="#d99a33" opacity=".9"/><circle cx="795" cy="44" r="30" stroke="#b97e24" opacity=".5"/>
+    <path d="M60 82 L155 42 L250 82 Z" stroke="#2b2118" stroke-width="2"/><rect x="66" y="82" width="178" height="94" stroke="#2b2118" stroke-width="2"/>
+    <g stroke="#2b2118" stroke-width="1.4"><rect x="82" y="96" width="22" height="28"/><rect x="120" y="96" width="22" height="28"/><rect x="168" y="96" width="22" height="28"/><rect x="206" y="96" width="22" height="28"/><path d="M140 176 v-36 h30 v36"/></g>
+    <path d="M40 176 H270" stroke="#2b2118" stroke-width="2"/>
+    <g fill="#2b2118"><circle cx="430" cy="84" r="12"/><path d="M430 96c-16 12-20 42-17 80h34c3-38-1-68-17-80z"/><ellipse cx="492" cy="162" rx="17" ry="9"/><circle cx="508" cy="154" r="6"/><path d="M482 170v8M490 171v8M498 170v8M505 168v8" stroke="#2b2118" stroke-width="3"/></g>
+    <path d="M380 178 H540" stroke="#2b2118" stroke-width="2"/>
+    <g stroke="#2f6f7e" stroke-width="2"><path class="wave" d="M560 148q20-8 40 0t40 0t40 0t40 0t40 0t40 0t40 0"/><path class="wave w2" d="M575 164q20-8 40 0t40 0t40 0t40 0t40 0t40 0t40 0"/></g>
+    <path d="M640 146c4-40 2-68-6-94" stroke="#5c7a45" stroke-width="3"/><g stroke="#5c7a45" stroke-width="1.4"><path d="M634 58c-14 22-18 46-16 72"/><path d="M638 56c12 24 16 48 12 74"/></g>
+  </svg>
+  <p class="vcaption">Москва. Остоженка. Дом барыни — и дорога в деревню, которой не было в реальной истории.</p>
+  <svg class="flourish" viewBox="0 0 220 20" fill="none" aria-hidden="true"><path d="M4 10h70M146 10h70" stroke="currentColor" stroke-width="1.2"/><path d="M84 10c8-8 16-8 26 0c-10 8-18 8-26 0zM136 10c-8-8-16-8-26 0c10 8 18 8 26 0z" stroke="currentColor" stroke-width="1.2"/><circle cx="110" cy="10" r="2.4" fill="currentColor"/></svg>
+
+  <div class="student-part">
+  <section class="reference reveal">
+    <div class="tag">Справка · опора для заданий</div>
+    <p>Рассказ «Муму» написан в 1852 году (в период ареста писателя в Петербурге) и впервые опубликован в журнале «Современник» в 1854 году. Его сюжет связан с реальными людьми из окружения матери писателя — Варвары Петровны Тургеневой, урождённой Лутовиновой. В её московском доме на Остоженке служил глухонемой дворник Андрей, которого исследователи считают прототипом Герасима. Реальный Андрей после гибели собаки остался служить хозяйке. В рассказе Тургенев изменил финал: Герасим уходит от барыни в деревню. Этот художественный выбор помогает раскрыть тему достоинства и несвободы.</p>
+  </section>
+
+  <section class="task reveal" id="task1">
+    <div class="thead"><span class="medal">1</span><h2>Найди и исправь ошибки</h2><span class="fb" id="fb1"></span></div>
+    <p class="instr">В каждом предложении есть ошибка. Исправь её, опираясь на справку.</p>
+    <div class="screen-only lockable">
+      <div class="err"><p class="s">1. События, послужившие основой рассказа, произошли в имении <b>Орловка</b>.</p><div class="fix"><span>Верно:</span><input id="t1-0" autocomplete="off"></div></div>
+      <div class="err"><p class="s">2. Прототипом барыни стала <b>старшая сестра</b> писателя.</p><div class="fix"><span>Верно:</span><input id="t1-1" autocomplete="off"></div></div>
+      <div class="err"><p class="s">3. Реальный дворник Андрей <b>ушёл от хозяйки в деревню</b>.</p><div class="fix"><span>Верно:</span><input id="t1-2" autocomplete="off" placeholder="Нет, …"></div></div>
+    </div>
+    <div class="print-only">
+      <p>1. События, послужившие основой рассказа, произошли в имении Орловка.<br>Верно: <span class="mirror" data-for="t1-0"></span><span class="pblank-line pline" style="min-width:340px"></span></p>
+      <p style="margin-top:6px">2. Прототипом барыни стала старшая сестра писателя.<br>Верно: <span class="mirror" data-for="t1-1"></span><span class="pblank-line pline" style="min-width:340px"></span></p>
+      <p style="margin-top:6px">3. Реальный дворник Андрей ушёл от хозяйки в деревню.<br>Верно: <span class="mirror" data-for="t1-2"></span><span class="pblank-line pline" style="min-width:340px"></span></p>
+    </div>
+  </section>
+
+  <section class="task reveal" id="task2">
+    <div class="thead"><span class="medal">2</span><h2>Установи соответствие</h2><span class="fb" id="fb2"></span></div>
+    <p class="instr">Соедини имя или элемент рассказа с подходящим пояснением.</p>
+    <div class="matchgrid"><div><div>1. Варвара Петровна</div><div>2. Московский дом на Остоженке</div><div>3. Финал рассказа — уход Герасима</div><div>4. Андрей — прототип Герасима</div></div>
+    <div class="mright"><div><b>А.</b> Реальный дворник, который остался служить хозяйке</div><div><b>Б.</b> Мать писателя и прототип барыни</div><div><b>В.</b> Художественное изменение реальной истории</div><div><b>Г.</b> Место, связанное с историей создания рассказа</div></div></div>
+    <div class="mrows screen-only lockable">
+      <div class="mrow"><span class="n">1</span> Варвара Петровна <select class="pick" id="t2-0"><option value="">—</option><option>А</option><option>Б</option><option>В</option><option>Г</option></select></div>
+      <div class="mrow"><span class="n">2</span> Дом на Остоженке <select class="pick" id="t2-1"><option value="">—</option><option>А</option><option>Б</option><option>В</option><option>Г</option></select></div>
+      <div class="mrow"><span class="n">3</span> Уход Герасима <select class="pick" id="t2-2"><option value="">—</option><option>А</option><option>Б</option><option>В</option><option>Г</option></select></div>
+      <div class="mrow"><span class="n">4</span> Андрей <select class="pick" id="t2-3"><option value="">—</option><option>А</option><option>Б</option><option>В</option><option>Г</option></select></div>
+    </div>
+    <p class="print-only" style="margin-top:8px"><b>Ответ:</b> <span class="mirror" id="p-t2"></span><span class="pblank-line">1 — ___, 2 — ___, 3 — ___, 4 — ___</span></p>
+  </section>
+
+  <section class="task reveal" id="task3">
+    <div class="thead"><span class="medal">3</span><h2>Раздели утверждения на группы</h2><span class="fb" id="fb3"></span></div>
+    <p class="instr">Распредели номера утверждений по колонкам.</p>
+    <div class="statements"><div><b>1.</b> Тургенев знал жизнь крепостных людей в доме и имении своей семьи.</div><div><b>2.</b> В рассказе Герасим после событий с Муму уходит от барыни в деревню.</div><div><b>3.</b> Реальный дворник Андрей после гибели собаки остался служить хозяйке.</div><div><b>4.</b> В рассказе Герасим спасает щенка из реки в Москве.</div><div><b>5.</b> Уход Герасима можно понять как проявление внутреннего достоинства и протеста.</div></div>
+    <div class="screen-only lockable">
+      <div class="pool" id="pool"></div>
+      <div class="cols">
+        <div class="zone fact" id="colFact" role="button" tabindex="0"><h3>Исторические факты</h3><div class="chips"></div><div class="empty">выбери карточку и нажми сюда</div></div>
+        <div class="zone story" id="colStory" role="button" tabindex="0"><h3>Сюжет и художественный замысел</h3><div class="chips"></div><div class="empty">выбери карточку и нажми сюда</div></div>
+      </div>
+      <p class="t3hint">Нажми на утверждение, затем на колонку (или перетащи). Чтобы вернуть — выбери карточку и нажми на верхнее поле.</p>
+    </div>
+    <div class="print-only"><table class="pgrid"><tr><th style="width:50%">Исторические факты</th><th>Сюжет и художественный замысел рассказа</th></tr><tr><td>Номера: <span class="mirror" id="p-fact"></span><span class="pblank-line">____</span></td><td>Номера: <span class="mirror" id="p-story"></span><span class="pblank-line">____</span></td></tr></table></div>
+  </section>
+
+  <section class="task reveal" id="task4">
+    <div class="thead"><span class="medal">4</span><h2>Восстанови последовательность</h2><span class="fb" id="fb4"></span></div>
+    <p class="instr">Пронумеруй события от 1 до 4: от реальной основы — к художественному смыслу.</p>
+    <div class="seq screen-only lockable">
+      <div class="seqrow"><select class="pick" id="t4-0"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select> Тургенев создал рассказ, опираясь на реальные впечатления.</div>
+      <div class="seqrow"><select class="pick" id="t4-1"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select> Писатель изменил финал: Герасим ушёл от барыни.</div>
+      <div class="seqrow"><select class="pick" id="t4-2"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select> В доме матери Тургенева служил дворник Андрей.</div>
+      <div class="seqrow"><select class="pick" id="t4-3"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option></select> Финал помог раскрыть тему достоинства и несвободы.</div>
+    </div>
+    <div class="print-only">
+      <p><span class="mirror" data-for="t4-0"></span><span class="pblank-line">___</span> Тургенев создал рассказ, опираясь на реальные впечатления.</p>
+      <p><span class="mirror" data-for="t4-1"></span><span class="pblank-line">___</span> Писатель изменил финал: Герасим ушёл от барыни.</p>
+      <p><span class="mirror" data-for="t4-2"></span><span class="pblank-line">___</span> В доме матери Тургенева служил дворник Андрей.</p>
+      <p><span class="mirror" data-for="t4-3"></span><span class="pblank-line">___</span> Финал помог раскрыть тему достоинства и несвободы.</p>
+    </div>
+  </section>
+
+  <section class="task reveal" id="task5">
+    <div class="thead"><span class="medal">5</span><h2>Объясни образ героя</h2><span class="fb" id="fb5"></span></div>
+    <p class="instr">Прочитай две цитаты о Герасиме и ответь на вопросы (2–4 предложения).</p>
+    <div class="quote">«…под „немым“ Тургенев подразумевал не одного Герасима, но народ, ещё не сказавший своего слова…». <span class="src">— из учебника-хрестоматии В. Я. Коровиной</span></div>
+    <div class="quote">«…олицетворение русского народа, его страшной силы и непостижимой кротости, его удаления к себе и в себя, его молчания на все запросы, его нравственных, честных побуждений». <span class="src">— И. С. Аксаков, о рассказе «Муму»</span></div>
+    <p class="qs"><b>Вопросы.</b> Почему, по мысли этих цитат, Тургенев сделал Герасима немым? Что может символизировать уход героя из Москвы в деревню?</p>
+    <div class="screen-only lockable"><textarea id="t5"></textarea><div class="count" id="c5">0 слов</div></div>
+    <div class="print-only"><p><b>Ответ:</b></p><div class="pblock mirror" data-for="t5"></div><div class="pblank pblock"></div></div>
+  </section>
+
+  <section class="task reveal" id="task6">
+    <div class="thead"><span class="medal">6</span><h2>Сделай собственный вывод</h2><span class="fb" id="fb6"></span></div>
+    <p class="instr">Объясни в 2–3 предложениях, зачем Тургенев изменил финал реальной истории. Как уход Герасима влияет на смысл рассказа?</p>
+    <div class="screen-only lockable"><textarea id="t6"></textarea><div class="count" id="c6">0 слов</div></div>
+    <div class="print-only"><p><b>Вывод:</b></p><div class="pblock mirror" data-for="t6"></div><div class="pblank pblock"></div></div>
+  </section>
+
+  <div class="submitarea screen-only no-print" id="submitArea">
+    <button id="btnSubmitBig">✓ Завершить и проверить работу</button>
+    <p class="submitnote">После завершения изменить ответы будет нельзя. Проверка выполняется автоматически по всем шести заданиям.</p>
+  </div>
+
+  <section class="results" id="results" aria-live="polite">
+    <h2>Итог автоматической проверки</h2>
+    <div class="resgrid">
+      <div class="stamp" id="stamp"><div style="text-align:center"><div class="w">проверено</div><div class="g" id="stampGrade">–</div><div class="p" id="stampPoints">0 / 10</div></div></div>
+      <div style="flex:1;min-width:240px">
+        <table class="restable"><tbody id="resBody"></tbody></table>
+        <div class="scale"><span>«5» — 9–10</span><span>«4» — 7–8</span><span>«3» — 5–6</span><span>«2» — 0–4</span></div>
+        <p class="resmeta" id="resMeta"></p>
+      </div>
+    </div>
+    <div class="detail" id="detail"></div>
+  </section>
+  <p class="print-only pscore">Баллы: <span id="p-score"></span></p>
+  </div>
+
+  <section class="keys" id="keys">
+    <h2>Ответы и критерии для учителя</h2>
+    <h3>Задание 1 — до 3 баллов</h3><ul><li>Орловка → московский дом матери Тургенева на Остоженке.</li><li>Старшая сестра → мать писателя, Варвара Петровна Тургенева, урождённая Лутовинова.</li><li>Ушёл от хозяйки в деревню → <b>Нет,</b> остался служить хозяйке.</li></ul>
+    <h3>Задание 2 — 1 балл</h3><p>1 — Б, 2 — Г, 3 — В, 4 — А.</p>
+    <h3>Задание 3 — 1 балл</h3><p>Исторические факты: 1, 3. · Сюжет и художественный замысел: 2, 4, 5.</p>
+    <h3>Задание 4 — 1 балл</h3><p>Порядок строк: 2, 3, 1, 4 (Андрей → рассказ → изменённый финал → смысл).</p>
+    <h3>Задание 5 — до 2 баллов</h3><p class="ex">Пример: «Немота Герасима делает его образом народа, лишённого права голоса. Уход в деревню — проявление внутренней силы и несогласия с несправедливостью, способ „сказать“ без слов».</p><ul><li>1 балл — немота связана с бесправием / отсутствием голоса.</li><li>1 балл — уход объяснён как достоинство, сила или протест.</li></ul>
+    <h3>Задание 6 — до 2 баллов</h3><p class="ex">Пример: «Тургенев не просто пересказал реальную историю, а создал художественный финал, который раскрывает характер героя. Уход Герасима подчёркивает его достоинство и усиливает тему несвободы».</p><ul><li>1 балл — объяснена разница между реальной историей и замыслом.</li><li>1 балл — названа идея достоинства, свободы или протеста.</li></ul>
+    <h3>Максимум: 10 баллов</h3><p>«5» — 9–10 · «4» — 7–8 · «3» — 5–6 · «2» — 0–4.</p>
+  </section>
+
+  <footer>«Страница. Русский язык и литература. Материалы» · контрольный рабочий лист · 5 класс<br>Для свободного некоммерческого использования в классе.<div class="tags">#рабочийлист #литература5класс #Тургенев #Муму #ВПР</div></footer>
+</main>
+</div>
+
+<div class="warnoverlay no-print" id="warnOverlay">
+  <div class="warncard">
+    <div class="big">⚠️</div>
+    <h2>Вы покинули вкладку</h2>
+    <p>Во время работы запрещено переключаться на другие вкладки и окна. Нарушение зафиксировано.</p>
+    <p class="cnt" id="warnCount">Предупреждение 1 из 3</p>
+    <p style="font-size:13px;color:var(--ink-soft)">При третьем нарушении работа завершится автоматически.</p>
+    <button id="btnWarnOk">Вернуться к работе</button>
+  </div>
+</div>
+
+<div class="toast no-print" id="toast"><span id="toastMsg"></span></div>
+<noscript><p style="color:#f7f0e1;text-align:center;padding:20px">Для работы листа включите JavaScript.</p></noscript>
+
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)};
+var KEY="mumu-exam-v2", TEACHER_CODE="1852", MAX_VIO=3, DURATION=20*60*1000;
+var ST={1:"Тургенев знал жизнь крепостных людей в доме и имении своей семьи.",2:"В рассказе Герасим после событий с Муму уходит от барыни в деревню.",3:"Реальный дворник Андрей после гибели собаки остался служить хозяйке.",4:"В рассказе Герасим спасает щенка из реки в Москве.",5:"Уход Герасима можно понять как проявление внутреннего достоинства и протеста."};
+var T2KEY=["Б","Г","В","А"],T4KEY=["2","3","1","4"];
+function def(){return{phase:"intro",surname:"",name:"",startedAt:null,finished:false,finishedAt:null,finishReason:null,violations:0,vioLog:[],answers:{t1:["","",""],t2:["","","",""],t3:{1:null,2:null,3:null,4:null,5:null},t4:["","","",""],t5:"",t6:""},result:null};}
+var state=def(),selected=null,timerId=null,saveTimer=null,lastVio=0,suspend=false,teacherUnlocked=false,printing=false;
+try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);state=Object.assign(def(),p);state.answers=Object.assign(def().answers,p.answers||{});state.answers.t3=Object.assign(def().answers.t3,(p.answers||{}).t3||{});}}catch(e){}
+function save(){clearTimeout(saveTimer);saveTimer=setTimeout(function(){try{localStorage.setItem(KEY,JSON.stringify(state));var s=$("#saveState");s.classList.add("on");setTimeout(function(){s.classList.remove("on")},1200);}catch(e){}},200);}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]});}
+function norm(s){return String(s).toLowerCase().replace(/ё/g,"е").replace(/[^a-zа-я0-9\s]/g," ").replace(/\s+/g," ").trim();}
+function words(t){t=t.trim();return t?t.split(/\s+/).length:0;}
+function grade(n){return n>=9?"5":n>=7?"4":n>=5?"3":"2";}
+function fmt(ms){ms=Math.max(0,ms);var s=Math.floor(ms/1000);return Math.floor(s/60)+":"+("0"+(s%60)).slice(-2);}
+function t1ok(v,n){v=norm(v);if(n===0)return /остоженк/.test(v)||(/москв/.test(v)&&/дом/.test(v));if(n===1)return /(варвар|матер|мам[аы])/.test(v)&&!/сестр/.test(v);return (/(остался|продолжал|служ)/.test(v)||/(^|\s)нет(\s|$)/.test(v))&&!/ушел/.test(v);}
+function checkAll(){
+  var a=state.answers,r=[],total=0;
+  var s1=0;for(var i=0;i<3;i++)if(t1ok(a.t1[i],i))s1++;r.push({n:1,s:s1,m:3});
+  var s2=a.t2.every(function(v,i){return v===T2KEY[i]})?1:0;r.push({n:2,s:s2,m:1});
+  var s3=(a.t3[1]==="fact"&&a.t3[3]==="fact"&&a.t3[2]==="story"&&a.t3[4]==="story"&&a.t3[5]==="story")?1:0;r.push({n:3,s:s3,m:1});
+  var s4=a.t4.every(function(v,i){return v===T4KEY[i]})?1:0;r.push({n:4,s:s4,m:1});
+  var v5=norm(a.t5),c5a=/(нем|молч|глухонем|немот)/.test(v5)&&/(голос|бесправ|лишен|народ|угнет|крепост|прав)/.test(v5);
+  var c5b=/(уход|ушел|уходит|покинул|вернул|деревн|возврат)/.test(v5)&&/(достоинств|протест|несоглас|сила|свобод|сопротив|гордост|бунт|не покор)/.test(v5);
+  r.push({n:5,s:(c5a?1:0)+(c5b?1:0),m:2,crit:[{ok:c5a,t:"Немота связана с бесправием / отсутствием голоса у народа."},{ok:c5b,t:"Уход объяснён как проявление достоинства, силы или протеста."}]});
+  var v6=norm(a.t6),c6a=(/(изменил|изменен|другой финал|вымысел|замысел|художествен|придумал|не повтор|отлич|не как)/.test(v6)&&/(реальн|настоящ|в жизни|истор|факт|прототип|андрей|барын|хозяйк)/.test(v6))||/изменил финал/.test(v6);
+  var c6b=/(достоинств|свобод|протест|несвобод|несоглас|сила|гордост|сопротив|несправедлив)/.test(v6);
+  r.push({n:6,s:(c6a?1:0)+(c6b?1:0),m:2,crit:[{ok:c6a,t:"Объяснена разница между реальной историей и художественным замыслом."},{ok:c6b,t:"Названа идея достоинства, свободы или протеста."}]});
+  total=r.reduce(function(x,y){return x+y.s},0);
+  return{r:r,total:total,grade:grade(total)};
+}
+function doneMap(){var a=state.answers;return[a.t1.every(function(x){return x.trim()}),a.t2.every(function(x){return x}),[1,2,3,4,5].every(function(n){return a.t3[n]}),a.t4.every(function(x){return x}),words(a.t5)>=8,words(a.t6)>=8];}
+function progress(){var d=doneMap(),n=d.filter(Boolean).length;$("#pbarFill").style.width=(n/6*100)+"%";$("#progText").textContent=n+"/6";}
+function counts(){$("#c5").textContent=words(state.answers.t5)+" слов";$("#c6").textContent=words(state.answers.t6)+" слов";}
+function pips(){var p=$("#vioPips").children;for(var i=0;i<3;i++)p[i].classList.toggle("on",i<state.violations);}
+function chip(n){var b=document.createElement("button");b.type="button";b.className="chip";b.draggable=!state.finished;b.dataset.id=n;b.innerHTML='<span class="num">'+n+'</span><span>'+ST[n]+'</span>';
+  b.addEventListener("click",function(e){e.stopPropagation();if(state.finished)return;selected=(selected===n?null:n);paintSel();});
+  b.addEventListener("dragstart",function(e){if(state.finished){e.preventDefault();return;}e.dataTransfer.setData("text/plain",String(n));selected=n;paintSel();});return b;}
+function paintSel(){document.querySelectorAll(".chip").forEach(function(c){c.classList.toggle("sel",+c.dataset.id===selected)});}
+function renderT3(){var pool=$("#pool"),f=$("#colFact .chips"),s=$("#colStory .chips");pool.innerHTML="";f.innerHTML="";s.innerHTML="";
+  [1,2,3,4,5].forEach(function(n){var c=chip(n),z=state.answers.t3[n];if(z==="fact")f.appendChild(c);else if(z==="story")s.appendChild(c);else pool.appendChild(c);});
+  $("#colFact .empty").style.display=f.children.length?"none":"block";$("#colStory .empty").style.display=s.children.length?"none":"block";paintSel();}
+function assign(n,zone){if(state.finished)return;state.answers.t3[n]=zone;selected=null;renderT3();progress();save();}
+function zoneHandler(el,zone){el.addEventListener("click",function(e){if(e.target.closest(".chip"))return;if(selected!=null)assign(selected,zone);});
+  el.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&selected!=null){e.preventDefault();assign(selected,zone);}});
+  el.addEventListener("dragover",function(e){e.preventDefault();el.classList.add("over")});el.addEventListener("dragleave",function(){el.classList.remove("over")});
+  el.addEventListener("drop",function(e){e.preventDefault();el.classList.remove("over");var n=+e.dataTransfer.getData("text/plain");if(n)assign(n,zone);});}
+zoneHandler($("#pool"),null);zoneHandler($("#colFact"),"fact");zoneHandler($("#colStory"),"story");
+function restoreFields(){var a=state.answers;for(var i=0;i<3;i++)$("#t1-"+i).value=a.t1[i];for(i=0;i<4;i++){$("#t2-"+i).value=a.t2[i];$("#t4-"+i).value=a.t4[i];}$("#t5").value=a.t5;$("#t6").value=a.t6;renderT3();counts();progress();pips();}
+for(var i=0;i<3;i++)(function(i){$("#t1-"+i).addEventListener("input",function(){state.answers.t1[i]=this.value;progress();save();});})(i);
+for(i=0;i<4;i++)(function(i){$("#t2-"+i).addEventListener("change",function(){state.answers.t2[i]=this.value;progress();save();});$("#t4-"+i).addEventListener("change",function(){state.answers.t4[i]=this.value;progress();save();});})(i);
+$("#t5").addEventListener("input",function(){state.answers.t5=this.value;counts();progress();save();});
+$("#t6").addEventListener("input",function(){state.answers.t6=this.value;counts();progress();save();});
+function startTimer(){clearInterval(timerId);timerId=setInterval(tick,500);tick();}
+function tick(){if(state.phase!=="working")return;var rem=DURATION-(Date.now()-state.startedAt);var t=$("#timer");t.textContent=fmt(rem);t.classList.toggle("warn",rem<120000&&rem>=30000);t.classList.toggle("danger",rem<30000);if(rem<=0)finish("timeout");}
+function registerViolation(){if(state.phase!=="working"||suspend||printing)return;var now=Date.now();if(now-lastVio<1200)return;lastVio=now;state.violations++;state.vioLog.push(now);pips();save();
+  if(state.violations>=MAX_VIO){$("#warnOverlay").classList.remove("show");finish("violations");}
+  else{$("#warnCount").textContent="Предупреждение "+state.violations+" из "+MAX_VIO;$("#warnOverlay").classList.add("show");}}
+document.addEventListener("visibilitychange",function(){if(document.hidden)registerViolation();});
+window.addEventListener("blur",function(){registerViolation();});
+$("#btnWarnOk").addEventListener("click",function(){$("#warnOverlay").classList.remove("show");window.focus();});
+function applyPhase(){document.body.dataset.phase=state.phase;
+  var working=state.phase==="working",finished=state.phase==="finished";
+  $("#btnSubmit").disabled=!working;$("#btnSubmitBig").disabled=!working;
+  var canPrint=finished||teacherUnlocked;$("#printMode").disabled=!canPrint;$("#btnPrint").disabled=!canPrint;
+  $("#btnKeys").disabled=!canPrint;$("#btnExport").disabled=!finished;
+  $("#submitArea").style.display=finished?"none":"block";
+  $("#dispName").textContent=(state.surname+" "+state.name).trim()||"—";
+  $("#dispDate").textContent=state.startedAt?new Date(state.startedAt).toLocaleDateString("ru-RU"):"—";
+  var sb=$("#statusBadge");if(finished){sb.className="statusbadge done";sb.textContent="Завершено";}else{sb.className="statusbadge work";sb.textContent="Идёт работа";}
+  document.querySelectorAll(".lockable input,.lockable select,.lockable textarea").forEach(function(el){el.disabled=finished;});
+  if(working){startTimer();}else{clearInterval(timerId);}
+  if(finished){$("#timer").textContent=fmt(state.finishedAt-state.startedAt);$("#timer").classList.remove("warn","danger");renderResults();}
+}
+function start(){var sn=$("#inSurname").value.trim(),nm=$("#inName").value.trim();
+  if(!sn||!nm){$("#startErr").textContent="Впишите фамилию и имя, чтобы начать.";return;}
+  state.surname=sn;state.name=nm;state.startedAt=Date.now();state.phase="working";save();restoreFields();applyPhase();
+  toast("Работа началась. У вас 20 минут. Не покидайте вкладку.");window.scrollTo(0,0);}
+$("#btnStart").addEventListener("click",start);
+["inSurname","inName"].forEach(function(id){$("#"+id).addEventListener("keydown",function(e){if(e.key==="Enter")start();});});
+function finish(reason){if(state.finished)return;state.finished=true;state.finishedAt=Date.now();state.finishReason=reason;state.phase="finished";state.result=checkAll();
+  clearInterval(timerId);$("#warnOverlay").classList.remove("show");save();applyPhase();
+  var msg=reason==="violations"?"Работа завершена досрочно: три нарушения правил.":reason==="timeout"?"Время вышло. Работа отправлена на проверку.":"Работа завершена и проверена.";
+  toast(msg);setTimeout(function(){$("#results").scrollIntoView({behavior:"smooth",block:"start"})},300);}
+function confirmFinish(){var d=doneMap(),n=d.filter(Boolean).length;if(n<6){if(!confirm("Заполнено заданий: "+n+" из 6. Незаполненные получат 0 баллов. Завершить работу?"))return;}else{if(!confirm("Завершить работу и отправить на проверку? Изменить ответы будет нельзя."))return;}finish("manual");}
+$("#btnSubmit").addEventListener("click",confirmFinish);
+$("#btnSubmitBig").addEventListener("click",confirmFinish);
+function renderResults(){var res=state.result;if(!res)return;$("#results").classList.add("show");
+  $("#stampGrade").textContent=res.grade;$("#stampPoints").textContent=res.total+" / 10";
+  var body=$("#resBody");body.innerHTML="";res.r.forEach(function(x){var tr=document.createElement("tr");tr.innerHTML="<td>Задание "+x.n+"</td><td>"+x.s+" / "+x.m+"</td>";body.appendChild(tr);});
+  var tr=document.createElement("tr");tr.innerHTML="<td><b>Итого</b></td><td><b>"+res.total+" / 10</b></td>";body.appendChild(tr);
+  var used=fmt(state.finishedAt-state.startedAt);var reason=state.finishReason==="violations"?"досрочно (нарушения)":state.finishReason==="timeout"?"по истечении времени":"по кнопке «Завершить»";
+  $("#resMeta").innerHTML="Время работы: <b>"+used+"</b> · Завершено: "+reason+" · Нарушений вкладок: <span class='vio'>"+state.violations+"</span>";
+  res.r.forEach(function(x){var t=$("#task"+x.n),fb=$("#fb"+x.n);t.classList.remove("ok","bad","part");fb.className="fb";
+    if(x.s===x.m){t.classList.add("ok");fb.classList.add("show","ok");fb.textContent="✓ "+x.s+"/"+x.m;}
+    else if(x.s===0){t.classList.add("bad");fb.classList.add("show","bad");fb.textContent="✗ 0/"+x.m;}
+    else{t.classList.add("part");fb.classList.add("show","part");fb.textContent="◐ "+x.s+"/"+x.m;}});
+  for(var i=0;i<3;i++)$("#t1-"+i).classList.add(t1ok(state.answers.t1[i],i)?"good":"wrong");
+  for(i=0;i<4;i++){$("#t2-"+i).classList.add(state.answers.t2[i]===T2KEY[i]?"good":"wrong");$("#t4-"+i).classList.add(state.answers.t4[i]===T4KEY[i]?"good":"wrong");}
+  document.querySelectorAll(".chip").forEach(function(c){var n=+c.dataset.id,z=state.answers.t3[n],ok=(n===1||n===3)?z==="fact":z==="story";c.classList.add(ok?"good":"wrong");});
+  var det=$("#detail");det.innerHTML="";
+  [5,6].forEach(function(n){var x=res.r[n-1];var card=document.createElement("div");card.className="dcard";
+    var html="<h4>Задание "+n+" · развёрнутый ответ · "+x.s+" / "+x.m+"</h4>";
+    html+="<div class='ans'>"+(esc(state.answers["t"+n])||"— ответ не дан —")+"</div>";
+    x.crit.forEach(function(c){html+="<div class='crit "+(c.ok?"yes":"no")+"'><span class='mark'>"+(c.ok?"✓":"✗")+"</span><span>"+c.t+"</span></div>";});
+    card.innerHTML=html;det.appendChild(card);});
+  var st=$("#stamp");st.classList.remove("thud");void st.offsetWidth;st.classList.add("thud");}
+$("#btnKeys").addEventListener("click",function(){$("#keys").classList.toggle("show");if($("#keys").classList.contains("show"))$("#keys").scrollIntoView({behavior:"smooth"});});
+$("#btnTeacher").addEventListener("click",function(){if(teacherUnlocked){toast("Режим учителя уже активен.");return;}suspend=true;var code=prompt("Код учителя:");suspend=false;
+  if(code===TEACHER_CODE){teacherUnlocked=true;$("#btnNewStudent").style.display="inline-block";applyPhase();toast("Режим учителя активен: ключи и печать доступны, можно подготовить устройство для нового ученика.");}
+  else if(code!==null){toast("Неверный код.");}});
+$("#btnNewStudent").addEventListener("click",function(){if(!teacherUnlocked)return;suspend=true;var ok=confirm("Очистить сохранённую работу и подготовить устройство для нового ученика? Текущие ответы и результат будут удалены.");suspend=false;if(!ok)return;try{localStorage.removeItem(KEY);}catch(e){}location.reload();});
+function fillPrint(){var mode=$("#printMode").value;document.body.dataset.pm=mode;var a=state.answers;
+  var map={t5:a.t5,t6:a.t6};for(var i=0;i<3;i++)map["t1-"+i]=a.t1[i];for(i=0;i<4;i++)map["t4-"+i]=a.t4[i];
+  document.querySelectorAll(".mirror[data-for]").forEach(function(m){var v=map[m.dataset.for];m.textContent=(v&&String(v).trim())?v:(mode==="answers"?"—":"");});
+  $("#p-t2").textContent="1 — "+(a.t2[0]||"___")+", 2 — "+(a.t2[1]||"___")+", 3 — "+(a.t2[2]||"___")+", 4 — "+(a.t2[3]||"___");
+  var f=[],s=[];[1,2,3,4,5].forEach(function(n){if(a.t3[n]==="fact")f.push(n);if(a.t3[n]==="story")s.push(n);});
+  $("#p-fact").textContent=f.join(", ");$("#p-story").textContent=s.join(", ");
+  $("#p-score").textContent=state.result?(state.result.total+" / 10 · отметка «"+state.result.grade+"»"):"работа не проверялась";}
+window.addEventListener("beforeprint",fillPrint);
+$("#btnPrint").addEventListener("click",function(){if($("#btnPrint").disabled)return;printing=true;fillPrint();setTimeout(function(){window.print();setTimeout(function(){printing=false},800);},60);});
+$("#btnExport").addEventListener("click",function(){if(!state.finished)return;var a=state.answers,res=state.result;
+  var L=["КОНТРОЛЬНЫЙ РАБОЧИЙ ЛИСТ · И. С. Тургенев «Муму» · 5 класс","Ученик: "+(state.surname+" "+state.name).trim(),"Дата: "+new Date(state.startedAt).toLocaleDateString("ru-RU"),"Время работы: "+fmt(state.finishedAt-state.startedAt),"Нарушений вкладок: "+state.violations,"","Задание 1:"," 1) "+(a.t1[0]||"—")," 2) "+(a.t1[1]||"—")," 3) "+(a.t1[2]||"—"),"","Задание 2: 1—"+(a.t2[0]||"_")+", 2—"+(a.t2[1]||"_")+", 3—"+(a.t2[2]||"_")+", 4—"+(a.t2[3]||"_"),"","Задание 3: факты — "+([1,2,3,4,5].filter(function(n){return a.t3[n]==="fact"}).join(", ")||"—")+"; замысел — "+([1,2,3,4,5].filter(function(n){return a.t3[n]==="story"}).join(", ")||"—"),"","Задание 4: "+a.t4.map(function(x){return x||"_"}).join(", "),"","Задание 5:",a.t5||"—","","Задание 6:",a.t6||"—","","ИТОГ: "+res.total+" / 10 · отметка «"+res.grade+"»"];
+  res.r.forEach(function(x){L.push("  Задание "+x.n+": "+x.s+"/"+x.m);});
+  var blob=new Blob(["\ufeff"+L.join("\n")],{type:"text/plain;charset=utf-8"});var el=document.createElement("a");el.href=URL.createObjectURL(blob);el.download="Муму_результат_"+(state.surname||"ученик")+".txt";document.body.appendChild(el);el.click();setTimeout(function(){URL.revokeObjectURL(el.href);el.remove()},400);toast("Файл с результатами сохранён.");});
+var toastTimer=null;function toast(msg){var t=$("#toast");$("#toastMsg").textContent=msg;t.classList.add("on");clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove("on")},4200);}
+if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}})},{threshold:.1});document.querySelectorAll(".reveal").forEach(function(el,i){el.style.transitionDelay=(i%4)*70+"ms";io.observe(el);});}else document.querySelectorAll(".reveal").forEach(function(el){el.classList.add("in")});
+if(state.finished){state.phase="finished";}else if(state.startedAt){state.phase="working";}else{state.phase="intro";}
+restoreFields();applyPhase();
+if(state.phase==="working"&&DURATION-(Date.now()-state.startedAt)<=0){finish("timeout");}
+})();
+</script>
+</body>
+</html>
