@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>А.А. Фет. Работа со статьёй Б. Михайловского</title>
+<style>
+  :root{
+    --paper:#f4ecd8;
+    --paper-dark:#e8dcc0;
+    --ink:#2c1810;
+    --ink-light:#5a4632;
+    --accent:#8b4513;
+    --accent-dark:#6b3410;
+    --gold:#b8860b;
+    --red:#8b0000;
+    --green:#2d5016;
+    --shadow:rgba(44,24,16,0.2);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'PT Serif',Georgia,serif;
+    background:linear-gradient(135deg,#d4c5a0 0%,#c4b48a 100%);
+    color:var(--ink);
+    min-height:100vh;
+    padding:20px;
+    line-height:1.6;
+  }
+  .container{
+    max-width:1100px;
+    margin:0 auto;
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 20% 30%,rgba(139,69,19,0.03) 0%,transparent 50%),
+      radial-gradient(circle at 80% 70%,rgba(139,69,19,0.03) 0%,transparent 50%);
+    border:1px solid var(--accent);
+    box-shadow:0 10px 40px var(--shadow),inset 0 0 60px rgba(139,69,19,0.05);
+    padding:40px;
+    position:relative;
+  }
+  .container::before,.container::after{
+    content:"❦";
+    position:absolute;
+    font-size:24px;
+    color:var(--accent);
+  }
+  .container::before{top:15px;left:20px}
+  .container::after{bottom:15px;right:20px}
+  header{
+    text-align:center;
+    border-bottom:3px double var(--accent);
+    padding-bottom:20px;
+    margin-bottom:30px;
+  }
+  h1{
+    font-family:'Georgia',serif;
+    font-size:2.2em;
+    color:var(--ink);
+    letter-spacing:2px;
+    font-weight:normal;
+    margin-bottom:8px;
+  }
+  h1 .amp{color:var(--accent);font-style:italic}
+  .subtitle{
+    font-style:italic;
+    color:var(--ink-light);
+    font-size:1.05em;
+  }
+  .source{
+    margin-top:10px;
+    font-size:0.85em;
+    color:var(--ink-light);
+  }
+  /* Tabs */
+  .tabs{
+    display:flex;
+    gap:4px;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+    border-bottom:2px solid var(--accent);
+    padding-bottom:0;
+  }
+  .tab{
+    padding:12px 20px;
+    background:var(--paper-dark);
+    border:1px solid var(--accent);
+    border-bottom:none;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:0.95em;
+    color:var(--ink);
+    transition:all 0.3s;
+    border-radius:6px 6px 0 0;
+    position:relative;
+    top:2px;
+  }
+  .tab:hover{background:#ede0c0}
+  .tab.active{
+    background:var(--paper);
+    border-bottom:2px solid var(--paper);
+    font-weight:bold;
+    color:var(--accent-dark);
+  }
+  .tab.completed::after{
+    content:"✓";
+    margin-left:6px;
+    color:var(--green);
+    font-weight:bold;
+  }
+  .tab.locked{opacity:0.5;cursor:not-allowed}
+  .panel{
+    display:none;
+    animation:fadeIn 0.5s;
+  }
+  .panel.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  h2{
+    color:var(--accent-dark);
+    border-left:4px solid var(--accent);
+    padding-left:15px;
+    margin-bottom:20px;
+    font-size:1.5em;
+    font-weight:normal;
+  }
+  h3{
+    color:var(--ink);
+    margin:20px 0 12px;
+    font-size:1.15em;
+  }
+  .task{
+    background:rgba(255,255,255,0.4);
+    border:1px solid rgba(139,69,19,0.3);
+    border-radius:6px;
+    padding:20px;
+    margin-bottom:20px;
+    position:relative;
+  }
+  .task::before{
+    content:"✦";
+    position:absolute;
+    top:-10px;
+    left:15px;
+    background:var(--paper);
+    padding:0 8px;
+    color:var(--accent);
+    font-size:1.2em;
+  }
+  .task-label{
+    font-weight:bold;
+    color:var(--accent-dark);
+    margin-bottom:10px;
+    font-size:0.95em;
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+  /* Text block */
+  .text-block{
+    background:#faf5e4;
+    border:1px solid var(--accent);
+    border-radius:4px;
+    padding:20px;
+    margin:15px 0;
+    font-size:0.98em;
+    line-height:1.8;
+    max-height:400px;
+    overflow-y:auto;
+    position:relative;
+  }
+  .text-block::-webkit-scrollbar{width:10px}
+  .text-block::-webkit-scrollbar-track{background:var(--paper-dark)}
+  .text-block::-webkit-scrollbar-thumb{background:var(--accent);border-radius:5px}
+  .text-block h4{
+    color:var(--accent-dark);
+    margin-bottom:10px;
+    border-bottom:1px dotted var(--accent);
+    padding-bottom:5px;
+    font-size:1em;
+  }
+  .highlight{
+    background:yellow;
+    padding:1px 3px;
+    border-radius:2px;
+  }
+  .quote-mark{
+    color:var(--accent);
+    font-size:1.3em;
+    font-family:Georgia;
+  }
+  /* Buttons */
+  .btn{
+    background:var(--accent);
+    color:var(--paper);
+    border:none;
+    padding:10px 22px;
+    font-family:inherit;
+    font-size:0.95em;
+    cursor:pointer;
+    border-radius:4px;
+    transition:all 0.3s;
+    letter-spacing:1px;
+    box-shadow:0 2px 4px var(--shadow);
+  }
+  .btn:hover{background:var(--accent-dark);transform:translateY(-1px)}
+  .btn:active{transform:translateY(0)}
+  .btn.secondary{background:var(--ink-light)}
+  .btn:disabled{opacity:0.4;cursor:not-allowed}
+  .btn.success{background:var(--green)}
+  .btn.return{background:var(--gold);font-size:0.85em;padding:6px 12px}
+  /* Score */
+  .score-panel{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:var(--ink);
+    color:var(--paper);
+    padding:12px 18px;
+    border-radius:6px;
+    border:2px solid var(--gold);
+    font-size:0.9em;
+    box-shadow:0 4px 15px var(--shadow);
+    z-index:100;
+    min-width:150px;
+  }
+  .score-panel .label{font-size:0.8em;opacity:0.8;text-transform:uppercase;letter-spacing:1px}
+  .score-panel .value{font-size:1.6em;font-weight:bold;color:var(--gold);margin-top:4px}
+  /* Tasks specifics */
+  .option-group{display:flex;flex-direction:column;gap:10px;margin:10px 0}
+  .option{
+    background:#fff;
+    border:2px solid rgba(139,69,19,0.3);
+    padding:12px 15px;
+    border-radius:4px;
+    cursor:pointer;
+    transition:all 0.2s;
+    font-family:inherit;
+    text-align:left;
+    font-size:0.95em;
+  }
+  .option:hover{border-color:var(--accent);background:#fff9ec}
+  .option.selected{background:#fff4d6;border-color:var(--accent)}
+  .option.correct{background:#e8f5d6;border-color:var(--green)}
+  .option.wrong{background:#fad6d6;border-color:var(--red)}
+  /* Matching */
+  .match-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin:15px 0;
+  }
+  .match-col h4{text-align:center;margin-bottom:10px;color:var(--accent-dark)}
+  .match-item{
+    background:#fff;
+    padding:10px;
+    border:2px solid var(--accent);
+    border-radius:4px;
+    cursor:pointer;
+    text-align:center;
+    font-size:0.9em;
+    transition:all 0.2s;
+  }
+  .match-item:hover{background:#fff4d6}
+  .match-item.selected{background:var(--gold);color:#fff}
+  .match-item.matched{background:var(--green);color:#fff;cursor:default}
+  .match-item.wrong-match{background:var(--red);color:#fff;animation:shake 0.4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  /* Timeline */
+  .timeline{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin:15px 0;
+  }
+  .timeline-item{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    background:#fff;
+    padding:10px 15px;
+    border-radius:4px;
+    border-left:4px solid var(--accent);
+  }
+  .timeline-item .year{
+    font-weight:bold;
+    color:var(--accent-dark);
+    min-width:110px;
+    font-size:1.05em;
+  }
+  .timeline-item .event{flex:1;font-size:0.95em}
+  .timeline-item input{
+    width:80px;
+    padding:5px;
+    border:1px solid var(--accent);
+    border-radius:3px;
+    text-align:center;
+    font-family:inherit;
+  }
+  /* Table fill */
+  .fill-table{
+    width:100%;
+    border-collapse:collapse;
+    margin:15px 0;
+    background:#fff;
+  }
+  .fill-table th{
+    background:var(--accent);
+    color:#fff;
+    padding:10px;
+    text-align:left;
+    font-weight:normal;
+    font-size:0.9em;
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+  .fill-table td{
+    padding:12px;
+    border:1px solid var(--accent);
+    vertical-align:top;
+    font-size:0.92em;
+  }
+  .fill-table tr:nth-child(even) td{background:#faf5e4}
+  .fill-table select{
+    width:100%;
+    padding:6px;
+    border:1px solid var(--accent);
+    border-radius:3px;
+    font-family:inherit;
+    background:#fff;
+    cursor:pointer;
+  }
+  /* Poetry */
+  .poem{
+    font-style:italic;
+    text-align:center;
+    padding:20px;
+    background:#fff9ec;
+    border-top:1px solid var(--accent);
+    border-bottom:1px solid var(--accent);
+    margin:15px 0;
+    line-height:1.9;
+    font-size:1.05em;
+  }
+  /* Feedback */
+  .feedback{
+    margin-top:15px;
+    padding:12px 15px;
+    border-radius:4px;
+    display:none;
+    font-size:0.95em;
+  }
+  .feedback.show{display:block}
+  .feedback.correct{background:#e8f5d6;border-left:4px solid var(--green);color:var(--green)}
+  .feedback.wrong{background:#fad6d6;border-left:4px solid var(--red);color:var(--red)}
+  .feedback.info{background:#fff4d6;border-left:4px solid var(--gold);color:var(--accent-dark)}
+  /* Final */
+  .final-grade{
+    text-align:center;
+    padding:30px;
+    background:linear-gradient(135deg,#fff9ec,#f4ecd8);
+    border:3px double var(--accent);
+    border-radius:8px;
+    margin-top:20px;
+  }
+  .grade-letter{
+    font-size:5em;
+    color:var(--accent-dark);
+    font-family:Georgia;
+    font-weight:bold;
+    margin:10px 0;
+  }
+  .grade-text{font-size:1.2em;margin:15px 0}
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:15px;
+    margin-top:20px;
+  }
+  .stat-card{
+    background:#fff;
+    padding:15px;
+    border-radius:6px;
+    border:1px solid var(--accent);
+    text-align:center;
+  }
+  .stat-card .num{font-size:2em;color:var(--accent-dark);font-weight:bold}
+  .stat-card .label{font-size:0.85em;color:var(--ink-light);text-transform:uppercase;letter-spacing:1px}
+  /* Progress */
+  .progress{
+    height:6px;
+    background:var(--paper-dark);
+    border-radius:3px;
+    overflow:hidden;
+    margin:20px 0;
+  }
+  .progress-bar{
+    height:100%;
+    background:linear-gradient(90deg,var(--accent),var(--gold));
+    transition:width 0.5s;
+    width:0%;
+  }
+  /* Helpers */
+  .hint-box{
+    background:#fff4d6;
+    border-left:4px solid var(--gold);
+    padding:10px 15px;
+    margin:10px 0;
+    font-size:0.9em;
+    font-style:italic;
+  }
+  .nav-buttons{
+    display:flex;
+    justify-content:space-between;
+    margin-top:30px;
+    gap:10px;
+    padding-top:20px;
+    border-top:1px solid var(--accent);
+  }
+  .badge{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    padding:3px 10px;
+    border-radius:12px;
+    font-size:0.8em;
+    margin-left:8px;
+  }
+  .text-clickable span.click-zone{
+    cursor:pointer;
+    transition:background 0.2s;
+  }
+  .text-clickable span.click-zone:hover{background:rgba(255,215,0,0.3)}
+  .text-clickable span.click-zone.clicked{background:yellow;font-weight:bold}
+  .text-clickable span.click-zone.wrong-click{background:#fad6d6}
+  .reset-btn{
+    background:transparent;
+    border:1px dashed var(--accent);
+    color:var(--accent);
+    padding:5px 12px;
+    font-size:0.85em;
+    cursor:pointer;
+    border-radius:3px;
+    font-family:inherit;
+  }
+  .reset-btn:hover{background:var(--accent);color:#fff}
+  @media(max-width:700px){
+    .container{padding:20px}
+    h1{font-size:1.5em}
+    .tab{padding:8px 12px;font-size:0.85em}
+    .match-grid{grid-template-columns:1fr}
+    .score-panel{position:static;margin-bottom:15px}
+  }
+</style>
+</head>
+<body>
+
+<div class="score-panel">
+  <div class="label">Ваш результат</div>
+  <div class="value"><span id="score">0</span> / 50</div>
+</div>
+
+<div class="container">
+  <header>
+    <h1>А. А. Фет <span class="amp">&</span> теория «чистого искусства»</h1>
+    <div class="subtitle">Интерактивная работа по статье Б. Михайловского</div>
+    <div class="source">Источник: Литературная энциклопедия. Т. 11. — М., 1939. — Стб. 702—706</div>
+  </header>
+
+  <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="0">I. Биография</button>
+    <button class="tab" data-tab="1">II. Борьба</button>
+    <button class="tab" data-tab="2">III. Эволюция</button>
+    <button class="tab" data-tab="3">IV. Философия</button>
+    <button class="tab" data-tab="4">V. Итог</button>
+  </div>
+
+  <!-- ПАНЕЛЬ 1: БИОГРАФИЯ -->
+  <div class="panel active" id="panel-0">
+    <h2>I. Биография: травма и борьба</h2>
+
+    <div class="text-block">
+      <h4>📖 Фрагмент статьи</h4>
+      <p><strong>ФЕТ (Шеншин) Афанасий Афанасьевич [1820—1892]</strong> — известный русский поэт. Сын состоятельного родовитого помещика. <em>&lt;...&gt;</em> Как «незаконнорожденный» Ф. был лишен дворянства, права наследования и отцовского имени; с молодых лет до старости упорно добивался восстановления утраченных прав и благосостояния разными способами. С 1845 по 1858 служил в армии. В 50-х гг. сблизился с кругом журнала «Современник» (с Тургеневым, Боткиным, Л. Толстым и др.). <em>&lt;...&gt;</em> Враждебно настроенный к реформам 1861 и к революционно-демократическому движению, Фет разошелся даже со своими либеральными друзьями и в 60—70-х гг. умолк как поэт. В эти годы он выступал лишь как реакционный публицист... нападал на «нигилистов». В эпоху реакции 80-х гг. Ф. возвратился к художественному творчеству (сб. «Вечерние огни», 1883, 1885, 1888, 1891, переводы).</p>
+    </div>
+
+    <div class="task">
+      <div class="task-label">Задание 1. Хронология жизни</div>
+      <p>Перетащите (или выберите в выпадающем списке) события в правильном хронологическом порядке. <span class="badge">5 баллов</span></p>
+      <div class="timeline" id="timeline">
+        <div class="timeline-item"><span class="year">1840</span><span class="event"><select data-correct="a"><option value="">— выберите —</option><option value="a">Выход сборника «Лирический пантеон»</option><option value="b">Служба в армии</option><option value="c">Возвращение к творчеству</option><option value="d">Сближение с «Современником»</option></select></span></div>
+        <div class="timeline-item"><span class="year">1845—1858</span><span class="event"><select data-correct="b"><option value="">— выберите —</option><option value="a">Выход сборника «Лирический пантеон»</option><option value="b">Служба в армии</option><option value="c">Возвращение к творчеству</option><option value="d">Сближение с «Современником»</option></select></span></div>
+        <div class="timeline-item"><span class="year">1850-е</span><span class="event"><select data-correct="d"><option value="">— выберите —</option><option value="a">Выход сборника «Лирический пантеон»</option><option value="b">Служба в армии</option><option value="c">Возвращение к творчеству</option><option value="d">Сближение с «Современником»</option></select></span></div>
+        <div class="timeline-item"><span class="year">1860—1870-е</span><span class="event"><select data-correct="c"><option value="">— выберите —</option><option value="a">Поэтическое молчание и публицистика</option><option value="b">Служба в армии</option><option value="c">Возвращение к творчеству</option><option value="d">Сближение с «Современником»</option></select></span></div>
+      </div>
+      <button class="btn" onclick="checkTimeline()">Проверить</button>
+      <div class="feedback" id="fb-timeline"></div>
+    </div>
+
+    <div class="task">
+      <div class="task-label">Задание 2. Причина травмы</div>
+      <p>Найдите в тексте <strong>точную формулировку</strong>, объясняющую, почему Фет был лишён дворянства. Кликните на нужную фразу. <span class="badge">3 балла</span></p>
+      <div class="text-block text-clickable" id="clickText1">
+        <span class="click-zone" data-right="0">Сын состоятельного родовитого помещика.</span>
+        <span class="click-zone" data-right="1">Как «незаконнорожденный»</span>
+        <span class="click-zone" data-right="0">с молодых лет до старости упорно добивался</span>
+        <span class="click-zone" data-right="0">С 1845 по 1858 служил в армии.</span>
+        <span class="click-zone" data-right="0">Враждебно настроенный к реформам 1861</span>
+      </div>
+      <button class="btn" onclick="checkClick1()">Проверить</button>
+      <div class="feedback" id="fb-click1"></div>
+    </div>
+
+    <div class="hint-box">💡 Подсказка: «незаконнорожденный» — не бытовая характеристика, а <em>юридический статус</em>, записанный в метрических книгах Дармштадта.</div>
+
+    <div class="nav-buttons">
+      <button class="btn secondary" disabled>← Назад</button>
+      <button class="btn" onclick="goTab(1)">Далее: Литературная борьба →</button>
+    </div>
+  </div>
+
+  <!-- ПАНЕЛЬ 2: БОРЬБА -->
+  <div class="panel" id="panel-1">
+    <h2>II. Литературная борьба 1850—1860-х</h2>
+
+    <div class="text-block">
+      <h4>📖 Фрагмент статьи: оценки критиков</h4>
+      <p>В 40—50-х гг. Ф. был крупнейшим представителем плеяды поэтов <em>&lt;...&gt;</em>, к-рые выступали под лозунгом <strong>«чистого искусства»</strong>. Как поэта «вечных ценностей», «абсолютной красоты» Ф. пропагандировала <em>эстетическая и отчасти славянофильская критика</em> 50-х гг. (Дружинин, Боткин, Григорьев и др.). Для <em>революционно-демократической и радикальной критики</em> 60-х гг. стихи Ф. были образцом поэтического пустословия, безыдейного щебетанья о любви и природе (Добролюбов, Писарев). Эта критика разоблачала Фета как певца крепостничества... Тургенев же противопоставлял Ф., великому поэту, помещика и публициста Шеншина, «закоренелого и остервенелого крепостника, консерватора и поручика старого закала».</p>
+    </div>
+
+    <div class="task">
+      <div class="task-label">Задание 3. Соотнеси критика и оценку</div>
+      <p>Кликните на критика слева, затем на его характеристику справа. <span class="badge">8 баллов</span></p>
+      <div class="match-grid">
+        <div class="match-col">
+          <h4>Критик / друг</h4>
+          <div class="match-item" data-match="1" data-side="L">Дружинин, Боткин</div>
+          <div class="match-item" data-match="2" data-side="L">Добролюбов, Писарев</div>
+          <div class="match-item" data-match="3" data-side="L">Минаев, Щедрин</div>
+          <div class="match-item" data-match="4" data-side="L">Тургенев</div>
+        </div>
+        <div class="match-col">
+          <h4>Оценка</h4>
+          <div class="match-item" data-match="3" data-side="R">«певец крепостничества»</div>
+          <div class="match-item" data-match="1" data-side="R">певец «абсолютной красоты»</div>
+          <div class="match-item" data-match="4" data-side="R">«остервенелый крепостник»</div>
+          <div class="match-item" data-match="2" data-side="R">«безыдейное щебетанье»</div>
+        </div>
+      </div>
+      <div class="feedback" id="fb-match"></div>
+    </div>
+
+    <div class="task">
+      <div class="task-label">Задание 4. Парадокс личности</div>
+      <p>Выберите верное утверждение о позиции Тургенева. <span class="badge">3 балла</span></p>
+      <div class="option-group" id="q-turgenev">
+        <button class="option" data-correct="0">Тургенев полностью порвал с Фетом и не читал его стихов.</button>
+        <button class="option" data-correct="1">Тургенев разделял Фета-поэта и Шеншина-помещика: первого ценил, второго презирал.</button>
+        <button class="option" data-correct="0">Тургенев поддерживал публицистические письма Фета «Из деревни».</button>
+        <button class="option" data-correct="0">Тургенев считал Фета великим поэтом и одновременно великим политическим деятелем.</button>
+      </div>
+      <button class="btn" onclick="checkTurgenev()">Проверить</button>
+      <div class="feedback" id="fb-turgenev"></div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn return" onclick="goTab(0)">↶ Вернуться к биографии</button>
+      <button class="btn" onclick="goTab(2)">Далее: Эволюция поэтики →</button>
+    </div>
+  </div>
+
+  <!-- ПАНЕЛЬ 3: ЭВОЛЮЦИЯ -->
+  <div class="panel" id="panel-2">
+    <h2>III. Три фазы эволюции поэтики</h2>
+
+    <div class="text-block">
+      <h4>📖 Три периода по статье Михайловского</h4>
+      <p><strong>[Ранний]</strong> «языческий» культ прекрасной «плоти», предметность, созерцание идеализированных, покоящихся чувственных форм... Радостное жизнеутверждение принимает вид умеренного <em>горацианского эпикуреизма</em>.</p>
+      <p><strong>[Зрелый]</strong> От четкой пластичности Ф. переходит к нежной акварельности... «Хватает на лету и закрепляет вдруг / И темный бред души, и трав неясный запах»... впервые в русскую поэзию Ф. вводит <em>безглагольные стихи</em>... стих получает особую суггестивность, напевность, музыкальность «дрожащих напевов». <em>&lt;...&gt;</em> предшественник импрессионизма.</p>
+      <p><strong>[Поздний]</strong> Лирика проникается <em>метафизическим идеализмом</em>... «сон мимолетный»... шопенгауэровский «мир-представление»... тема прорыва в иной мир, полёта, образ крыльев. От эпикуреизма к <em>платонизму</em>... подошёл к порогу символизма.</p>
+    </div>
+
+    <div class="poem">
+      Хватает на лету и закрепляет вдруг<br>
+      И темный бред души, и трав неясный запах...
+    </div>
+
+    <div class="task">
+      <div class="task-label">Задание 5. Заполни таблицу</div>
+      <p>Выберите из списка нужные термины для каждой фазы. <span class="badge">10 баллов</span></p>
+      <table class="fill-table">
+        <tr><th>Фаза</th><th>Период</th><th>Ключевая черта</th><th>Философская основа</th></tr>
+        <tr>
+          <td><strong>I. Ранний Фет</strong></td>
+          <td>1840—50-е</td>
+          <td><select data-correct="plastic"><option value="">— ? —</option><option value="plastic">Пластичность, ясность, антологические стихи</option><option value="accent">«Нежная акварельность», безглагольность</option><option value="cosmos">Космический пейзаж, мотив крыльев</option></select></td>
+          <td><select data-correct="epicur"><option value="">— ? —</option><option value="epicur">Горацианский эпикуреизм</option><option value="plat">Платонизм, спиритуализм</option><option value="impr">Импрессионизм</option></select></td>
+        </tr>
+        <tr>
+          <td><strong>II. Зрелый Фет</strong></td>
+          <td>1850—60-е</td>
+          <td><select data-correct="accent"><option value="">— ? —</option><option value="plastic">Пластичность, ясность, антологические стихи</option><option value="accent">«Нежная акварельность», безглагольность</option><option value="cosmos">Космический пейзаж, мотив крыльев</option></select></td>
+          <td><select data-correct="impr"><option value="">— ? —</option><option value="epicur">Горацианский эпикуреизм</option><option value="plat">Платонизм, спиритуализм</option><option value="impr">Импрессионизм</option></select></td>
+        </tr>
+        <tr>
+          <td><strong>III. Поздний Фет</strong></td>
+          <td>1880-е («Вечерние огни»)</td>
+          <td><select data-correct="cosmos"><option value="">— ? —</option><option value="plastic">Пластичность, ясность, антологические стихи</option><option value="accent">«Нежная акварельность», безглагольность</option><option value="cosmos">Космический пейзаж, мотив крыльев</option></select></td>
+          <td><select data-correct="plat"><option value="">— ? —</option><option value="epicur">Горацианский эпикуреизм</option><option value="plat">Платонизм, спиритуализм</option><option value="impr">Импрессионизм</option></select></td>
+        </tr>
+      </table>
+      <button class="btn" onclick="checkTable()">Проверить таблицу</button>
+      <button class="reset-btn" onclick="resetTable()">↻ Сбросить</button>
+      <div class="feedback" id="fb-table"></div>
+    </div>
+
+    <div class="task">
+      <div class="task-label">Задание 6. «Хватает на лету...» — к какой фазе относится?</div>
+      <p><span class="badge">2 балла</span></p>
+      <div class="option-group" id="q-phase">
+        <button class="option" data-correct="0">I. Ранний Фет (новый классицизм)</button>
+        <button class="option" data-correct="1">II. Зрелый Фет (импрессионизм, безглагольность)</button>
+        <button class="option" data-correct="0">III. Поздний Фет (метафизика)</button>
+      </div>
+      <button class="btn" onclick="checkPhase()">Проверить</button>
+      <div class="feedback" id="fb-phase"></div>
+    </div>
+
+    <div class="hint-box">💡 Чтобы ответить точно, вернитесь к фрагменту о «нежной акварельности» и «безглагольных стихах».</div>
+
+    <div class="nav-buttons">
+      <button class="btn return" onclick="goTab(1)">↶ Вернуться к борьбе</button>
+      <button class="btn" onclick="goTab(3)">Далее: Философия →</button>
+    </div>
+  </div>
+
+  <!-- ПАНЕЛЬ 4: ФИЛОСОФИЯ -->
+  <div class="panel" id="panel-3">
+    <h2>IV. Философия позднего Фета</h2>
+
+    <div class="text-block">
+      <h4>📖 Философский контекст</h4>
+      <p>Реальная действительность... предстают как «сон мимолетный», как призрак, как <em>шопенгауэровский «мир-представление»</em>. Но это не греза индивидуального сознания... это «один и тот же сон жизни, в который мы все погружены» (эпиграф Ф. из Шопенгауэра). <em>&lt;...&gt;</em> Одной из основных у Ф. становится тема прорыва в иной мир, полета, образ крыльев. <em>&lt;...&gt;</em> От эстетики прекрасного Фет приходит к эстетике возвышенного, от эпикуреизма к платонизму... В этой последней фазе своего творчества Ф. подошел к порогу символизма, оказал большое влияние на поэзию В. Соловьева, а затем — Блока.</p>
+    </div>
+
+    <div class="task">
+      <div class="task-label">Задание 7. Понятийный словарь</div>
+      <p>Соотнесите философский термин и его определение в контексте статьи. <span class="badge">6 баллов</span></p>
+      <div class="match-grid">
+        <div class="match-col">
+          <h4>Термин</h4>
+          <div class="match-item" data-match="1" data-side="L">Эпикуреизм</div>
+          <div class="match-item" data-match="2" data-side="L">Платонизм</div>
+          <div class="match-item" data-match="3" data-side="L">Метафизический идеализм</div>
+        </div>
+        <div class="match-col">
+          <h4>Значение у Фета</h4>
+          <div class="match-item" data-match="2" data-side="R">Высшая реальность — мир вечных идей</div>
+          <div class="match-item" data-match="3" data-side="R">Реальность как «мир-представление», «сон жизни»</div>
+          <div class="match-item" data-match="1" data-side="R">Умеренное наслаждение «плотской» жизнью</div>
+        </div>
+      </div>
+      <div class="feedback" id="fb-match2"></div>
+    </div>
+
+    <div class="task">
+      <div class="task-label">Задание 8. Мост к Серебряному веку</div>
+      <p>На каких поэтов начала XX века, согласно статье, повлиял поздний Фет? Выберите <strong>все верные</strong>. <span class="badge">4 балла</span></p>
+      <div class="option-group" id="q-influence">
+        <label class="option"><input type="checkbox" value="sol"> Владимир Соловьёв</label>
+        <label class="option"><input type="checkbox" value="blok"> Александр Блок</label>
+        <label class="option"><input type="checkbox" value="pushkin"> Александр Пушкин</label>
+        <label class="option"><input type="checkbox" value="nek"> Николай Некрасов</label>
+      </div>
+      <button class="btn" onclick="checkInfluence()">Проверить</button>
+      <div class="feedback" id="fb-influence"></div>
+    </div>
+
+    <div class="hint-box">💡 Пушкин и Некрасов жили раньше или были современниками Фета, но не его наследниками. Вспомните хронологию!</div>
+
+    <div class="nav-buttons">
+      <button class="btn return" onclick="goTab(2)">↶ К эволюции</button>
+      <button class="btn" onclick="goTab(4)">Далее: Итог →</button>
+    </div>
+  </div>
+
+  <!-- ПАНЕЛЬ 5: ИТОГ -->
+  <div class="panel" id="panel-4">
+    <h2>V. Итоговый контроль</h2>
+
+    <div class="task">
+      <div class="task-label">Финальный тест (5 вопросов, по 3 балла)</div>
+
+      <div style="margin-top:15px">
+        <p><strong>1. Что означает теория «чистого искусства» в контексте статьи?</strong></p>
+        <div class="option-group" id="q-f1">
+          <button class="option" data-correct="0">Поэзия должна служить гражданским целям и обличать пороки.</button>
+          <button class="option" data-correct="1">Поэзия служит «вечным ценностям» и «абсолютной красоте», а не злобе дня.</button>
+          <button class="option" data-correct="0">Поэзия должна быть только религиозной.</button>
+        </div>
+      </div>
+
+      <div style="margin-top:20px">
+        <p><strong>2. Почему Фет в 60—70-е годы «умолк как поэт»?</strong></p>
+        <div class="option-group" id="q-f2">
+          <button class="option" data-correct="0">Он потерял интерес к литературе.</button>
+          <button class="option" data-correct="0">Ему запретили публиковаться.</button>
+          <button class="option" data-correct="1">Он был враждебен реформам 1861 г. и ушёл в публицистику и «домостроительство».</button>
+        </div>
+      </div>
+
+      <div style="margin-top:20px">
+        <p><strong>3. Какое новаторство внёс Фет в русскую поэзию?</strong></p>
+        <div class="option-group" id="q-f3">
+          <button class="option" data-correct="0">Ввёл гражданскую риторику.</button>
+          <button class="option" data-correct="1">Первым ввёл безглагольные стихи («Шёпот», «Буря»).</button>
+          <button class="option" data-correct="0">Отказался от рифмы полностью.</button>
+        </div>
+      </div>
+
+      <div style="margin-top:20px">
+        <p><strong>4. Какой философ оказал наибольшее влияние на позднего Фета?</strong></p>
+        <div class="option-group" id="q-f4">
+          <button class="option" data-correct="0">Аристотель</button>
+          <button class="option" data-correct="0">Кант</button>
+          <button class="option" data-correct="1">Шопенгауэр</button>
+        </div>
+      </div>
+
+      <div style="margin-top:20px">
+        <p><strong>5. К какому литературному направлению подошёл поздний Фет?</strong></p>
+        <div class="option-group" id="q-f5">
+          <button class="option" data-correct="0">Классицизму</button>
+          <button class="option" data-correct="1">Символизму</button>
+          <button class="option" data-correct="0">Реализму</button>
+        </div>
+      </div>
+
+      <button class="btn success" style="margin-top:20px" onclick="finishTest()">Завершить работу и получить оценку</button>
+      <div class="feedback" id="fb-final"></div>
+    </div>
+
+    <div id="finalResult" style="display:none"></div>
+  </div>
+
+</div>
+
+<script>
+let score = 0;
+let taskScores = {
+  timeline: false,
+  click1: false,
+  match: false,
+  turgenev: false,
+  table: false,
+  phase: false,
+  match2: false,
+  influence: false,
+  final: false
+};
+let completedTabs = new Set();
+
+function updateScore(delta, taskName){
+  if(taskScores[taskName]) return; // уже засчитано
+  score += delta;
+  taskScores[taskName] = true;
+  document.getElementById('score').textContent = score;
+  updateProgress();
+}
+
+function updateProgress(){
+  const completed = Object.values(taskScores).filter(v=>v).length;
+  const total = Object.keys(taskScores).length;
+  const pct = (completed/total)*100;
+  document.getElementById('progressBar').style.width = pct+'%';
+}
+
+// Tabs
+document.querySelectorAll('.tab').forEach((t,i)=>{
+  t.addEventListener('click',()=>goTab(i));
+});
+
+function goTab(i){
+  document.querySelectorAll('.panel').forEach((p,j)=>{
+    p.classList.toggle('active', j===i);
+  });
+  document.querySelectorAll('.tab').forEach((t,j)=>{
+    t.classList.toggle('active', j===i);
+  });
+  completedTabs.add(i);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Task 1: Timeline
+function checkTimeline(){
+  const selects = document.querySelectorAll('#timeline select');
+  let correct = 0;
+  selects.forEach(s=>{
+    if(s.value === s.dataset.correct){
+      s.style.background = '#e8f5d6';
+      correct++;
+    } else if(s.value !== ''){
+      s.style.background = '#fad6d6';
+    }
+  });
+  const fb = document.getElementById('fb-timeline');
+  if(correct === 4){
+    fb.className = 'feedback show correct';
+    fb.innerHTML = '✓ Всё верно! Хронология: 1840 — «Лирический пантеон», 1845-58 — армия, 1850-е — «Современник», 1860-70-е — молчание. +5 баллов.';
+    updateScore(5,'timeline');
+  } else {
+    fb.className = 'feedback show wrong';
+    fb.innerHTML = `✗ Правильных ответов: ${correct} из 4. Вернитесь к тексту и уточните даты.`;
+  }
+}
+
+// Task 2: Click text
+function checkClick1(){
+  const zones = document.querySelectorAll('#clickText1 .click-zone');
+  const fb = document.getElementById('fb-click1');
+  let gotIt = false;
+  zones.forEach(z=>{
+    z.classList.remove('clicked','wrong-click');
+    z.onclick = function(){
+      zones.forEach(x=>x.classList.remove('clicked','wrong-click'));
+      if(this.dataset.right === '1'){
+        this.classList.add('clicked');
+        fb.className = 'feedback show correct';
+        fb.innerHTML = '✓ Верно! Формулировка — «Как "незаконнорожденный"». Именно этот юридический статус стал причиной утраты дворянства. +3 балла.';
+        updateScore(3,'click1');
+      } else {
+        this.classList.add('wrong-click');
+        fb.className = 'feedback show wrong';
+        fb.innerHTML = '✗ Не то. Ищите фразу, которая объясняет юридическую причину, а не биографический факт.';
+      }
+    };
+  });
+  fb.className = 'feedback show info';
+  fb.innerHTML = '💡 Кликните по нужной фразе в тексте.';
+}
+
+// Task 3: Matching
+let matchState = {L:null, R:null, matched:0};
+document.querySelectorAll('#panel-1 .match-item').forEach(item=>{
+  item.addEventListener('click',function(){
+    if(this.classList.contains('matched')) return;
+    const side = this.dataset.side;
+    document.querySelectorAll(`#panel-1 .match-item[data-side="${side}"]`).forEach(x=>{
+      if(!x.classList.contains('matched')) x.classList.remove('selected');
+    });
+    this.classList.add('selected');
+    matchState[side] = this;
+    if(matchState.L && matchState.R){
+      if(matchState.L.dataset.match === matchState.R.dataset.match){
+        matchState.L.classList.add('matched');
+        matchState.R.classList.add('matched');
+        matchState.L.classList.remove('selected');
+        matchState.R.classList.remove('selected');
+        matchState.matched++;
+        if(matchState.matched === 4){
+          const fb = document.getElementById('fb-match');
+          fb.className = 'feedback show correct';
+          fb.innerHTML = '✓ Отлично! Все пары найдены. Вы видите, как одна и та же фигура Фета вызывала полярные оценки. +8 баллов.';
+          updateScore(8,'match');
+        }
+      } else {
+        matchState.L.classList.add('wrong-match');
+        matchState.R.classList.add('wrong-match');
+        setTimeout(()=>{
+          matchState.L.classList.remove('wrong-match','selected');
+          matchState.R.classList.remove('wrong-match','selected');
+        },500);
+      }
+      matchState.L = null;
+      matchState.R = null;
+    }
+  });
+});
+
+// Task 4: Turgenev
+document.querySelectorAll('#q-turgenev .option').forEach(o=>{
+  o.addEventListener('click',function(){
+    document.querySelectorAll('#q-turgenev .option').forEach(x=>x.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+function checkTurgenev(){
+  const sel = document.querySelector('#q-turgenev .option.selected');
+  const fb = document.getElementById('fb-turgenev');
+  if(!sel){ fb.className='feedback show wrong'; fb.innerHTML='Выберите вариант.'; return; }
+  document.querySelectorAll('#q-turgenev .option').forEach(x=>x.classList.remove('selected','correct','wrong'));
+  if(sel.dataset.correct === '1'){
+    sel.classList.add('correct');
+    fb.className = 'feedback show correct';
+    fb.innerHTML = '✓ Верно! Тургенев видел в Фете ДВУХ людей: гениального лирика и невыносимого консерватора-помещика. Это и есть трагедия его раздвоения. +3 балла.';
+    updateScore(3,'turgenev');
+  } else {
+    sel.classList.add('wrong');
+    fb.className = 'feedback show wrong';
+    fb.innerHTML = '✗ Не совсем. Вернитесь к цитате Тургенева во втором фрагменте статьи.';
+  }
+}
+
+// Task 5: Table
+function checkTable(){
+  const selects = document.querySelectorAll('.fill-table select');
+  let correct = 0;
+  selects.forEach(s=>{
+    if(s.value === s.dataset.correct){
+      s.style.background = '#e8f5d6';
+      correct++;
+    } else if(s.value !== ''){
+      s.style.background = '#fad6d6';
+    }
+  });
+  const fb = document.getElementById('fb-table');
+  if(correct === 6){
+    fb.className = 'feedback show correct';
+    fb.innerHTML = '✓ Таблица собрана идеально! Вы видите чёткую эволюцию: от эпикуреизма через импрессионизм к платонизму. +10 баллов.';
+    updateScore(10,'table');
+  } else {
+    fb.className = 'feedback show wrong';
+    fb.innerHTML = `Правильных: ${correct} из 6. Вернитесь к трём фрагментам и уточните термины.`;
+  }
+}
+function resetTable(){
+  document.querySelectorAll('.fill-table select').forEach(s=>{
+    s.value = '';
+    s.style.background = '#fff';
+  });
+  document.getElementById('fb-table').className = 'feedback';
+}
+
+// Task 6: Phase
+document.querySelectorAll('#q-phase .option').forEach(o=>{
+  o.addEventListener('click',function(){
+    document.querySelectorAll('#q-phase .option').forEach(x=>x.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+function checkPhase(){
+  const sel = document.querySelector('#q-phase .option.selected');
+  const fb = document.getElementById('fb-phase');
+  if(!sel){ fb.className='feedback show wrong'; fb.innerHTML='Выберите вариант.'; return; }
+  if(sel.dataset.correct === '1'){
+    sel.classList.add('correct');
+    fb.className = 'feedback show correct';
+    fb.innerHTML = '✓ Верно! Это зрелый период: «нежная акварельность», безглагольность, «дрожащие напевы». +2 балла.';
+    updateScore(2,'phase');
+  } else {
+    sel.classList.add('wrong');
+    fb.className = 'feedback show wrong';
+    fb.innerHTML = '✗ Не совсем. Перечитайте фрагмент о «зрелом периоде».';
+  }
+}
+
+// Task 7: Matching 2
+let match2State = {L:null, R:null, matched:0};
+document.querySelectorAll('#panel-3 .match-item').forEach(item=>{
+  item.addEventListener('click',function(){
+    if(this.classList.contains('matched')) return;
+    const side = this.dataset.side;
+    document.querySelectorAll(`#panel-3 .match-item[data-side="${side}"]`).forEach(x=>{
+      if(!x.classList.contains('matched')) x.classList.remove('selected');
+    });
+    this.classList.add('selected');
+    match2State[side] = this;
+    if(match2State.L && match2State.R){
+      if(match2State.L.dataset.match === match2State.R.dataset.match){
+        match2State.L.classList.add('matched');
+        match2State.R.classList.add('matched');
+        match2State.L.classList.remove('selected');
+        match2State.R.classList.remove('selected');
+        match2State.matched++;
+        if(match2State.matched === 3){
+          const fb = document.getElementById('fb-match2');
+          fb.className = 'feedback show correct';
+          fb.innerHTML = '✓ Отлично! Три философских ключа к Фету освоены. +6 баллов.';
+          updateScore(6,'match2');
+        }
+      } else {
+        match2State.L.classList.add('wrong-match');
+        match2State.R.classList.add('wrong-match');
+        setTimeout(()=>{
+          match2State.L.classList.remove('wrong-match','selected');
+          match2State.R.classList.remove('wrong-match','selected');
+        },500);
+      }
+      match2State.L = null;
+      match2State.R = null;
+    }
+  });
+});
+
+// Task 8: Influence
+function checkInfluence(){
+  const checked = Array.from(document.querySelectorAll('#q-influence input:checked')).map(x=>x.value);
+  const correct = ['sol','blok'];
+  const fb = document.getElementById('fb-influence');
+  document.querySelectorAll('#q-influence .option').forEach(o=>{
+    o.classList.remove('correct','wrong');
+  });
+  const allCorrect = checked.length === correct.length && checked.every(c=>correct.includes(c));
+  if(allCorrect){
+    document.querySelectorAll('#q-influence input:checked').forEach(c=>c.parentElement.classList.add('correct'));
+    fb.className = 'feedback show correct';
+    fb.innerHTML = '✓ Верно! Именно Соловьёв и Блок — прямые наследники позднего Фета. +4 балла.';
+    updateScore(4,'influence');
+  } else {
+    document.querySelectorAll('#q-influence .option').forEach(o=>{
+      const val = o.querySelector('input').value;
+      if(correct.includes(val)) o.classList.add('correct');
+      else if(o.querySelector('input').checked) o.classList.add('wrong');
+    });
+    fb.className = 'feedback show wrong';
+    fb.innerHTML = '✗ Не совсем. Вспомните: Пушкин и Некрасов — не наследники Фета. Вернитесь к четвёртому фрагменту статьи.';
+  }
+}
+
+// Final test
+function finishTest(){
+  const questions = ['q-f1','q-f2','q-f3','q-f4','q-f5'];
+  let correct = 0;
+  questions.forEach(qid=>{
+    const sel = document.querySelector(`#${qid} .option.selected`);
+    document.querySelectorAll(`#${qid} .option`).forEach(x=>x.classList.remove('selected','correct','wrong'));
+    if(sel){
+      if(sel.dataset.correct === '1'){
+        sel.classList.add('correct');
+        correct++;
+      } else {
+        sel.classList.add('wrong');
+        document.querySelector(`#${qid} .option[data-correct="1"]`).classList.add('correct');
+      }
+    }
+  });
+
+  const fb = document.getElementById('fb-final');
+  if(correct === 5 && !taskScores.final){
+    updateScore(15,'final');
+  } else if(!taskScores.final){
+    updateScore(correct*3,'final');
+  }
+
+  const earned = correct * 3;
+  fb.className = 'feedback show ' + (correct>=4?'correct':correct>=3?'info':'wrong');
+  fb.innerHTML = `Итоговый тест: ${correct} из 5 верно. +${earned} баллов.`;
+
+  showFinalGrade();
+}
+
+// Setup option clicks for final
+['q-f1','q-f2','q-f3','q-f4','q-f5'].forEach(qid=>{
+  document.querySelectorAll(`#${qid} .option`).forEach(o=>{
+    o.addEventListener('click',function(){
+      document.querySelectorAll(`#${qid} .option`).forEach(x=>x.classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+});
+
+function showFinalGrade(){
+  const total = score;
+  let grade, letter, comment;
+  if(total >= 45){ grade = 5; letter = 'V'; comment = 'Превосходно! Вы глубоко освоили статью и видите всю трагедию Фета-Шеншина.'; }
+  else if(total >= 35){ grade = 4; letter = 'IV'; comment = 'Хорошо! Основные идеи усвоены, но есть детали, к которым стоит вернуться.'; }
+  else if(total >= 25){ grade = 3; letter = 'III'; comment = 'Удовлетворительно. Перечитайте фрагменты статьи и повторите задания.'; }
+  else { grade = 2; letter = 'II'; comment = 'Необходимо вернуться к статье и пройти все задания заново.'; }
+
+  const res = document.getElementById('finalResult');
+  res.style.display = 'block';
+  res.innerHTML = `
+    <div class="final-grade">
+      <div style="font-size:0.9em;color:var(--ink-light);text-transform:uppercase;letter-spacing:2px">Итоговая оценка</div>
+      <div class="grade-letter">${letter}</div>
+      <div class="grade-text">Балл: <strong>${grade}</strong></div>
+      <div style="font-style:italic;margin:15px 0">${comment}</div>
+      <div class="stats">
+        <div class="stat-card"><div class="num">${total}</div><div class="label">Набрано баллов</div></div>
+        <div class="stat-card"><div class="num">50</div><div class="label">Максимум</div></div>
+        <div class="stat-card"><div class="num">${Math.round(total/50*100)}%</div><div class="label">Результат</div></div>
+      </div>
+      <button class="btn secondary" style="margin-top:20px" onclick="location.reload()">↻ Пройти заново</button>
+    </div>
+  `;
+  res.scrollIntoView({behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
