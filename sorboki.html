@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сорбонки: Старинные слова у Даля</title>
+<style>
+  * {box-sizing:border-box;}
+  body {margin:0; background:#f3ead8; font-family:Georgia,"Times New Roman",serif; color:#3d2b17; padding:20px;}
+  .wrap {max-width:1200px; margin:0 auto;}
+  h1 {text-align:center; font-size:28px; margin:10px 0; color:#3d2b17; font-weight:normal;}
+  .ornament {text-align:center; color:#b08d4f; font-size:20px; margin:10px 0;}
+  .controls {text-align:center; margin:20px 0;}
+  .btn {background:#8a5a2b; color:#fff; border:none; border-radius:10px; padding:10px 20px;
+        font-size:16px; font-family:inherit; cursor:pointer; margin:5px;}
+  .btn:hover {background:#75481f;}
+  .btn.ghost {background:#fbf6ea; color:#6b4e26; border:1.5px solid #d9c9a6;}
+  .btn.ghost:hover {background:#f6ecd8;}
+  .btn.active {background:#2e7d32;}
+  .grid {display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:20px; margin-top:20px;}
+  .card-container {perspective:1000px; height:320px;}
+  .card {position:relative; width:100%; height:100%; transition:transform 0.6s;
+         transform-style:preserve-3d; cursor:pointer;}
+  .card.flipped {transform:rotateY(180deg);}
+  .card-face {position:absolute; width:100%; height:100%; backface-visibility:hidden;
+              border-radius:14px; box-shadow:0 6px 24px rgba(90,60,20,.12);
+              display:flex; flex-direction:column; justify-content:center; align-items:center;
+              padding:20px; text-align:center;}
+  .card-front {background:linear-gradient(135deg, #fffdf6 0%, #f6efdd 100%); border:2px solid #b08d4f;}
+  .card-back {background:linear-gradient(135deg, #eef7ee 0%, #f6efdd 100%); border:2px solid #2e7d32;
+              transform:rotateY(180deg);}
+  .card-word {font-size:36px; font-weight:bold; color:#8a5a2b; margin-bottom:15px;
+              font-family:"Times New Roman",serif;}
+  .card-meaning {font-size:16px; color:#5a4630; line-height:1.5; margin:10px 0;}
+  .card-example {font-size:14px; color:#6b4e26; font-style:italic; margin-top:15px;
+                 border-top:1px solid #d9c9a6; padding-top:10px; width:100%;}
+  .card-modern {font-size:18px; color:#2e7d32; font-weight:bold; margin:10px 0;
+                background:#e7f3e7; padding:8px 12px; border-radius:8px; display:inline-block;}
+  .card-section {font-size:12px; color:#8a7a5e; margin-top:10px;}
+  .flip-hint {font-size:11px; color:#8a7a5e; margin-top:10px; font-style:italic;}
+  .search-box {width:100%; max-width:400px; padding:12px; font-size:16px; border:1.5px solid #d9c9a6;
+               border-radius:10px; font-family:inherit; background:#fbf6ea; color:#3d2b17; margin:0 auto;}
+  .search-container {text-align:center; margin:20px 0;}
+  .category-label {display:inline-block; background:#efe4cc; color:#6b4e26; padding:3px 10px;
+                   border-radius:12px; font-size:11px; margin-bottom:10px; text-transform:uppercase;
+                   letter-spacing:0.05em;}
+  .stats {text-align:center; margin:20px 0; font-size:14px; color:#6b4e26;}
+  @media (max-width:768px){
+    .grid {grid-template-columns:1fr;}
+    .card-container {height:280px;}
+    .card-word {font-size:28px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="ornament">❦</div>
+  <h1>Сорбонки: Старинные слова у Даля</h1>
+  <div class="ornament">❦</div>
+  
+  <div class="stats">Нажмите на карточку, чтобы перевернуть и увидеть объяснение</div>
+  
+  <div class="search-container">
+    <input type="text" class="search-box" id="searchInput" placeholder="Поиск слова (например: аз, рать, пуд)">
+  </div>
+  
+  <div class="controls">
+    <button class="btn ghost" onclick="showAll()">Все слова</button>
+    <button class="btn ghost" onclick="showCategory('азбука')">Азбука</button>
+    <button class="btn ghost" onclick="showCategory('меры')">Меры</button>
+    <button class="btn ghost" onclick="showCategory('быт')">Быт</button>
+    <button class="btn ghost" onclick="showCategory('люди')">Люди</button>
+    <button class="btn ghost" onclick="showCategory('дом')">Дом</button>
+  </div>
+  
+  <div class="grid" id="cardGrid"></div>
+</div>
+
+<script>
+const words = [
+  {word:"аз", old:"первая буква старинной азбуки (как «А»)", modern:"А", 
+   example:"Сперва аз да буки, а там и науки", category:"азбука"},
+  {word:"буки", old:"вторая буква старинной азбуки (как «Б»)", modern:"Б",
+   example:"Сперва аз да буки, а там и науки", category:"азбука"},
+  {word:"веди", old:"буква старинной азбуки (как «В»)", modern:"В",
+   example:"Аз, буки, веди — первые три буквы", category:"азбука"},
+  {word:"глаголь", old:"буква старинной азбуки (как «Г»)", modern:"Г",
+   example:"Глаголь аз — глаз", category:"азбука"},
+  {word:"рать", old:"битва, воинский поход (устар.)", modern:"война, битва",
+   example:"Друг познается на рати да при беде", category:"быт"},
+  {word:"однова́", old:"один раз (устар.)", modern:"один раз",
+   example:"Десятью примерь, однова отрежь", category:"быт"},
+  {word:"поколе", old:"пока, до тех пор (устар.)", modern:"пока",
+   example:"Поколе кипит — куй железо", category:"быт"},
+  {word:"куль", old:"мешок (просторечие)", modern:"мешок",
+   example:"Вместе пуд (куль) соли съесть", category:"быт"},
+  {word:"оладышек", old:"оладья, пышная лепёшка", modern:"оладья",
+   example:"Хозяйка в дому — что оладышек в меду", category:"дом"},
+  {word:"затишно", old:"тихо, спокойно, безветренно", modern:"спокойно",
+   example:"Хоть не пышно, да затишно", category:"быт"},
+  {word:"потаковщик", old:"тот, кто во всём поддакивает", modern:"льстец, поддакивала",
+   example:"Не люби друга потаковщика", category:"люди"},
+  {word:"встречник", old:"тот, кто спорит, но честно", modern:"оппонент, спорщик",
+   example:"Люби встречника", category:"люди"},
+  {word:"шесток", old:"площадка перед устьем русской печи", modern:"площадка у печи",
+   example:"Всяк сверчок знай свой шесток", category:"дом"},
+  {word:"сверчок", old:"насекомое, живущее у печи", modern:"сверчок",
+   example:"Всяк сверчок знай свой шесток", category:"дом"},
+  {word:"калач", old:"белый пшеничный хлеб особой формы", modern:"белый хлеб",
+   example:"Хочешь есть калачи, так не сиди на печи", category:"быт"},
+  {word:"сошка", old:"лёгкий деревянный плуг", modern:"плуг",
+   example:"Один с сошкой, а семеро с ложкой", category:"быт"},
+  {word:"пуд", old:"старинная мера веса (около 16 кг)", modern:"16 кг",
+   example:"Вместе пуд соли съесть", category:"меры"},
+  {word:"верста", old:"старинная мера длины (около 1 км)", modern:"1 км",
+   example:"Одна верста до города", category:"меры"},
+  {word:"сажень", old:"старинная мера длины (около 2 м)", modern:"2 метра",
+   example:"От горшка два вершка, а сажень росту", category:"меры"},
+  {word:"лыко", old:"кора липы для плетения лаптей", modern:"кора",
+   example:"Лапти из лыка плетут", category:"быт"},
+  {word:"зепь", old:"карман в старинной одежде (устар.)", modern:"карман",
+   example:"Клади в зепь орехи", category:"быт"},
+  {word:"очина", old:"перо для письма (устар.)", modern:"перо",
+   example:"Очина — птичье перо", category:"быт"},
+  {word:"светец", old:"подставка для лучины", modern:"подставка",
+   example:"Светец держит лучину", category:"дом"},
+  {word:"ухват", old:"приспособление для горшков", modern:"приспособление для печи",
+   example:"Ухватом горшок достают", category:"дом"},
+  {word:"кочерга", old:"инструмент для печи", modern:"инструмент для печи",
+   example:"Кочергой угли ворошат", category:"дом"},
+  {word:"чело", old:"отверстие в печи", modern:"устье печи",
+   example:"Чело печи — её вход", category:"дом"},
+  {word:"печина", old:"зола в печи", modern:"зола",
+   example:"Печина от дров", category:"дом"},
+  {word:"голбец", old:"ящик у печи для сна", modern:"ящик, лавка",
+   example:"Спать на голбце", category:"дом"},
+  {word:"сенцы", old:"сени, помещение перед избой", modern:"сени, прихожая",
+   example:"Войти в сенцы", category:"дом"},
+  {word:"красный угол", old:"передний угол избы с иконами", modern:"почётное место",
+   example:"Иконы в красном углу", category:"дом"}
+];
+
+let currentCategory = 'all';
+let currentSearch = '';
+
+function createCard(item, index) {
+  const container = document.createElement('div');
+  container.className = 'card-container';
+  container.dataset.category = item.category;
+  container.dataset.word = item.word.toLowerCase();
+  
+  container.innerHTML = `
+    <div class="card" onclick="this.classList.toggle('flipped')">
+      <div class="card-face card-front">
+        <div class="category-label">${getCategoryName(item.category)}</div>
+        <div class="card-word">${item.word}</div>
+        <div class="card-meaning">${item.old}</div>
+        <div class="flip-hint">Нажмите, чтобы перевернуть</div>
+      </div>
+      <div class="card-face card-back">
+        <div class="category-label">${getCategoryName(item.category)}</div>
+        <div class="card-word">${item.word}</div>
+        <div class="card-modern">${item.modern}</div>
+        <div class="card-example">«${item.example}»</div>
+        <div class="card-section">Из сборника В. И. Даля</div>
+      </div>
+    </div>
+  `;
+  
+  return container;
+}
+
+function getCategoryName(cat) {
+  const names = {
+    'азбука': 'Азбука',
+    'меры': 'Меры',
+    'быт': 'Быт',
+    'люди': 'Люди',
+    'дом': 'Дом и хозяйство'
+  };
+  return names[cat] || cat;
+}
+
+function renderCards() {
+  const grid = document.getElementById('cardGrid');
+  grid.innerHTML = '';
+  
+  const filtered = words.filter(item => {
+    const matchCategory = currentCategory === 'all' || item.category === currentCategory;
+    const matchSearch = currentSearch === '' || 
+                        item.word.toLowerCase().includes(currentSearch) ||
+                        item.old.toLowerCase().includes(currentSearch) ||
+                        item.modern.toLowerCase().includes(currentSearch);
+    return matchCategory && matchSearch;
+  });
+  
+  filtered.forEach((item, index) => {
+    grid.appendChild(createCard(item, index));
+  });
+  
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px; color:#6b4e26;">Ничего не найдено</div>';
+  }
+}
+
+function showAll() {
+  currentCategory = 'all';
+  renderCards();
+}
+
+function showCategory(cat) {
+  currentCategory = cat;
+  renderCards();
+}
+
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  currentSearch = e.target.value.toLowerCase();
+  renderCards();
+});
+
+// Инициализация
+renderCards();
+</script>
+</body>
+</html>
