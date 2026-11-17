@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Восстанови пословицу — викторина по сборнику В. И. Даля</title>
+<style>
+  * {box-sizing:border-box;}
+  body {margin:0; background:#f3ead8; font-family:Georgia,"Times New Roman",serif; color:#3d2b17;}
+  .wrap {max-width:780px; margin:24px auto; padding:0 14px;}
+  .card {background:#fffdf6; border:1px solid #d9c9a6; border-radius:14px;
+         box-shadow:0 6px 24px rgba(90,60,20,.12); padding:26px 30px;}
+  .kicker {letter-spacing:.06em; text-transform:uppercase; font-size:12px; color:#8a6a3f; text-align:center;}
+  h1 {text-align:center; font-size:30px; margin:6px 0 2px; color:#3d2b17; font-weight:normal;}
+  .ornament {text-align:center; color:#b08d4f; font-size:18px; margin-bottom:10px;}
+  .epigraph {text-align:right; font-style:italic; color:#6b4e26; margin:10px 0 2px;}
+  .epinote {text-align:right; font-size:12px; color:#8a7a5e; margin:0 0 14px;}
+  .screen {display:none;}
+  .screen.active {display:block; animation:fadeIn .35s;}
+  @keyframes fadeIn {from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .intro {font-size:16px; line-height:1.5; margin:10px 0;}
+  .facts {background:#f6efdd; border:1px solid #e2d5b8; border-radius:10px;
+          padding:10px 14px; font-size:14px; color:#6b4e26; margin:12px 0;}
+  .namerow {margin:14px 0;}
+  #nameInput {width:100%; font-size:16px; padding:11px 12px; border:1.5px solid #d9c9a6;
+              border-radius:10px; font-family:inherit; background:#fbf6ea; color:#3d2b17;}
+  .btn {background:#8a5a2b; color:#fff; border:none; border-radius:10px; padding:12px 22px;
+        font-size:17px; font-family:inherit; cursor:pointer;}
+  .btn:hover {background:#75481f;}
+  .btn.ghost {background:#fbf6ea; color:#6b4e26; border:1.5px solid #d9c9a6;}
+  .btn.ghost:hover {background:#f6ecd8;}
+  .topline {display:flex; justify-content:space-between; align-items:center; font-size:14px; color:#6b4e26;}
+  .badge {background:#efe4cc; border:1px solid #d9c9a6; border-radius:20px; padding:3px 12px; font-size:13px;}
+  .progress {height:8px; background:#e8dcc2; border-radius:6px; overflow:hidden; margin:10px 0 14px;}
+  #bar {height:100%; width:0; background:linear-gradient(90deg,#b08d4f,#8a5a2b); transition:width .3s;}
+  .qnum {font-size:13px; color:#8a6a3f; margin-bottom:6px;}
+  .prompt {font-size:15px; color:#6b4e26; background:#f6efdd; border-radius:8px; padding:8px 12px; margin-bottom:8px;}
+  .qtext {font-size:20px; margin:6px 0 10px; color:#2f2212; line-height:1.4;}
+  .hint {font-size:14px; color:#7a5c2e; font-style:italic; margin-bottom:8px;}
+  .opt {display:block; width:100%; text-align:left; background:#fbf6ea; border:1.5px solid #d9c9a6;
+        border-radius:10px; padding:12px 14px; margin:8px 0; font-size:17px; font-family:inherit;
+        cursor:pointer; color:#3d2b17;}
+  .opt:hover:not(:disabled) {border-color:#8a5a2b; background:#f6ecd8;}
+  .opt .num {display:inline-block; width:24px; height:24px; line-height:24px; text-align:center;
+             background:#e8dcc2; border-radius:50%; margin-right:10px; font-size:13px; color:#6b4e26;}
+  .opt.correct {background:#e7f3e7; border-color:#2e7d32; color:#1b5e20; font-weight:bold;}
+  .opt.wrong {background:#fbe9e7; border-color:#c62828; color:#b71c1c;}
+  .opt.dim {opacity:.55;}
+  .opt:disabled {cursor:default;}
+  .inputrow {display:none; gap:8px; margin:10px 0;}
+  #answerInput {flex:1; font-size:17px; padding:11px 12px; border:1.5px solid #d9c9a6;
+                border-radius:10px; font-family:inherit; background:#fbf6ea; color:#3d2b17;}
+  .feedback {border-radius:10px; padding:14px 16px; margin-top:14px; display:none; animation:fadeIn .3s;}
+  .feedback.good {background:#eef7ee; border:1px solid #bcd9bc;}
+  .feedback.bad {background:#fdf0ee; border:1px solid #e4bdb7;}
+  .fb-title {font-weight:bold; margin-bottom:6px;}
+  .good .fb-title {color:#2e7d32;}
+  .bad .fb-title {color:#c62828;}
+  .fb-full {font-style:italic; font-size:17px; margin:4px 0;}
+  .fb-section {font-size:13px; color:#7a6a52;}
+  .fb-note {font-size:14px; margin-top:8px; color:#5a4630; background:#f6efdd;
+            border-left:3px solid #b08d4f; padding:6px 10px; border-radius:4px;}
+  .nextrow {text-align:right; margin-top:12px;}
+  #nextBtn {display:none;}
+  #who {text-align:center; color:#6b4e26; margin:4px 0;}
+  .score-circle {width:120px; height:120px; border-radius:50%; background:#8a5a2b; color:#fff;
+                 display:flex; flex-direction:column; align-items:center; justify-content:center; margin:14px auto;}
+  #finalScore {font-size:40px; line-height:1;}
+  #finalMax {font-size:13px; opacity:.85;}
+  #rating {text-align:center; font-size:22px; color:#3d2b17; margin:6px 0;}
+  #ratingComment {text-align:center; color:#6b4e26; margin-bottom:12px;}
+  .resultbtns {text-align:center; margin:14px 0;}
+  .resultbtns .btn {margin:4px;}
+  #review h3 {font-size:17px; margin:14px 0 6px; color:#3d2b17;}
+  .rev {border:1px solid #e2d5b8; border-radius:10px; padding:10px 12px; margin:8px 0; background:#fbf6ea;}
+  .rev-q {font-size:15px;}
+  .rev-given {font-size:13px; color:#b71c1c; margin-top:4px;}
+  .rev-a {color:#2e7d32; font-weight:bold; font-size:14px; margin-top:2px;}
+  .rev-full {font-style:italic; font-size:14px; color:#5a4630; margin-top:2px;}
+  .rev-sec {font-style:normal; color:#8a6a3f; font-size:12px;}
+  .perfect {text-align:center; color:#2e7d32; font-style:italic;}
+  .footer {margin-top:18px; border-top:1px solid #e2d5b8; padding-top:10px;
+           font-size:12px; color:#8a7a5e; text-align:center; line-height:1.5;}
+  @media (max-width:560px){
+    .card {padding:18px 16px;}
+    h1 {font-size:24px;}
+    .qtext {font-size:18px;}
+    .opt {font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="kicker">В. И. Даль · «Пословицы русского народа» · 1862</div>
+    <h1>Восстанови пословицу</h1>
+    <div class="ornament">❦</div>
+
+    <!-- ЗАСТАВКА -->
+    <section id="start" class="screen active">
+      <p class="epigraph">«Пословица несудима».</p>
+      <p class="epinote">Эту надпись Даль поместил на титульном листе своего сборника.</p>
+      <p class="intro">В сборнике Даля — 30&nbsp;130 пословиц, поговорок и метких слов по 178 темам.
+      Многие мы знаем наизусть, но порой помним не совсем так, как записал Даль.
+      Верни пословицам пропущенные слова — и проверь, чья память точнее: твоя или словарная.</p>
+      <div class="facts">22 вопроса · 6 кругов · за верный ответ — 1 балл ·
+      после каждого ответа — полная пословица и раздел сборника · в конце — разбор ошибок.</div>
+      <div class="namerow">
+        <input id="nameInput" type="text" placeholder="Как тебя зовут? (необязательно)" maxlength="40">
+      </div>
+      <div style="text-align:center;">
+        <button class="btn" id="startBtn">Начать викторину ❧</button>
+      </div>
+    </section>
+
+    <!-- ВИКТОРИНА -->
+    <section id="quiz" class="screen">
+      <div class="topline">
+        <span class="badge" id="roundBadge"></span>
+        <span id="scoreLive">Баллы: 0</span>
+      </div>
+      <div class="progress"><div id="bar"></div></div>
+      <div class="qnum" id="qnum"></div>
+      <div class="prompt" id="prompt"></div>
+      <div class="qtext" id="qtext"></div>
+      <div class="hint" id="hint"></div>
+      <div id="options"></div>
+      <div class="inputrow" id="inputRow">
+        <input id="answerInput" type="text" placeholder="Впиши ответ словом или цифрой" autocomplete="off">
+        <button class="btn" id="answerBtn">Ответить</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <div class="nextrow"><button class="btn" id="nextBtn">Дальше →</button></div>
+    </section>
+
+    <!-- РЕЗУЛЬТАТ -->
+    <section id="result" class="screen">
+      <p id="who">Твой результат:</p>
+      <div class="score-circle"><span id="finalScore">0</span><span id="finalMax">из 22</span></div>
+      <div id="rating"></div>
+      <div id="ratingComment"></div>
+      <div class="resultbtns">
+        <button class="btn" id="againBtn">Пройти ещё раз</button>
+        <button class="btn ghost" id="homeBtn">На заставку</button>
+      </div>
+      <div id="review"></div>
+    </section>
+
+    <div class="footer">
+      Тексты пословиц сверены по сборнику В.&nbsp;И.&nbsp;Даля «Пословицы русского народа»
+      (1-е изд. 1862; публикация на Викитеке).<br>Для свободного некоммерческого использования.
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+  // Круг 1. Разминка
+  {round:"Разминка", type:"choice",
+   text:"Без труда не вынешь и ______ из пруда.",
+   options:["рыбку","щуку","лапоть","шапку"], correct:"рыбку",
+   full:"Без труда не вынешь и рыбку из пруда.", section:"Работа — праздность"},
+  {round:"Разминка", type:"choice",
+   text:"Слово не ______: вылетит — не поймаешь.",
+   options:["воробей","ветер","стрела","дым"], correct:"воробей",
+   full:"Слово не воробей: вылетит — не поймаешь.", section:"Язык — речь"},
+  {round:"Разминка", type:"choice",
+   text:"Старый ______ лучше новых двух.",
+   options:["друг","конь","сапог","плуг"], correct:"друг",
+   full:"Старый друг лучше новых двух.", section:"Друг — недруг"},
+  {round:"Разминка", type:"choice",
+   text:"В гостях хорошо, а ______ лучше.",
+   options:["дома","в пути","на пиру","в лесу"], correct:"дома",
+   full:"В гостях хорошо, а дома лучше.", section:"Двор — дом — хозяйство"},
+  // Круг 2. Парные слова
+  {round:"Парные слова", type:"choice",
+   text:"Ученье — ______, а неученье — ______.",
+   options:["свет — тьма","день — ночь","золото — серебро","труд — лень"], correct:"свет — тьма",
+   full:"Ученье — свет, а неученье — тьма.", section:"Ученье — наука"},
+  {round:"Парные слова", type:"choice",
+   text:"Труд человека ______, а лень ______.",
+   options:["кормит — портит","строит — рушит","учит — мучит","греет — студит"], correct:"кормит — портит",
+   full:"Труд человека кормит, а лень портит.", section:"Работа — праздность"},
+  {round:"Парные слова", type:"choice",
+   text:"Корень учения ______, да плод его ______.",
+   options:["горек — сладок","долог — короток","крепок — мягок","сух — сочен"], correct:"горек — сладок",
+   full:"Корень учения горек, да плод его сладок.", section:"Ученье — наука"},
+  {round:"Парные слова", type:"choice",
+   text:"Птица радуется ______, а младенец ______.",
+   options:["весне — матери","солнцу — отцу","лету — свету","зерну — молоку"], correct:"весне — матери",
+   full:"Птица радуется весне, а младенец матери.", section:"Дети — родины"},
+  // Круг 3. Числа словами
+  {round:"Числа словами", type:"choice",
+   text:"______ одного не ждут.",
+   options:["Семеро","Двое","Трое","Пятеро"], correct:"Семеро",
+   full:"Семеро одного не ждут.", section:"Пора — мера — успех"},
+  {round:"Числа словами", type:"choice",
+   text:"За одного битого ______ небитых дают, да и то не берут.",
+   options:["двух","трёх","пятерых","семерых"], correct:"двух",
+   full:"За одного битого двух небитых дают, да и то не берут.", section:"Ученье — наука",
+   note:"У Даля есть и вариант: «За ученого (битого) двух неученых (небитых) дают, да и то не берут»."},
+  {round:"Числа словами", type:"choice",
+   text:"Семь раз ______, один раз ______!",
+   options:["примерь — отрежь","отмерь — отрежь","подумай — сделай","спроси — ответь"], correct:"примерь — отрежь",
+   full:"Семь раз примерь, один раз отрежь!", section:"Осторожность",
+   note:"Ловушка! Привычное нам «отмерь» — нынешний обычный вариант, а у Даля записано «примерь». Рядом — «Десятью примерь, однова́ отрежь!»."},
+  {round:"Числа словами", type:"choice",
+   text:"Не узнавай друга в ______ дня, узнай в ______ года.",
+   options:["три — три","два — два","семь — семь","три — тридцать"], correct:"три — три",
+   full:"Не узнавай друга в три дня, узнай в три года.", section:"Друг — недруг"},
+  // Круг 4. Старинные слова
+  {round:"Старинные слова", type:"choice",
+   text:"Сперва ______ да ______, а там и науки.",
+   options:["аз — буки","склад — толк","перо — чернила","книга — буква"], correct:"аз — буки",
+   hint:"Аз и буки — названия первых букв старинной азбуки.",
+   full:"Сперва аз да буки, а там и науки.", section:"Грамота"},
+  {round:"Старинные слова", type:"choice",
+   text:"Хочешь есть ______, так не сиди на печи!",
+   options:["калачи","пироги","блины","пряники"], correct:"калачи",
+   hint:"Калач — белый пшеничный хлеб, выпеченный в форме замка с дужкой.",
+   full:"Хочешь есть калачи, так не сиди на печи!", section:"Работа — праздность"},
+  {round:"Старинные слова", type:"choice",
+   text:"Друга узнать — вместе ______ соли съесть.",
+   options:["пуд","фунт","золотник","берковец"], correct:"пуд",
+   hint:"Нужная мера веса — около 16 килограммов. Остальные слова — тоже старинные меры, но другие.",
+   full:"Друга узнать — вместе пуд (куль) соли съесть.", section:"Друг — недруг",
+   note:"Скобки у Даля — народный вариант слова: «куль», то есть мешок."},
+  {round:"Старинные слова", type:"choice",
+   text:"Коня в ______ узнаешь, а друга в беде.",
+   options:["рати","поле","работе","дороге"], correct:"рати",
+   hint:"Рать — битва, воинский поход (устар.).",
+   full:"Коня в рати узнаешь, а друга в беде.", section:"Друг — недруг"},
+  // Круг 5. Ловушки
+  {round:"Ловушки: как у Даля?", type:"choice",
+   prompt:"Мы говорим: «Не имей сто рублей, а имей сто друзей».",
+   text:"А у Даля: «Не ______ сто рублей, ______ сто друзей».",
+   options:["держи","имей","копи","прячь"], correct:"держи",
+   full:"Не держи сто рублей, держи сто друзей.", section:"Друг — недруг",
+   note:"Смысл тот же, но Даль записал живое народное слово, а не книжное."},
+  {round:"Ловушки: как у Даля?", type:"choice",
+   prompt:"Мы говорим: «Тише едешь — дальше будешь».",
+   text:"А у Даля: «Тише едешь — ______ будешь».",
+   options:["дале","дальше","дольше","ближе"], correct:"дале",
+   full:"Тише едешь — дале будешь.", section:"Пора — мера — успех",
+   note:"«Дале» — старинная краткая форма слова «дальше»."},
+  {round:"Ловушки: как у Даля?", type:"choice",
+   prompt:"Мы говорим: «Глаза боятся, а руки делают».",
+   text:"А у Даля: «Глаза ______ (страшат), а руки делают».",
+   options:["глядят","молчат","плачут","дремлют"], correct:"глядят",
+   full:"Глаза глядят (страшат), а руки делают.", section:"Работа — праздность",
+   note:"«Страшат» — значит пугаются. Даль поставил два народных слова рядом."},
+  {round:"Ловушки: как у Даля?", type:"choice",
+   prompt:"Мы говорим: «При солнышке тепло, при матери добро».",
+   text:"А у Даля: «При ______ тепло, а при матери добро».",
+   options:["солнце","солнышке","печке","огне"], correct:"солнце",
+   full:"При солнце тепло, а при матери добро.", section:"Дети — родины",
+   note:"В записи Даля — «при солнце», а не «при солнышке»."},
+  // Круг 6. Загадки
+  {round:"Загадки из «Счёта»", type:"input",
+   text:"Старинная загадка: «У семерых братьев по одной сестрице, много ли всех?» Сколько всего сестёр?",
+   accepted:["одна","1","одна сестра","1 сестра","сестра одна","одна сестрица","1 сестрица","сестрица одна","сестёр одна","всего одна"], answer:"одна",
+   full:"Ответ Даля: «Одна» — сестра у всех братьев общая.", section:"Счёт"},
+  {round:"Загадки из «Счёта»", type:"input",
+   text:"Старинная загадка: «Шли столбцом сын с отцом да дед со внуком; сколько их?»",
+   accepted:["трое","3","три","три человека","трое человек","3 человека","трое людей","всего трое"], answer:"трое",
+   full:"Ответ Даля: «Трое» — это дед, отец и сын.", section:"Счёт"}
+];
+
+let idx = 0, score = 0, answered = false, mistakes = [], playerName = "";
+const $ = id => document.getElementById(id);
+
+function show(id){
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  $(id).classList.add("active");
+  window.scrollTo(0,0);
+}
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function norm(s){
+  return s.toLowerCase().replace(/ё/g,"е").replace(/[^a-zа-я0-9 ]/gi,"").replace(/\s+/g," ").trim();
+}
+function esc(s){
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+function startQuiz(){
+  playerName = $("nameInput").value.trim();
+  QUESTIONS.forEach(q => { if(q.type==="choice") q.order = shuffle(q.options.slice()); });
+  idx = 0; score = 0; mistakes = [];
+  show("quiz");
+  render();
+}
+function render(){
+  const q = QUESTIONS[idx];
+  answered = false;
+  $("roundBadge").textContent = q.round;
+  $("scoreLive").textContent = "Баллы: " + score;
+  $("qnum").textContent = "Вопрос " + (idx+1) + " из " + QUESTIONS.length;
+  $("bar").style.width = (idx / QUESTIONS.length * 100) + "%";
+  $("prompt").style.display = q.prompt ? "block" : "none";
+  if(q.prompt) $("prompt").textContent = q.prompt;
+  $("qtext").textContent = q.text;
+  $("hint").style.display = q.hint ? "block" : "none";
+  if(q.hint) $("hint").textContent = "Подсказка: " + q.hint;
+  $("feedback").style.display = "none";
+  $("feedback").innerHTML = "";
+  $("nextBtn").style.display = "none";
+  const opts = $("options");
+  opts.innerHTML = "";
+  if(q.type === "choice"){
+    opts.style.display = "block";
+    $("inputRow").style.display = "none";
+    q.order.forEach((opt,i) => {
+      const b = document.createElement("button");
+      b.className = "opt";
+      b.dataset.opt = opt;
+      b.innerHTML = '<span class="num">' + (i+1) + '</span>' + opt;
+      b.onclick = () => choose(b, opt);
+      opts.appendChild(b);
+    });
+  } else {
+    opts.style.display = "none";
+    $("inputRow").style.display = "flex";
+    $("answerInput").value = "";
+    $("answerInput").disabled = false;
+    $("answerBtn").disabled = false;
+    $("answerInput").focus();
+  }
+}
+function choose(btn, opt){
+  if(answered) return;
+  answered = true;
+  const q = QUESTIONS[idx];
+  const good = opt === q.correct;
+  document.querySelectorAll(".opt").forEach(b => {
+    b.disabled = true;
+    if(b.dataset.opt === q.correct) b.classList.add("correct");
+    else if(b === btn && !good) b.classList.add("wrong");
+    else b.classList.add("dim");
+  });
+  finishAnswer(good, opt);
+}
+function answerInput(){
+  if(answered) return;
+  const q = QUESTIONS[idx];
+  const v = $("answerInput").value;
+  if(!norm(v)) return;
+  answered = true;
+  $("answerInput").disabled = true;
+  $("answerBtn").disabled = true;
+  const good = q.accepted.some(a => norm(a) === norm(v));
+  finishAnswer(good, v.trim());
+}
+function finishAnswer(good, given){
+  const q = QUESTIONS[idx];
+  if(good){ score++; } else { mistakes.push({q:q, given:given}); }
+  $("scoreLive").textContent = "Баллы: " + score;
+  $("bar").style.width = ((idx+1) / QUESTIONS.length * 100) + "%";
+  const fb = $("feedback");
+  fb.style.display = "block";
+  fb.className = "feedback " + (good ? "good" : "bad");
+  const right = q.type === "input" ? q.answer : q.correct;
+  let h = '<div class="fb-title">' + (good ? "✔ Верно! +1 балл" : "✘ Не угадал. Верный ответ: " + right) + '</div>';
+  h += '<div class="fb-full">' + (q.type === "input" ? q.full : "«" + q.full + "»") + '</div>';
+  h += '<div class="fb-section">Раздел сборника: «' + q.section + '»</div>';
+  if(q.note) h += '<div class="fb-note">' + q.note + '</div>';
+  fb.innerHTML = h;
+  $("nextBtn").style.display = "inline-block";
+  $("nextBtn").textContent = (idx === QUESTIONS.length - 1) ? "К результатам ✦" : "Дальше →";
+}
+function next(){
+  if(idx < QUESTIONS.length - 1){ idx++; render(); }
+  else { showResult(); }
+}
+function showResult(){
+  show("result");
+  $("finalScore").textContent = score;
+  $("finalMax").textContent = "из " + QUESTIONS.length;
+  $("who").textContent = playerName ? playerName + ", твой результат:" : "Твой результат:";
+  let rating, comment;
+  if(score >= 20){ rating = "Знаток народной мудрости"; comment = "Сам Даль бы пожал тебе руку."; }
+  else if(score >= 15){ rating = "Верный друг пословицы"; comment = "Ещё чуть-чуть — и до звания знатока."; }
+  else if(score >= 9){ rating = "Подмастерье слова"; comment = "Хорошая работа: перечитай ловушки и попробуй снова."; }
+  else { rating = "Аз да буки впереди"; comment = "Не беда! Сперва аз да буки, а там и науки."; }
+  $("rating").textContent = rating;
+  $("ratingComment").textContent = comment;
+  const rv = $("review");
+  if(mistakes.length === 0){
+    rv.innerHTML = '<p class="perfect">Ни одной ошибки — пословица несудима, а ты — тем более!</p>';
+  } else {
+    let h = "<h3>Разбор ошибок</h3>";
+    mistakes.forEach(m => {
+      const right = m.q.type === "input" ? m.q.answer : m.q.correct;
+      const full = m.q.type === "input" ? m.q.full : "«" + m.q.full + "»";
+      h += '<div class="rev"><div class="rev-q">' + m.q.text + '</div>' +
+           '<div class="rev-given">Твой ответ: ' + esc(m.given) + '</div>' +
+           '<div class="rev-a">Верно: ' + right + '</div>' +
+           '<div class="rev-full">' + full + ' <span class="rev-sec">(раздел «' + m.q.section + '»)</span></div></div>';
+    });
+    rv.innerHTML = h;
+  }
+}
+
+$("startBtn").onclick = startQuiz;
+$("nextBtn").onclick = next;
+$("answerBtn").onclick = answerInput;
+$("againBtn").onclick = startQuiz;
+$("homeBtn").onclick = () => show("start");
+$("nameInput").addEventListener("keydown", e => { if(e.key === "Enter") startQuiz(); });
+
+document.addEventListener("keydown", function(e){
+  if(!$("quiz").classList.contains("active")) return;
+  const q = QUESTIONS[idx];
+  if(!answered){
+    if(q.type === "input" && e.key === "Enter"){ answerInput(); }
+    else if(q.type === "choice" && ["1","2","3","4"].includes(e.key)){
+      const bs = document.querySelectorAll(".opt");
+      const b = bs[+e.key - 1];
+      if(b) b.click();
+    }
+  } else if(e.key === "Enter"){ next(); }
+});
+</script>
+</body>
+</html>
