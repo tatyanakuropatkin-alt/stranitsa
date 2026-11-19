@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ЕГЭ. Русский язык. Задание 7. Десять заданий</title>
+<style>
+  :root {
+    --ink: #16324A;
+    --turquoise: #1FA8D6;
+    --amber: #F2A93B;
+    --coral: #E86A5C;
+    --mint: #3FBF9F;
+    --bg: #F0F5F7;
+    --card-border: #D6E4E8;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--ink), #2A5070);
+    color: #fff;
+    padding: 26px 16px;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: 26px;
+    margin-bottom: 6px;
+  }
+
+  header p {
+    opacity: 0.92;
+  }
+
+  .panel {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #fff;
+    border-bottom: 2px solid var(--card-border);
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .timer {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .danger {
+    color: var(--coral);
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.35; }
+    100% { opacity: 1; }
+  }
+
+  .progress-wrap {
+    width: 230px;
+    height: 9px;
+    background: #E2E8F0;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+
+  #progress {
+    height: 100%;
+    width: 0%;
+    background: var(--mint);
+  }
+
+  .progress-label {
+    font-size: 14px;
+    color: #334155;
+    margin-top: 3px;
+  }
+
+  .violations {
+    font-weight: 700;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 22px auto 40px;
+    padding: 0 16px;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 10px rgba(22, 50, 74, 0.06);
+  }
+
+  .t1  { border-left: 7px solid var(--turquoise); }
+  .t2  { border-left: 7px solid var(--amber); }
+  .t3  { border-left: 7px solid var(--coral); }
+  .t4  { border-left: 7px solid var(--mint); }
+  .t5  { border-left: 7px solid var(--ink); }
+  .t6  { border-left: 7px solid var(--turquoise); }
+  .t7  { border-left: 7px solid var(--amber); }
+  .t8  { border-left: 7px solid var(--coral); }
+  .t9  { border-left: 7px solid var(--mint); }
+  .t10 { border-left: 7px solid var(--ink); }
+
+  .card h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+  }
+
+  .task-text {
+    margin-bottom: 12px;
+  }
+
+  .words {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+  }
+
+  .answer {
+    width: 100%;
+    max-width: 420px;
+    padding: 11px 12px;
+    border: 1px solid #B9C6D2;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+  }
+
+  .answer:focus {
+    border-color: var(--turquoise);
+    box-shadow: 0 0 0 3px rgba(31, 168, 214, 0.14);
+  }
+
+  .answer.ok {
+    border-color: var(--mint);
+    background: #EDFBF6;
+  }
+
+  .answer.bad {
+    border-color: var(--coral);
+    background: #FFF3F1;
+  }
+
+  .note {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: #E2E8F0;
+    font-size: 14px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 22px 0;
+  }
+
+  button {
+    border: 0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  #finishBtn {
+    background: var(--ink);
+    color: #fff;
+  }
+
+  #printBtn {
+    background: var(--mint);
+    color: #fff;
+  }
+
+  button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  #result {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 10px;
+  }
+
+  #result h2 {
+    margin-bottom: 8px;
+  }
+
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+
+    body {
+      background: #fff;
+    }
+
+    .card {
+      box-shadow: none;
+      page-break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ЕГЭ. Русский язык. Задание 7</h1>
+  <p>Десять тренировочных заданий в формате ЕГЭ</p>
+</header>
+
+<div class="panel no-print">
+  <div>
+    <div id="timer" class="timer">30:00</div>
+    <div class="progress-wrap">
+      <div id="progress"></div>
+    </div>
+    <div class="progress-label">Прогресс: <span id="progressText">0 / 10</span></div>
+  </div>
+  <div class="violations">Нарушения: <span id="violations">0</span> / 3</div>
+</div>
+
+<main>
+
+  <div class="card t1">
+    <h2>Задание 1</h2>
+    <p class="task-text">
+      В одном из выделенных ниже слов допущена грамматическая ошибка.
+      Исправьте ошибку и запишите слово правильно.
+    </p>
+    <p class="words">
+      ОПЫТНЫЕ ШОФЁРЫ, ЛЯГТЕ ПОРАНЬШЕ, НЕТ ЧУЛОК, БОЛЕЕ ПЯТИСТА УЧАСТНИКОВ, СОГЛАСНО РАСПИСАНИЮ
+    </p>
+    <input id="q1" class="answer" type="text" autocomplete="off" placeholder="Запишите только одно слово">
+    <p class="note" id="note-q1" hidden>Правильный ответ: пятисот</p>
+  </div>
+
+  <div class="card t2">
+    <h2>Задание 2</h2>
+    <p class="task-text">
+      В одном из выделенных ниже слов допущена грамматическая ошибка.
+      Исправьте ошибку и запишите слово правильно.
+    </p>
+    <p class="words">
+      ПОЕЗЖАЙТЕ ПРЯМО, ПАРА НОСКОВ, ОБОИМИ СЁСТРАМИ, НЕСКОЛЬКО ПОЛОТЕНЕЦ, ПРИВЕТЛИВЫЙ СОЧИ
+    </p>
+    <input id="q2" class="answer" type="text" autocomplete="off" placeholder="Запишите только одно слово">
+    <p class="note" id="note-q2" hidden>Правильный ответ: обеими</p>
+  </div>
+
+  <div class="card t3">
+    <h2>Задание 3</h2>
+    <p class="task-text">
+      В одном из выделенных ниже слов допущена грамматическая ошибка.
+      Исправьте ошибку и запишите слово правильно.
+    </p>
+    <p class="words">
+      ВЫЙГРАТЬ ПАРТИЮ, ПЯТЬ КИЛОГРАММОВ, ОПЫТНЫЕ БУХГАЛТЕРЫ, ЛЯГ НА ДИВАН, ВОПРЕКИ ПРОГНОЗУ
+    </p>
+    <input id="q3" class="answer" type="text" autocomplete="off" placeholder="Запишите только одно слово">
+    <p class="note" id="note-q3" hidden>Правильный ответ: выиграть</p>
+  </div>
+
+  <div class="card t4">
+    <h2>Задание 4</h2>
+    <p class="task-text">
+      В одном из выделенных ниже слов допущена грамматическая ошибка.
+      Исправьте ошибку и запишите слово правильно.
+    </p>
+    <p class="words">
+      ЗАБАВНОЕ ШИМПАНЗЕ, МГУ ОБЪЯВИЛ ПРИЁМ, НОВОЕ ПИАНИНО, НЕСКОЛЬКО ЯБЛОК, СОГЛАСНО ПРИКАЗУ
+    </p>
+    <input id="q4" class="answer" type="text" autocomplete="off" placeholder="Запишите только одно слово">
+    <p class="note" id="note-q4" hidden>Правильный ответ: забавный</p>
+  </div>
+
+  <div class="card t5">
+    <h2>Задание 5</h2>
+    <p class="task-text">
+      В одном из выделенных ниже слов допущена грамматическая ошибка.
+      Исправьте ошибку и запишите слово правильно.
+    </p>
+    <p class="words">
+      ДВОЕ САНЕЙ, НЕТ ВАЛЕНКОВ, С ШЕСТЬЮДЕСЯТЬЮ УЧАСТНИКАМИ, НАИБОЛЕЕ УДАЧНЫЙ, ПО ОКОНЧАНИИ ШКОЛЫ
+    </p>
+    <input id="q5" class="answer" type="text" autocomplete="off" placeholder="Запишите только одно слово">
+    <p class="note" id="note-q5" hidden>Правильный ответ: валенок</p>
+  </div>
+
+  <div class="card t6">
+    <h2>Задание 6</h2>
+    <p class="task-text">
+      В одном из выделенных ниже слов допущена грамматическая ошибка.
+      Исправьте ошибку и запишите слово правильно.
+    </p>
+    <p class="words">
+      ОКОЛО ПОЛУТОРА ЧАСОВ, СЛЕДУЮЩИЙ ПОВОРОТ, ДВОЕ УЧЕНИЦ, НЕТ ПОГОН, БЛАГОДАРЯ ПОДДЕРЖКЕ
+    </p>
+    <input id="q6" class="answer" type="text" autocomplete="off" placeholder="Запишите только одно слово">
+    <p class="note" id="note-q6" hidden>Правильный ответ: две</p>
+  </div>
+
+  <div class="card t7">
+    <h2>Задание 7</h2>
+    <p class="task-text">
+      В одном из выделенных ниже слов допущена грамматическая ошибка.
+      Исправьте ошибку и запишите слово правильно.
+    </p>
+    <p class="words">
+      С ПЯТЬЮСТАМИ РУБЛЯМИ, ОКОЛО ЧЕТВЕРО СУТОК, НЕТ МЕСТ, ГОРЯЧИЙ КОФЕ, ДВЕ ПАРЫ ТУФЕЛЬ
+    </p>
+    <input id="q7" class="answer" type="text" autocomplete="off" placeholder="Запишите только одно слово">
+    <p class="note" id="note-q7" hidden>Правильный ответ: четырёх</p>
+  </div>
+
+  <div class="card t8">
+    <h2>Задание 8</h2>
+    <p class="task-text">
+      В одном из выделенных ниже слов допущена грамматическая ошибка.
+      Исправьте ошибку и запишите слово правильно.
+    </p>
+    <p class="words">
+      УВЕРЕННОСТЬ В ПОБЕДЕ, РЕЦЕНЗИЯ О КНИГЕ, ВОПРЕКИ ОЖИДАНИЯМ, С ТРЕМЯСТАМИ РУБЛЯМИ, НЕТ БЛЮДЕЦ
+    </p>
+    <input id="q8" class="answer" type="text" autocomplete="off" placeholder="Запишите только одно слово">
+    <p class="note" id="note-q8" hidden>Правильный ответ: на</p>
+  </div>
+
+  <div class="card t9">
+    <h2>Задание 9</h2>
+    <p class="task-text">
+      В одном из выделенных ниже слов допущена грамматическая ошибка.
+      Исправьте ошибку и запишите слово правильно.
+    </p>
+    <p class="words">
+      ОНА СКОРО ВЫЗДОРОВИТ, ЛЯГТЕ РАНЬШЕ, НЕТ НОСКОВ, ОКОЛО ДЕВЯНОСТА ЧЕЛОВЕК, В НОВОМ ПАЛЬТО
+    </p>
+    <input id="q9" class="answer" type="text" autocomplete="off" placeholder="Запишите только одно слово">
+    <p class="note" id="note-q9" hidden>Правильный ответ: выздоровеет</p>
+  </div>
+
+  <div class="card t10">
+    <h2>Задание 10</h2>
+    <p class="task-text">
+      В одном из выделенных ниже слов допущена грамматическая ошибка.
+      Исправьте ошибку и запишите слово правильно.
+    </p>
+    <p class="words">
+      НОВЫЕ ДОГОВОРЫ, ИХНИЕ ДОКУМЕНТЫ, ПАРА САПОГ, К ТРЁМСТАМ УЧАСТНИКАМ, ПО ПРИЕЗДЕ В ГОРОД
+    </p>
+    <input id="q10" class="answer" type="text" autocomplete="off" placeholder="Запишите только одно слово">
+    <p class="note" id="note-q10" hidden>Правильный ответ: их</p>
+  </div>
+
+  <div class="actions no-print">
+    <button id="finishBtn" type="button">Завершить и проверить</button>
+    <button id="printBtn" type="button">Печать</button>
+  </div>
+
+  <section id="result" hidden></section>
+
+</main>
+
+<script>
+  const STORAGE_KEY = "ege_task7_ten_ege_format";
+
+  const TASKS = [
+    { id: "q1",  answer: "пятисот" },
+    { id: "q2",  answer: "обеими" },
+    { id: "q3",  answer: "выиграть" },
+    { id: "q4",  answer: "забавный" },
+    { id: "q5",  answer: "валенок" },
+    { id: "q6",  answer: "две" },
+    { id: "q7",  answer: "четырёх" },
+    { id: "q8",  answer: "на" },
+    { id: "q9",  answer: "выздоровеет" },
+    { id: "q10", answer: "их" }
+  ];
+
+  let timeLeft = 1800;
+  let violations = 0;
+  let finished = false;
+  let timerId = null;
+
+  function normalize(value) {
+    return value.trim().toLowerCase().replace(/ё/g, "е").replace(/\s+/g, " ");
+  }
+
+  function getAnswers() {
+    const answers = {};
+    TASKS.forEach(task => {
+      answers[task.id] = document.getElementById(task.id).value;
+    });
+    return answers;
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        timeLeft,
+        violations,
+        finished,
+        answers: getAnswers()
+      }));
+    } catch (e) {
+      // localStorage недоступен — работаем без сохранения
+    }
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+
+      const data = JSON.parse(raw);
+
+      if (typeof data.timeLeft === "number") {
+        timeLeft = data.timeLeft;
+      }
+
+      if (typeof data.violations === "number") {
+        violations = data.violations;
+      }
+
+      finished = Boolean(data.finished);
+
+      if (data.answers) {
+        TASKS.forEach(task => {
+          if (data.answers[task.id] !== undefined) {
+            document.getElementById(task.id).value = data.answers[task.id];
+          }
+        });
+      }
+    } catch (e) {
+      // повреждённые данные игнорируем
+    }
+  }
+
+  function updateProgress() {
+    let filled = 0;
+
+    TASKS.forEach(task => {
+      if (document.getElementById(task.id).value.trim()) {
+        filled++;
+      }
+    });
+
+    document.getElementById("progress").style.width = (filled / TASKS.length) * 100 + "%";
+    document.getElementById("progressText").textContent = filled + " / " + TASKS.length;
+  }
+
+  function updateTimer() {
+    const safeTime = Math.max(timeLeft, 0);
+    const minutes = Math.floor(safeTime / 60);
+    const seconds = safeTime % 60;
+    const timerEl = document.getElementById("timer");
+
+    timerEl.textContent = minutes + ":" + String(seconds).padStart(2, "0");
+    timerEl.classList.toggle("danger", timeLeft <= 60 && !finished);
+  }
+
+  function startTimer() {
+    timerId = setInterval(() => {
+      if (finished) return;
+
+      timeLeft--;
+      updateTimer();
+      saveState();
+
+      if (timeLeft <= 0) {
+        finish();
+      }
+    }, 1000);
+  }
+
+  function gradeTasks() {
+    let score = 0;
+
+    TASKS.forEach(task => {
+      const input = document.getElementById(task.id);
+      const note = document.getElementById("note-" + task.id);
+
+      input.disabled = true;
+
+      const ok = normalize(input.value) === normalize(task.answer);
+
+      input.classList.remove("ok", "bad");
+      input.classList.add(ok ? "ok" : "bad");
+
+      if (ok) {
+        score++;
+      }
+
+      if (note) {
+        note.hidden = false;
+      }
+    });
+
+    return score;
+  }
+
+  function showResult(score) {
+    let grade = "2";
+
+    if (score >= 9) {
+      grade = "5";
+    } else if (score >= 7) {
+      grade = "4";
+    } else if (score >= 5) {
+      grade = "3";
+    }
+
+    const result = document.getElementById("result");
+    result.hidden = false;
+    result.innerHTML =
+      "<h2>Результат</h2>" +
+      "<p>Баллы: " + score + " из " + TASKS.length + "</p>" +
+      "<p>Отметка: " + grade + "</p>";
+  }
+
+  function finish() {
+    if (finished) return;
+
+    finished = true;
+
+    if (timerId) {
+      clearInterval(timerId);
+    }
+
+    const score = gradeTasks();
+
+    document.getElementById("finishBtn").disabled = true;
+    showResult(score);
+    saveState();
+  }
+
+  function restoreFinished() {
+    const score = gradeTasks();
+    document.getElementById("finishBtn").disabled = true;
+    showResult(score);
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden && !finished) {
+      violations++;
+      document.getElementById("violations").textContent = violations;
+      saveState();
+
+      if (violations >= 3) {
+        finish();
+      }
+    }
+  });
+
+  TASKS.forEach(task => {
+    const input = document.getElementById(task.id);
+    input.addEventListener("input", function () {
+      updateProgress();
+      saveState();
+    });
+  });
+
+  document.getElementById("finishBtn").addEventListener("click", finish);
+  document.getElementById("printBtn").addEventListener("click", function () {
+    window.print();
+  });
+
+  loadState();
+
+  document.getElementById("violations").textContent = violations;
+  updateProgress();
+  updateTimer();
+
+  if (finished) {
+    restoreFinished();
+  } else if (timeLeft <= 0 || violations >= 3) {
+    finish();
+  } else {
+    startTimer();
+  }
+</script>
+
+</body>
+</html>
