@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Колесо удачи · Задание 7 ЕГЭ · Грамматические нормы</title>
+<meta name="description" content="Интерактивное колесо удачи по заданию 7 ЕГЭ по русскому языку: грамматические нормы (морфологические, словообразовательные, синтаксические). Восемь испытаний по пять позиций, мгновенная проверка, разбор с указанием источника, отметка по нормам Минпросвещения. Автономный файл, работает без интернета.">
+<style>
+:root{
+  --bg:#f6f1e7; --card:#fffdf8; --ink:#22262f; --muted:#6d6558;
+  --accent:#7a2e2e; --accent2:#b08442; --line:#e2d8c6;
+  --ok:#2e6b45; --okbg:#e9f4ec; --bad:#8f2b2b; --badbg:#fbeceb;
+  --s0:#7a2e2e; --s1:#b08442; --s2:#4f5d2f; --s3:#a3542f;
+  --s4:#5e2430; --s5:#c9a227; --s6:#6b7a3a; --s7:#8a4a2f;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  min-height:100vh}
+h1,h2,h3,.serif{font-family:Georgia,"Times New Roman",serif}
+header.top{position:sticky;top:0;z-index:20;background:#2b2118;color:#f4ece0;
+  padding:10px 16px;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.top-in{max-width:960px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.top-in .t{font-family:Georgia,serif;font-size:17px}
+.top-in .s{font-size:12.5px;color:#cdbfa8}
+.spacer{flex:1}
+.chip{background:#3d3025;border:1px solid #5b4835;color:#f0e4d2;border-radius:999px;
+  padding:4px 11px;font-size:12.5px;white-space:nowrap}
+main{max-width:960px;margin:0 auto;padding:18px 14px 70px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:18px 18px 20px;margin:0 0 16px;box-shadow:0 1px 3px rgba(80,60,30,.06)}
+.card h2{margin:0 0 6px;font-size:21px;color:var(--accent)}
+.lead{color:var(--muted);font-size:14.5px;margin:0 0 14px}
+.rules{background:#fbf6ea;border-left:4px solid var(--accent2);padding:12px 14px;border-radius:8px;margin:14px 0}
+.rules li{margin:5px 0}
+label.fld{display:block;font-size:13.5px;color:var(--muted);margin:10px 0 4px}
+input[type=text]{width:100%;padding:10px 12px;border:1px solid #cfc3ae;border-radius:9px;
+  background:#fff;font:inherit;color:var(--ink)}
+input:focus{outline:2px solid var(--accent2);outline-offset:1px}
+.btn{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:13px 22px;
+  font:600 15.5px/1 inherit;cursor:pointer;box-shadow:0 2px 6px rgba(122,46,46,.25)}
+.btn:hover{background:#652323}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sec{background:#fff;color:var(--accent);border:1px solid var(--accent);box-shadow:none}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.note{font-size:13.5px;color:var(--muted)}
+.dropcap{float:left;font-family:Georgia,serif;font-size:64px;line-height:.8;color:var(--accent);
+  margin:4px 12px 0 0;font-weight:700}
+.wheel-stage{display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0 4px}
+.wheel-box{position:relative;width:min(360px,88vw);aspect-ratio:1/1}
+.wheel{width:100%;height:100%;border-radius:50%;
+  background:conic-gradient(var(--s0) 0 45deg,var(--s1) 45deg 90deg,var(--s2) 90deg 135deg,var(--s3) 135deg 180deg,var(--s4) 180deg 225deg,var(--s5) 225deg 270deg,var(--s6) 270deg 315deg,var(--s7) 315deg 360deg);
+  border:6px solid #2b2118;box-shadow:0 8px 26px rgba(0,0,0,.22),inset 0 0 0 4px rgba(255,255,255,.12);
+  transition:transform 3.2s cubic-bezier(.17,.67,.16,1);position:relative}
+.wheel .lab{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:64px;height:64px;border-radius:50%;background:#fffdf8;border:3px solid #2b2118;
+  display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;
+  font-weight:700;color:var(--accent);font-size:15px;text-align:center;line-height:1.1;z-index:3}
+.wheel .tick{position:absolute;left:50%;top:6px;transform-origin:50% calc(50% + 0px);
+  width:2px;height:46%;background:rgba(255,255,255,.45);transform:translateX(-50%)}
+.pointer{position:absolute;left:50%;top:-6px;transform:translateX(-50%);z-index:5;
+  width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;
+  border-top:22px solid #2b2118;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+.spin-note{font-size:13.5px;color:var(--muted);min-height:1.2em;text-align:center}
+.test{border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 12px;background:#fffdf8}
+.test .kind{display:inline-block;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:#fff;background:var(--accent2);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.test .q{font-size:15.5px;margin:0 0 12px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{border:1px solid #cfc3ae;background:#fff;border-radius:9px;padding:9px 14px;font:inherit;
+  cursor:pointer;text-align:left}
+.opt:hover{background:#f4ecdd}
+.opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+.opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.expl{margin-top:12px;border-left:4px solid var(--accent2);background:#fbf6ea;
+  padding:10px 12px;border-radius:8px;font-size:14.5px}
+.expl .src{display:block;margin-top:6px;font-size:12.5px;color:var(--muted);font-style:italic}
+.expl.good{border-left-color:var(--ok);background:var(--okbg)}
+.expl.bad{border-left-color:var(--bad);background:var(--badbg)}
+.score-hero{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.big{font-family:Georgia,serif;font-size:44px;color:var(--accent);line-height:1}
+.mark{font-family:Georgia,serif;font-size:34px;width:70px;height:70px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;background:#2b2118;color:#f6e9d4}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#f2ebdd}
+td.n{text-align:center;white-space:nowrap}
+.rev{border-top:2px solid var(--line);padding-top:14px;margin-top:16px}
+[hidden]{display:none !important}
+footer{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);text-align:center;
+  color:var(--muted);font-size:13px}
+footer .sig{color:var(--accent);font-size:15px;letter-spacing:.06em;margin-bottom:4px;font-family:Georgia,serif}
+@media (max-width:620px){.big{font-size:36px}.wheel-box{width:90vw}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div>
+      <div class="t">Колесо удачи · Задание 7 ЕГЭ</div>
+      <div class="s">Грамматические нормы · морфологические, словообразовательные, синтаксические</div>
+    </div>
+    <div class="spacer"></div>
+    <div class="chip" id="chipMode">Разминка · 8 испытаний</div>
+    <div class="chip" id="chipScore" hidden>0 / 8</div>
+  </div>
+</header>
+
+<main>
+
+<section id="scr-intro">
+  <div class="card">
+    <h2><span class="dropcap">К</span>олесо удачи по заданию 7</h2>
+    <p class="lead">Задание 7 ЕГЭ проверяет грамматические нормы современного русского литературного языка. Крути колесо — оно остановится на одном из восьми испытаний: в каждом ряду пять слов или словосочетаний, одно из них с ошибкой. Нажми на ошибочное слово, проверка мгновенная, подсказок нет. В конце — разбор каждого испытания с указанием источника и отметка по нормам Минпросвещения.</p>
+    <div class="rules">
+      <strong>Как играть</strong>
+      <ul>
+        <li><b>Восемь секторов</b> — восемь испытаний. Каждый сектор проходится <b>один раз</b>: после ответа он блокируется, колесо крутится только на оставшиеся.</li>
+        <li><b>Подсказок нет.</b> Правильный ответ и пояснение с источником открываются сразу после клика.</li>
+        <li><b>Отметка</b> по шкале Минпросвещения: 90–100% — «5»; 75–89% — «4»; 50–74% — «3»; ниже 50% — «2».</li>
+        <li>Это <b>разминка</b>, не контрольная: таймера нет, имя и класс вписывать по желанию. В конце можно сыграть ещё раз.</li>
+        <li>Материал — из демоверсии ЕГЭ 2027 и приложенной теории по заданию 7 (повелительное наклонение, числительные, родительный падеж множественного числа). Спорные формы, в которых словари колеблются, в рулетку не включены намеренно.</li>
+      </ul>
+    </div>
+    <label class="fld" for="fio">Фамилия и имя (по желанию)</label>
+    <input type="text" id="fio" placeholder="Например: Иванова Мария" autocomplete="off">
+    <label class="fld" for="klass">Класс (по желанию)</label>
+    <input type="text" id="klass" placeholder="10 «А»" autocomplete="off">
+    <div class="actions">
+      <button class="btn" id="btnStart">Крутить колесо</button>
+      <span class="note">Работа сохраняется на этом устройстве, без интернета.</span>
+    </div>
+  </div>
+</section>
+
+<section id="scr-game" hidden>
+  <div class="card">
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <strong id="whoLine" class="serif" style="font-size:17px"></strong>
+      <div class="spacer"></div>
+      <span class="note" id="leftLine">Осталось секторов: 8</span>
+    </div>
+    <div class="wheel-stage">
+      <div class="wheel-box">
+        <div class="pointer"></div>
+        <div class="wheel" id="wheel">
+          <div class="lab" id="wheelLab">крути</div>
+        </div>
+      </div>
+      <button class="btn" id="btnSpin">Крутить</button>
+      <p class="spin-note" id="spinNote">Нажми «Крутить» — колесо остановится на испытании.</p>
+    </div>
+  </div>
+
+  <div id="testMount"></div>
+</section>
+
+<section id="scr-result" hidden></section>
+
+</main>
+
+<footer>
+  <div class="sig">Сообщество «Страница»</div>
+  <div>Интерактивные работы по литературе и русскому языку · для свободного некоммерческого использования · личные данные автора в контент не включены</div>
+</footer>
+
+<script>
+"use strict";
+/* ======== МАТЕРИАЛ: только из приложенных источников ======== */
+/* Сектор 0 — демоверсия ЕГЭ 2027 */
+/* Секторы 1–4 — приложенная теория (старый список) */
+/* Секторы 5–8 — приложенная теория (повелительное наклонение), только однозначные нормы */
+var TESTS = [
+  {
+    kind:"Ряд слов · найди ошибку",
+    color:"var(--s0)",
+    q:"В одном из выделенных слов допущена грамматическая ошибка. Нажми на это слово.",
+    type:"row",
+    words:["поскользнулся и упал","растущее алоэ","не купил ананасов","собрались все тренеры","две пары туфлей"],
+    correctIndex:4,
+    rightWord:"туфель",
+    expl:"Ошибка в слове «туфлей». Родительный падеж множественного числа от «туфля» — «туфель». Остальные формы нормативны: поскользнулся, растущее (алоэ), ананасов, тренеры.",
+    src:"Демоверсия ЕГЭ 2027 по русскому языку (ФИПИ / Рособрнадзор), задание 7."
+  },
+  {
+    kind:"Глаголы и повелительное наклонение",
+    color:"var(--s1)",
+    q:"В одном из словосочетаний допущена ошибка. Нажми на него.",
+    type:"row",
+    words:["поезжай домой","не поезжай домой","положить на стол","класть на стол","не езди"],
+    correctIndex:1,
+    rightWord:"не езди домой",
+    expl:"Ошибка в форме «не поезжай домой». В сочетании с частицей НЕ формы поезжай/поезжайте, как правило, не употребляются; обычно используется «не езди(те)». Формы «поезжай», «положить на стол», «класть на стол» и «не езди» нормативны по правилу: от ЕХАТЬ образуются поезжай(те), приезжай(те), отъезжай(те); глаголы с корнем -ЛОЖ- употребляются с приставкой, а образованные от КЛАСТЬ — без приставки.",
+    src:"Приложенная теория по заданию 7: повелительное наклонение от ЕХАТЬ, частица НЕ, глаголы положить/класть."
+  },
+  {
+    kind:"Числительные",
+    color:"var(--s2)",
+    q:"В одном из словосочетаний допущена ошибка. Нажми на него.",
+    type:"row",
+    words:["около полутора","с пятьюстами","более трёхсот","около пятисот","около полтора"],
+    correctIndex:4,
+    rightWord:"около полутора",
+    expl:"Ошибка в форме «около полтора». Числительные полтора, полторы и полтораста в И.п. и В.п. имеют одинаковые формы, а в остальных падежах — полутора и полутораста. Сложные количественные числительные склоняются оба корня: около пятисот, более трёхсот, с пятьюстами.",
+    src:"Приложенная теория по заданию 7: числительные полтора и склонение сложных количественных числительных."
+  },
+  {
+    kind:"Родительный падеж множественного числа",
+    color:"var(--s3)",
+    q:"В одном из словосочетаний допущена ошибка. Нажми на него.",
+    type:"row",
+    words:["много полотенцев","нет деревцев","несколько абзацев","нет перьев","много блюдец"],
+    correctIndex:0,
+    rightWord:"много полотенец",
+    expl:"Ошибка в форме «много полотенцев». Если существительное в И.п. ед.ч. оканчивается на -ЦЕ, в Р.п. мн.ч. будет -ЕЦ: полотенце – полотенец. Формы «деревцев» и «перьев» — исключения из списка; «абзацев» образовано по правилу для слов на -АЦ (ЕЦ / ИЦ / АЦ / ЯЦ дают -ЦЕВ); «блюдец» — нормативная форма среднего рода с беглой гласной из списка.",
+    src:"Приложенная теория по заданию 7: формы Р.п. мн.ч. существительных на -ЦЕ, -АЦ и исключения."
+  },
+  {
+    kind:"Класть и положить (повелительное)",
+    color:"var(--s4)",
+    q:"В одном из словосочетаний допущена ошибка. Нажми на него.",
+    type:"row",
+    words:["клади сюда","кладите сюда","положи на стол","отложи дело","поклади вещи"],
+    correctIndex:4,
+    rightWord:"положи вещи",
+    expl:"Ошибка в форме «поклади». От глагола положить повелительное наклонение — положи; форма «поклади» вне литературной нормы. Глагол ложить без приставки не употребляется: без приставки — класть (клади, кладите), с приставкой — положить (положи, отложи). Формы «клади», «кладите», «положи», «отложи» нормативны.",
+    src:"Приложенная теория по заданию 7: повелительное наклонение глаголов класть / положить."
+  },
+  {
+    kind:"Лечь (повелительное)",
+    color:"var(--s5)",
+    q:"В одном из словосочетаний допущена ошибка. Нажми на него.",
+    type:"row",
+    words:["ляг на диван","лягте на диван","лежи спокойно","лежите спокойно","ляжьте на диван"],
+    correctIndex:4,
+    rightWord:"лягте на диван",
+    expl:"Ошибка в форме «ляжьте». Словари предписывают один вариант императива от лечь — ляг, лягте; формы ляжь, ляжьте ошибочны (возникли по аналогии с чередованием г/ж, которого у глагола лечь нет). Формы «лежи», «лежите» нормативны — они от другого глагола, лежать.",
+    src:"Приложенная теория по заданию 7: повелительное наклонение глагола лечь."
+  },
+  {
+    kind:"Бежать (повелительное)",
+    color:"var(--s6)",
+    q:"В одном из словосочетаний допущена ошибка. Нажми на него.",
+    type:"row",
+    words:["беги домой","бегите домой","клади на стол","ляг на диван","бежи домой"],
+    correctIndex:4,
+    rightWord:"беги домой",
+    expl:"Ошибка в форме «бежи». Нормативны беги, бегите; формы бежи, бежите — грубая ошибка (слово «бежите» существует, но это изъявительное наклонение: вы бежите). Чередование г/ж провоцирует неверные формы, но у глагола бежать в императиве оно не работает.",
+    src:"Приложенная теория по заданию 7: повелительное наклонение глагола бежать."
+  },
+  {
+    kind:"Повелительное наклонение · однозначные нормы",
+    color:"var(--s7)",
+    q:"В одном из словосочетаний допущена ошибка. Нажми на него.",
+    type:"row",
+    words:["маши сюда","отложи книгу","беги скорей","ляг ровно","ложи книгу"],
+    correctIndex:4,
+    rightWord:"положи книгу",
+    expl:"Ошибка в форме «ложи». Глагол ложить без приставки в литературном языке не употребляется: без приставки — класть (клади), с приставкой — положить (положи, отложи). Форма «маши» нормативна («Словарь трудностей» и «Русское словесное ударение» приводят маши как единственную норму повелительного от махать); разговорный вариант махай в это испытание не включён, поскольку словари не запрещают его outright.",
+    src:"Приложенная теория по заданию 7: повелительное наклонение (махать, класть/положить, бежать, лечь)."
+  }
+];
+var N = TESTS.length;
+var KEY = "kolso_zadanie7_v3";
+
+/* ======== СОСТОЯНИЕ ======== */
+var S = { name:"", klass:"", started:false, done:{}, pick:{}, finished:false };
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function load(){ try{ var r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r)); }catch(e){} }
+function remaining(){ var a=[]; for(var i=0;i<N;i++){ if(!S.done[i]) a.push(i); } return a; }
+function scoreNow(){ var s=0; for(var i=0;i<N;i++){ if(S.done[i] && S.pick[i]===TESTS[i].correctIndex) s++; } return s; }
+function markOf(sc){ var p=sc/N*100; if(p>=90) return "5"; if(p>=75) return "4"; if(p>=50) return "3"; return "2"; }
+
+var $=function(s){return document.querySelector(s);};
+function el(tag,cls,txt){ var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e; }
+
+/* ======== СТАРТ ======== */
+load();
+if(S.finished){ renderResult(); }
+else if(S.started){ openGame(); }
+
+$("#btnStart").addEventListener("click", function(){
+  S.name=$("#fio").value.trim(); S.klass=$("#klass").value.trim();
+  S.started=true; save(); openGame();
+});
+
+function openGame(){
+  $("#scr-intro").hidden=true; $("#scr-game").hidden=false;
+  $("#whoLine").textContent=(S.name||"Гость")+(S.klass?" · "+S.klass:"");
+  $("#chipScore").hidden=false; buildTicks(); updateHud();
+  bindWheel();
+}
+function buildTicks(){
+  var w=$("#wheel");
+  for(var i=0;i<8;i++){
+    var t=el("div","tick");
+    t.style.transform="translateX(-50%) rotate("+(i*45)+"deg)";
+    w.insertBefore(t, w.firstChild);
+  }
+}
+function updateHud(){
+  var rem=remaining().length;
+  $("#leftLine").textContent="Осталось секторов: "+rem;
+  $("#chipScore").textContent=scoreNow()+" / "+N;
+  $("#btnSpin").disabled = rem===0;
+}
+
+/* ======== КОЛЕСО ======== */
+var rot=0, spinning=false;
+function bindWheel(){
+  $("#btnSpin").addEventListener("click", spin);
+}
+function spin(){
+  if(spinning) return;
+  var rem=remaining();
+  if(!rem.length) return;
+  spinning=true;
+  $("#btnSpin").disabled=true;
+  $("#wheelLab").textContent="…";
+  $("#spinNote").textContent="Колесо крутится…";
+  var target = rem[Math.floor(Math.random()*rem.length)];
+  var stop = 360*5 - (target*45 + 22.5);
+  rot = rot - (rot % 360) + stop;
+  var wheel=$("#wheel");
+  wheel.style.transform="rotate("+rot+"deg)";
+  setTimeout(function(){
+    spinning=false;
+    $("#wheelLab").textContent=String(target+1);
+    $("#spinNote").textContent="Испытание "+(target+1)+" из "+N;
+    showTest(target);
+  }, 3300);
+}
+
+/* ======== ИСПЫТАНИЕ ======== */
+function showTest(idx){
+  var t=TESTS[idx];
+  var mount=$("#testMount"); mount.innerHTML="";
+  var box=el("div","card");
+  var head=el("div","");
+  head.appendChild(el("span","kind",t.kind));
+  box.appendChild(head);
+  box.appendChild(el("p","q",t.q));
+
+  var optsWrap=el("div","opts");
+  var items = t.words;
+  var btns=[];
+  items.forEach(function(txt,i){
+    var b=el("button","opt",txt);
+    b.addEventListener("click", function(){ answer(idx,i,b,btns); });
+    optsWrap.appendChild(b); btns.push(b);
+  });
+  box.appendChild(optsWrap);
+
+  var nextRow=el("div","actions");
+  var nextBtn=el("button","btn sec","К колесу");
+  nextBtn.hidden=true;
+  nextBtn.addEventListener("click", function(){
+    mount.innerHTML="";
+    if(remaining().length===0){ finish(); }
+    else { updateHud(); $("#wheelLab").textContent="крути"; $("#spinNote").textContent="Нажми «Крутить» — колесо остановится на следующем испытании."; $("#btnSpin").disabled=false; }
+  });
+  nextRow.appendChild(nextBtn);
+  box.appendChild(nextRow);
+
+  mount.appendChild(box);
+  box.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function answer(idx, pick, btn, btns){
+  if(S.done[idx]) return;
+  var t=TESTS[idx];
+  S.done[idx]=true; S.pick[idx]=pick; save();
+  btns.forEach(function(b){ b.disabled=true; });
+  var ok = (pick===t.correctIndex);
+  btn.classList.add(ok?"right":"wrong");
+  if(!ok){ btns[t.correctIndex].classList.add("right"); }
+  var expl=el("div","expl "+(ok?"good":"bad"));
+  expl.appendChild(el("div","", "Правильная форма: «"+t.rightWord+"»."));
+  expl.appendChild(el("div","", (ok?"Верно. ":"Неверно. ") + t.expl));
+  expl.appendChild(el("span","src","Источник: "+t.src));
+  var card=btn.closest(".card");
+  var actions=card.querySelector(".actions");
+  card.insertBefore(expl, actions);
+  actions.querySelector("button").hidden=false;
+  updateHud();
+}
+
+/* ======== ИТОГ ======== */
+function finish(){
+  S.finished=true; save(); renderResult();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderResult(){
+  $("#scr-intro").hidden=true; $("#scr-game").hidden=true;
+  $("#chipMode").textContent="Разминка завершена";
+  var sc=scoreNow(), mk=markOf(sc), pct=Math.round(sc/N*100);
+  var box=$("#scr-result"); box.innerHTML="";
+
+  var top=el("div","card");
+  var hero=el("div","score-hero");
+  hero.appendChild(el("div","mark",mk));
+  var bigWrap=el("div","");
+  bigWrap.appendChild(el("div","big",sc+" / "+N));
+  bigWrap.appendChild(el("div","note","баллов · "+pct+"% · отметка «"+mk+"»"));
+  hero.appendChild(bigWrap);
+  hero.appendChild(el("div","spacer"));
+  var who=el("div","");
+  who.appendChild(el("div","serif",(S.name||"Гость")));
+  who.appendChild(el("div","note",S.klass||"класс не указан"));
+  hero.appendChild(who);
+  top.appendChild(hero);
+
+  var tbl=el("table","");
+  var thead=el("thead","");
+  var hr=el("tr","");
+  ["№","Испытание","Твой ответ","Верный ответ","Балл"].forEach(function(h){ hr.appendChild(el("th","",h)); });
+  thead.appendChild(hr); tbl.appendChild(thead);
+  var tb=el("tbody","");
+  TESTS.forEach(function(t,i){
+    var tr=el("tr","");
+    tr.appendChild(el("td","n",String(i+1)));
+    tr.appendChild(el("td","",t.kind));
+    var pickTxt = (S.pick[i]!=null) ? t.words[S.pick[i]] : "—";
+    var rightTxt = "слово №"+(t.correctIndex+1)+" · «"+t.rightWord+"»";
+    var got = (S.pick[i]===t.correctIndex);
+    tr.appendChild(el("td","",pickTxt));
+    tr.appendChild(el("td","",rightTxt));
+    tr.appendChild(el("td","n", got?"1":"0"));
+    tb.appendChild(tr);
+  });
+  tbl.appendChild(tb);
+  top.appendChild(tbl);
+  top.appendChild(el("p","note","Шкала Минпросвещения: 90–100% — «5»; 75–89% — «4»; 50–74% — «3»; ниже 50% — «2». Разбор каждого испытания — ниже, с указанием источника."));
+  box.appendChild(top);
+
+  var rev=el("div","card");
+  rev.appendChild(el("h2","","Разбор испытаний"));
+  TESTS.forEach(function(t,i){
+    var got=(S.pick[i]===t.correctIndex);
+    var r=el("div","rev");
+    r.appendChild(el("h3","","Испытание "+(i+1)+" · "+t.kind+(got?" · верно":" · неверно")));
+    r.appendChild(el("p","lead",t.q));
+    var ansLine=el("div","");
+    ansLine.appendChild(el("div","", "Твой выбор: "+((S.pick[i]!=null)?t.words[S.pick[i]]:"нет ответа")));
+    ansLine.appendChild(el("div","", "Верно: «"+t.rightWord+"» (слово №"+(t.correctIndex+1)+")"));
+    r.appendChild(ansLine);
+    var ex=el("div","expl "+(got?"good":"bad"));
+    ex.appendChild(el("div","",t.expl));
+    ex.appendChild(el("span","src","Источник: "+t.src));
+    r.appendChild(ex);
+    rev.appendChild(r);
+  });
+  box.appendChild(rev);
+
+  var again=el("div","card");
+  var ag=el("div","actions");
+  var b=el("button","btn","Сыграть ещё раз");
+  b.addEventListener("click", function(){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    location.reload();
+  });
+  ag.appendChild(b);
+  ag.appendChild(el("span","note","Новый сеанс очистит сохранённый результат на этом устройстве."));
+  again.appendChild(ag);
+  box.appendChild(again);
+
+  box.hidden=false;
+}
+</script>
+</body>
+</html>
