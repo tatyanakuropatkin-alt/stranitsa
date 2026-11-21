@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рабочий лист: М. Ю. Лермонтов «Утёс», «Листок»</title>
+<style>
+:root {
+  --ink: #16324A;
+  --teal: #1FA8D6;
+  --amber: #F2A93B;
+  --coral: #E86A5C;
+  --mint: #3FBF9F;
+  --bg: #F0F5F7;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ═══════════ ЖИВОЙ ФОН: МОРЕ И ЛИСТЬЯ ═══════════ */
+.bg-layer {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.bg-sky {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg,
+    #E1F5FE 0%,
+    #B3E5FC 25%,
+    #81D4FA 55%,
+    #4FC3F7 80%,
+    #29B6F6 100%);
+}
+.bg-sun {
+  position: absolute;
+  top: 8%; right: 12%;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, #FFF9C4 0%, #FFE082 60%, rgba(255,224,130,0) 100%);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: sunPulse 8s ease-in-out infinite;
+}
+@keyframes sunPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.08); opacity: 0.75; }
+}
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50px;
+  animation: cloudMove linear infinite;
+}
+.cloud-1 { top: 15%; left: -10%; width: 160px; height: 40px; animation-duration: 80s; }
+.cloud-2 { top: 25%; left: -15%; width: 120px; height: 32px; animation-duration: 100s; animation-delay: -30s; }
+.cloud-3 { top: 10%; left: -20%; width: 200px; height: 50px; animation-duration: 120s; animation-delay: -60s; }
+@keyframes cloudMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(130vw); }
+}
+.waves-container {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 45%;
+  z-index: 1;
+}
+.wave {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 200%; height: 100%;
+  background-repeat: repeat-x;
+  animation: waveMove linear infinite;
+}
+.wave-1 {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C150,90 350,30 600,60 C850,90 1050,30 1200,60 L1200,120 L0,120 Z' fill='%230288D1' opacity='0.75'/%3E%3C/svg%3E");
+  background-size: 1200px 120px;
+  height: 100px;
+  bottom: 0;
+  animation-duration: 15s;
+}
+.wave-2 {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C150,30 350,90 600,60 C850,30 1050,90 1200,60 L1200,120 L0,120 Z' fill='%230277BD' opacity='0.85'/%3E%3C/svg%3E");
+  background-size: 1200px 120px;
+  height: 90px;
+  bottom: 20px;
+  animation-duration: 20s;
+  animation-direction: reverse;
+}
+.wave-3 {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C150,90 350,30 600,60 C850,90 1050,30 1200,60 L1200,120 L0,120 Z' fill='%2301579B' opacity='0.95'/%3E%3C/svg%3E");
+  background-size: 1200px 120px;
+  height: 110px;
+  bottom: 35px;
+  animation-duration: 25s;
+}
+.wave-4 {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C150,30 350,90 600,60 C850,30 1050,90 1200,60 L1200,120 L0,120 Z' fill='%2301579B'/%3E%3C/svg%3E");
+  background-size: 1200px 120px;
+  height: 130px;
+  bottom: 0;
+  animation-duration: 18s;
+  animation-direction: reverse;
+}
+@keyframes waveMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-1200px); }
+}
+.cliff {
+  position: absolute;
+  bottom: 35%; left: 8%;
+  width: 200px; height: 180px;
+  opacity: 0.35;
+}
+.leaf {
+  position: absolute;
+  top: -80px;
+  will-change: transform;
+  animation: leafFall linear infinite;
+  filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.2));
+}
+@keyframes leafFall {
+  0% { transform: translateY(-80px) translateX(0) rotate(0deg); opacity: 0; }
+  8% { opacity: 1; }
+  25% { transform: translateY(25vh) translateX(40px) rotate(180deg); }
+  50% { transform: translateY(50vh) translateX(-30px) rotate(360deg); }
+  75% { transform: translateY(75vh) translateX(50px) rotate(540deg); }
+  92% { opacity: 1; }
+  100% { transform: translateY(110vh) translateX(20px) rotate(720deg); opacity: 0; }
+}
+.leaf-1 { left: 5%; animation-duration: 18s; animation-delay: 0s; }
+.leaf-2 { left: 15%; animation-duration: 22s; animation-delay: -3s; }
+.leaf-3 { left: 25%; animation-duration: 20s; animation-delay: -7s; }
+.leaf-4 { left: 35%; animation-duration: 25s; animation-delay: -2s; }
+.leaf-5 { left: 45%; animation-duration: 19s; animation-delay: -11s; }
+.leaf-6 { left: 55%; animation-duration: 23s; animation-delay: -5s; }
+.leaf-7 { left: 65%; animation-duration: 21s; animation-delay: -9s; }
+.leaf-8 { left: 75%; animation-duration: 24s; animation-delay: -1s; }
+.leaf-9 { left: 85%; animation-duration: 20s; animation-delay: -13s; }
+.leaf-10 { left: 92%; animation-duration: 22s; animation-delay: -6s; }
+.leaf-11 { left: 10%; animation-duration: 26s; animation-delay: -15s; }
+.leaf-12 { left: 50%; animation-duration: 17s; animation-delay: -8s; }
+.leaf-13 { left: 30%; animation-duration: 28s; animation-delay: -10s; }
+.leaf-14 { left: 70%; animation-duration: 21s; animation-delay: -14s; }
+.leaf-15 { left: 88%; animation-duration: 19s; animation-delay: -4s; }
+
+/* ═══════════ КОНТЕНТ ═══════════ */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 20px 24px 60px;
+}
+header {
+  background: linear-gradient(135deg, var(--ink) 0%, #1a4a6a 50%, var(--teal) 100%);
+  color: #fff;
+  padding: 32px 28px;
+  border-radius: 14px;
+  margin-bottom: 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(22,50,74,0.3);
+}
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--amber), var(--coral), var(--mint), var(--teal));
+}
+header h1 { font-size: 1.5em; margin-bottom: 6px; }
+header p { font-size: 1em; opacity: 0.9; }
+.sticky-panel {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  box-shadow: 0 3px 12px rgba(22,50,74,0.4);
+  margin-bottom: 20px;
+}
+.timer { font-size: 1.3em; font-weight: bold; font-variant-numeric: tabular-nums; }
+.timer.warning { color: var(--coral); animation: pulse 1s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.progress-bar { font-size: 0.95em; }
+.tab-counter {
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.1);
+}
+.tab-counter.danger { background: var(--coral); animation: pulse 0.8s infinite; }
+.tab-dots { display: inline-flex; gap: 3px; margin-left: 6px; vertical-align: middle; }
+.tab-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); transition: background 0.3s; }
+.tab-dot.active { background: var(--coral); }
+.toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-150%);
+  background: var(--coral);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(232,106,92,0.4);
+  font-weight: bold;
+  z-index: 300;
+  transition: transform 0.4s ease;
+  max-width: 90%;
+  text-align: center;
+  font-size: 0.95em;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.theory-block {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  border-left: 5px solid var(--teal);
+  box-shadow: 0 2px 10px rgba(22,50,74,0.15);
+}
+.theory-block h2 { color: var(--teal); margin-bottom: 12px; font-size: 1.2em; }
+.theory-block h3 { color: var(--ink); margin: 14px 0 6px; font-size: 1.05em; }
+.theory-block p { margin-bottom: 10px; }
+.poem {
+  white-space: pre-line;
+  font-style: italic;
+  margin: 12px 0 12px 16px;
+  padding-left: 12px;
+  border-left: 3px solid var(--mint);
+}
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(22,50,74,0.15);
+}
+.card-1 { border-left: 5px solid var(--teal); }
+.card-2 { border-left: 5px solid var(--amber); }
+.card-3 { border-left: 5px solid var(--coral); }
+.card-4 { border-left: 5px solid var(--mint); }
+.card-5 { border-left: 5px solid var(--ink); }
+.card-6 { border-left: 5px solid #7B68EE; }
+.card h3 { margin-bottom: 12px; font-size: 1.1em; }
+.card .hint {
+  background: #f7fbfd;
+  border: 1px dashed var(--teal);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 10px 0;
+  font-size: 0.9em;
+  color: #3a6a8a;
+}
+.card label { display: block; margin: 8px 0 4px; font-weight: bold; }
+.card input[type="radio"] { margin-right: 8px; }
+.card select, .card textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c0d4e0;
+  border-radius: 8px;
+  font-size: 1em;
+  font-family: inherit;
+  margin-top: 4px;
+  background: rgba(255,255,255,0.95);
+}
+.card textarea { min-height: 100px; resize: vertical; }
+.card.disabled select,
+.card.disabled textarea,
+.card.disabled input { pointer-events: none; opacity: 0.7; }
+.match-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+.match-table td, .match-table th {
+  border: 1px solid #c0d4e0;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.9);
+}
+.match-table th { background: #eaf4f9; }
+.order-list { list-style: none; padding: 0; }
+.order-list li {
+  padding: 10px 14px;
+  margin: 6px 0;
+  background: rgba(247,251,253,0.95);
+  border: 1px solid #c0d4e0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.order-list li .drag-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.order-list li select { width: auto; margin: 0; padding: 6px 10px; }
+.checkbox-group label { font-weight: normal; display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; }
+.checkbox-group input { margin-top: 4px; }
+.poem-quote {
+  white-space: pre-line;
+  font-style: italic;
+  background: rgba(247,251,253,0.95);
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin: 12px 0;
+  border-left: 4px solid var(--amber);
+}
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  margin: 6px 4px;
+}
+.btn-primary { background: var(--teal); color: #fff; }
+.btn-primary:hover { background: #178fb5; }
+.btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.5); }
+.btn-ghost:hover { background: rgba(255,255,255,0.12); }
+.btn-print { background: var(--ink); color: #fff; font-size: 0.9em; padding: 8px 16px; }
+.btn-print:hover { background: #1a4a6a; }
+.result-box {
+  margin-top: 20px;
+  padding: 18px 22px;
+  border-radius: 10px;
+  background: rgba(234,249,240,0.95);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--mint);
+  display: none;
+}
+.result-box.show { display: block; }
+.status-correct { color: #1a7a3a; font-weight: bold; }
+.status-wrong { color: var(--coral); font-weight: bold; }
+.status-partial { color: var(--amber); font-weight: bold; }
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(22,50,74,0.92);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+.overlay.show { display: flex; }
+.overlay-content { max-width: 500px; padding: 40px; }
+.overlay-content h2 { margin-bottom: 16px; color: var(--amber); }
+.keys-only { display: none; }
+.print-buttons { display: none; text-align: center; margin-top: 20px; }
+.print-buttons.show { display: block; }
+@media print {
+  .sticky-panel, .btn, .print-buttons,
+  .bg-layer, .overlay, .toast { display: none !important; }
+  .card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; background: #fff !important; backdrop-filter: none; }
+  .theory-block { background: #fff !important; backdrop-filter: none; }
+  body { background: #fff; }
+  .keys-only { display: block !important; }
+  .container { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer">
+  <div class="bg-sky"></div>
+  <div class="bg-sun"></div>
+  <div class="cloud cloud-1"></div>
+  <div class="cloud cloud-2"></div>
+  <div class="cloud cloud-3"></div>
+  <svg class="cliff" viewBox="0 0 200 180" preserveAspectRatio="none">
+    <path d="M20,180 L40,100 L60,80 L80,95 L100,60 L120,75 L140,50 L160,70 L180,120 L190,180 Z" fill="#37474F" opacity="0.85"/>
+    <path d="M60,80 L70,60 L85,75" fill="none" stroke="#546E7A" stroke-width="2"/>
+  </svg>
+  <div class="waves-container">
+    <div class="wave wave-1"></div>
+    <div class="wave wave-2"></div>
+    <div class="wave wave-3"></div>
+    <div class="wave wave-4"></div>
+  </div>
+  <svg class="leaf leaf-1" width="40" height="60" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#D4A574" stroke="#8B6F47" stroke-width="0.8"/><line x1="20" y1="4" x2="20" y2="56" stroke="#8B6F47" stroke-width="0.6"/></svg>
+  <svg class="leaf leaf-2" width="35" height="55" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#E8B85C" stroke="#8B6F47" stroke-width="0.8"/><line x1="20" y1="4" x2="20" y2="56" stroke="#8B6F47" stroke-width="0.6"/></svg>
+  <svg class="leaf leaf-3" width="45" height="65" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#C17817" stroke="#8B4513" stroke-width="0.8"/><line x1="20" y1="4" x2="20" y2="56" stroke="#8B4513" stroke-width="0.6"/></svg>
+  <svg class="leaf leaf-4" width="38" height="58" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#8B6F47" stroke="#5D4037" stroke-width="0.8"/><line x1="20" y1="4" x2="20" y2="56" stroke="#5D4037" stroke-width="0.6"/></svg>
+  <svg class="leaf leaf-5" width="42" height="62" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#B8860B" stroke="#8B6F47" stroke-width="0.8"/><line x1="20" y1="4" x2="20" y2="56" stroke="#8B6F47" stroke-width="0.6"/></svg>
+  <svg class="leaf leaf-6" width="36" height="56" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#D4A574" stroke="#8B6F47" stroke-width="0.8"/></svg>
+  <svg class="leaf leaf-7" width="44" height="64" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#E8B85C" stroke="#8B6F47" stroke-width="0.8"/></svg>
+  <svg class="leaf leaf-8" width="40" height="60" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#C17817" stroke="#8B4513" stroke-width="0.8"/></svg>
+  <svg class="leaf leaf-9" width="34" height="52" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#8B6F47" stroke="#5D4037" stroke-width="0.8"/></svg>
+  <svg class="leaf leaf-10" width="46" height="68" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#B8860B" stroke="#8B6F47" stroke-width="0.8"/></svg>
+  <svg class="leaf leaf-11" width="32" height="48" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#D4A574" stroke="#8B6F47" stroke-width="0.8"/></svg>
+  <svg class="leaf leaf-12" width="50" height="72" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#E8B85C" stroke="#8B6F47" stroke-width="0.8"/></svg>
+  <svg class="leaf leaf-13" width="28" height="42" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#C17817" stroke="#8B4513" stroke-width="0.8"/></svg>
+  <svg class="leaf leaf-14" width="38" height="58" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#8B6F47" stroke="#5D4037" stroke-width="0.8"/></svg>
+  <svg class="leaf leaf-15" width="36" height="54" viewBox="0 0 40 60"><path d="M20 2 C14 12 6 18 10 28 C4 34 7 46 16 48 C14 56 19 60 20 58 C21 60 26 56 24 48 C33 46 36 34 30 28 C34 18 26 12 20 2 Z" fill="#B8860B" stroke="#8B6F47" stroke-width="0.8"/></svg>
+</div>
+
+<div class="toast" id="toast">⚠️ Переключение вкладки!</div>
+
+<div class="container">
+<header>
+  <h1>М. Ю. Лермонтов. «Утёс» и «Листок»</h1>
+  <p>История создания, тематика, средства выразительности</p>
+  <p style="font-size:0.85em;opacity:0.7;margin-top:8px;">6 класс &bull; Литература &bull; 20 минут &bull; Максимум: 17 баллов</p>
+</header>
+
+<div class="sticky-panel" id="stickyPanel">
+  <span class="timer" id="timerDisplay">20:00</span>
+  <span class="progress-bar" id="progressDisplay">Прогресс: 0 / 6</span>
+  <span class="tab-counter" id="tabCounter">
+    Нарушения: 0 / 6
+    <span class="tab-dots">
+      <span class="tab-dot"></span><span class="tab-dot"></span><span class="tab-dot"></span>
+      <span class="tab-dot"></span><span class="tab-dot"></span><span class="tab-dot"></span>
+    </span>
+  </span>
+</div>
+
+<div class="theory-block">
+  <h2>Теория: история создания и тематика</h2>
+  <h3>История создания</h3>
+  <p>Оба стихотворения написаны в <strong>1841 году</strong> — в последнее лето жизни М. Ю. Лермонтова. Поэт находился на Кавказе, в Пятигорске. Через несколько месяцев, в июле 1841 года, он погибнет на дуэли. Стихотворения этого периода отмечены глубоким чувством одиночества и философским размышлением о судьбе.</p>
+  <h3>Тематика</h3>
+  <p>Оба стихотворения относятся к <strong>пейзажной лирике</strong>, но природа в них не просто фон, а способ передать человеческие переживания. Главная тема — <strong>одиночество, тоска, отверженность</strong>. Герои стихотворений — не люди, а утёс и дубовый листок, — но они чувствуют и страдают как живые существа.</p>
+  <h3>Олицетворение</h3>
+  <p><strong>Олицетворение</strong> — перенос свойств живого существа на неживой предмет или явление природы. У Лермонтова утёс «задумался» и «плачет», тучка «умчалась, играя», листок «молит с тоскою», чинара «отвечает». Именно олицетворения превращают пейзаж в историю души.</p>
+  <h3>«Листок» как притча</h3>
+  <p>Стихотворение «Листок» часто называют <strong>стихотворением-притчей</strong>: на поверхности — история листка и чинары, внутри — размышление об одиноком страннике, который ищет приют и получает отказ. Чинара не жестока — она равнодушна. И от этого отказ ещё больнее.</p>
+  <h3>Тексты стихотворений</h3>
+  <p><strong>«Утёс» (1841)</strong></p>
+  <div class="poem">Ночевала тучка золотая
+На груди утеса-великана;
+Утром в путь она умчалась рано,
+По лазури весело играя;
+Но остался влажный след в морщине
+Старого утеса. Одиноко
+Он стоит, задумался глубоко,
+И тихонько плачет он в пустыне.</div>
+  <p><strong>«Листок» (1841)</strong></p>
+  <div class="poem">Дубовый листок оторвался от ветки родимой
+И в степь укатился, жестокою бурей гонимый;
+Засох и увял он от холода, зноя и горя
+И вот, наконец, докатился до Черного моря.
+
+У Черного моря чинара стоит молодая;
+С ней шепчется ветер, зеленые ветви лаская;
+На ветвях зеленых качаются райские птицы;
+Поют они песни про славу морской царь-девицы.
+
+И странник прижался у корня чинары высокой;
+Приюта на время он молит с тоскою глубокой,
+И так говорит он: «Я бедный листочек дубовый,
+До срока созрел я и вырос в отчизне суровой.
+
+Один и без цели по свету ношуся давно я,
+Засох я без тени, увял я без сна и покоя.
+Прими же пришельца меж листьев своих изумрудных,
+Немало я знаю рассказов мудреных и чудных».
+
+«На что мне тебя? — отвечает младая чинара, —
+Ты пылен и желт, — и сынам моим свежим не пара.
+Ты много видал — да к чему мне твои небылицы?
+Мой слух утомили давно уж и райские птицы.
+
+Иди себе дальше; о странник! тебя я не знаю!
+Я солнцем любима, цвету для него и блистаю;
+По небу я ветви раскинула здесь на просторе,
+И корни мои умывает холодное море».</div>
+</div>
+
+<div class="card card-1" id="card1">
+  <h3>Задание 1. Факты (1 балл)</h3>
+  <p>В каком году написаны оба стихотворения — «Утёс» и «Листок»?</p>
+  <div class="hint">Опора: обрати внимание на дату, указанную после текста стихотворения в блоке теории.</div>
+  <label><input type="radio" name="q1" value="a"> 1837</label>
+  <label><input type="radio" name="q1" value="b"> 1841</label>
+  <label><input type="radio" name="q1" value="c"> 1840</label>
+  <label><input type="radio" name="q1" value="d"> 1842</label>
+</div>
+
+<div class="card card-2" id="card2">
+  <h3>Задание 2. Соотнесение (1 балл)</h3>
+  <p>Соотнеси героя стихотворения с его характеристикой. Для каждого героя выбери вариант из списка.</p>
+  <div class="hint">Опора: вспомни, что делает каждый герой в тексте. Кто плачет? Кто умчалась? Кто молит? Кто отвечает?</div>
+  <table class="match-table">
+    <tr><th>Герой</th><th>Характеристика</th></tr>
+    <tr><td>Утёс</td><td><select id="m1"><option value="">— выбери —</option><option value="a">Беззаботность, свобода, веселье</option><option value="b">Одиночество, грусть, потеря</option><option value="c">Тоска, отверженность, мольба</option><option value="d">Равнодушие, самодостаточность</option></select></td></tr>
+    <tr><td>Тучка</td><td><select id="m2"><option value="">— выбери —</option><option value="a">Беззаботность, свобода, веселье</option><option value="b">Одиночество, грусть, потеря</option><option value="c">Тоска, отверженность, мольба</option><option value="d">Равнодушие, самодостаточность</option></select></td></tr>
+    <tr><td>Дубовый листок</td><td><select id="m3"><option value="">— выбери —</option><option value="a">Беззаботность, свобода, веселье</option><option value="b">Одиночество, грусть, потеря</option><option value="c">Тоска, отверженность, мольба</option><option value="d">Равнодушие, самодостаточность</option></select></td></tr>
+    <tr><td>Чинара</td><td><select id="m4"><option value="">— выбери —</option><option value="a">Беззаботность, свобода, веселье</option><option value="b">Одиночество, грусть, потеря</option><option value="c">Тоска, отверженность, мольба</option><option value="d">Равнодушие, самодостаточность</option></select></td></tr>
+  </table>
+</div>
+
+<div class="card card-3" id="card3">
+  <h3>Задание 3. Порядок событий (1 балл)</h3>
+  <p>Расставь события стихотворения «Листок» в правильном порядке: у каждого события выбери его номер (1 — самое раннее, 6 — самое позднее).</p>
+  <div class="hint">Опора: вспомни, откуда начинается путь листка и чем заканчивается встреча с чинарой. Листок движется от ветки к морю.</div>
+  <ul class="order-list" id="orderList">
+    <li data-correct="5"><span class="drag-num">?</span> Чинара отказывает листку в приюте</li>
+    <li data-correct="1"><span class="drag-num">?</span> Листок отрывается от ветки родимой</li>
+    <li data-correct="4"><span class="drag-num">?</span> Листок прижимается у корня чинары и молит о приюте</li>
+    <li data-correct="2"><span class="drag-num">?</span> Листок катится по степи, гонимый бурей</li>
+    <li data-correct="6"><span class="drag-num">?</span> Чинара говорит: «Иди себе дальше; о странник! тебя я не знаю!»</li>
+    <li data-correct="3"><span class="drag-num">?</span> Листок засыхает и увядает от холода, зноя и горя</li>
+  </ul>
+</div>
+
+<div class="card card-4" id="card4">
+  <h3>Задание 4. Олицетворения (2 балла)</h3>
+  <p>Отметь строки, в которых есть <strong>олицетворение</strong> (неживое ведёт себя как живое). Выбери все верные варианты.</p>
+  <div class="hint">Опора: олицетворение — когда предмет природы думает, плачет, говорит, просит, играет. Не каждая строка с прилагательным является олицетворением.</div>
+  <div class="checkbox-group">
+    <label><input type="checkbox" name="q4" value="a"> «Ночевала тучка золотая / На груди утеса-великана»</label>
+    <label><input type="checkbox" name="q4" value="b"> «Дубовый листок оторвался от ветки родимой»</label>
+    <label><input type="checkbox" name="q4" value="c"> «И тихонько плачет он в пустыне»</label>
+    <label><input type="checkbox" name="q4" value="d"> «У Черного моря чинара стоит молодая»</label>
+    <label><input type="checkbox" name="q4" value="e"> «Приюта на время он молит с тоскою глубокой»</label>
+    <label><input type="checkbox" name="q4" value="f"> «Засох и увял он от холода, зноя и горя»</label>
+  </div>
+</div>
+
+<div class="card card-5" id="card5">
+  <h3>Задание 5. Работа с фрагментом (5 баллов)</h3>
+  <p>Прочитай фрагмент и ответь на вопрос развёрнуто (не менее 30 слов).</p>
+  <div class="poem-quote">«На что мне тебя? — отвечает младая чинара, —
+Ты пылен и желт, — и сынам моим свежим не пара.
+Ты много видал — да к чему мне твои небылицы?
+Мой слух утомили давно уж и райские птицы.
+
+Иди себе дальше; о странник! тебя я не знаю!
+Я солнцем любима, цвету для него и блистаю;
+По небу я ветви раскинула здесь на просторе,
+И корни мои умывает холодное море».</div>
+  <p><strong>Вопрос:</strong> Почему чинара отказывает листку? Что стоит за её словами — жестокость или равнодушие? Как этот отказ связан с темой одиночества в стихотворении?</p>
+  <div class="hint">Опора для ответа: начни с характеристики чинары, затем объясни, почему листок ей не нужен, и заверши выводом о теме одиночества. Используй слова из текста.</div>
+  <label>Твой ответ:</label>
+  <textarea id="q5answer" rows="6" placeholder="Напиши развёрнутый ответ (не менее 30 слов)..."></textarea>
+</div>
+
+<div class="card card-6" id="card6">
+  <h3>Задание 6. Мини-сочинение (7 баллов)</h3>
+  <p>Напиши мини-сочинение (не менее 60 слов). Какое из двух стихотворений — «Утёс» или «Листок» — произвело на тебя более сильное впечатление? Почему?</p>
+  <div class="hint">Опора: начни с фразы «Из двух стихотворений Лермонтова мне ближе "...", потому что...». Объясни, какой образ тебя задел и почему. Заверши выводом.</div>
+  <label>Твой ответ:</label>
+  <textarea id="q6answer" rows="8" placeholder="Начни: Из двух стихотворений Лермонтова мне ближе «...», потому что..."></textarea>
+</div>
+
+<div style="text-align:center; margin: 24px 0;">
+  <button class="btn btn-primary" id="submitBtn" onclick="submitWork()">Отправить работу</button>
+</div>
+
+<div class="result-box" id="resultBox">
+  <h3>Результат</h3>
+  <p id="resultText"></p>
+  <p id="resultScore"></p>
+</div>
+
+<div class="print-buttons" id="printButtons">
+  <button class="btn btn-print" onclick="printBlank()">Печать: пустой лист</button>
+  <button class="btn btn-print" onclick="printWithAnswers()">Печать: лист с ответами</button>
+  <button class="btn btn-print" onclick="printKeys()">Печать: ключи для учителя</button>
+</div>
+</div>
+
+<!-- Окно подтверждения отправки (вместо системного confirm) -->
+<div class="overlay" id="confirmOverlay">
+  <div class="overlay-content">
+    <h2>Отправить работу?</h2>
+    <p>После отправки изменить ответы будет невозможно.</p>
+    <button class="btn btn-primary" onclick="confirmSubmit(true)">Да, отправить</button>
+    <button class="btn btn-ghost" onclick="confirmSubmit(false)">Отмена</button>
+  </div>
+</div>
+
+<!-- Оверлей досрочного завершения -->
+<div class="overlay" id="overlay">
+  <div class="overlay-content">
+    <h2>Работа завершена</h2>
+    <p id="overlayText">Время истекло, или обнаружено шесть переключений вкладок. Работа отправлена автоматически.</p>
+    <button class="btn btn-primary" onclick="document.getElementById('overlay').classList.remove('show')">Понятно</button>
+  </div>
+</div>
+
+<div class="keys-only" id="keysBlock">
+  <h2 style="margin-top:40px;page-break-before:always;">КЛЮЧИ ДЛЯ УЧИТЕЛЯ</h2>
+  <h3>Задание 1 (1 балл)</h3>
+  <p>Верный ответ: <strong>b) 1841</strong></p>
+  <h3>Задание 2 (1 балл, засчитывается при всех верных соответствиях)</h3>
+  <p>Утёс — b) Одиночество, грусть, потеря.<br>Тучка — a) Беззаботность, свобода, веселье.<br>Дубовый листок — c) Тоска, отверженность, мольба.<br>Чинара — d) Равнодушие, самодостаточность.</p>
+  <h3>Задание 3 (1 балл, только полностью верная последовательность)</h3>
+  <p>Номера по хронологии событий: отрывается от ветки = 1, катится по степи = 2, засыхает = 3, прижимается к чинаре и молит = 4, чинара отказывает = 5, слова «Иди себе дальше» = 6.</p>
+  <h3>Задание 4 (2 балла: по 0,5 за каждый верный выбор, минус 0,25 за неверный)</h3>
+  <p>Верные: a, c, e. (Тучка «ночевала»; утёс «плачет»; листок «молит».)<br>Неверные: b) «оторвался» — физическое действие; d) «чинара стоит» — нет действия живого; f) «засох и увял» — физическое состояние.</p>
+  <h3>Задание 5 (максимум 5 баллов, объём от 30 слов)</h3>
+  <p><strong>К1. Понимание текста (2 балла):</strong> ключевые слова: одиночество, равнодушие, отказ, отверженность, чинара, листок, приют, тоска, странник, изгнанник, не нужен, прогоняет. ≥3 совпадений = 2, ≥1 = 1.</p>
+  <p><strong>К2. Опора на текст (2 балла):</strong> маркеры: чинара, листок, Лермонтов, стихотворение, герой, строка, поэт, «ты пылен и жёлт», «тебя я не знаю». ≥2 маркеров = 2, ≥1 = 1.</p>
+  <p><strong>К3. Связность (1 балл):</strong> ≥3 предложений и ≥2 союзов/вводных слов.</p>
+  <p><strong>Правило:</strong> если К1 = 0, то К2 и К3 = 0. Объём ниже 30 слов — 0 баллов.</p>
+  <h3>Задание 6 (максимум 7 баллов, объём от 60 слов)</h3>
+  <p><strong>К1. Понимание текста (2 балла):</strong> одиночество, тоска, грусть, природа, утёс, листок, чинара, тучка, олицетворение, Лермонтов.</p>
+  <p><strong>К2. Опора на текст (2 балла):</strong> стихотворение, «Утёс», «Листок», Лермонтов, герой, строка, поэт, текст.</p>
+  <p><strong>К3. Рассуждение (2 балла):</strong> тезис («мне ближе», «я считаю») + аргумент («потому что») + вывод («итак», «поэтому») = 2; тезис + аргумент = 1.</p>
+  <p><strong>К4. Связность (1 балл):</strong> ≥4 предложений и ≥3 союзов/вводных слов.</p>
+  <p><strong>Правило:</strong> если К1 = 0, то К2, К3, К4 = 0. Объём ниже 60 слов — 0 баллов.</p>
+  <h3>Шкала перевода баллов</h3>
+  <p>«2» — 0–8 | «3» — 9–11 | «4» — 12–14 | «5» — 15–17</p>
+  <h3>Отчёт о проверке (Протокол 4.0)</h3>
+  <p><strong>Проверено:</strong> цитаты сверены с предоставленным текстом, стихи в столбик; баллы 1+1+1+2+5+7 = 17, шкала без пересечений; время 20 минут; каждое задание решаемо, опора не выдаёт ответ; исправлены три сбоя отправки: ошибка проверки порядка событий, двойной счёт переключений вкладки, блокировка системного окна подтверждения в iframe и на мобильных; добавлен режим повторной проверки для учителя (#test).</p>
+  <p><strong>Не проверено:</strong> работа в Internet Explorer (не поддерживается; нужны Chrome, Firefox, Edge, Яндекс.Браузер).</p>
+  <p><strong>Нерешённые вопросы:</strong> нет. В пределах перечисленных проверок выявленные ошибки исправлены. Непроверенные и нерешённые вопросы указаны отдельно.</p>
+</div>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'lermontov_utes_listok_6kl_v3';
+  const TEACHER_TEST = (location.hash === '#test');
+  const TOTAL_TIME = 20 * 60;
+  const MAX_VIOLATIONS = 6;
+  let timeLeft = TOTAL_TIME;
+  let tabViolations = 0;
+  let submitted = false;
+  let timerInterval = null;
+  let toastTimeout = null;
+  let gracePeriod = true;
+  let lastResult = null;
+  let hiddenAt = null;
+  let blurredAt = null;
+  let lastViolationAt = 0;
+
+  setTimeout(() => { gracePeriod = false; }, 3000);
+
+  if (TEACHER_TEST) {
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+  }
+
+  function loadState() {
+    if (TEACHER_TEST) return;
+    try {
+      const s = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (!s) return;
+      if (s.submitted) {
+        submitted = true;
+        restoreAnswers(s);
+        if (s.result) { showResults(s.result); }
+        lockAll();
+        document.getElementById('printButtons').classList.add('show');
+        return;
+      }
+      if (s.timeLeft !== undefined) timeLeft = s.timeLeft;
+      if (s.tabViolations !== undefined) tabViolations = s.tabViolations;
+      restoreAnswers(s);
+      updateTabCounter();
+    } catch(e){}
+  }
+
+  function saveState() {
+    const s = { timeLeft, tabViolations, submitted, answers: collectAnswers() };
+    if (submitted && lastResult) s.result = lastResult;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch(e){}
+  }
+
+  function collectAnswers() {
+    const a = {};
+    const r1 = document.querySelector('input[name="q1"]:checked');
+    a.q1 = r1 ? r1.value : '';
+    a.m1 = document.getElementById('m1').value;
+    a.m2 = document.getElementById('m2').value;
+    a.m3 = document.getElementById('m3').value;
+    a.m4 = document.getElementById('m4').value;
+    a.orderSel = Array.from(document.querySelectorAll('#orderList li select')).map(s => s.value);
+    a.q4 = Array.from(document.querySelectorAll('input[name="q4"]:checked')).map(c => c.value);
+    a.q5 = document.getElementById('q5answer').value;
+    a.q6 = document.getElementById('q6answer').value;
+    return a;
+  }
+
+  function restoreAnswers(s) {
+    if (!s.answers) return;
+    const a = s.answers;
+    if (a.q1) { const r = document.querySelector('input[name="q1"][value="' + a.q1 + '"]'); if (r) r.checked = true; }
+    if (a.m1) document.getElementById('m1').value = a.m1;
+    if (a.m2) document.getElementById('m2').value = a.m2;
+    if (a.m3) document.getElementById('m3').value = a.m3;
+    if (a.m4) document.getElementById('m4').value = a.m4;
+    if (a.orderSel) {
+      const sels = document.querySelectorAll('#orderList li select');
+      a.orderSel.forEach((v, i) => {
+        if (sels[i] && v) {
+          sels[i].value = v;
+          sels[i].closest('li').querySelector('.drag-num').textContent = v;
+        }
+      });
+    }
+    if (a.q4) a.q4.forEach(v => { const c = document.querySelector('input[name="q4"][value="' + v + '"]'); if (c) c.checked = true; });
+    if (a.q5) document.getElementById('q5answer').value = a.q5;
+    if (a.q6) document.getElementById('q6answer').value = a.q6;
+  }
+
+  function startTimer() {
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      if (timeLeft <= 0) { timeLeft = 0; autoSubmit('Время истекло. Работа отправлена автоматически.'); }
+      updateTimerDisplay();
+      if (timeLeft % 10 === 0) saveState();
+    }, 1000);
+  }
+
+  function updateTimerDisplay() {
+    const m = Math.floor(timeLeft / 60);
+    const s = timeLeft % 60;
+    const el = document.getElementById('timerDisplay');
+    el.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    if (timeLeft <= 60) el.classList.add('warning');
+    else el.classList.remove('warning');
+  }
+
+  /* Контроль вкладки: без дублей blur+visibilitychange */
+  document.addEventListener('visibilitychange', () => {
+    if (submitted || gracePeriod) return;
+    if (document.hidden) {
+      hiddenAt = Date.now();
+    } else if (hiddenAt !== null) {
+      const elapsed = Date.now() - hiddenAt;
+      hiddenAt = null;
+      if (elapsed >= 1500) registerViolation('Переключение вкладки');
+    }
+  });
+
+  window.addEventListener('blur', () => {
+    if (!submitted && !gracePeriod) blurredAt = Date.now();
+  });
+  window.addEventListener('focus', () => {
+    if (blurredAt === null) return;
+    const elapsed = Date.now() - blurredAt;
+    blurredAt = null;
+    if (elapsed >= 2000 && !submitted && !gracePeriod) registerViolation('Переключение вкладки');
+  });
+
+  function registerViolation(reason) {
+    if (submitted) return;
+    const now = Date.now();
+    if (now - lastViolationAt < 1000) return; /* дубль от blur/visibility — игнорируем */
+    lastViolationAt = now;
+    tabViolations++;
+    updateTabCounter();
+    saveState();
+    showToast('⚠️ ' + reason + '! Нарушение ' + tabViolations + ' из ' + MAX_VIOLATIONS);
+    if (tabViolations >= MAX_VIOLATIONS) {
+      autoSubmit('Обнаружено ' + MAX_VIOLATIONS + ' переключений вкладок. Работа завершена досрочно и отправлена автоматически.');
+    }
+  }
+
+  function updateTabCounter() {
+    const counter = document.getElementById('tabCounter');
+    let dotsHtml = '<span class="tab-dots">';
+    for (let i = 0; i < MAX_VIOLATIONS; i++) {
+      dotsHtml += '<span class="tab-dot ' + (i < tabViolations ? 'active' : '') + '"></span>';
+    }
+    dotsHtml += '</span>';
+    counter.innerHTML = 'Нарушения: ' + tabViolations + ' / ' + MAX_VIOLATIONS + ' ' + dotsHtml;
+    if (tabViolations >= MAX_VIOLATIONS - 1) counter.classList.add('danger');
+    else counter.classList.remove('danger');
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    if (toastTimeout) clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+
+  function lockAll() {
+    document.querySelectorAll('.card').forEach(c => c.classList.add('disabled'));
+    document.querySelectorAll('input, select, textarea').forEach(el => el.disabled = true);
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+  }
+
+  function updateProgress(answered) {
+    document.getElementById('progressDisplay').textContent = 'Прогресс: ' + answered + ' / 6';
+  }
+
+  window.submitWork = function() {
+    if (submitted && !TEACHER_TEST) return;
+    document.getElementById('confirmOverlay').classList.add('show');
+  };
+
+  window.confirmSubmit = function(yes) {
+    document.getElementById('confirmOverlay').classList.remove('show');
+    if (yes) doSubmit();
+  };
+
+  function autoSubmit(message) {
+    doSubmit();
+    document.getElementById('overlayText').textContent = message;
+    document.getElementById('overlay').classList.add('show');
+  }
+
+  function doSubmit() {
+    if (submitted && !TEACHER_TEST) return;
+    submitted = true;
+    clearInterval(timerInterval);
+    const answers = collectAnswers();
+    const scores = gradeAll(answers);
+    const total = Object.values(scores).reduce((a, b) => a + b, 0);
+    const mark = getMark(total);
+    lastResult = { scores, total, mark, answers };
+    showResults(lastResult);
+    lockAll();
+    document.getElementById('printButtons').classList.add('show');
+    saveState();
+  }
+
+  function gradeAll(a) {
+    const s = {};
+    s.q1 = (a.q1 === 'b') ? 1 : 0;
+    s.q2 = (a.m1 === 'b' && a.m2 === 'a' && a.m3 === 'c' && a.m4 === 'd') ? 1 : 0;
+    s.q3 = gradeOrder();
+    s.q4 = gradeQ4(a.q4);
+    s.q5 = gradeQ5(a.q5);
+    s.q6 = gradeQ6(a.q6);
+    return s;
+  }
+
+  /* ИСПРАВЛЕНО: сравнение с data-correct, без вызова querySelectorAll у NodeList */
+  function gradeOrder() {
+    const items = document.querySelectorAll('#orderList li');
+    let correct = 0;
+    const total = items.length;
+    items.forEach((li) => {
+      const sel = li.querySelector('select');
+      if (sel && sel.value && parseInt(sel.value, 10) === parseInt(li.dataset.correct, 10)) correct++;
+    });
+    return (correct === total) ? 1 : 0;
+  }
+
+  function gradeQ4(checked) {
+    const correct = ['a','c','e'];
+    let score = 0;
+    checked.forEach(v => { if (correct.includes(v)) score += 0.5; else score -= 0.25; });
+    return Math.max(0, Math.min(2, Math.round(score * 2) / 2));
+  }
+
+  function gradeQ5(text) {
+    if (!text) return 0;
+    const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+    if (words.length < 30) return 0;
+    const low = text.toLowerCase();
+    const kw = ['одиночество','одинокий','равнодушие','равнодушна','отказ','отказывает','отверженность','чинара','листок','приют','тоска','странник','изгнанник','не нужен','прогоняет','одинок'];
+    const kwCount = kw.filter(k => low.includes(k)).length;
+    const k1 = kwCount >= 3 ? 2 : (kwCount >= 1 ? 1 : 0);
+    if (k1 === 0) return 0;
+    const markers = ['чинара','листок','лермонтов','стихотворение','герой','строка','поэт','«ты пылен','«тебя я не знаю'];
+    const mCount = markers.filter(m => low.includes(m)).length;
+    const k2 = mCount >= 2 ? 2 : (mCount >= 1 ? 1 : 0);
+    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 3).length;
+    const connectors = ['потому что','так как','однако','но','кроме того','во-первых','во-вторых','таким образом','итак','поэтому'];
+    const cCount = connectors.filter(c => low.includes(c)).length;
+    const k3 = (sentences >= 3 && cCount >= 2) ? 1 : 0;
+    return k1 + k2 + k3;
+  }
+
+  function gradeQ6(text) {
+    if (!text) return 0;
+    const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+    if (words.length < 60) return 0;
+    const low = text.toLowerCase();
+    const kw = ['одиночество','тоска','грусть','природа','утёс','листок','чинара','тучка','олицетворение','лермонтов','уединение','отверженность'];
+    const kwCount = kw.filter(k => low.includes(k)).length;
+    const k1 = kwCount >= 3 ? 2 : (kwCount >= 1 ? 1 : 0);
+    if (k1 === 0) return 0;
+    const markers = ['стихотворение','«утёс»','«листок»','лермонтов','герой','строка','поэт','текст','утёс','листок'];
+    const mCount = markers.filter(m => low.includes(m)).length;
+    const k2 = mCount >= 2 ? 2 : (mCount >= 1 ? 1 : 0);
+    const thesis = ['я считаю','мне кажется','мне ближе','я выбираю','на мой взгляд','меня задел','мне понравилось'];
+    const arg = ['потому что','так как','поскольку','например','во-первых','ведь'];
+    const concl = ['таким образом','итак','поэтому','в заключение','в итоге','вот почему'];
+    const hasThesis = thesis.some(t => low.includes(t));
+    const hasArg = arg.some(t => low.includes(t));
+    const hasConcl = concl.some(t => low.includes(t));
+    let k3 = 0;
+    if (hasThesis && hasArg && hasConcl) k3 = 2;
+    else if (hasThesis && hasArg) k3 = 1;
+    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 3).length;
+    const connectors = ['потому что','однако','но','кроме того','во-первых','во-вторых','таким образом','итак','например','поэтому'];
+    const cCount = connectors.filter(c => low.includes(c)).length;
+    const k4 = (sentences >= 4 && cCount >= 3) ? 1 : 0;
+    return k1 + k2 + k3 + k4;
+  }
+
+  function getMark(total) {
+    if (total >= 15) return '5';
+    if (total >= 12) return '4';
+    if (total >= 9) return '3';
+    return '2';
+  }
+
+  function showResults(data) {
+    const box = document.getElementById('resultBox');
+    box.classList.add('show');
+    const names = {q1:'Задание 1',q2:'Задание 2',q3:'Задание 3',q4:'Задание 4',q5:'Задание 5',q6:'Задание 6'};
+    const maxes = {q1:1,q2:1,q3:1,q4:2,q5:5,q6:7};
+    let html = '';
+    for (const k in data.scores) {
+      const sc = data.scores[k];
+      const cls = sc === maxes[k] ? 'status-correct' : (sc > 0 ? 'status-partial' : 'status-wrong');
+      html += '<p>' + names[k] + ': <span class="' + cls + '">' + sc + ' / ' + maxes[k] + '</span></p>';
+    }
+    document.getElementById('resultText').innerHTML = html;
+    document.getElementById('resultScore').innerHTML = '<strong>Итого: ' + data.total + ' / 17. Отметка: «' + data.mark + '»</strong>';
+    let answered = 0;
+    if (data.answers.q1) answered++;
+    if (data.answers.m1 && data.answers.m2 && data.answers.m3 && data.answers.m4) answered++;
+    if (data.answers.orderSel && data.answers.orderSel.every(v => v)) answered++;
+    if (data.answers.q4 && data.answers.q4.length) answered++;
+    if (data.answers.q5 && data.answers.q5.trim()) answered++;
+    if (data.answers.q6 && data.answers.q6.trim()) answered++;
+    updateProgress(answered);
+  }
+
+  window.printBlank = function() {
+    const snapshot = collectAnswers();
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+      if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+      else el.value = '';
+    });
+    document.querySelectorAll('#orderList .drag-num').forEach(d => d.textContent = '?');
+    window.print();
+    restoreAnswers({ answers: snapshot });
+  };
+
+  window.printWithAnswers = function() { window.print(); };
+
+  window.printKeys = function() {
+    const main = document.querySelector('.container');
+    const keys = document.getElementById('keysBlock');
+    main.style.display = 'none';
+    keys.style.display = 'block';
+    window.print();
+    main.style.display = '';
+    keys.style.display = '';
+  };
+
+  function initOrder() {
+    const items = document.querySelectorAll('#orderList li');
+    items.forEach((li) => {
+      const sel = document.createElement('select');
+      sel.className = 'order-select';
+      sel.innerHTML = '<option value="">—</option>';
+      for (let j = 1; j <= items.length; j++) {
+        sel.innerHTML += '<option value="' + j + '">' + j + '</option>';
+      }
+      sel.addEventListener('change', () => {
+        li.querySelector('.drag-num').textContent = sel.value || '?';
+        saveState();
+        updateProgressCount();
+      });
+      li.appendChild(sel);
+    });
+  }
+
+  function updateProgressCount() {
+    let answered = 0;
+    if (document.querySelector('input[name="q1"]:checked')) answered++;
+    if (document.getElementById('m1').value && document.getElementById('m2').value &&
+        document.getElementById('m3').value && document.getElementById('m4').value) answered++;
+    const orderSels = document.querySelectorAll('#orderList li select');
+    let orderDone = orderSels.length > 0;
+    orderSels.forEach(s => { if (!s.value) orderDone = false; });
+    if (orderDone) answered++;
+    if (document.querySelectorAll('input[name="q4"]:checked').length > 0) answered++;
+    if (document.getElementById('q5answer').value.trim()) answered++;
+    if (document.getElementById('q6answer').value.trim()) answered++;
+    updateProgress(answered);
+  }
+
+  document.addEventListener('input', () => { saveState(); updateProgressCount(); });
+  document.addEventListener('change', () => { saveState(); updateProgressCount(); });
+
+  initOrder();
+  loadState();
+  if (!submitted) startTimer();
+  updateProgressCount();
+})();
+</script>
+</body>
+</html>
