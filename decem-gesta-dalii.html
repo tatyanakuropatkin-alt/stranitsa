@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Интерактивная викторина «Десять свершений Владимира Даля» к 225-летию: 20 вопросов, мгновенная проверка, пояснения с источниками, разбор ошибок.">
+<title>Десять свершений Владимира Даля — викторина</title>
+<style>
+:root{
+  --paper:#f4efe2;
+  --panel:#fdfbf4;
+  --ink:#2b2a26;
+  --muted:#6f6a5e;
+  --line:#ddd6c4;
+  --green:#2e4b40;
+  --green-deep:#1e352c;
+  --sage:#8aa595;
+  --sage-lt:#e9f1ea;
+  --gold:#b08d3f;
+  --gold-lt:#e3cf9a;
+  --gold-pale:#f6edd6;
+  --wine:#7a3a37;
+  --wine-lt:#f4e4e1;
+  --shadow:0 2px 10px rgba(46,75,64,.07), 0 1px 2px rgba(43,42,38,.05);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;padding:26px 18px 46px;
+  color:var(--ink);
+  font-family:Georgia,"Palatino Linotype","Book Antiqua","Times New Roman",serif;
+  font-size:17px;line-height:1.6;
+  background-color:var(--paper);
+  background-image:
+    radial-gradient(1100px 600px at 12% -8%, rgba(176,141,63,.10), transparent 60%),
+    radial-gradient(900px 520px at 105% 8%, rgba(46,75,64,.09), transparent 62%),
+    radial-gradient(700px 700px at 50% 120%, rgba(122,58,55,.06), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%232e4b40' stroke-width='1' opacity='0.07'%3E%3Cpath d='M42 10 C 53 21 53 33 42 44 C 31 33 31 21 42 10 Z'/%3E%3Ccircle cx='42' cy='58' r='3'/%3E%3Cpath d='M10 42 C 21 53 33 53 44 42'/%3E%3Cpath d='M84 42 C 73 31 61 31 50 42'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment:fixed,fixed,fixed,fixed;
+}
+/* боковые рейки — корешок переплёта */
+body::before,body::after{
+  content:"";position:fixed;top:0;bottom:0;width:26px;z-index:0;pointer-events:none;opacity:.42;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='124'%3E%3Cg fill='none' stroke='%23b08d3f' stroke-width='1'%3E%3Cpath d='M13 0 V124'/%3E%3Cpath d='M13 18 C 21 25 21 35 13 42 C 5 35 5 25 13 18 Z'/%3E%3Ccircle cx='13' cy='66' r='2.6'/%3E%3Cpath d='M13 84 C 19 89 19 96 13 101 C 7 96 7 89 13 84 Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+body::before{left:0}
+body::after{right:0;transform:scaleX(-1)}
+@media (max-width:1080px){body::before,body::after{display:none}}
+
+.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto}
+
+/* ---------- панель с классической двойной рамкой ---------- */
+.frame{
+  position:relative;background:var(--panel);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+}
+.frame::after{
+  content:"";position:absolute;inset:7px;border:1px solid rgba(176,141,63,.42);pointer-events:none;
+}
+.corner{position:absolute;width:74px;height:74px;color:var(--gold);z-index:2;pointer-events:none}
+.corner.tl{top:-4px;left:-4px}
+.corner.tr{top:-4px;right:-4px;transform:scaleX(-1)}
+.corner.bl{bottom:-4px;left:-4px;transform:scaleY(-1)}
+.corner.br{bottom:-4px;right:-4px;transform:scale(-1,-1)}
+@media (max-width:640px){.corner{width:52px;height:52px}}
+
+/* ---------- шапка ---------- */
+.masthead{
+  position:relative;overflow:hidden;
+  background:linear-gradient(168deg,#2b473d 0%,#1e352c 58%,#1a2f27 100%);
+  padding:30px 26px 52px;text-align:center;color:#f2ecdd;
+}
+.masthead::before{
+  content:"";position:absolute;inset:12px;border:1px solid rgba(227,207,154,.35);pointer-events:none;
+}
+.masthead .flower{width:74px;height:50px;color:var(--gold-lt);display:block;margin:0 auto 10px}
+.masthead h1{
+  margin:0;font-size:clamp(24px,4.4vw,36px);font-weight:normal;
+  letter-spacing:.10em;text-transform:uppercase;line-height:1.24;
+}
+.masthead h1 em{font-style:italic;text-transform:none;letter-spacing:.02em;color:var(--gold-lt)}
+.masthead .sub{margin:12px auto 0;max-width:640px;font-size:15px;color:#d9d4c2;font-style:italic}
+.masthead .sub2{
+  margin:14px 0 0;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-lt);
+}
+.wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:44px;display:block}
+
+/* ---------- тело ---------- */
+main{padding:26px 30px 32px}
+@media (max-width:640px){main{padding:20px 16px 26px}}
+
+.divider{display:flex;align-items:center;gap:12px;margin:26px 0 20px;color:var(--gold)}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-lt),transparent)}
+.divider svg{width:64px;height:20px;color:var(--gold);flex:0 0 auto}
+.divider.first{margin-top:4px}
+
+h2{font-size:22px;font-weight:normal;margin:0 0 12px;letter-spacing:.02em;color:var(--green-deep)}
+h3{font-size:18px;font-weight:normal;margin:24px 0 12px;letter-spacing:.03em;color:var(--green-deep)}
+p{margin:0 0 12px}
+.lead::first-letter{
+  float:left;font-size:58px;line-height:.82;padding:6px 12px 0 0;
+  color:var(--green);font-style:italic;
+}
+.hint{color:var(--muted);font-size:14.5px;font-style:italic}
+.src{font-size:13.5px;font-style:italic;color:var(--muted);margin:10px 0 0}
+
+ul.rules{list-style:none;margin:14px 0 0;padding:0}
+ul.rules li{position:relative;padding:0 0 0 26px;margin-bottom:9px}
+ul.rules li::before{
+  content:"❧";position:absolute;left:0;top:0;color:var(--gold);font-size:16px;
+}
+.legend{
+  margin-top:18px;padding:12px 16px;background:var(--gold-pale);
+  border-left:3px solid var(--gold);font-size:14.5px;color:#5c4a22;
+}
+.legend b{font-weight:normal;font-variant:small-caps;letter-spacing:.06em}
+
+/* ---------- прогресс-лоза ---------- */
+.vine{position:relative;margin:0 0 22px;padding:0 4px}
+.vine-track{
+  position:relative;height:10px;border-radius:5px;
+  background:repeating-linear-gradient(90deg,#efe7d4 0 10px,#e7ddc6 10px 20px);
+  border:1px solid var(--line);overflow:visible;
+}
+#bar{
+  height:100%;width:0;border-radius:5px;
+  background:linear-gradient(90deg,var(--sage),var(--gold));
+  transition:width .35s ease;
+}
+#barleaf{
+  position:absolute;top:-9px;left:0;width:26px;height:26px;color:var(--green);
+  transform:translateX(-50%);transition:left .35s ease;pointer-events:none;
+}
+.vine-meta{display:flex;justify-content:space-between;margin-top:10px;font-size:13px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+#scoreline{color:var(--green)}
+
+/* ---------- вопрос ---------- */
+.qhead{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.badge{
+  position:relative;flex:0 0 62px;width:62px;height:62px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;border:1px solid var(--gold);
+  box-shadow:inset 0 0 0 4px #fff, inset 0 0 0 5px rgba(176,141,63,.35);
+  font-size:22px;color:var(--green-deep);letter-spacing:.02em;
+}
+.badge::after{
+  content:"";position:absolute;inset:-7px;border-radius:50%;
+  border:1px dashed rgba(176,141,63,.5);
+}
+.block{margin:0;color:var(--green);font-style:italic;font-size:15.5px;letter-spacing:.02em}
+#qtext{font-size:clamp(19px,2.6vw,23px);line-height:1.45;margin:0 0 10px;color:var(--ink)}
+
+.opts{display:flex;flex-direction:column;gap:11px;margin-top:16px}
+.opt{
+  display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;cursor:pointer;
+  font-family:inherit;font-size:16.5px;line-height:1.5;color:var(--ink);
+  background:#fff;border:1px solid #d7cfbc;border-radius:4px 20px 4px 20px;
+  padding:13px 16px;position:relative;
+  transition:background .18s,border-color .18s,transform .18s,box-shadow .18s;
+}
+.opt:hover:not(:disabled){
+  background:var(--gold-pale);border-color:var(--gold);transform:translateX(3px);
+  box-shadow:-2px 2px 0 rgba(46,75,64,.10);
+}
+.opt:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.num{
+  flex:0 0 28px;height:28px;border-radius:50%;background:#f3eee0;color:var(--muted);
+  font-size:13.5px;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(176,141,63,.45);
+}
+.txt{flex:1;padding-top:2px}
+.tick{flex:0 0 auto;font-size:17px;line-height:28px;min-width:20px;text-align:center}
+.opt.sel{background:#fff;border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}
+.opt.sel .num{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.sel .tick::before{content:"◦";color:var(--green)}
+.opt.right{background:var(--sage-lt);border-color:var(--sage)}
+.opt.right .num{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.right .tick::before{content:"✔";color:var(--green)}
+.opt.wrong{background:var(--wine-lt);border-color:var(--wine)}
+.opt.wrong .num{background:var(--wine);color:#fff;border-color:var(--wine)}
+.opt.wrong .tick::before{content:"✘";color:var(--wine)}
+.opt:disabled{cursor:default;transform:none}
+
+/* ---------- пояснение ---------- */
+.fb{
+  position:relative;margin-top:20px;padding:16px 20px 16px 26px;
+  background:#fbf7ec;border:1px solid var(--line);border-left:3px solid var(--gold);
+  border-radius:2px 14px 14px 2px;
+}
+.fb::before{
+  content:"";position:absolute;left:9px;top:18px;bottom:18px;width:1px;
+  background:repeating-linear-gradient(180deg,var(--gold) 0 4px,transparent 4px 9px);
+}
+.fb-ok{border-left-color:var(--sage);background:#f2f7f2}
+.fb-no{border-left-color:var(--wine);background:#fbf1ef}
+.fb p{margin:0 0 9px}
+.fb-head{font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.fb-ok .fb-head{color:var(--green)}
+.fb-no .fb-head{color:var(--wine)}
+
+/* ---------- кнопки ---------- */
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;align-items:center}
+.btn{
+  font-family:inherit;font-size:15.5px;letter-spacing:.06em;padding:11px 24px;cursor:pointer;
+  border-radius:4px 18px 4px 18px;border:1px solid var(--green);background:#fff;color:var(--green);
+  transition:background .18s,color .18s,transform .18s,box-shadow .18s;
+}
+.btn:hover{background:var(--sage-lt);transform:translateY(-1px)}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.btn.primary{background:linear-gradient(160deg,var(--green),var(--green-deep));color:#f4efe2;border-color:var(--green-deep);
+  box-shadow:0 1px 0 rgba(176,141,63,.6) inset, 0 2px 6px rgba(30,53,44,.22)}
+.btn.primary:hover{background:linear-gradient(160deg,#35564a,#244035)}
+.btn:disabled{opacity:.4;cursor:default;transform:none}
+
+/* ---------- итоги ---------- */
+.medal{position:relative;width:172px;height:172px;margin:6px auto 18px;color:var(--gold)}
+.medal .ring{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center}
+.medal .score{font-size:34px;color:var(--green-deep);line-height:1.1}
+.medal .pct{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.mark{font-size:19px;text-align:center;color:var(--green);font-style:italic;margin:0 0 18px}
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:0;margin:0 0 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{flex:1 1 180px;padding:12px 16px;text-align:center}
+.stat+.stat{border-left:1px solid var(--line)}
+.stat .k{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.stat .v{font-size:16px;color:var(--green-deep)}
+.note{padding:14px 18px;background:var(--gold-pale);border:1px solid rgba(176,141,63,.4);
+  border-radius:2px 16px 2px 16px;font-size:15.5px}
+.note.clean{background:var(--sage-lt);border-color:rgba(138,165,149,.5);color:var(--green-deep)}
+
+.mis{
+  position:relative;padding:16px 20px;margin-bottom:16px;background:#fff;
+  border:1px solid var(--line);border-left:3px solid var(--wine);border-radius:2px 16px 2px 16px;
+}
+.mis-b{margin:0 0 8px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.mis-q{margin:0 0 12px;font-size:17px}
+.mis-a{margin:0 0 5px;font-size:15.5px}
+.mis-a.ok{color:var(--green)}
+.lab{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.mis-e{margin:12px 0 0}
+
+/* ---------- раскрытые разделы ---------- */
+details.fold{margin-top:22px;background:var(--panel);border:1px solid var(--line);
+  box-shadow:var(--shadow);position:relative}
+details.fold::after{content:"";position:absolute;inset:6px;border:1px solid rgba(176,141,63,.3);pointer-events:none}
+details.fold>summary{
+  list-style:none;cursor:pointer;padding:16px 22px;font-size:17px;color:var(--green-deep);
+  letter-spacing:.03em;display:flex;align-items:center;gap:12px;
+}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary .ico{width:22px;height:22px;color:var(--gold);flex:0 0 auto;transition:transform .25s}
+details.fold[open]>summary .ico{transform:rotate(90deg)}
+details.fold>summary .t{flex:1}
+details.fold .inner{padding:4px 24px 24px;border-top:1px solid var(--line)}
+details.fold ol,details.fold ul{padding-left:0;margin:0;list-style:none;counter-reset:n}
+details.fold ol li,details.fold ul li{position:relative;padding:12px 0 12px 34px;border-bottom:1px dotted var(--line)}
+details.fold ol li:last-child,details.fold ul li:last-child{border-bottom:none}
+details.fold ol li::before{
+  counter-increment:n;content:counter(n);position:absolute;left:0;top:12px;
+  width:22px;height:22px;border-radius:50%;border:1px solid rgba(176,141,63,.5);
+  font-size:12px;color:var(--gold);display:flex;align-items:center;justify-content:center;
+}
+details.fold ul li::before{content:"❧";position:absolute;left:2px;top:12px;color:var(--gold);font-size:14px}
+details.fold b{color:var(--green-deep)}
+
+footer.colophon{
+  max-width:900px;margin:22px auto 0;text-align:center;color:var(--muted);font-size:13.5px;font-style:italic;
+}
+footer.colophon .orn{width:52px;height:18px;color:var(--gold);display:block;margin:0 auto 8px}
+
+[hidden]{display:none !important}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+
+@media print{
+  body{background:#fff;padding:0;color:#000}
+  body::before,body::after,.wave,.corner,.row,.vine,#intro,.legend{display:none !important}
+  .frame,.frame::after,details.fold::after{box-shadow:none;border-color:#bbb}
+  .frame::after,details.fold::after{display:none}
+  .masthead{background:#fff !important;color:#000;padding:12px 0 16px;border-bottom:2px solid #000}
+  .masthead::before{display:none}
+  .masthead h1{color:#000}
+  .masthead .sub,.masthead .sub2{color:#333}
+  main{padding:14px 0}
+  details.fold{border:none}
+  details.fold .inner{display:block !important}
+  .mis{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- орнаменты: один раз, используются многократно -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="orn-corner" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+      <path d="M2 48 C 22 45 34 34 41 18 C 45 9 52 4 60 2"/>
+      <path d="M9 64 C 26 60 37 47 43 30"/>
+      <path d="M3 78 C 13 75 20 68 24 59"/>
+      <path d="M44 14 C 50 8 58 6 66 8"/>
+    </g>
+    <ellipse cx="45" cy="12" rx="4.4" ry="8.4" transform="rotate(30 45 12)" fill="currentColor" opacity=".85"/>
+    <circle cx="20" cy="53" r="2.3" fill="currentColor"/>
+    <circle cx="33" cy="39" r="1.7" fill="currentColor"/>
+    <circle cx="12" cy="70" r="1.5" fill="currentColor"/>
+  </symbol>
+
+  <symbol id="orn-flower" viewBox="0 0 74 50">
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+      <path d="M37 50 C 37 38 37 30 37 22"/>
+      <path d="M37 34 C 28 32 22 26 20 18"/>
+      <path d="M37 34 C 46 32 52 26 54 18"/>
+      <path d="M20 18 C 24 14 28 14 31 17"/>
+      <path d="M54 18 C 50 14 46 14 43 17"/>
+    </g>
+    <g fill="currentColor" opacity=".9">
+      <ellipse cx="37" cy="12" rx="4" ry="9"/>
+      <ellipse cx="27" cy="15" rx="3.6" ry="8" transform="rotate(-38 27 15)"/>
+      <ellipse cx="47" cy="15" rx="3.6" ry="8" transform="rotate(38 47 15)"/>
+      <circle cx="37" cy="22" r="2.4"/>
+    </g>
+  </symbol>
+
+  <symbol id="orn-div" viewBox="0 0 64 20">
+    <g fill="none" stroke="currentColor" stroke-width="1.2">
+      <path d="M52 12 C 46 4 36 4 32 12 C 36 20 46 20 52 12 Z"/>
+      <path d="M12 12 C 18 4 28 4 32 12 C 28 20 18 20 12 12 Z"/>
+    </g>
+    <circle cx="32" cy="12" r="2.2" fill="currentColor"/>
+    <circle cx="6" cy="12" r="1.4" fill="currentColor"/>
+    <circle cx="58" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+
+  <symbol id="orn-leaf" viewBox="0 0 26 26">
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+      <path d="M13 25 C 13 18 13 12 13 6"/>
+      <path d="M13 15 C 5 13 2 8 3 2 C 10 4 14 9 13 15 Z"/>
+    </g>
+    <circle cx="13" cy="22" r="1.8" fill="currentColor"/>
+  </symbol>
+
+  <symbol id="orn-medal" viewBox="0 0 172 172">
+    <g fill="none" stroke="currentColor" stroke-width="1.2">
+      <circle cx="86" cy="86" r="84" opacity=".5"/>
+      <circle cx="86" cy="86" r="74"/>
+      <circle cx="86" cy="86" r="66" opacity=".45" stroke-dasharray="2 5"/>
+    </g>
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".9">
+      <path d="M40 132 C 26 116 22 96 28 76"/>
+      <path d="M132 132 C 146 116 150 96 144 76"/>
+      <path d="M34 104 C 42 102 47 96 48 88"/>
+      <path d="M38 118 C 46 117 52 111 54 103"/>
+      <path d="M138 104 C 130 102 125 96 124 88"/>
+      <path d="M134 118 C 126 117 120 111 118 103"/>
+    </g>
+    <g fill="currentColor" opacity=".8">
+      <circle cx="29" cy="88" r="2.2"/><circle cx="34" cy="102" r="2"/><circle cx="40" cy="116" r="1.8"/>
+      <circle cx="143" cy="88" r="2.2"/><circle cx="138" cy="102" r="2"/><circle cx="132" cy="116" r="1.8"/>
+      <ellipse cx="86" cy="26" rx="3.4" ry="7"/>
+    </g>
+  </symbol>
+
+  <symbol id="orn-chev" viewBox="0 0 22 22">
+    <path d="M7 4 L15 11 L7 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</svg>
+
+<div class="wrap">
+
+  <div class="frame">
+    <svg class="corner tl"><use href="#orn-corner"/></svg>
+    <svg class="corner tr"><use href="#orn-corner"/></svg>
+    <svg class="corner bl"><use href="#orn-corner"/></svg>
+    <svg class="corner br"><use href="#orn-corner"/></svg>
+
+    <header class="masthead">
+      <svg class="flower" aria-hidden="true"><use href="#orn-flower"/></svg>
+      <h1>Десять свершений<br><em>Владимира Даля</em></h1>
+      <p class="sub">Викторина к 225-летию лексикографа: 10 (22) ноября 1801 — 22 сентября (4 октября) 1872</p>
+      <p class="sub2">20 вопросов · проверка сразу · разбор ошибок</p>
+      <svg class="wave" viewBox="0 0 1200 48" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 48 L0 27 Q 60 5 120 27 T 240 27 T 360 27 T 480 27 T 600 27 T 720 27 T 840 27 T 960 27 T 1080 27 T 1200 27 L1200 48 Z" fill="var(--paper)"/>
+        <path d="M0 27 Q 60 5 120 27 T 240 27 T 360 27 T 480 27 T 600 27 T 720 27 T 840 27 T 960 27 T 1080 27 T 1200 27" fill="none" stroke="var(--gold)" stroke-width="1.3" opacity=".7"/>
+      </svg>
+    </header>
+
+    <main>
+
+      <div class="divider first" aria-hidden="true"><svg><use href="#orn-div"/></svg></div>
+
+      <!-- прогресс -->
+      <div class="vine" id="vinebox" hidden>
+        <div class="vine-track">
+          <div id="bar"></div>
+          <svg id="barleaf" viewBox="0 0 26 26" aria-hidden="true"><use href="#orn-leaf"/></svg>
+        </div>
+        <div class="vine-meta"><span id="counter"></span><span id="scoreline"></span></div>
+      </div>
+
+      <section id="intro" class="card">
+        <h2>Как работать с викториной</h2>
+        <p class="lead">Материал построен по десяти свершениям Даля — моряк, военный врач, инженер, стеклодув, автор запретных сказок, друг Пушкина, оренбургский подвижник, чиновник министерства, собиратель слова, лексикограф. В каждом блоке по два вопроса: всего двадцать.</p>
+        <ul class="rules">
+          <li>Пятнадцать вопросов — с одним верным ответом: нажимаете вариант, проверка происходит сразу.</li>
+          <li>Пять вопросов — с несколькими верными ответами: отмечаете нужные и нажимаете «Проверить». Сколько верных — подсказано над вариантами.</li>
+          <li>После каждого ответа появляется пояснение и указание источника.</li>
+          <li>В конце — разбор только ошибочных вопросов, список блоков для повторения, отметка по шкале и время работы.</li>
+          <li>Три сюжета в популярных текстах изложены неверно: год Хивинского похода, разряд крестьян в удельной конторе и сказка, подарённая Пушкиным. Здесь они даны по источникам.</li>
+        </ul>
+        <div class="legend"><b>Клавиши:</b> 1–4 — выбор варианта, Enter — проверить или перейти к следующему вопросу. Порядок вариантов перемешивается при каждом прохождении.</div>
+        <div class="row"><button id="start" class="btn primary">Начать викторину</button></div>
+      </section>
+
+      <section id="quiz" hidden>
+        <div class="qhead">
+          <div class="badge" id="badge" aria-hidden="true">01</div>
+          <p class="block" id="blockname"></p>
+        </div>
+        <h2 id="qtext"></h2>
+        <p id="hint" class="hint"></p>
+        <div id="options" class="opts"></div>
+        <div id="feedback" class="fb" role="status" aria-live="polite" hidden></div>
+        <div class="row">
+          <button id="check" class="btn" hidden>Проверить</button>
+          <button id="next" class="btn primary" hidden>Следующий вопрос</button>
+        </div>
+      </section>
+
+      <section id="result" hidden>
+        <div class="medal" aria-hidden="true">
+          <svg viewBox="0 0 172 172" width="172" height="172"><use href="#orn-medal"/></svg>
+          <div class="ring">
+            <div class="score" id="r-score2">—</div>
+            <div class="pct" id="r-score"></div>
+          </div>
+        </div>
+        <p class="mark" id="r-mark"></p>
+        <div class="stats">
+          <div class="stat"><span class="k">Верных ответов</span><span class="v" id="s-right"></span></div>
+          <div class="stat"><span class="k">Ошибок</span><span class="v" id="s-wrong"></span></div>
+          <div class="stat"><span class="k">Время работы</span><span class="v" id="r-time"></span></div>
+        </div>
+        <p class="note" id="r-bad"></p>
+        <h3>Разбор ошибок</h3>
+        <div id="mistakes"></div>
+        <div class="row">
+          <button id="restart" class="btn primary">Пройти заново</button>
+          <button id="print" class="btn">Печать разбора</button>
+        </div>
+      </section>
+
+      <details class="fold">
+        <summary><svg class="ico"><use href="#orn-chev"/></svg><span class="t">Спорные места: где популярные тексты расходятся с источниками</span></summary>
+        <div class="inner">
+          <ul>
+            <li><b>Возраст поступления в Морской кадетский корпус.</b> В популярных биографиях — «в 11 лет», в Русском биографическом словаре — «четырнадцати лет». Надёжная опора для урока: выпущен мичманом 2 марта 1819 года.</li>
+            <li><b>Заступничество после ареста 1832 года.</b> Одни источники называют В. А. Жуковского, другие — генерала Ф. Ф. Ридигера и дерптского профессора Паррота; В. И. Порудоминский указывал, что Жуковский был тогда за границей. Срок задержания тоже указан по-разному: от «в тот же день» до нескольких дней. Установлено твёрдо: арест был, нераспроданный тираж изъят.</li>
+            <li><b>Учебники «Ботаника» и «Зоология».</b> Написаны в 1849 году по вызову главного начальника военно-учебных заведений («Ботаника», 2-е изд. 1851), а не в оренбургский период. Определение «первые в России школьные учебники» — упрощение: учебники по естественной истории на русском языке выходили и раньше, далевские выделялись живым языком.</li>
+            <li><b>Родство Перовских.</b> Софья Перовская — дочь Льва Николаевича Перовского (1816–1890); министр внутренних дел Лев Алексеевич Перовский не был её «родным дядей», в популярных текстах встречается и версия «внучка». В школьном материале эту деталь лучше не использовать.</li>
+            <li><b>Даты словаря.</b> Тома первого издания датированы 1863–1866 годами, выпуски выходили с 1861 по 1868 год. Обе даты в справочниках верны, противоречия здесь нет.</li>
+            <li><b>Награды за словарь.</b> Почётный член Академии наук: с 1863 года по естественным наукам, с 1868 года — по историко-филологическому отделению. Ломоносовская премия — 1869 год; кроме неё Константиновская золотая медаль Русского географического общества и премия Дерптского университета.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary><svg class="ico"><use href="#orn-chev"/></svg><span class="t">Источники</span></summary>
+        <div class="inner">
+          <ol>
+            <li>Даль В. И. Толковый словарь живого великорусского языка: в 4 т. 2-е изд. СПб., 1880–1882; 3-е изд. под ред. И. А. Бодуэна де Куртенэ. СПб., 1903–1909.</li>
+            <li>Даль В. И. Пословицы русского народа. М., 1862.</li>
+            <li>Даль В. И. Русские сказки из предания народного изустного на грамоту гражданскую переложенные… Казаком Владимиром Луганским. Пяток первый. СПб., 1832.</li>
+            <li>Русский биографический словарь (под ред. А. А. Половцова), статья «Даль, Владимир Иванович».</li>
+            <li>Булич С. К. Даль, Владимир Иванович // Энциклопедический словарь Брокгауза и Ефрона. Т. X. СПб., 1893.</li>
+            <li>Порудоминский В. И. Даль. М.: Молодая гвардия, 1971 (ЖЗЛ); Булатов М. А., Порудоминский В. И. Собирал человек слова… М.: Детская литература, 1966.</li>
+            <li>Матвиевская Г. П., Зубова И. К. Владимир Иванович Даль, 1801–1872. М.: Наука, 2002 (Научно-биографическая литература).</li>
+            <li>Топорков А. Л. Даль Владимир Иванович // Русские фольклористы: биобиблиографический словарь. XVIII–XIX вв. Т. 2. СПб.: Дмитрий Буланин, 2017 (ИРЛИ РАН, Пушкинский Дом).</li>
+            <li>Модестов Н. Н. Владимир Иванович Даль в Оренбурге. Оренбург, 1913 (Труды Оренбургской учёной архивной комиссии, вып. 27).</li>
+            <li>Манойленко А. С., Манойленко Ю. Е. О социально-политических взглядах В. И. Даля через призму служебной деятельности в Нижнем Новгороде (1849–1859) // Россия: общество, политика, история. 2022. № 3(3). С. 102–120.</li>
+            <li>Майков Л. Н. Пушкин и Даль // Русский вестник. 1890. № 10; Мельников-Печерский П. И. Воспоминания о Владимире Ивановиче Дале.</li>
+            <li>Повод: Замостьянов А. Десять свершений Владимира Даля // Год литературы, 21.11.2026. Юбилей государственный: Указ Президента Российской Федерации от 08.11.2023 № 843 «О праздновании 225-летия со дня рождения В. И. Даля».</li>
+          </ol>
+        </div>
+      </details>
+
+    </main>
+  </div>
+
+  <footer class="colophon">
+    <svg class="orn" aria-hidden="true"><use href="#orn-div"/></svg>
+    Материал для некоммерческого образовательного использования. Пояснения даны по указанным источникам; там, где источники расходятся, это отмечено отдельно.
+  </footer>
+</div>
+
+<script id="quiz-data" type="application/json">
+{"blocks": ["Моряк, который не любил качку", "Военный врач", "Инженер, который умел разрушать", "Стеклодув", "Запретные сказки", "Сюртук Пушкина", "Благодетель Оренбурга", "Второй человек в министерстве", "Слова, собранные по крупицам", "Любимые слова"],
+"questions": [
+{"b": 1, "t": "one", "q": "Какое слово Владимир Даль записал первым — в марте 1819 года, по дороге из Петербурга к месту службы?", "o": ["«замолаживает»", "«выползина»", "«мокроступы»", "«колоземица»"], "c": [0], "e": "Слово услышано от ямщика на почтовой станции: „Замолаживает. Вишь, пасмурнеет. Это к теплу!“ Даль истолковал его так: небо пасмурнеет, заволакивается тучами. С тех пор, по его признанию, не было дня, чтобы он не записал слово, оборот или речение. „Выползина“ — тоже слово из далевского запаса, но оно связано с Пушкиным: так называют сброшенную кожу змеи.", "s": "В. И. Порудоминский. Даль. М.: Молодая гвардия, 1971 (ЖЗЛ); автобиографическая записка В. И. Даля."},
+{"b": 1, "t": "one", "q": "Почему Даль, выпущенный мичманом в 1819 году, оставил флот и поступил в Дерптский университет на медицинский факультет?", "o": ["Он так и не смог справиться с морской болезнью", "Его уволили со службы за эпиграмму", "Он не сдал экзамены по навигации", "Флот сокращали после войны 1812 года"], "c": [0], "e": "Даль служил на Чёрном море, затем на Балтике, но качку переносить не мог. В 1826 году он вышел в отставку и стал студентом-медиком в Дерпте. Арест по подозрению в эпиграмме на командующего Черноморским флотом А. С. Грейга действительно был (1823–1824) и закончился переводом в Кронштадт, но причиной ухода со службы стала морская болезнь.", "s": "ЭСБЕ, ст. «Даль, Владимир Иванович» (С. К. Булич); Русский биографический словарь, ст. «Даль»."},
+{"b": 2, "t": "one", "q": "Чему была посвящена докторская диссертация Даля, защищённая в Дерпте в 1829 году?", "o": ["Успешному методу трепанации черепа", "Снятию катаракты", "Лечению холеры", "Гомеопатии"], "c": [0], "e": "Диссертация вышла в Дерпте в 1829 году по-латыни; кроме трепанации черепа в ней разобрано скрытое изъязвление почек. Порядок событий важен: на русско-турецкую войну Даль ушёл ещё студентом, в 1828 году, а степень доктора получил за диссертацию в 1829-м. Он был при осаде Силистрии, под Кулевчей и Шумлой, при взятии Сливны и занятии Адрианополя; в Яссах и Каменце-Подольске предпринимал меры против холеры.", "s": "Русский биографический словарь, ст. «Даль» (латинское заглавие диссертации, Dorpati, 1829)."},
+{"b": 2, "t": "many", "q": "Отметьте верные утверждения о врачебной практике Даля.", "o": ["Он сделал более сорока операций снятия катаракты, и все успешно", "Он одинаково владел левой и правой рукой, что ценили петербургские хирурги", "Он написал одну из первых в России статей в защиту гомеопатии («Современник», 1838, № 12)", "Он открыл в Петербурге первую в России гомеопатическую аптеку"], "c": [0, 1, 2], "e": "О сорока с лишним успешных операциях и об одинаково развитых руках вспоминал П. И. Мельников-Печерский. Статья о гомеопатии напечатана в «Современнике» (1838, № 12) в виде письма к В. Ф. Одоевскому. Гомеопатическую лечебницу Даль помогал открыть не в Петербурге, а в Нижнем Новгороде, уже служа управляющим удельной конторой.", "s": "П. И. Мельников-Печерский. Воспоминания о Владимире Ивановиче Дале; ЭСБЕ, ст. «Даль»."},
+{"b": 3, "t": "one", "q": "Через какую реку и в каком году Даль навёл понтонный мост из подручных средств?", "o": ["Через Вислу у Юзефува, 1831 год", "Через Дунай у Силистрии, 1828 год", "Через Урал под Оренбургом, 1836 год", "Через Днепр, 1831 год"], "c": [0], "e": "Мост навели для переправы отряда генерал-лейтенанта Ф. Ф. Ридигера в польскую кампанию 1831 года: инженера не оказалось, и работу сделал военный врач. Когда мостом попытались воспользоваться противники, Даль сам его разрушил. В 1833 году он выпустил в Петербурге брошюру «Описание моста, наведённого на реке Висле для перехода отряда генерал-лейтенанта Ридигера» с чертежами и расчётами; её перевели на французский и немецкий.", "s": "ЭСБЕ, ст. «Даль»; Русский биографический словарь, ст. «Даль»."},
+{"b": 3, "t": "one", "q": "Как обошлось с Далем начальство за подвиг с мостом?", "o": ["Орден Св. Владимира 4-й степени с бантом и перстень от императора — но выговор от медицинского начальства", "Только повышение в чине", "Только благодарность в приказе", "Награда и перевод в инженеры"], "c": [0], "e": "Николай I наградил Даля орденом Св. Владимира 4-й степени с бантом, бриллиантовым перстнем и знаком отличия военного ордена. А ближайшее медицинское начальство сделало выговор: врач, мол, уклонился от прямых обязанностей. Эта двойная реакция говорит о Дале больше, чем овация солдат.", "s": "Русский биографический словарь, ст. «Даль»; ЭСБЕ, ст. «Даль»."},
+{"b": 4, "t": "one", "q": "Что из «ремесленной» биографии Даля подтверждается источниками?", "o": ["Он сконструировал стеклодувный аппарат, делал изделия из цветного стекла, увлекался резьбой по дереву", "Он профессионально писал иконы на продажу", "Он держал в Петербурге стекольную фабрику", "Он отливал типографский шрифт для своего словаря"], "c": [0], "e": "Ремёслам Даль учился с детства: отец считал, что морской офицер должен уметь всё. Он точил, резал по дереву, работал на стеклодувном аппарате, который сделал сам. Фабрики у него не было — это домашнее мастерство, а не промысел.", "s": "В. И. Порудоминский. Даль (ЖЗЛ); воспоминания Н. И. Пирогова."},
+{"b": 4, "t": "one", "q": "Кто сказал о Дале: «Это был, прежде всего, человек, что называется, на все руки. За что ни брался Даль, всё ему удавалось»?", "o": ["Хирург Н. И. Пирогов", "Поэт В. А. Жуковский", "Писатель П. И. Мельников-Печерский", "Критик В. Г. Белинский"], "c": [0], "e": "Пирогов знал Даля по Дерпту и оставил о нём самые тёплые воспоминания: «Какое счастливое у него сердце! Увидит знакомого — так и вспыхнет от радости!» Белинский оценивал Даля-писателя: в 1846 году назвал его «после Гоголя до сих пор решительно первым талантом».", "s": "Воспоминания Н. И. Пирогова (цит. по: В. И. Порудоминский. Даль); Русский биографический словарь, ст. «Даль» (о Белинском)."},
+{"b": 5, "t": "one", "q": "Что произошло с первой книгой Даля — «Русскими сказками… Казака Владимира Луганского» (1832)?", "o": ["Книгу изъяли из продажи, автора арестовали, но вскоре освободили", "Книгу напечатали без помех, она сразу стала школьным учебником", "Книгу запретили, а автора отправили в ссылку в Сибирь", "Книгу одобрила цензура, но запретил Синод"], "c": [0], "e": "По доносу в книге усмотрели «насмешки над правительством, жалобы на горестное положение солдата». Даля взяли под арест прямо во время обхода больных, нераспроданный тираж изъяли. О деталях источники расходятся: заступником называют то Жуковского, то генерала Ридигера (В. И. Порудоминский указывал, что Жуковский был тогда за границей); по одним данным, Даля освободили в тот же день, по другим — он провёл в камере несколько дней. Твёрдо установлено: арест был, тираж погиб.", "s": "Русский биографический словарь, ст. «Даль»; В. И. Порудоминский. Даль (ЖЗЛ)."},
+{"b": 5, "t": "one", "q": "Зачем, по собственному признанию Даля, он писал сказки?", "o": ["Чтобы дать землякам образец народного языка и говора: сказка была предлогом", "Чтобы заработать на детском чтении", "Чтобы прославиться как сказочник", "Чтобы выполнить заказ Министерства просвещения"], "c": [0], "e": "«Не сказки сами по себе были мне важны, а русское слово, которое у нас в таком загоне… сказка послужила предлогом. Я задал себе задачу познакомить земляков своих сколько-нибудь с народным языком и говором». Отсюда и длинное заглавие: сказки «на грамоту гражданскую переложенные, к быту житейскому приноровленные и поговорками ходячими разукрашенные».", "s": "В. И. Даль. Русские сказки… Пяток первый. СПб., 1832 (предисловие); Русский биографический словарь, ст. «Даль»."},
+{"b": 6, "t": "one", "q": "Какую свою сказку Пушкин подарил Далю в рукописи с надписью «Твоя от твоих! Сказочнику Казаку Луганскому — сказочник Александр Пушкин»?", "o": ["«Сказку о рыбаке и рыбке»", "«Сказку о попе и работнике его Балде»", "«Сказку о золотом петушке»", "«Сказку о царе Салтане»"], "c": [0], "e": "Дарственная надпись стоит на рукописи «Сказки о рыбаке и рыбке»; подарок сделан в 1833 году, через год после выхода далевских сказок, а не при первом знакомстве. В популярных пересказах называют «Балду» — это распространённая путаница: «Балда» действительно не прошла цензуру при жизни поэта, но надпись относится к «Рыбаке и рыбке».", "s": "Русский биографический словарь, ст. «Даль»; М. А. Булатов, В. И. Порудоминский. Собирал человек слова… М.: Детская литература, 1966."},
+{"b": 6, "t": "many", "q": "Что досталось Далю от Пушкина и его вдовы в дни смерти поэта?", "o": ["Перстень-талисман с изумрудом", "Простреленный сюртук", "Дуэльный пистолет", "Рукопись «Истории Пугачёва»"], "c": [0, 1], "e": "27 января 1837 года Даль прибежал на Мойку и не отходил от умирающего до конца: «Я подошёл к болящему, он подал мне руку, улыбнулся и сказал: „Плохо, брат!“» Перстень-талисман Пушкин отдал со словами «Бери, друг, мне уж не писать»; простреленный сюртук передала Наталья Николаевна. Дочь Даля Ольга вспоминала, что отец однажды по рассеянности надел этот сюртук на службу.", "s": "Воспоминания В. И. Даля о смерти Пушкина; Л. Н. Майков. Пушкин и Даль // Русский вестник. 1890. № 10."},
+{"b": 7, "t": "many", "q": "Отметьте то, что относится к оренбургскому периоду (1833–1841).", "o": ["Создание «Музеума естественных произведений Оренбургского края»", "Избрание членом-корреспондентом Академии наук (1838) за коллекции флоры и фауны", "Изучение быта уральских казаков и тюркских народов края", "Написание учебников «Ботаника» и «Зоология» для школ"], "c": [0, 1, 2], "e": "Учебники — ловушка. По Русскому биографическому словарю, «Ботанику» (2-е изд. 1851) и «Зоологию» Даль написал в 1849 году по вызову главного начальника военно-учебных заведений, то есть значительно позже Оренбурга. Формулировка «первые в России школьные учебники» тоже требует осторожности: русские учебники по естественной истории существовали и раньше, а далевские выделялись живым, образным языком.", "s": "Русский биографический словарь, ст. «Даль»; Н. Н. Модестов. Владимир Иванович Даль в Оренбурге. Оренбург, 1913."},
+{"b": 7, "t": "one", "q": "В каком году состоялся Хивинский поход, в котором Даль отвечал за санитарное обеспечение войск?", "o": ["1839–1840", "1833–1834", "1838", "1845"], "c": [0], "e": "Зимний поход отряда Отдельного Оренбургского корпуса к Хивинскому ханству закончился неудачей: морозы, метели, болезни. Даль лечил и оперировал, придумал подвесную койку для перевозки больных на верблюдах, а позже напечатал «Походные письма на Хиву». В статье «Года литературы» указан 1838 год — это ошибка.", "s": "Русский биографический словарь, ст. «Даль»; В. И. Даль. Походные письма на Хиву // Русский архив. 1867."},
+{"b": 8, "t": "one", "q": "При каком министре Даль заведовал особой канцелярией?", "o": ["При министре внутренних дел Л. А. Перовском", "При оренбургском военном губернаторе В. А. Перовском", "При нижегородском губернаторе А. Н. Муравьёве", "При министре просвещения А. С. Шишкове"], "c": [0], "e": "В Оренбурге Даль служил чиновником особых поручений при В. А. Перовском, а в Петербурге — у его брата Л. А. Перовского: сначала секретарём при товарище министра уделов (1841), затем, с сентября 1843 года до 1849-го, управлял особой канцелярией министра внутренних дел. Лев Алексеевич — брат писателя Антония Погорельского, автора «Чёрной курицы».", "s": "Русский биографический словарь, ст. «Даль»; ЭСБЕ, ст. «Даль»."},
+{"b": 8, "t": "many", "q": "Чем Даль занимался на службе в Министерстве внутренних дел?", "o": ["Вместе с Н. А. Милютиным вырабатывал и вводил городовое положение в Петербурге", "Составлял карантинные правила", "Готовил всеподданнейшие отчёты, доклады и записки министра", "Написал Положения 19 февраля 1861 года об отмене крепостного права"], "c": [0, 1, 2], "e": "Даль участвовал в трудах комитетов по устройству бедных дворян и об улучшении быта помещичьих крестьян, выработал устав губернских правлений, но автором Положений 1861 года не был: он вышел в отставку в 1859 году. Современники называли его «правой рукой» министра — в том числе потому, что министр был косноязычен, и Даль писал за него речи и записки.", "s": "Русский биографический словарь, ст. «Даль»; А. С. и Ю. Е. Манойленко. О социально-политических взглядах В. И. Даля… // Россия: общество, политика, история. 2022. № 3(3)."},
+{"b": 9, "t": "one", "q": "Из-за какой фразы в рассказе «Ворожейка» (1848) разразился скандал?", "o": ["«Власти, как всегда, бездействовали»", "«Поганое к чистому не пристаёт»", "«Пословица не судима»", "«Церковь не в брёвнах, а в рёбрах»"], "c": [0], "e": "Концовка рассказа — «На деревне сделалась тревога. Власти, как всегда, бездействовали» — показалась намёком на обычное бездействие начальства; замечание дошло от императора. Министр Л. А. Перовский поставил Даля перед выбором: «Писать — так не служить, служить — так не писать!» Даль выбрал Нижний Новгород, где можно было и служить, и собирать слово.", "s": "Е. Р. Ольховский. Владимир Иванович Даль // Деятели русской науки XIX–XX веков. Вып. 2. СПб.: Дмитрий Буланин, 2000."},
+{"b": 9, "t": "one", "q": "Какими крестьянами ведала Нижегородская удельная контора, которой Даль управлял в 1849–1859 годах?", "o": ["Удельными — они принадлежали императорской фамилии", "Государственными — они были в ведении Министерства государственных имуществ", "Помещичьими, выкупленными у нижегородских помещиков", "Монастырскими, приписанными к монастырям"], "c": [0], "e": "Уделы — имущества императорской фамилии; управление шло через Департамент уделов, а на местах — через удельные конторы. В Нижегородской губернии у Даля было около 37 тысяч удельных крестьян; он бесплатно лечил их и защищал перед губернской администрацией. Формулировка «ведала делами 40 тысяч государственных крестьян» кочует по популярным справочникам, но неверна: государственные крестьяне относились к другому ведомству. Путаницу подогревает то, что юридически удельные крестьяне занимали среднее положение между государственными и помещичьими.", "s": "А. С. и Ю. Е. Манойленко. О социально-политических взглядах В. И. Даля… // Россия: общество, политика, история. 2022. № 3(3). С. 102–120."},
+{"b": 10, "t": "one", "q": "Какое русское слово Даль предлагал вместо «галош»?", "o": ["мокроступы", "колоземица", "ловкосилие", "насылка"], "c": [0], "e": "«Колоземица» должна была заменить «атмосферу», «ловкосилие» — «гимнастику», «насылка» — «адрес». Большинство таких новообразований остались курьёзом, но «мокроступы» живут в шутливой речи до сих пор. Даль не любил заимствований, не «переваренных» русской речью, и предлагал замены сотнями.", "s": "Русский биографический словарь, ст. «Даль»; В. И. Даль. Толковый словарь живого великорусского языка."},
+{"b": 10, "t": "many", "q": "Отметьте верные утверждения о двух главных книгах Даля.", "o": ["«Толковый словарь живого великорусского языка»: свыше 200 тысяч слов, четыре тома первого издания датированы 1863–1866 годами", "«Пословицы русского народа» вышли в 1862 году; в сборнике около 30 тысяч пословиц, поговорок, загадок и поверий", "В третьем издании словаря под редакцией И. А. Бодуэна де Куртенэ (1903–1909) добавлено не менее 20 тысяч новых слов, все вставки помечены скобками", "Даль включил в словарь бранную лексику, заменив часть букв отточиями"], "c": [0, 1, 2], "e": "Бранных слов у Даля нет: есть только сдержанная статья «Поматерну» — о самом обычае браниться. «Пословицы» шли к печати девять лет: рецензент, академик-протоиерей Кочетов, нашёл в сборнике «щепоть мышьяку» и усмотрел «желание дать печатный авторитет памятникам народной глупости». Отсюда далевское «Пословица не судима!» Тома словаря датированы 1863–1866 годами, а выпуски выходили с 1861 по 1868 год — поэтому в справочниках встречаются обе даты.", "s": "Русский биографический словарь, ст. «Даль»; В. И. Даль. Толковый словарь… 3-е изд. под ред. И. А. Бодуэна де Куртенэ. СПб., 1903–1909."}
+]}
+</script>
+
+<script>
+const DATA = JSON.parse(document.getElementById('quiz-data').textContent);
+const BLOCKS = DATA.blocks, QS = DATA.questions;
+let order = [], idx = 0, score = 0, answers = [], startedAt = 0, locked = false;
+
+const el = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const pad = n => (n < 10 ? '0' : '') + n;
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a;
+}
+
+function buildOrder(){
+  order = QS.map(function(q){
+    const pack = q.o.map(function(text,i){ return {text:text, ok:q.c.indexOf(i)>-1}; });
+    shuffle(pack);
+    return {b:q.b, t:q.t, q:q.q, e:q.e, s:q.s, opts:pack,
+            need:pack.filter(function(o){return o.ok;}).length};
+  });
+}
+
+function setProgress(p){
+  const w = Math.max(0, Math.min(100, p));
+  el('bar').style.width = w + '%';
+  el('barleaf').style.left = w + '%';
+}
+
+function start(){
+  buildOrder(); idx=0; score=0; answers=[]; locked=false; startedAt=Date.now();
+  el('intro').hidden=true; el('result').hidden=true; el('quiz').hidden=false;
+  el('vinebox').hidden=false;
+  setProgress(0);
+  render();
+}
+
+function render(){
+  const q = order[idx];
+  setProgress(idx/QS.length*100);
+  el('counter').textContent = 'Вопрос '+pad(idx+1)+' из '+QS.length;
+  el('scoreline').textContent = 'Верных ответов: '+score;
+  el('badge').textContent = pad(idx+1);
+  el('blockname').textContent = 'Свершение '+q.b+' — '+BLOCKS[q.b-1];
+  el('qtext').textContent = q.q;
+  el('hint').textContent = q.t==='many'
+    ? 'Отметьте все верные варианты — их '+q.need+'. Порядок нажатия любой.'
+    : 'Выберите один верный вариант.';
+  const box = el('options'); box.innerHTML='';
+  q.opts.forEach(function(o,i){
+    const b=document.createElement('button');
+    b.type='button'; b.className='opt'; b.dataset.i=i;
+    b.innerHTML='<span class="num">'+(i+1)+'</span><span class="txt">'+esc(o.text)+'</span><span class="tick" aria-hidden="true"></span>';
+    b.addEventListener('click',function(){ pick(i); });
+    box.appendChild(b);
+  });
+  el('feedback').hidden=true; el('feedback').innerHTML='';
+  el('check').hidden = q.t!=='many'; el('check').disabled=true;
+  el('next').hidden=true; locked=false;
+  el('next').textContent = idx===QS.length-1 ? 'Итоги и разбор' : 'Следующий вопрос';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function pick(i){
+  if(locked) return;
+  if(order[idx].t==='one'){ lock([i]); return; }
+  el('options').children[i].classList.toggle('sel');
+  el('check').disabled = el('options').querySelectorAll('.sel').length===0;
+}
+
+function chosen(){
+  return Array.prototype.map.call(el('options').querySelectorAll('.sel'), function(b){ return Number(b.dataset.i); });
+}
+
+function lock(sel){
+  locked=true;
+  const q=order[idx];
+  const right=[];
+  q.opts.forEach(function(o,i){ if(o.ok) right.push(i); });
+  const ok = sel.length===right.length && right.every(function(i){ return sel.indexOf(i)>-1; });
+  if(ok) score++;
+  answers.push({n:idx+1, b:q.b, q:q.q, ok:ok,
+    given:sel.map(function(i){return q.opts[i].text;}),
+    right:right.map(function(i){return q.opts[i].text;}), e:q.e, s:q.s});
+  Array.prototype.forEach.call(el('options').children, function(b,i){
+    b.disabled=true; b.classList.remove('sel');
+    if(q.opts[i].ok) b.classList.add('right');
+    if(sel.indexOf(i)>-1 && !q.opts[i].ok) b.classList.add('wrong');
+  });
+  const f=el('feedback');
+  f.hidden=false;
+  f.className='fb '+(ok?'fb-ok':'fb-no');
+  f.innerHTML='<p class="fb-head">'+(ok?'Верно':'Неверно')+'</p><p>'+esc(q.e)+'</p><p class="src">Источник: '+esc(q.s)+'</p>';
+  el('check').hidden=true; el('next').hidden=false; el('next').focus();
+  el('scoreline').textContent='Верных ответов: '+score;
+  setProgress((idx+1)/QS.length*100);
+}
+
+function next(){
+  if(idx<QS.length-1){ idx++; render(); } else { finish(); }
+}
+
+function finish(){
+  const secs=Math.round((Date.now()-startedAt)/1000);
+  const pc=Math.round(score/QS.length*100);
+  let mark='Нужно повторить материал';
+  if(score>=18) mark='Отлично — «5»';
+  else if(score>=15) mark='Хорошо — «4»';
+  else if(score>=11) mark='Удовлетворительно — «3»';
+  el('quiz').hidden=true; el('result').hidden=false;
+  setProgress(100);
+  el('r-score2').textContent = score+' / '+QS.length;
+  el('r-score').textContent = pc+' %';
+  el('r-mark').textContent = mark;
+  el('s-right').textContent = score;
+  el('s-wrong').textContent = QS.length - score;
+  el('r-time').textContent = Math.floor(secs/60)+' мин '+(secs%60)+' с';
+  const bad=answers.filter(function(a){ return !a.ok; });
+  const badBlocks=[];
+  bad.forEach(function(a){ if(badBlocks.indexOf(a.b)<0) badBlocks.push(a.b); });
+  badBlocks.sort(function(x,y){return x-y;});
+  const note=el('r-bad');
+  note.className = 'note' + (bad.length ? '' : ' clean');
+  note.textContent = bad.length
+    ? ('Блоки для повторения: '+badBlocks.map(function(b){ return b+' — «'+BLOCKS[b-1]+'»'; }).join('; ')+'.')
+    : 'Ошибок нет — все десять свершений разобраны верно. Загляните в раздел «Спорные места»: там показано, где популярные тексты расходятся с источниками.';
+  const list=el('mistakes'); list.innerHTML='';
+  if(bad.length){
+    bad.forEach(function(a){
+      const d=document.createElement('div'); d.className='mis';
+      d.innerHTML='<p class="mis-b">Свершение '+a.b+' · '+esc(BLOCKS[a.b-1])+' · вопрос '+pad(a.n)+'</p>'+
+        '<p class="mis-q">'+esc(a.q)+'</p>'+
+        '<p class="mis-a"><span class="lab">Ваш ответ</span>'+esc(a.given.join(' | '))+'</p>'+
+        '<p class="mis-a ok"><span class="lab">Верно</span>'+esc(a.right.join(' | '))+'</p>'+
+        '<p class="mis-e">'+esc(a.e)+'</p><p class="src">Источник: '+esc(a.s)+'</p>';
+      list.appendChild(d);
+    });
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+el('start').addEventListener('click',start);
+el('restart').addEventListener('click',start);
+el('check').addEventListener('click',function(){ if(!locked) lock(chosen()); });
+el('next').addEventListener('click',next);
+el('print').addEventListener('click',function(){ window.print(); });
+document.addEventListener('keydown',function(e){
+  if(el('quiz').hidden) return;
+  if(e.key>='1' && e.key<='5'){ const i=Number(e.key)-1; if(i<order[idx].opts.length) pick(i); }
+  if(e.key==='Enter'){
+    if(!locked && order[idx].t==='many' && chosen().length) lock(chosen());
+    else if(locked) next();
+  }
+});
+</script>
+</body>
+</html>
