@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тэффи. «Мой первый Пушкин» — разбор для 7 класса</title>
+<style>
+:root{
+  --ink:#12151E; --ink2:#1E2333; --paper:#F7F0E3; --paper2:#FFFDF8; --line:#DCCDB4;
+  --crimson:#C8102E; --vermilion:#E4572E; --gold:#E9B44C; --bronze:#8A6A43;
+  --verdigris:#2E7D6F; --azure:#2D6BE4;
+  --bg:var(--paper); --surface:var(--paper2); --surface2:#F2E8D6; --text:#1B1A17; --muted:#6B6152;
+  --accent:var(--crimson); --accent2:var(--vermilion); --ok:var(--verdigris); --info:var(--azure); --warn:#9A6B00; --danger:var(--crimson);
+  --hero1:#160D14; --hero2:#2A1220; --herotext:#F6EEDF;
+  --nav:64px; --read-size:18px; --read-lh:1.62; --read-width:74ch; --read-font:Georgia,"Times New Roman",serif;
+  --shadow:0 10px 30px rgba(30,18,10,.10); --radius:14px;
+}
+html[data-theme="dusk"]{
+  --bg:#12151E; --surface:#1A1F2E; --surface2:#232939; --text:#EFE7D8; --muted:#A79E8C; --line:#333B4F;
+  --accent:#FF5A4E; --accent2:#FF8A3D; --gold:#F2C463; --ok:#4FC2A8; --info:#6E9BFF; --warn:#F2C463; --danger:#FF6B6B;
+  --hero1:#0C0A11; --hero2:#25101C; --shadow:0 12px 34px rgba(0,0,0,.45);
+}
+html[data-theme="contrast"]{
+  --bg:#FFFFFF; --surface:#FFFFFF; --surface2:#F2F2F2; --text:#000000; --muted:#2B2B2B; --line:#000000;
+  --accent:#A80020; --accent2:#8A3200; --gold:#7A5200; --ok:#12564A; --info:#123C9E; --warn:#6B4A00; --danger:#A80020;
+  --hero1:#FFFFFF; --hero2:#F0F0F0; --herotext:#000000; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--read-font);font-size:var(--read-size);line-height:var(--read-lh);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.35;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.5'/></svg>")}
+html[data-theme="dusk"] body::before{mix-blend-mode:screen;opacity:.16}
+html[data-theme="contrast"] body::before{display:none}
+::selection{background:var(--gold);color:#1B1A17}
+*{scrollbar-width:thin;scrollbar-color:var(--accent) var(--surface2)}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--surface2);border-radius:20px}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),var(--accent2));border-radius:20px;border:2px solid var(--surface2)}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--gold),var(--accent2))}
+h1,h2,h3,h4{font-family:"Palatino Linotype","Book Antiqua",Georgia,serif;line-height:1.18;margin:0 0 .5em}
+h2{font-size:1.72rem;letter-spacing:.2px}
+h3{font-size:1.16rem}
+p{margin:0 0 .85em}
+a{color:var(--info)}
+.shell{max-width:1180px;margin:0 auto;padding:0 20px}
+.ui{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+/* HEADER */
+header.top{position:fixed;top:0;left:0;right:0;height:var(--nav);z-index:60;display:flex;align-items:center;gap:14px;
+  padding:0 18px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-family:system-ui,sans-serif;font-weight:700;font-size:.94rem;white-space:nowrap}
+.brand i{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--crimson),var(--vermilion) 60%,var(--gold));display:inline-block;box-shadow:0 0 0 1px var(--line)}
+nav.links{display:flex;gap:4px;overflow-x:auto;flex:1;padding:4px 0}
+nav.links a{font-family:system-ui,sans-serif;font-size:.83rem;text-decoration:none;color:var(--muted);padding:7px 11px;border-radius:999px;white-space:nowrap;border:1px solid transparent;transition:.18s}
+nav.links a:hover{color:var(--text);background:var(--surface2)}
+nav.links a.on{color:#fff;background:linear-gradient(120deg,var(--accent),var(--accent2));border-color:transparent}
+html[data-theme="contrast"] nav.links a.on{color:#fff}
+.topacts{display:flex;gap:8px}
+.btn{font-family:system-ui,sans-serif;font-size:.83rem;font-weight:600;border-radius:10px;padding:9px 13px;border:1px solid var(--line);
+  background:var(--surface);color:var(--text);cursor:pointer;transition:.16s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px);border-color:var(--accent);box-shadow:var(--shadow)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.btn.gold{background:linear-gradient(120deg,var(--gold),#F6D897);color:#2A1C05;border-color:transparent}
+.btn.ghost{background:transparent}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--info);outline-offset:2px}
+#bar{position:fixed;top:var(--nav);left:0;height:3px;width:0;z-index:61;background:linear-gradient(90deg,var(--crimson),var(--vermilion),var(--gold),var(--verdigris))}
+/* RAIL */
+.rail{font-family:system-ui,sans-serif;background:var(--surface);border:1px solid var(--line);z-index:50}
+.rail h4{font-family:system-ui,sans-serif;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.ctl{margin-bottom:12px}
+.ctl label{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-bottom:5px;gap:8px}
+.ctl label b{color:var(--text);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--gold));outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--surface);border:3px solid var(--accent);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--surface);border:3px solid var(--accent);cursor:pointer}
+select{width:100%;font-family:system-ui,sans-serif;font-size:.82rem;padding:7px 9px;border-radius:9px;border:1px solid var(--line);background:var(--surface2);color:var(--text)}
+.seg{display:flex;gap:4px}
+.seg button{flex:1;font-size:.74rem;padding:7px 4px;border-radius:9px;border:1px solid var(--line);background:var(--surface2);color:var(--muted);cursor:pointer;font-family:system-ui,sans-serif}
+.seg button[aria-pressed=true]{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.8rem;padding:6px 0;cursor:pointer}
+.sw input{position:absolute;opacity:0;width:0;height:0}
+.track{width:40px;height:22px;border-radius:999px;background:var(--surface2);border:1px solid var(--line);position:relative;transition:.2s;flex:none}
+.track::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:.2s}
+.sw input:checked+.track{background:linear-gradient(120deg,var(--ok),var(--verdigris));border-color:transparent}
+.sw input:checked+.track::after{left:20px;background:#fff}
+.sw input:focus-visible+.track{outline:3px solid var(--info);outline-offset:2px}
+@media(min-width:1240px){
+  body{padding-right:302px}
+  .rail{position:fixed;right:16px;top:calc(var(--nav) + 18px);width:270px;max-height:calc(100vh - var(--nav) - 36px);overflow-y:auto;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+  .rail .railstrip{display:block}
+}
+@media(max-width:1239px){
+  .rail{position:sticky;top:var(--nav);margin:0;border-left:0;border-right:0;padding:10px 14px;overflow-x:auto}
+  .rail h4{display:none}
+  .rail .railstrip{display:flex;gap:16px;align-items:flex-end;width:max-content}
+  .rail .ctl{margin:0;width:150px}
+  .rail .sw{width:132px;font-size:.72rem;padding:0}
+  .rail .railacts{display:flex;gap:6px}
+  .rail .btn{padding:8px 10px;font-size:.76rem}
+}
+/* HERO */
+.hero{position:relative;margin-top:var(--nav);padding:70px 0 60px;overflow:hidden;background:
+  radial-gradient(900px 420px at 78% 18%,rgba(200,16,46,.42),transparent 62%),
+  radial-gradient(700px 380px at 12% 82%,rgba(46,125,111,.34),transparent 65%),
+  linear-gradient(160deg,var(--hero1),var(--hero2) 55%,#0E1520);
+  color:var(--herotext);border-bottom:1px solid var(--line)}
+html[data-theme="contrast"] .hero{background:#fff;border-bottom:2px solid #000}
+.hero .shell{position:relative;z-index:3;display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center}
+.kicker{font-family:system-ui,sans-serif;font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.hero h1{font-size:clamp(2.1rem,5vw,3.5rem);margin-bottom:.3em;color:var(--herotext)}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold),#FFF1C6 45%,var(--bronze));-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme="contrast"] .hero h1 em{color:#A80020;-webkit-text-fill-color:#A80020}
+.hero p.lead{font-size:1.06rem;max-width:52ch;color:color-mix(in srgb,var(--herotext) 86%,transparent)}
+html[data-theme="contrast"] .hero p.lead{color:#000}
+.herocta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.metastrip{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;font-family:system-ui,sans-serif;font-size:.78rem;color:color-mix(in srgb,var(--herotext) 72%,transparent)}
+html[data-theme="contrast"] .metastrip{color:#222}
+.metastrip b{display:block;font-size:1.05rem;color:var(--gold)}
+html[data-theme="contrast"] .metastrip b{color:#7A5200}
+.scene{position:relative;height:330px}
+.scene svg{position:absolute;inset:0;width:100%;height:100%}
+.mote{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.5;filter:blur(.4px);animation:drift linear infinite}
+@keyframes drift{0%{transform:translate3d(0,20px,0) scale(.6);opacity:0}20%{opacity:.65}100%{transform:translate3d(26px,-160px,0) scale(1.1);opacity:0}}
+.boxcard{position:absolute;left:2%;bottom:6%;width:190px;height:132px;border:0;padding:0;background:none;cursor:pointer;perspective:700px;z-index:4}
+.boxcard .body{position:absolute;inset:0;border-radius:9px;background:linear-gradient(150deg,#D4142F,#8E0C20);box-shadow:0 16px 34px rgba(0,0,0,.45),inset 0 0 0 2px rgba(233,180,76,.55);display:grid;place-items:center;transform:rotate(-6deg)}
+.boxcard .body span{font-family:"Palatino Linotype",Georgia,serif;font-size:1.5rem;background:linear-gradient(100deg,#E9B44C,#FFF3CE 45%,#B98A34);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.04em}
+.boxcard .lid{position:absolute;left:0;right:0;top:0;height:132px;border-radius:9px;background:linear-gradient(150deg,#E01C36,#A50F24);box-shadow:inset 0 0 0 2px rgba(233,180,76,.7);transform-origin:left center;transform:rotate(-6deg);transition:transform .5s cubic-bezier(.2,.8,.25,1);display:grid;place-items:center}
+.boxcard:hover .lid,.boxcard:focus-visible .lid{transform:rotate(-6deg) rotateY(-118deg)}
+.boxcard .hint{position:absolute;left:0;bottom:-24px;font-family:system-ui,sans-serif;font-size:.7rem;color:var(--gold);white-space:nowrap}
+.candy{position:absolute;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#8B5A2B,#3E2213);box-shadow:inset 0 -3px 5px rgba(0,0,0,.5)}
+/* SECTIONS */
+main{position:relative;z-index:2}
+section{padding:56px 0;border-bottom:1px solid var(--line);scroll-margin-top:calc(var(--nav) + 22px)}
+section:nth-of-type(even){background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 60%,transparent),transparent)}
+.eyebrow{font-family:system-ui,sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card.tint{background:linear-gradient(150deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface))}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.25,1)}
+.reveal.in{opacity:1;transform:none}
+html[data-motion="off"] .reveal{opacity:1;transform:none;transition:none}
+html[data-motion="off"] .mote,html[data-motion="off"] .cloud{animation:none}
+/* STORY */
+.storywrap{max-width:var(--read-width);margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:34px clamp(18px,4vw,44px);box-shadow:var(--shadow);position:relative}
+.storywrap::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:14px 0 0 14px;background:linear-gradient(180deg,var(--crimson),var(--gold),var(--verdigris))}
+#story p{margin:0 0 .9em}
+#story p.dlg{padding-left:1.1em;border-left:2px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.poem{margin:16px 0 16px 18px;padding:14px 18px;border-radius:12px;font-style:italic;position:relative;
+  background:linear-gradient(120deg,color-mix(in srgb,var(--gold) 16%,var(--surface)),var(--surface));border:1px solid color-mix(in srgb,var(--gold) 55%,var(--line))}
+.poem.pushkin{background:linear-gradient(120deg,color-mix(in srgb,var(--verdigris) 15%,var(--surface)),var(--surface));border-color:color-mix(in srgb,var(--verdigris) 55%,var(--line))}
+.poem .tag{display:inline-block;font-family:system-ui,sans-serif;font-style:normal;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;margin-bottom:9px;color:#fff;background:var(--accent)}
+.poem.pushkin .tag{background:var(--ok)}
+.poem .ln{display:block}
+span.w{border-bottom:2px dotted var(--info);cursor:help}
+html[data-words="off"] span.w{border-bottom:0;cursor:text}
+mark.d{background:linear-gradient(180deg,transparent 58%,color-mix(in srgb,var(--gold) 70%,transparent) 58%);color:inherit;cursor:pointer;padding:0 1px;border-radius:3px}
+html[data-details="off"] mark.d{background:none;cursor:text}
+html[data-steps="on"] #story p[data-start]{position:relative;padding-left:44px}
+html[data-steps="on"] #story p[data-start]::before{content:attr(data-start);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:system-ui,sans-serif;font-size:.85rem;font-weight:700;color:#fff;background:linear-gradient(130deg,var(--accent),var(--accent2))}
+html[data-steps="on"] #story [data-step]{border-left:2px solid color-mix(in srgb,var(--accent) 22%,transparent);padding-left:12px;margin-left:-14px}
+html[data-steps="on"] #story p[data-start]{padding-left:44px;margin-left:-14px}
+#pop{position:absolute;z-index:70;max-width:290px;background:var(--ink2);color:#F4ECDD;border:1px solid var(--gold);border-radius:12px;padding:12px 14px;font-family:system-ui,sans-serif;font-size:.84rem;line-height:1.45;box-shadow:0 18px 40px rgba(0,0,0,.4);display:none}
+#pop b{color:var(--gold);display:block;margin-bottom:4px}
+html[data-theme="contrast"] #pop{background:#000;color:#fff}
+/* STEPS TIMELINE */
+.steps{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:.88rem;position:relative;transition:.2s}
+.step:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:var(--shadow)}
+.step b{display:block;font-family:system-ui,sans-serif;font-size:.72rem;color:#fff;background:linear-gradient(130deg,var(--accent),var(--accent2));width:26px;height:26px;border-radius:50%;display:grid;place-items:center;margin-bottom:8px}
+/* AUTHORSHIP */
+.poemcards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.pcard .verse{font-style:italic;margin:10px 0 14px;line-height:1.7}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{font-family:system-ui,sans-serif;font-size:.84rem;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);color:var(--text);cursor:pointer;transition:.16s}
+.opt:hover{border-color:var(--accent);transform:translateY(-1px)}
+.opt.right{background:linear-gradient(120deg,var(--ok),#3FA48F);color:#fff;border-color:transparent}
+.opt.wrong{background:linear-gradient(120deg,var(--danger),#E0533C);color:#fff;border-color:transparent}
+.opt[disabled]{cursor:default;opacity:.92}
+.fb{margin-top:12px;font-family:system-ui,sans-serif;font-size:.85rem;line-height:1.5;padding:12px 14px;border-radius:11px;display:none;border-left:4px solid var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.fb.bad{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 10%,var(--surface))}
+.fb .src{display:block;margin-top:6px;font-size:.75rem;color:var(--muted)}
+.fb.show{display:block}
+/* TWO LIVES */
+.lives{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:linear-gradient(115deg,#2A1220,#12202A)}
+html[data-theme="contrast"] .lives{background:#fff;border:2px solid #000}
+.livesgrid{display:grid;grid-template-columns:1fr 1fr}
+.life{padding:26px;min-height:250px;color:#F6EEDF;transition:opacity .25s,filter .25s}
+html[data-theme="contrast"] .life{color:#000}
+.life.noisy{background:linear-gradient(150deg,rgba(200,16,46,.55),rgba(228,87,46,.25))}
+.life.quiet{background:linear-gradient(150deg,rgba(46,125,111,.5),rgba(45,107,228,.28))}
+html[data-theme="contrast"] .life.noisy{background:#FBE9EC}
+html[data-theme="contrast"] .life.quiet{background:#E6F2EF}
+.life h3{color:inherit}
+.life ul{margin:0;padding-left:18px;font-size:.94rem}
+.life li{margin-bottom:6px}
+.lifeq{font-style:italic;margin-top:12px;font-size:.92rem;opacity:.95}
+.mixrow{display:flex;align-items:center;gap:14px;margin-top:16px;font-family:system-ui,sans-serif;font-size:.82rem;color:var(--muted)}
+.mixrow input{flex:1}
+#mixlabel{min-width:190px;text-align:right;color:var(--text);font-weight:600}
+/* DETAILS */
+.details{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.detail{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:.2s}
+.detail.open{border-color:var(--accent);box-shadow:var(--shadow)}
+.dhead{width:100%;display:flex;align-items:center;gap:12px;padding:15px 16px;background:none;border:0;cursor:pointer;text-align:left;font-family:var(--read-font);font-size:1rem;color:var(--text)}
+.dhead svg{flex:none;width:34px;height:34px}
+.dhead .plus{margin-left:auto;font-family:system-ui,sans-serif;color:var(--accent);font-size:1.3rem;transition:.2s}
+.detail.open .plus{transform:rotate(45deg)}
+.dbody{display:none;padding:0 16px 16px;font-size:.94rem;border-top:1px dashed var(--line)}
+.detail.open .dbody{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+/* CLOUDS */
+.clouds{position:relative;height:120px;overflow:hidden;border-radius:12px;background:linear-gradient(120deg,color-mix(in srgb,var(--info) 16%,var(--surface)),color-mix(in srgb,var(--verdigris) 14%,var(--surface)));border:1px solid var(--line)}
+.cloud{position:absolute;opacity:.75;animation:sail linear infinite}
+@keyframes sail{from{transform:translateX(-30%)}to{transform:translateX(130%)}}
+/* BUILDER */
+.builder{display:grid;grid-template-columns:1fr 330px;gap:22px;align-items:start}
+.stepbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+.stepbox h3{display:flex;align-items:center;gap:10px;font-size:1.02rem}
+.stepbox h3 i{font-style:normal;font-family:system-ui,sans-serif;font-size:.75rem;font-weight:700;color:#fff;background:linear-gradient(130deg,var(--accent),var(--accent2));width:24px;height:24px;border-radius:50%;display:grid;place-items:center}
+.stepbox .task{font-size:.88rem;color:var(--muted);margin-bottom:10px}
+textarea{width:100%;min-height:96px;resize:vertical;font-family:var(--read-font);font-size:1rem;line-height:1.55;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);color:var(--text)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.chip{font-family:system-ui,sans-serif;font-size:.76rem;padding:6px 10px;border-radius:999px;border:1px dashed var(--accent);background:transparent;color:var(--accent);cursor:pointer;transition:.15s}
+.chip:hover{background:var(--accent);color:#fff;border-style:solid}
+.counter{font-family:system-ui,sans-serif;font-size:.74rem;color:var(--muted);margin-top:7px;display:flex;justify-content:space-between}
+.counter b{color:var(--ok)}
+.sidepanel{position:sticky;top:calc(var(--nav) + 20px);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.meter{height:10px;border-radius:999px;background:var(--surface2);overflow:hidden;margin:8px 0 14px;border:1px solid var(--line)}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--crimson),var(--gold),var(--verdigris));transition:width .35s}
+.check{list-style:none;margin:0 0 14px;padding:0;font-family:system-ui,sans-serif;font-size:.82rem}
+.check li{display:flex;gap:9px;align-items:flex-start;margin-bottom:8px;color:var(--muted)}
+.check li::before{content:"○";color:var(--muted);font-weight:700}
+.check li.done{color:var(--text)}
+.check li.done::before{content:"✓";color:var(--ok)}
+#preview{display:none;margin-top:16px;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:18px}
+#preview.show{display:block}
+#preview p{margin-bottom:.8em}
+details.sample{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+details.sample summary{cursor:pointer;font-family:system-ui,sans-serif;font-weight:600;font-size:.9rem;color:var(--accent)}
+details.sample[open] summary{margin-bottom:10px}
+/* QUIZ */
+.quiz{display:grid;gap:14px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.q h3{font-size:1.02rem;margin-bottom:12px}
+.q .opts{display:grid;gap:8px}
+.q .opt{text-align:left}
+.scorebar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 12%,var(--surface)),color-mix(in srgb,var(--info) 10%,var(--surface)));border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-bottom:18px}
+.ring{width:74px;height:74px;flex:none;border-radius:50%;display:grid;place-items:center;font-family:system-ui,sans-serif;font-weight:700;font-size:1.05rem;
+  background:conic-gradient(var(--ok) calc(var(--p,0)*1%),var(--surface2) 0);position:relative}
+.ring::after{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--surface)}
+.ring span{position:relative;z-index:2}
+#review{display:none;margin-top:18px}
+#review.show{display:block}
+#review .item{border-left:4px solid var(--danger);background:color-mix(in srgb,var(--danger) 8%,var(--surface));border-radius:10px;padding:12px 14px;margin-bottom:10px;font-size:.92rem}
+#review .item b{color:var(--danger)}
+/* MISC */
+table{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--surface);border-radius:12px;overflow:hidden}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 14%,var(--surface)),var(--surface2));font-family:system-ui,sans-serif;font-size:.82rem}
+.note{font-size:.86rem;color:var(--muted)}
+.traps li{margin-bottom:10px}
+footer{padding:34px 0 60px;font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted)}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,140%);z-index:90;display:flex;gap:12px;align-items:center;
+  background:var(--ink2);color:#F4ECDD;border:1px solid var(--gold);border-radius:12px;padding:12px 16px;font-family:system-ui,sans-serif;font-size:.86rem;box-shadow:0 18px 40px rgba(0,0,0,.4);transition:transform .35s cubic-bezier(.2,.8,.25,1)}
+#toast.show{transform:translate(-50%,0)}
+#toast button{background:var(--gold);color:#2A1C05;border:0;border-radius:8px;padding:7px 12px;font-weight:700;cursor:pointer;font-family:system-ui,sans-serif}
+@media(max-width:1000px){
+  .hero .shell{grid-template-columns:1fr}
+  .scene{height:250px;order:-1}
+  .cols,.poemcards,.details,.builder{grid-template-columns:1fr}
+  .cols3{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .livesgrid{grid-template-columns:1fr}
+  .sidepanel{position:static}
+}
+@media(max-width:620px){
+  :root{--nav:58px}
+  .brand span{display:none}
+  section{padding:40px 0}
+  .steps{grid-template-columns:1fr}
+  .storywrap{padding:22px 16px}
+  .boxcard{width:150px;height:106px}
+  .boxcard .lid{height:106px}
+  .topacts .btn{padding:8px 10px}
+}
+@media print{
+  header.top,#bar,.rail,.hero,.herocta,#toast,.ui,.chips,.opts,.counter,.meter,.sidepanel .btn,#pop{display:none!important}
+  body{padding:0;background:#fff;color:#000;font-size:12pt}
+  body::before{display:none}
+  section{padding:12pt 0;border:0;break-inside:auto}
+  .card,.storywrap,.q,.detail,.stepbox,.pcard{box-shadow:none;border:1px solid #999;background:#fff}
+  .dbody{display:block!important}
+  .reveal{opacity:1!important;transform:none!important}
+  a{color:#000;text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top ui">
+  <div class="brand"><i></i><span>Мой первый Пушкин · 7 класс</span></div>
+  <nav class="links" id="nav">
+    <a href="#story-sec">Рассказ</a>
+    <a href="#steps-sec">Семь шагов</a>
+    <a href="#author-sec">Чьи стихи</a>
+    <a href="#lives-sec">Две жизни</a>
+    <a href="#details-sec">Детали</a>
+    <a href="#build-sec">Моя работа</a>
+    <a href="#quiz-sec">Проверка</a>
+    <a href="#teacher-sec">Учителю</a>
+  </nav>
+  <div class="topacts">
+    <button class="btn gold" id="docBtn" title="Скачать памятку для Word">Word</button>
+    <button class="btn ghost" id="printBtn">Печать</button>
+  </div>
+</header>
+<div id="bar"></div>
+
+<div class="rail ui" id="rail">
+  <h4>Настройки чтения</h4>
+  <div class="railstrip">
+    <div class="ctl"><label>Размер текста <b id="vSize">18</b></label><input type="range" id="cSize" min="15" max="26" step="1" value="18"></div>
+    <div class="ctl"><label>Интервал <b id="vLh">1.6</b></label><input type="range" id="cLh" min="1.2" max="2.1" step="0.05" value="1.62"></div>
+    <div class="ctl"><label>Ширина колонки <b id="vW">74</b></label><input type="range" id="cW" min="52" max="96" step="2" value="74"></div>
+    <div class="ctl"><label>Тема</label>
+      <div class="seg" id="cTheme">
+        <button data-th="paper" aria-pressed="true">Бумага</button>
+        <button data-th="dusk" aria-pressed="false">Сумерки</button>
+        <button data-th="contrast" aria-pressed="false">Контраст</button>
+      </div>
+    </div>
+    <div class="ctl"><label>Шрифт</label>
+      <select id="cFont">
+        <option value='Georgia,"Times New Roman",serif'>С засечками</option>
+        <option value='system-ui,-apple-system,"Segoe UI",Roboto,sans-serif'>Без засечек</option>
+        <option value='"Palatino Linotype","Book Antiqua",Georgia,serif'>Книжный</option>
+      </select>
+    </div>
+    <label class="sw">Словарные слова<input type="checkbox" id="cWords" checked><span class="track"></span></label>
+    <label class="sw">Шаги сюжета<input type="checkbox" id="cSteps"><span class="track"></span></label>
+    <label class="sw">Подсветка деталей<input type="checkbox" id="cDetails" checked><span class="track"></span></label>
+    <label class="sw">Живой фон<input type="checkbox" id="cMotion" checked><span class="track"></span></label>
+    <div class="ctl railacts">
+      <button class="btn" id="resetBtn">Сброс</button>
+      <button class="btn primary" id="docBtn2">Word</button>
+      <button class="btn" id="printBtn2">Печать</button>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="shell">
+    <div>
+      <div class="kicker">Тэффи · газета «Русское слово» · 1912</div>
+      <h1>Мой <em>первый</em> Пушкин</h1>
+      <p class="lead">Рассказ о шестилетней девочке, конфетной коробке с золотым словом «Пушкин» и о том, как одни стихи меняют человека навсегда. Читаем медленно, разбираемся по шагам и пишем свою работу.</p>
+      <div class="herocta ui">
+        <a class="btn primary" href="#story-sec">Читать рассказ</a>
+        <a class="btn" href="#build-sec">Собрать свою работу</a>
+        <a class="btn ghost" href="#author-sec">Загадка: чьи стихи?</a>
+      </div>
+      <div class="metastrip">
+        <div><b>6 лет</b>возраст героини</div>
+        <div><b>2 поэта</b>Пушкин и Туманский</div>
+        <div><b>7 шагов</b>от конфет к стихам</div>
+        <div><b>8 вопросов</b>проверка в конце</div>
+      </div>
+    </div>
+    <div class="scene" aria-hidden="true">
+      <svg viewBox="0 0 420 330" preserveAspectRatio="xMidYMax meet">
+        <defs>
+          <linearGradient id="br" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#6E5334"/><stop offset=".5" stop-color="#2B2119"/><stop offset="1" stop-color="#15100C"/>
+          </linearGradient>
+          <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#E9B44C" stop-opacity=".95"/><stop offset="1" stop-color="#E9B44C" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="glow"><stop offset="0" stop-color="#E9B44C" stop-opacity=".55"/><stop offset="1" stop-color="#E9B44C" stop-opacity="0"/></radialGradient>
+        </defs>
+        <circle cx="300" cy="120" r="120" fill="url(#glow)"/>
+        <g opacity=".5" stroke="#7E6A4C" stroke-width="2" fill="none">
+          <path d="M20 300 L20 150 M20 190 L-2 168 M20 205 L44 178 M20 225 L-4 208"/>
+          <path d="M400 300 L400 140 M400 180 L424 156 M400 200 L376 176"/>
+        </g>
+        <rect x="238" y="228" width="120" height="76" fill="url(#br)"/>
+        <rect x="228" y="216" width="140" height="16" rx="3" fill="url(#br)"/>
+        <rect x="228" y="216" width="140" height="4" fill="url(#rim)"/>
+        <path d="M298 216 c-4-26 -12-42 -10-64 c1-14 6-24 6-36 c-8-4 -12-12 -10-22 c2-11 12-18 22-16 c11 2 17 12 15 23 c-1 8 -6 13 -12 16 c2 10 10 16 16 24 c8 11 12 26 14 40 c2 14 3 24 2 35 z" fill="url(#br)"/>
+        <path d="M306 92 c10 2 16 11 15 22 c-1 7 -5 12 -11 15" stroke="#E9B44C" stroke-width="2.4" fill="none" opacity=".85"/>
+        <path d="M312 132 c10 12 15 30 17 48" stroke="#E9B44C" stroke-width="2" fill="none" opacity=".55"/>
+        <path d="M286 150 c-12 10 -20 22 -22 34 l10 4 c4-12 10-22 18-30 z" fill="url(#br)"/>
+        <g fill="url(#br)">
+          <rect x="96" y="268" width="104" height="9" rx="3"/><rect x="96" y="284" width="104" height="9" rx="3"/>
+          <rect x="100" y="293" width="8" height="24"/><rect x="188" y="293" width="8" height="24"/>
+          <rect x="96" y="248" width="104" height="8" rx="3"/>
+        </g>
+        <rect x="0" y="316" width="420" height="14" fill="#0B0A0E" opacity=".65"/>
+      </svg>
+      <button class="boxcard" id="boxcard" title="Открыть коробку">
+        <span class="body"><span>Пушкин</span>
+          <i class="candy" style="left:22px;top:26px"></i><i class="candy" style="left:60px;top:52px"></i>
+          <i class="candy" style="left:104px;top:30px"></i><i class="candy" style="left:140px;top:64px"></i>
+        </span>
+        <span class="lid"></span>
+        <span class="hint">наведи — откроется</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<section id="read-sec" data-doc="1">
+  <div class="shell">
+    <div class="eyebrow">Привычка первая</div>
+    <h2>Читать медленно, а не «120 слов в минуту»</h2>
+    <p style="max-width:70ch">Читай так, будто тебе написали письмо о чужом детстве. Останавливайся там, где странно, красиво или непонятно. Три-четыре остановки — и разбор уже начался.</p>
+    <div class="cols3" style="margin-top:20px">
+      <div class="card tint reveal"><h3>Что я вижу глазами?</h3><p class="note">Кровать с сетчатыми перильцами, красная книжечка, крошки на дне коробки, чугунный глаз памятника.Picture складывается из мелочей.</p></div>
+      <div class="card tint reveal"><h3>Что меня удивило?</h3><p class="note">Стихи приклеены «для обмана». Девочка читает стоя на одной ноге. Памятнику шепчут, как живому.</p></div>
+      <div class="card tint reveal"><h3>Где героиня стала другой?</h3><p class="note">После строк «О, если правда, что в ночи…». Она сама говорит: «начались с той поры две жизни».</p></div>
+    </div>
+    <div class="card reveal" style="margin-top:18px">
+      <h3>Кто это написал</h3>
+      <p>Тэффи — литературное имя Надежды Александровны Лохвицкой (1872–1952). Она писала весёлые газетные рассказы. «Мой первый Пушкин» напечатан в газете «Русское слово» в 1912 году.</p>
+      <p style="margin-bottom:0">Здесь взрослая писательница вспоминает себя шестилетней. Поэтому в рассказе два голоса: девочка, у которой всё происходит впервые, и взрослая Тэффи, которая смотрит на неё с нежностью и тихой усмешкой. Не путай их: ошибается девочка, а рассказывает об этом Тэффи.</p>
+    </div>
+  </div>
+</section>
+
+<section id="story-sec" data-doc="1">
+  <div class="shell">
+    <div class="eyebrow">Текст целиком</div>
+    <h2>Тэффи. «Мой первый Пушкин»</h2>
+    <p class="note ui" style="margin-bottom:18px">Слова с пунктиром можно нажать — появится объяснение. Золотая подсветка — детали, о которых стоит подумать. Переключатель «Шаги сюжета» расставит номера прямо в тексте.</p>
+    <div class="storywrap">
+      <div id="story">
+        <p data-step="1" data-start="1">Мне было тогда шесть лет.</p>
+        <p data-step="1">Я только что начала поправляться после кори и еще лежала в кровати с сетчатыми перильцами, стриженая и слабая, когда мне подарили небольшую красную книжечку, на крышке которой было написано золотыми разливистыми буквами: «Пушкин».</p>
+        <p data-step="2" data-start="2">Книжечка была маленькая, но толстенькая, и внутри у нее что-то погромыхивало. Это было занятно, но отчасти и жутковато.</p>
+        <p data-step="2">Осторожно приоткрыла ее и удивилась. Книжечка оказалась просто <mark class="d" data-d="d-box" tabindex="0">коробкой с шоколадными конфетками</mark>, и только под самым переплетом для обмана приклеено было несколько листочков со стихами.</p>
+        <p data-step="3" data-start="3">Подивившись на хитрую штуку, я принялась за конфеты, которые, к слову сказать, в шесть лет едятся совсем не так, как, например, в тридцать, а с интересом, вниманием и проникновением в сущность начинки. Шестилетний едок не довольствуется одними вкусовыми ощущениями: он откусит и непременно посмотрит, что делается внутри, а иногда, уже пожевав немного, спохватится, что плохо рассмотрел, и, пока не все пропало, вытащит изо рта и проверит, как и что.</p>
+        <p data-step="3">Словом, все это не пустяк, и просидела я над этой коробкой весь день и только на другое утро, <mark class="d" data-d="d-crumbs" tabindex="0">печально полизав прилипшие на дно крошки</mark>, принялась за стихи.</p>
+        <p data-step="3">На первом листочке было напечатано:</p>
+        <div class="poem" data-step="3"><span class="tag">«Птичка» — не Пушкин</span>
+          <span class="ln">Вчера я отворил темницу</span><span class="ln">Воздушной пленницы моей.</span><span class="ln">Я рощам возвратил певицу,</span><span class="ln">Я возвратил свободу ей.</span></div>
+        <p data-step="4" data-start="4">и т.д. Я читала слова и думала: «Вот-то хорошо!» Но представляла себе совсем не то, что говорил поэт.</p>
+        <p data-step="4">«Воздушная пленница» была для меня не птица, а женщина с закованными в цепи руками, тонкая, в прозрачном платье, «воздушная». А при словах «Я рощам возвратил певицу» я с тоскливым неудовольствием представляла себе опять-таки не птицу, а виденную в гостиной у матери плотную красную даму, про которую мне сказали, что она известная певица.</p>
+        <p data-step="4">Целые дни повторяла я нараспев это стихотворение, пугавшее меня сложными и непонятными образами и чаровавшее словами.</p>
+        <p data-step="4">Кто-то из старших сестер спросил, понимаю ли я эти стихи.</p>
+        <p class="dlg" data-step="4">— Еще бы! — отвечала я гордо. — Чего тут не понимать? Очень просто. Выпустил воздушную пленницу, а певицу вроде той, что была у мамы, отправил в лес.</p>
+        <p data-step="4">Мне объяснили мое заблуждение, и я поняла его, но достаточно мне было остаться одной и с чувством продекламировать это стихотворение, как снова вставала прежняя картина и пленяла меня и мучила, и так это на всю жизнь и осталось.</p>
+        <p data-step="5" data-start="5">В Москве, на бульваре, куда меня водили гулять, показали мне <mark class="d" data-d="d-monument" tabindex="0">памятник Пушкину</mark>.</p>
+        <p data-step="5">Я видела его и прежде, но настоящее значение приобрел он для меня только теперь, когда я познакомилась с его поэзией.</p>
+        <p data-step="5">Теперь я уже не могла играть около этого памятника. Было как-то неловко визжать и прыгать на скакалке, когда здесь стоит тот самый, который написал такое поразительное стихотворение.</p>
+        <p data-step="5">Я обходила вокруг памятника, садилась на скамеечку прилично, тихо, обдергивала платье на коленках и, глядя Пушкину прямо в глаза, благоговейно шептала:</p>
+        <p class="dlg" data-step="5">— Птичка! Стихотворение поэта Пушкина. Ваше стихотворение.</p>
+        <div class="poem" data-step="5"><span class="ln">Вчера я отворил темницу</span><span class="ln">Воздушной пленницы моей.</span><span class="ln">Я рощам возвратил певицу,</span><span class="ln">Я возвратил свободу ей.</span></div>
+        <p data-step="5">И все смотрела на его лицо, на его лоб и думала:</p>
+        <p class="dlg" data-step="5">— Вот это он так смотрел, когда это сочинял!</p>
+        <p data-step="5">На бульваре у меня был «муж», с которым мы когда-то, до моего увлечения литературой, строили дом из песка, камешков и <mark class="d" data-d="d-cow" tabindex="0">сломанной картонной коровы</mark>, с успехом заменявшей крыльцо. Но теперь муж был брошен и, как большинство людей с разбитой жизнью, старался забыться в путешествии — ездил сам на себе вокруг памятника, подстегивал себя кнутиком, ржал, брыкался, покрикивал басом. Но мне ни до чего этого не было ни малейшего дела.</p>
+        <p data-step="5">Я сидела чинно, обдернув платьице, и шептала, глядя на пушкинский <mark class="d" data-d="d-monument" tabindex="0">большой чугунный глаз</mark>:</p>
+        <p class="dlg" data-step="5">— Птичка! Ваше стихотворение.</p>
+        <div class="poem" data-step="5"><span class="ln">Вчера я отворил темницу</span><span class="ln">Воздушной пленницы моей…</span></div>
+        <p data-step="6" data-start="6">Через несколько месяцев увидала я у старшей сестры большую толстую книгу. На переплете было написано: «Сочинения А. С. Пушкина».</p>
+        <p data-step="6">Я спросила, можно ли мне это почитать. Мне сказали, что нельзя и что я все равно ничего не пойму.</p>
+        <p data-step="6">— Это я-то не пойму? — удивилась я, но так как книги мне все равно не дали, то я решила прочесть ее потихоньку, и вот, выбрав время, когда гувернантка занималась с сестрой музыкой, я подобралась к столу, открыла и прочла:</p>
+        <div class="poem pushkin" data-step="6"><span class="tag">Пушкин. «Заклинание», 1830</span>
+          <span class="ln">О, если правда, что в ночи,</span><span class="ln">Когда покоятся живые,</span><span class="ln">И с неба лунные лучи</span><span class="ln">Скользят на камни гробовые,</span><span class="ln">О, если правда, что тогда</span><span class="ln">Пустеют тихие могилы, —</span><span class="ln">Я тень зову, я жду Леилы:</span><span class="ln">Ко мне, мой друг, сюда! Сюда!</span></div>
+        <p data-step="6">Дальше читать я не посмела, потому что послышались в соседней комнате шаги. Но то, что я прочла, поразило меня. Я не увидела ни лунного света, ни могильных камней — ничего, я только услышала это повторенное «О, если правда», и было это для меня так неожиданно и так прекрасно, что на долгое время изменило всю мою жизнь.</p>
+        <p data-step="6">Рассказать об этом было некому, да я и сама не понимала, что это такое. Знала только, что <mark class="d" data-d="d-bench" tabindex="0">начались с той поры две жизни</mark>. Одна — та, где ползают под столом вместе со старой кошкой, где грубиянят няньке, вывираются из-за неприготовленного урока перед гувернанткой, гримасничают, воруют сахар и ревут благим матом, нарочно для безобразия распяливая рот, и другая — жизнь, где сидят тихо, одиноко прижавшись на деревянной скамеечке, и шепчут чуть-чуть слышно, влюбленно и робко глядя в большой чугунный глаз:</p>
+        <div class="poem pushkin" data-step="6"><span class="ln">О, если правда!</span><span class="ln">О, если правда, что тогда…</span></div>
+        <p class="dlg" data-step="6">— Ваше стихотворение, Пушкин.</p>
+        <p data-step="6">И каждый день, как только внизу в зале раздаются первые ноты разучиваемой гаммы — путь свободен! — я прокрадывалась в комнату сестры и читала Пушкина. Читала, насторожившись, оглядываясь, и, чтобы скорее можно было убежать на случай беды, <mark class="d" data-d="d-leg" tabindex="0">стояла всегда на одной ноге</mark>. Так, стоя на одной ноге, выучила я на память весь том стихотворений и помню до сих пор, на которой странице что напечатано.</p>
+        <p data-step="7" data-start="7">Когда через пять лет мне подарили Лермонтова, я не сразу решилась читать его. Мне было страшно: вдруг полюблю его и оторвусь от того, от «о, если правда»…</p>
+        <p data-step="7">Будучи уже подростком лет тринадцати, я, как-то высунувшись в окно вагона, громко продекламировала «Тучки небесные» и сказала сестре:</p>
+        <p class="dlg" data-step="7">— Правда, какое чудное стихотворение?</p>
+        <p data-step="7">А потом закрыла глаза и увидела спокойный вечный чугунный взгляд и себя увидела маленькой, с еле прикрытыми короткой юбочкой коленками.</p>
+        <p class="dlg" data-step="7">— Стихотворение Пушкина.</p>
+        <div class="poem" data-step="7"><span class="ln">Вчера я отворил темницу</span><span class="ln">Воздушной пленницы моей…</span></div>
+        <p class="dlg" data-step="7">— Ваше стихотворение, Пушкин!</p>
+        <p data-step="7"><b>Нет, я никогда не уйду с этой деревянной скамеечки, всю жизнь буду я здесь.</b></p>
+        <p class="dlg" data-step="7">— Ваше стихотворение, Пушкин!</p>
+        <p class="note" data-step="7">1912</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:28px">Словарик: слова, которые мешают читать</h3>
+    <table>
+      <tr><th style="width:26%">Слово</th><th>Что значит</th></tr>
+      <tr><td>Корь</td><td>Заразная болезнь с высокой температурой и сыпью. После неё девочка слабая и стриженая.</td></tr>
+      <tr><td>Темница</td><td>Тюрьма, тёмное помещение, где держат взаперти.</td></tr>
+      <tr><td>Воздушная пленница</td><td>«Лёгкая, как воздух, узница». В стихах это птица, а не женщина.</td></tr>
+      <tr><td>Певица</td><td>Здесь — поющая птица. Девочка подумала о женщине, которая поёт в гостиной.</td></tr>
+      <tr><td>Том</td><td>Большая толстая книга, часть собрания сочинений.</td></tr>
+      <tr><td>Гувернантка</td><td>Домашняя учительница в состоятельной семье.</td></tr>
+      <tr><td>Чинно</td><td>Тихо, прилично, «как положено».</td></tr>
+      <tr><td>Благоговейно</td><td>С глубоким уважением и восхищением, почти с робостью.</td></tr>
+      <tr><td>Нараспев</td><td>Протяжно, будто поёшь.</td></tr>
+      <tr><td>Гамма</td><td>Простое упражнение из последовательных нот: его разучивают на уроке музыки.</td></tr>
+      <tr><td>Кнутик</td><td>Маленький кнут, плётка. Мальчик подстёгивает им сам себя, изображая лошадь.</td></tr>
+      <tr><td>«Муж» (в кавычках)</td><td>Так девочка называла мальчика, с которым играла на бульваре.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="steps-sec" data-doc="1">
+  <div class="shell">
+    <div class="eyebrow">Каркас сюжета</div>
+    <h2>Семь шагов: от конфет к стихам</h2>
+    <div class="steps" style="margin-top:18px">
+      <div class="step reveal"><b>1</b>Шесть лет, болезнь, подарок: красная книжечка с золотым словом «Пушкин».</div>
+      <div class="step reveal"><b>2</b>Внутри — шоколадные конфеты. Стихи приклеены под переплётом «для обмана».</div>
+      <div class="step reveal"><b>3</b>День — конфетам, утро — стихам. Первое стихотворение: «Птичка».</div>
+      <div class="step reveal"><b>4</b>Понимает по-своему: пленница — женщина в цепях, певица — красная дама из гостиной.</div>
+      <div class="step reveal"><b>5</b>Памятник на бульваре. Играть рядом неловко. Скамеечка, платьице, шёпот.</div>
+      <div class="step reveal"><b>6</b>Тайком открывает толстый том. «О, если правда…» — и две жизни.</div>
+      <div class="step reveal"><b>7</b>Лермонтов, тринадцать лет, окно вагона. Первое чувство остаётся.</div>
+    </div>
+    <div class="card reveal" style="margin-top:20px">
+      <h3>Четыре слова, без которых не обойтись</h3>
+      <table>
+        <tr><th style="width:20%">Слово</th><th style="width:32%">Простыми словами</th><th>В этом рассказе</th></tr>
+        <tr><td>Тема</td><td>О чём текст</td><td>Первая встреча ребёнка с поэзией</td></tr>
+        <tr><td>Главная мысль</td><td>Что автор хотел этим сказать</td><td>Одни стихи могут изменить человека навсегда; у каждого есть свой «первый Пушкин»</td></tr>
+        <tr><td>Деталь</td><td>Мелкая подробность, которая работает на смысл</td><td>«Стояла всегда на одной ноге»</td></tr>
+        <tr><td>Композиция</td><td>Как части соединены между собой</td><td>Воспоминания идут по порядку, от смешного к серьёзному, а строки «Птички» возвращаются и связывают рассказ</td></tr>
+      </table>
+      <p class="note" style="margin:12px 0 0">Больше терминов не нужно. В олимпиадном задании прямо сказано: обилие терминов ещё не делает работу научной. Важно сказать ясно и точно.</p>
+    </div>
+  </div>
+</section>
+
+<section id="author-sec">
+  <div class="shell">
+    <div class="eyebrow">Главная загадка</div>
+    <h2>Чьи это стихи?</h2>
+    <p style="max-width:72ch">В рассказе звучат два отрывка. Один из них не пушкинский. Попробуй определить сам — ответ откроется сразу.</p>
+    <div class="poemcards ui" style="margin-top:18px">
+      <div class="pcard" data-answer="tum">
+        <div class="verse">Вчера я отворил темницу<br>Воздушной пленницы моей.<br>Я рощам возвратил певицу,<br>Я возвратил свободу ей.</div>
+        <div class="opts">
+          <button class="opt" data-pick="push">А. С. Пушкин</button>
+          <button class="opt" data-pick="tum">Ф. А. Туманский</button>
+        </div>
+        <div class="fb"><b class="verdict"></b><span class="text"></span><span class="src"></span></div>
+      </div>
+      <div class="pcard" data-answer="push">
+        <div class="verse">О, если правда, что в ночи,<br>Когда покоятся живые,<br>И с неба лунные лучи<br>Скользят на камни гробовые…</div>
+        <div class="opts">
+          <button class="opt" data-pick="push">А. С. Пушкин</button>
+          <button class="opt" data-pick="tum">Ф. А. Туманский</button>
+        </div>
+        <div class="fb"><b class="verdict"></b><span class="text"></span><span class="src"></span></div>
+      </div>
+    </div>
+    <div class="card" data-doc="1" style="margin-top:22px">
+      <h3>Как на самом деле</h3>
+      <p><b>«Птичка» («Вчера я отворил темницу…»)</b> — стихотворение Фёдора Антоновича Туманского (1799–1853), поэта пушкинского времени. Оно вышло в альманахе «Северные цветы на 1827 год». У Пушкина тоже есть «Птичка», но другая: «В чужбине свято наблюдаю…» (1823). Два стихотворения об одном и том же, похожим размером, почти современники — их легко спутать. Тэффи их и спутала, а когда рассказ напечатали, об ошибке заговорили в газетах.</p>
+      <p><b>«О, если правда, что в ночи…»</b> — это Пушкин, стихотворение «Заклинание» (1830). Именно эти строки девочка прочла в настоящем томе «Сочинения А. С. Пушкина».</p>
+      <p style="margin-bottom:0">Что это даёт нам, читателям? Девочка верит надписи на книге: раз написано «Пушкин», значит, всё внутри — Пушкина. Она ещё не различает имена, она различает чувство. И получается неожиданно: стихи, которые она шептала памятнику как пушкинские, были чужими, а те, что перевернули её жизнь, — как раз пушкинские. В своей работе об этом можно сказать прямо, только не останавливайся на слове «ошибка»: объясни, что она показывает в героине.</p>
+    </div>
+  </div>
+</section>
+
+<section id="lives-sec">
+  <div class="shell">
+    <div class="eyebrow">Приём: противопоставление</div>
+    <h2>Две жизни</h2>
+    <p style="max-width:70ch">Самое важное признание в рассказе: «начались с той поры две жизни». Подвигай ползунок — посмотри, как одна жизнь уступает место другой.</p>
+    <div class="lives" style="margin-top:16px">
+      <div class="livesgrid">
+        <div class="life noisy" id="lifeA">
+          <h3>Жизнь первая: шумная</h3>
+          <ul>
+            <li>ползают под столом вместе со старой кошкой</li>
+            <li>грубиянят няньке, вывираются перед гувернанткой</li>
+            <li>гримасничают, воруют сахар</li>
+            <li>ревут благим матом нарочно, для безобразия</li>
+          </ul>
+          <p class="lifeq">Здесь всё видно и слышно всем.</p>
+        </div>
+        <div class="life quiet" id="lifeB">
+          <h3>Жизнь вторая: тихая</h3>
+          <ul>
+            <li>сидят тихо, одиноко прижавшись на скамеечке</li>
+            <li>шепчут чуть-чуть слышно</li>
+            <li>глядят влюблённо и робко в чугунный глаз</li>
+            <li>читают стоя на одной ноге, чтобы успеть убежать</li>
+          </ul>
+          <p class="lifeq">«Рассказать об этом было некому».</p>
+        </div>
+      </div>
+    </div>
+    <div class="mixrow ui">
+      <span>шум</span><input type="range" id="mix" min="0" max="100" value="50" aria-label="Соотношение двух жизней"><span>тишина</span>
+      <span id="mixlabel">Обе жизни рядом</span>
+    </div>
+    <div class="card" data-doc="1" style="margin-top:18px">
+      <p style="margin-bottom:0">Такой приём называется противопоставлением. Он показывает: у человека появился внутренний мир, о котором никто вокруг не догадывается. Об этом не расскажешь ни сестре, ни няньке — да и слов для этого пока нет: «да я и сама не понимала, что это такое».</p>
+    </div>
+  </div>
+</section>
+
+<section id="details-sec">
+  <div class="shell">
+    <div class="eyebrow">Микроанализ</div>
+    <h2>Вещи, которые говорят за героиню</h2>
+    <p class="note ui">Нажми на карточку — откроется объяснение. Золотые слова в тексте рассказа ведут сюда же.</p>
+    <div class="details" style="margin-top:16px">
+      <article class="detail" id="d-box">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="12" width="30" height="22" rx="3" fill="#C8102E"/><rect x="5" y="8" width="30" height="7" rx="2" fill="#E4572E"/><circle cx="14" cy="24" r="4" fill="#5A3418"/><circle cx="26" cy="27" r="4" fill="#5A3418"/><rect x="5" y="8" width="30" height="2" fill="#E9B44C"/></svg>
+          Коробка конфет под видом книги<span class="plus">+</span></button>
+        <div class="dbody"><p>Сладкое и стихи лежат рядом. Сначала ребёнок берётся за конфеты и только потом за стихи — так и начинается путь к чтению. Обманка не осуждается: это просто детство, в котором книга и удовольствие ещё не разделены.</p></div>
+      </article>
+      <article class="detail" id="d-crumbs">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 30h28" stroke="#8A6A43" stroke-width="3"/><circle cx="12" cy="25" r="2.4" fill="#E9B44C"/><circle cx="20" cy="27" r="1.8" fill="#E9B44C"/><circle cx="28" cy="24" r="2.2" fill="#E9B44C"/></svg>
+          Крошки на дне коробки<span class="plus">+</span></button>
+        <div class="dbody"><p>«Печально полизав прилипшие на дно крошки» — конфеты кончились, и освободилось место для другого удовольствия, которому девочка ещё не знает названия. Одна мелкая подробность показывает целую перемену.</p></div>
+      </article>
+      <article class="detail" id="d-monument">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="10" y="30" width="20" height="7" fill="#8A6A43"/><path d="M20 8c4 0 6 3 6 6s-2 5-4 6l4 10H14l4-10c-2-1-4-3-4-6s2-6 6-6z" fill="#2B2119"/><circle cx="22" cy="13" r="1.6" fill="#E9B44C"/></svg>
+          Памятник и «большой чугунный глаз»<span class="plus">+</span></button>
+        <div class="dbody"><p>Для девочки поэт живой: она смотрит ему прямо в глаза, шепчет, ждёт ответа и даже думает: «Вот это он так смотрел, когда это сочинял!» Памятник перестаёт быть украшением бульвара и становится собеседником.</p></div>
+      </article>
+      <article class="detail" id="d-bench">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="18" width="28" height="4" rx="2" fill="#8A6A43"/><rect x="6" y="24" width="28" height="4" rx="2" fill="#8A6A43"/><rect x="9" y="28" width="3" height="8" fill="#6E5334"/><rect x="28" y="28" width="3" height="8" fill="#6E5334"/></svg>
+          Деревянная скамеечка<span class="plus">+</span></button>
+        <div class="dbody"><p>Место, где она сидит тихо и одна. В финале звучит: «Нет, я никогда не уйду с этой деревянной скамеечки, всю жизнь буду я здесь». Скамеечка — не мебель, а точка, в которой осталась её вторая жизнь.</p></div>
+      </article>
+      <article class="detail" id="d-leg">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="12" y="6" width="16" height="12" rx="2" fill="#2E7D6F"/><path d="M20 18v12M20 30l-5 5M20 30l6 3" stroke="#8A6A43" stroke-width="3" fill="none"/></svg>
+          Чтение стоя на одной ноге<span class="plus">+</span></button>
+        <div class="dbody"><p>«Чтобы скорее можно было убежать на случай беды, стояла всегда на одной ноге». Читает тайком, kitap держит наготове, готова исчезнуть. Значит, стихи для неё важнее запрета и страха — и так она выучила на память целый том.</p></div>
+      </article>
+      <article class="detail" id="d-cow">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="8" y="16" width="22" height="14" rx="3" fill="#E4572E"/><circle cx="14" cy="22" r="2" fill="#FFFDF8"/><path d="M30 16l5-5v8z" fill="#C8102E"/><path d="M12 30v5M26 30v5" stroke="#8A6A43" stroke-width="3"/></svg>
+          Картонная корова и брошенный «муж»<span class="plus">+</span></button>
+        <div class="dbody"><p>Прежние игры никуда не делись: мальчик по-прежнему «ездит сам на себе», ржёт и брыкается. Но героине «ни до чего этого не было ни малейшего дела». Взрослый автор рассказывает об этом с улыбкой — так выглядит перемена, которую ребёнок не может объяснить словами.</p></div>
+      </article>
+    </div>
+
+    <div class="cols" style="margin-top:22px" data-doc="1">
+      <div class="card">
+        <h3>Зачем в рассказе Лермонтов</h3>
+        <div class="clouds" aria-hidden="true">
+          <svg class="cloud" style="top:14px;width:150px;animation-duration:34s" viewBox="0 0 120 50"><path d="M20 40c-11 0-18-7-18-15S10 10 20 10c4-8 14-10 20-6 5-6 16-6 21 1 10-2 19 5 19 15s-8 20-20 20z" fill="#FFFDF8" opacity=".85"/></svg>
+          <svg class="cloud" style="top:52px;width:110px;animation-duration:47s;animation-delay:-12s" viewBox="0 0 120 50"><path d="M20 40c-11 0-18-7-18-15S10 10 20 10c4-8 14-10 20-6 5-6 16-6 21 1 10-2 19 5 19 15s-8 20-20 20z" fill="#FFFDF8" opacity=".65"/></svg>
+          <svg class="cloud" style="top:26px;width:80px;animation-duration:58s;animation-delay:-30s" viewBox="0 0 120 50"><path d="M20 40c-11 0-18-7-18-15S10 10 20 10c4-8 14-10 20-6 5-6 16-6 21 1 10-2 19 5 19 15s-8 20-20 20z" fill="#FFFDF8" opacity=".5"/></svg>
+        </div>
+        <p style="margin-top:14px">Лермонтов появляется как проверка первого чувства. Девочка боится читать его так, как боятся предать друга: «вдруг полюблю его и оторвусь от того». Потом всё-таки читает «Тучки небесные» — и признаёт, что это чудесно.</p>
+        <p style="margin-bottom:0">Но стоит закрыть глаза, и она снова видит чугунный взгляд и себя маленькую. Спора «кто лучше» в рассказе нет: Лермонтов нужен, чтобы стало видно — первое впечатление осталось самым прочным.</p>
+      </div>
+      <div class="card">
+        <h3>Почему рассказ называется «Мой первый Пушкин»</h3>
+        <p>«Первый» — это не первый прочитанный текст, а первое переживание красоты слова. Местоимение «мой» делает историю личной: не «Пушкин вообще», а тот Пушкин, который случился именно с ней.</p>
+        <p style="margin-bottom:0">Поэтому у каждого читателя может быть свой «первый Пушкин» — книга или стихи, с которых началась любовь к слову.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="build-sec">
+  <div class="shell">
+    <div class="eyebrow">Практика</div>
+    <h2>Собери свою работу за четыре шага</h2>
+    <p class="note ui" style="max-width:74ch">Пиши коротко и честно. Нажми на подсказку — она встанет в текст. Работа сохраняется сама, её можно скопировать, напечатать или скачать в Word.</p>
+    <div class="builder" style="margin-top:18px">
+      <div>
+        <div class="stepbox">
+          <h3><i>1</i>Вступление: о чём рассказ</h3>
+          <div class="task">Одно-два предложения. Назови автора и название.</div>
+          <textarea id="t1" placeholder="Рассказ Тэффи «Мой первый Пушкин» — воспоминание о том, как…"></textarea>
+          <div class="chips ui">
+            <button class="chip" data-for="t1">Рассказ Тэффи «Мой первый Пушкин» — воспоминание о том, как…</button>
+            <button class="chip" data-for="t1">Автор вспоминает себя шестилетней и показывает…</button>
+          </div>
+          <div class="counter ui"><span>шаг 1</span><span><b id="w1">0</b> слов</span></div>
+        </div>
+        <div class="stepbox">
+          <h3><i>2</i>Что происходит: начало — поворот — финал</h3>
+          <div class="task">Три-четыре предложения. Поворот здесь — чтение строк «О, если правда…».</div>
+          <textarea id="t2" placeholder="Сначала… Поворотным моментом становится… В финале…"></textarea>
+          <div class="chips ui">
+            <button class="chip" data-for="t2">Сначала мы узнаём, что…</button>
+            <button class="chip" data-for="t2">Поворотным моментом становится…</button>
+            <button class="chip" data-for="t2">В финале героиня…</button>
+          </div>
+          <div class="counter ui"><span>шаг 2</span><span><b id="w2">0</b> слов</span></div>
+        </div>
+        <div class="stepbox">
+          <h3><i>3</i>Одна деталь крупным планом</h3>
+          <div class="task">Короткая цитата в кавычках «…» и объяснение своими словами. Без объяснения цитата не работает.</div>
+          <textarea id="t3" placeholder="Особенно важна деталь… Она помогает понять…"></textarea>
+          <div class="chips ui">
+            <button class="chip" data-for="t3">Особенно важна деталь…</button>
+            <button class="chip" data-for="t3">Эта подробность помогает понять…</button>
+            <button class="chip" data-for="t3">«стояла всегда на одной ноге»</button>
+            <button class="chip" data-for="t3">«начались с той поры две жизни»</button>
+          </div>
+          <div class="counter ui"><span>шаг 3</span><span><b id="w3">0</b> слов</span></div>
+        </div>
+        <div class="stepbox">
+          <h3><i>4</i>Вывод: главная мысль</h3>
+          <div class="task">Одно-два предложения, ясно и без общих слов про «пользу чтения».</div>
+          <textarea id="t4" placeholder="Таким образом, Тэффи показывает, что…"></textarea>
+          <div class="chips ui">
+            <button class="chip" data-for="t4">Таким образом, автор показывает, что…</button>
+            <button class="chip" data-for="t4">Противопоставляя две жизни, Тэффи…</button>
+          </div>
+          <div class="counter ui"><span>шаг 4</span><span><b id="w4">0</b> слов</span></div>
+        </div>
+        <div class="ui" style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn primary" id="assemble">Показать работу</button>
+          <button class="btn" id="copyWork">Копировать</button>
+          <button class="btn gold" id="workDoc">Скачать .doc</button>
+          <button class="btn ghost" id="clearWork">Очистить</button>
+        </div>
+        <div id="preview"></div>
+      </div>
+      <aside class="sidepanel ui">
+        <h4 style="font-family:system-ui,sans-serif;font-size:.95rem;margin:0 0 4px">Готовность работы</h4>
+        <div class="meter"><i id="mfill"></i></div>
+        <ul class="check" id="checks">
+          <li data-c="named">Названы автор и название</li>
+          <li data-c="steps">Есть начало, поворот и финал</li>
+          <li data-c="quote">Есть цитата в кавычках «…»</li>
+          <li data-c="explain">Деталь объяснена своими словами</li>
+          <li data-c="idea">Сформулирована главная мысль</li>
+          <li data-c="size">Всего не меньше 120 слов</li>
+        </ul>
+        <p style="font-size:.8rem;color:var(--muted);margin:0 0 12px">Всего слов: <b id="wAll">0</b>. Черновик сохраняется в этом браузере.</p>
+        <details class="sample" data-doc="1">
+          <summary>Образец разбора (около 190 слов)</summary>
+          <div>
+            <p>Рассказ Тэффи «Мой первый Пушкин» — воспоминание о том, как шестилетняя девочка впервые услышала стихи и полюбила их.</p>
+            <p>Начало смешное: подарочная книжечка с золотым словом «Пушкин» оказывается коробкой конфет, а стихи приклеены под переплётом «для обмана». Девочка съедает конфеты и только на другое утро берётся за стихи. Перелом наступает позже, когда она тайком открывает толстый том и читает: «О, если правда, что в ночи…». Она не видит ни лунного света, ни могильных камней — она слышит повтор слов, и это меняет её жизнь: «начались с той поры две жизни».</p>
+            <p>Самая говорящая подробность — скамеечка у памятника. Девочка сидит «чинно», одёргивает платьице и шепчет: «Ваше стихотворение, Пушкин». Прежние игры брошены: картонная корова и «муж», который скачет сам на себе вокруг памятника. Значит, у неё появилось дело важнее любой игры.</p>
+            <p>Тэффи показывает: поэзия входит в жизнь ребёнка не через понимание, а через чувство. Девочка путает смысл слов и даже авторов, но переживает настоящее. Поэтому в финале она и говорит: «Нет, я никогда не уйду с этой деревянной скамеечки».</p>
+            <p class="note">Это не образец для переписывания: возьми свою деталь и скажи о ней своё.</p>
+          </div>
+        </details>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="quiz-sec">
+  <div class="shell">
+    <div class="eyebrow">Проверка</div>
+    <h2>Восемь вопросов по рассказу</h2>
+    <div class="scorebar ui">
+      <div class="ring" id="ring" style="--p:0"><span id="ringTxt">0/8</span></div>
+      <div style="flex:1;min-width:220px">
+        <b id="qStatus">Отвечай по порядку или вразнобой — проверка сразу.</b>
+        <div style="font-size:.84rem;color:var(--muted)" id="qSub">После каждого ответа появится объяснение и источник.</div>
+      </div>
+      <button class="btn" id="qReset">Пройти заново</button>
+    </div>
+    <div class="quiz ui" id="quiz"></div>
+    <div id="review"></div>
+
+    <div class="cols" style="margin-top:24px" data-doc="1">
+      <div class="card">
+        <h3>Проверь себя перед сдачей</h3>
+        <ul>
+          <li>Понял бы мой первый абзац человек, который рассказ не читал?</li>
+          <li>Есть ли начало, поворот и финал — или я просто пересказал всё подряд?</li>
+          <li>Есть ли хотя бы одна короткая цитата и объяснение к ней?</li>
+          <li>Не перепутал ли я Тэффи, которая вспоминает, и девочку, с которой всё происходит?</li>
+          <li>Проверил ли я, чьи стихи цитирую?</li>
+          <li>Прочитал ли вслух? Если спотыкаешься — предложение надо переделать.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Три ловушки</h3>
+        <ul class="traps">
+          <li><b>«Конфеты — это плохо, а стихи хорошо».</b> Нет. Конфеты здесь не осуждаются, это просто детство.</li>
+          <li><b>«Девочка неправильно поняла стихи, значит, она глупая».</b> Нет. Тэффи показывает силу детского воображения.</li>
+          <li><b>«Лермонтов хуже Пушкина».</b> В рассказе этого нет вовсе.</li>
+        </ul>
+        <h3 style="margin-top:16px">Задания для тренировки</h3>
+        <ol>
+          <li>Найди все места, где повторяются строки «Вчера я отворил темницу…». Объясни в двух предложениях, зачем они возвращаются.</li>
+          <li>Опиши тремя предложениями, что чувствует девочка, стоя на одной ноге у стола сестры. Опирайся только на текст.</li>
+          <li>Напиши пять-шесть предложений о своём «первом Пушкине».</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="teacher-sec" data-doc="1">
+  <div class="shell">
+    <div class="eyebrow">Справка</div>
+    <h2>Учителю: точные атрибуции и источники</h2>
+    <div class="card">
+      <p class="note">В исходном материале стихотворения были поменяны местами. Верное распределение таково.</p>
+      <ul class="note">
+        <li>«Птичка» («Вчера я отворил темницу / Воздушной пленницы моей…») — Ф. А. Туманский (1799–1853). Публикация: «Северные цветы на 1827 год», СПб., 1827, с. 259. В оригинале первая строка — «Вчера я растворил темницу»; Тэффи цитирует по памяти.</li>
+        <li>«О, если правда, что в ночи…» — А. С. Пушкин, «Заклинание» (1830).</li>
+        <li>Собственная пушкинская «Птичка» — «В чужбине свято наблюдаю…» (1823, «Литературные листки», № 2). Современники считали «Птичку» Туманского откликом на неё и на стихотворение А. А. Дельвига «К птичке, выпущенной на волю».</li>
+        <li>М. Ю. Лермонтов, «Тучи» («Тучки небесные, вечные странники!..») — 1840.</li>
+        <li>Тэффи (Надежда Александровна Лохвицкая, 1872–1952). «Мой первый Пушкин» — газета «Русское слово», 1912.</li>
+      </ul>
+      <p class="note">Об ошибке спорили в печати 1912 года: А. В. Амфитеатров посвятил ей статью «Тэффин грех», Тэффи ответила фельетоном-оправданием. Утверждение «Тэффи намеренно оставила ошибку» — её собственная защита, а не установленный факт; в школьной работе надёжнее говорить о детском восприятии, в котором имя автора ещё не важно.</p>
+      <p class="note" style="margin-bottom:0"><b>Источники:</b> текст рассказа — «Русское слово», 1912; опорные вопросы и критерии — задание 1 муниципального этапа ВсОШ по литературе, 9 класс, 2025/2026 учебный год (целостный анализ, 60 баллов, шесть критериев); тексты стихотворений — Викитека («Птичка» Ф. Туманского, «Заклинание» Пушкина).</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    Материал для бесплатного учебного использования. Рассказ Тэффи и стихотворения приведены по открытым источникам. Страница работает без интернета.
+  </div>
+</footer>
+
+<div id="pop" role="dialog" aria-live="polite"></div>
+<div id="toast" role="status"><span id="toastText"></span><button id="toastAct" type="button">Вернуть</button></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s);};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+var root=document.documentElement;
+var store={
+  get:function(k,d){try{var v=localStorage.getItem(k);return v===null?d:JSON.parse(v);}catch(e){return d;}},
+  set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}},
+  del:function(k){try{localStorage.removeItem(k);}catch(e){}}
+};
+
+/* ---------- SETTINGS ---------- */
+var DEF={size:18,lh:1.62,w:74,theme:"paper",font:'Georgia,"Times New Roman",serif',words:true,steps:false,details:true,motion:true};
+var S=Object.assign({},DEF,store.get("teffi7-settings",{}));
+if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches){S.motion=false;}
+function apply(){
+  root.style.setProperty("--read-size",S.size+"px");
+  root.style.setProperty("--read-lh",String(S.lh));
+  root.style.setProperty("--read-width",S.w+"ch");
+  root.style.setProperty("--read-font",S.font);
+  root.setAttribute("data-theme",S.theme);
+  root.setAttribute("data-words",S.words?"on":"off");
+  root.setAttribute("data-steps",S.steps?"on":"off");
+  root.setAttribute("data-details",S.details?"on":"off");
+  root.setAttribute("data-motion",S.motion?"on":"off");
+  $("#vSize").textContent=S.size; $("#vLh").textContent=Number(S.lh).toFixed(2); $("#vW").textContent=S.w;
+  $("#cSize").value=S.size; $("#cLh").value=S.lh; $("#cW").value=S.w; $("#cFont").value=S.font;
+  $("#cWords").checked=S.words; $("#cSteps").checked=S.steps; $("#cDetails").checked=S.details; $("#cMotion").checked=S.motion;
+  $$("#cTheme button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.th===S.theme));});
+  store.set("teffi7-settings",S);
+}
+function bindRange(id,key,cast){$(id).addEventListener("input",function(){S[key]=cast(this.value);apply();});}
+bindRange("#cSize","size",Number); bindRange("#cLh","lh",Number); bindRange("#cW","w",Number);
+$("#cFont").addEventListener("change",function(){S.font=this.value;apply();});
+$$("#cTheme button").forEach(function(b){b.addEventListener("click",function(){S.theme=b.dataset.th;apply();});});
+[["#cWords","words"],["#cSteps","steps"],["#cDetails","details"],["#cMotion","motion"]].forEach(function(p){
+  $(p[0]).addEventListener("change",function(){S[p[1]]=this.checked;apply();});
+});
+$("#resetBtn").addEventListener("click",function(){S=Object.assign({},DEF);apply();toast("Настройки чтения сброшены",null);});
+apply();
+
+/* ---------- AMBIENT MOTES ---------- */
+(function(){
+  var scene=$(".scene"); if(!scene) return;
+  for(var i=0;i<16;i++){
+    var m=document.createElement("span"); m.className="mote";
+    m.style.left=(6+Math.random()*88)+"%";
+    m.style.top=(40+Math.random()*55)+"%";
+    m.style.animationDuration=(9+Math.random()*11)+"s";
+    m.style.animationDelay=(-Math.random()*14)+"s";
+    m.style.background=i%3===0?"#E9B44C":(i%3===1?"#E4572E":"#4FC2A8");
+    scene.appendChild(m);
+  }
+})();
+$("#boxcard").addEventListener("click",function(){location.hash="#story-sec";});
+
+/* ---------- NAV / PROGRESS / REVEAL ---------- */
+var navLinks=$$("#nav a");
+var secs=navLinks.map(function(a){return document.querySelector(a.getAttribute("href"));}).filter(Boolean);
+function onScroll(){
+  var h=document.documentElement;
+  var p=h.scrollTop/Math.max(1,(h.scrollHeight-h.clientHeight));
+  $("#bar").style.width=(p*100)+"%";
+}
+window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
+if("IntersectionObserver" in window){
+  var spy=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        navLinks.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id);});
+      }
+    });
+  },{rootMargin:"-45% 0px -50% 0px"});
+  secs.forEach(function(s){spy.observe(s);});
+  var rev=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");rev.unobserve(e.target);}});
+  },{rootMargin:"0px 0px -8% 0px"});
+  $$(".reveal").forEach(function(el,i){el.style.transitionDelay=(Math.min(i,6)*45)+"ms";rev.observe(el);});
+}else{$$(".reveal").forEach(function(el){el.classList.add("in");});}
+navLinks.concat($$('.herocta a')).forEach(function(a){
+  a.addEventListener("click",function(ev){
+    var id=a.getAttribute("href"); if(!id||id.charAt(0)!=="#") return;
+    var t=document.querySelector(id); if(!t) return;
+    ev.preventDefault();
+    var nav=parseInt(getComputedStyle(root).getPropertyValue("--nav"),10)||64;
+    var extra=window.innerWidth<1240?($("#rail").offsetHeight||0):0;
+    window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-nav-extra-14,behavior:"smooth"});
+    history.replaceState(null,"",id);
+  });
+});
+
+/* ---------- DICTIONARY ---------- */
+var DICT={
+  "кори":["Корь","Заразная болезнь с высокой температурой и сыпью. После неё девочка слабая и стриженая."],
+  "темницу":["Темница","Тюрьма, тёмное помещение, где держат взаперти. В стихах так названа клетка птицы."],
+  "пленницы":["Пленница","Та, кого держат в неволе. «Воздушная пленница» — лёгкая, как воздух: это птица."],
+  "певицу":["Певица","Здесь — поющая птица. Девочка подумала о женщине, которая поёт в гостиной."],
+  "певица":["Певица","Здесь — поющая птица, а не женщина с концерта."],
+  "том":["Том","Большая толстая книга, часть собрания сочинений."],
+  "гувернантка":["Гувернантка","Домашняя учительница в состоятельной семье."],
+  "гувернанткой":["Гувернантка","Домашняя учительница: занимается с детьми музыкой и уроками."],
+  "чинно":["Чинно","Тихо, прилично, «как положено»."],
+  "благоговейно":["Благоговейно","С глубоким уважением и восхищением, почти с робостью."],
+  "нараспев":["Нараспев","Протяжно, будто поёшь."],
+  "кнутиком":["Кнутик","Маленький кнут, плётка. Мальчик подстёгивает им сам себя, изображая лошадь."],
+  "гаммы":["Гамма","Упражнение из последовательных нот: его разучивают на уроке музыки."],
+  "няньке":["Нянька","Женщина, которая ухаживает за детьми в доме."]
+};
+(function(){
+  var story=$("#story"); if(!story) return;
+  var keys=Object.keys(DICT).sort(function(a,b){return b.length-a.length;});
+  var re=new RegExp("(^|[^А-Яа-яЁё])("+keys.join("|")+")(?![А-Яа-яЁё])","g");
+  var walker=document.createTreeWalker(story,NodeFilter.SHOW_TEXT,null,false);
+  var nodes=[],n; while((n=walker.nextNode())){nodes.push(n);}
+  nodes.forEach(function(node){
+    var txt=node.nodeValue; if(!txt||txt.indexOf(" ")<0&&txt.length<4) return;
+    if(!re.test(txt)) return; re.lastIndex=0;
+    var frag=document.createDocumentFragment(),last=0,m;
+    while((m=re.exec(txt))!==null){
+      var start=m.index+m[1].length;
+      frag.appendChild(document.createTextNode(txt.slice(last,start)));
+      var sp=document.createElement("span"); sp.className="w"; sp.textContent=m[2];
+      sp.dataset.k=m[2].toLowerCase(); sp.setAttribute("tabindex","0"); sp.setAttribute("role","button");
+      frag.appendChild(sp); last=start+m[2].length;
+    }
+    frag.appendChild(document.createTextNode(txt.slice(last)));
+    node.parentNode.replaceChild(frag,node);
+  });
+})();
+var pop=$("#pop"),popOwner=null;
+function showPop(el){
+  var d=DICT[el.dataset.k]; if(!d) return;
+  pop.innerHTML="<b></b><span></span>";
+  pop.firstChild.textContent=d[0]; pop.lastChild.textContent=d[1];
+  pop.style.display="block";
+  var r=el.getBoundingClientRect(), pw=pop.offsetWidth, ph=pop.offsetHeight;
+  var left=Math.min(Math.max(8,r.left+window.pageXOffset-20),window.pageXOffset+document.documentElement.clientWidth-pw-10);
+  var top=r.bottom+window.pageYOffset+8;
+  if(r.bottom+ph+16>window.innerHeight){top=r.top+window.pageYOffset-ph-8;}
+  pop.style.left=left+"px"; pop.style.top=top+"px"; popOwner=el;
+}
+function hidePop(){pop.style.display="none";popOwner=null;}
+document.addEventListener("click",function(e){
+  var w=e.target.closest?e.target.closest("span.w"):null;
+  if(w&&S.words){e.stopPropagation();showPop(w);return;}
+  if(popOwner&&!pop.contains(e.target)) hidePop();
+});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){hidePop();}
+  if((e.key==="Enter"||e.key===" ")&&document.activeElement&&document.activeElement.classList.contains("w")){
+    e.preventDefault();showPop(document.activeElement);
+  }
+});
+window.addEventListener("scroll",function(){if(popOwner)hidePop();},{passive:true});
+
+/* ---------- DETAILS ---------- */
+$$(".detail").forEach(function(d){
+  var head=$(".dhead",d);
+  head.addEventListener("click",function(){
+    var open=d.classList.toggle("open");
+    head.setAttribute("aria-expanded",String(open));
+  });
+});
+function openDetail(id){
+  var d=document.getElementById(id); if(!d) return;
+  d.classList.add("open"); $(".dhead",d).setAttribute("aria-expanded","true");
+  var nav=parseInt(getComputedStyle(root).getPropertyValue("--nav"),10)||64;
+  var extra=window.innerWidth<1240?($("#rail").offsetHeight||0):0;
+  window.scrollTo({top:d.getBoundingClientRect().top+window.pageYOffset-nav-extra-20,behavior:"smooth"});
+}
+$$("mark.d").forEach(function(m){
+  m.setAttribute("role","button");
+  m.addEventListener("click",function(){if(S.details)openDetail(m.dataset.d);});
+  m.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&S.details){e.preventDefault();openDetail(m.dataset.d);}});
+});
+
+/* ---------- AUTHORSHIP MINI-TASK ---------- */
+var AUTH={
+  tum:{name:"Ф. А. Туманский",text:"«Птичка» («Вчера я отворил темницу…») написал Фёдор Антонович Туманский, современник Пушкина. У Пушкина есть своя «Птичка», но другая — «В чужбине свято наблюдаю…» (1823).",src:"Викитека: «Птичка» Ф. Туманского; «Северные цветы на 1827 год», СПб., 1827, с. 259."},
+  push:{name:"А. С. Пушкин",text:"«О, если правда, что в ночи…» — это Пушкин, стихотворение «Заклинание» (1830). Именно эти строки девочка прочла в томе «Сочинения А. С. Пушкина», и они изменили её жизнь.",src:"А. С. Пушкин. «Заклинание», 1830."}
+};
+$$(".pcard").forEach(function(card){
+  var right=card.dataset.answer, fb=$(".fb",card);
+  $$(".opt",card).forEach(function(btn){
+    btn.addEventListener("click",function(){
+      if(card.dataset.done) return;
+      card.dataset.done="1";
+      var ok=btn.dataset.pick===right;
+      $$(".opt",card).forEach(function(b){
+        b.disabled=true;
+        if(b.dataset.pick===right)b.classList.add("right");
+        else if(b===btn)b.classList.add("wrong");
+      });
+      $(".verdict",fb).textContent=ok?"Верно. ":"Не угадал. ";
+      $(".text",fb).textContent=AUTH[right].text;
+      $(".src",fb).textContent="Источник: "+AUTH[right].src;
+      fb.classList.toggle("bad",!ok); fb.classList.add("show");
+    });
+  });
+});
+
+/* ---------- TWO LIVES MIX ---------- */
+var mix=$("#mix");
+function applyMix(){
+  var v=Number(mix.value)/100;
+  $("#lifeA").style.opacity=String(1-v*0.72);
+  $("#lifeB").style.opacity=String(0.28+v*0.72);
+  $("#lifeA").style.filter="saturate("+(1.15-v*0.85).toFixed(2)+")";
+  $("#lifeB").style.filter="saturate("+(0.35+v*0.85).toFixed(2)+")";
+  var lbl=$("#mixlabel");
+  lbl.textContent=v<0.25?"Пока живёт только шумная жизнь":v<0.5?"Появляется тихая, о ней никто не знает":v<0.78?"Тихая жизнь становится важнее":"«Начались с той поры две жизни»";
+}
+mix.addEventListener("input",applyMix); applyMix();
+
+/* ---------- BUILDER ---------- */
+var IDS=["t1","t2","t3","t4"];
+var draft=store.get("teffi7-draft",{t1:"",t2:"",t3:"",t4:""});
+IDS.forEach(function(id){document.getElementById(id).value=draft[id]||"";});
+function words(s){var t=(s||"").trim();return t?t.split(/\s+/).length:0;}
+function collect(){var o={};IDS.forEach(function(id){o[id]=document.getElementById(id).value;});return o;}
+function checks(o){
+  var all=(o.t1+" "+o.t2+" "+o.t3+" "+o.t4);
+  return {
+    named:/тэффи/i.test(o.t1)&&/первый\s+пушкин/i.test(o.t1),
+    steps:words(o.t2)>=25&&/сначала|начал|вначале/i.test(o.t2)&&/поворот|перелом|потом|затем|когда/i.test(o.t2),
+    quote:/«[^»]{3,}»/.test(o.t3),
+    explain:words(o.t3)>=22&&/потому что|значит|показывает|помогает понять|это значит/i.test(o.t3),
+    idea:words(o.t4)>=10,
+    size:words(all)>=120
+  };
+}
+function refresh(){
+  var o=collect(); draft=o; store.set("teffi7-draft",o);
+  var total=0;
+  IDS.forEach(function(id,i){var w=words(o[id]);total+=w;document.getElementById("w"+(i+1)).textContent=w;});
+  $("#wAll").textContent=total;
+  var c=checks(o),done=0;
+  $$("#checks li").forEach(function(li){var ok=!!c[li.dataset.c];li.classList.toggle("done",ok);if(ok)done++;});
+  $("#mfill").style.width=Math.round(done/6*100)+"%";
+  if($("#preview").classList.contains("show")) renderPreview();
+}
+IDS.forEach(function(id){document.getElementById(id).addEventListener("input",refresh);});
+$$(".chip").forEach(function(ch){
+  ch.addEventListener("click",function(){
+    var ta=document.getElementById(ch.dataset.for);
+    var add=ch.textContent.trim();
+    ta.value=(ta.value.trim()?ta.value.replace(/\s*$/,"")+" ":"")+add+" ";
+    ta.focus(); ta.setSelectionRange(ta.value.length,ta.value.length);
+    refresh();
+  });
+});
+function workParagraphs(){
+  var o=collect();
+  return IDS.map(function(id){return o[id].trim();}).filter(Boolean);
+}
+function renderPreview(){
+  var pv=$("#preview"),ps=workParagraphs();
+  pv.innerHTML="";
+  if(!ps.length){pv.innerHTML="<p class='note'>Пока пусто. Напиши хотя бы первый шаг.</p>";return;}
+  var h=document.createElement("h3"); h.textContent="Моя работа"; pv.appendChild(h);
+  ps.forEach(function(t){var p=document.createElement("p");p.textContent=t;pv.appendChild(p);});
+  var n=document.createElement("p"); n.className="note"; n.textContent="Слов: "+words(ps.join(" "))+". Прочитай вслух: если спотыкаешься — переделай предложение.";
+  pv.appendChild(n);
+}
+$("#assemble").addEventListener("click",function(){
+  var pv=$("#preview"); pv.classList.add("show"); renderPreview();
+  pv.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+function copyText(t){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(function(){toast("Работа скопирована",null);},function(){fallbackCopy(t);});
+  }else fallbackCopy(t);
+}
+function fallbackCopy(t){
+  var ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  var ok=false; try{ok=document.execCommand("copy");}catch(e){}
+  document.body.removeChild(ta);
+  toast(ok?"Работа скопирована":"Не удалось скопировать — выдели текст вручную",null);
+}
+$("#copyWork").addEventListener("click",function(){
+  var ps=workParagraphs();
+  if(!ps.length){toast("Сначала напиши хотя бы один шаг",null);return;}
+  copyText("Моя работа по рассказу Тэффи «Мой первый Пушкин»\n\n"+ps.join("\n\n"));
+});
+var undoData=null,undoTimer=null;
+$("#clearWork").addEventListener("click",function(){
+  var cur=collect();
+  if(!IDS.some(function(id){return cur[id].trim();})){toast("Черновик и так пуст",null);return;}
+  undoData=cur;
+  IDS.forEach(function(id){document.getElementById(id).value="";});
+  $("#preview").classList.remove("show"); refresh();
+  toast("Черновик очищен",function(){
+    if(!undoData)return;
+    IDS.forEach(function(id){document.getElementById(id).value=undoData[id]||"";});
+    refresh(); undoData=null; toast("Черновик возвращён",null);
+  });
+});
+refresh();
+
+/* ---------- TOAST ---------- */
+function toast(text,action){
+  var t=$("#toast"),b=$("#toastAct");
+  $("#toastText").textContent=text;
+  if(action){b.style.display="";b.onclick=function(){action();hideToast();};}
+  else{b.style.display="none";b.onclick=null;}
+  t.classList.add("show");
+  if(undoTimer)clearTimeout(undoTimer);
+  undoTimer=setTimeout(hideToast,action?8000:2600);
+}
+function hideToast(){$("#toast").classList.remove("show");}
+
+/* ---------- QUIZ ---------- */
+var QS=[
+ {q:"Сколько лет героине в начале рассказа?",o:["Шесть","Тринадцать","Тридцать"],a:0,
+  why:"Рассказ открывается прямо: «Мне было тогда шесть лет». Тринадцать — это финал, тридцать — возраст рассказчицы, с которым она сравнивает детское eating конфет.",
+  fix:"Рассказ открывается прямо: «Мне было тогда шесть лет». Тринадцать — это финал, тридцать — возраст взрослой рассказчицы.",
+  src:"Тэффи. «Мой первый Пушкин», 1912.",sec:"#story-sec"},
+ {q:"Что оказалось внутри красной книжечки с надписью «Пушкин»?",o:["Толстый том стихов","Шоколадные конфеты","Письма поэта"],a:1,
+  fix:"Это коробка шоколадных конфет, а несколько листочков со стихами приклеены под переплётом «для обмана».",
+  src:"Тэффи. «Мой первый Пушкин», 1912.",sec:"#story-sec"},
+ {q:"Кому принадлежат строки «Вчера я отворил темницу / Воздушной пленницы моей…»?",o:["А. С. Пушкину","Ф. А. Туманскому","М. Ю. Лермонтову"],a:1,
+  fix:"Это «Птичка» Фёдора Антоновича Туманского. У Пушкина есть своя «Птичка», но другая: «В чужбине свято наблюдаю…» (1823).",
+  src:"Викитека: «Птичка» Ф. Туманского; «Северные цветы на 1827 год».",sec:"#author-sec"},
+ {q:"«О, если правда, что в ночи…» — это…",o:["Пушкин, «Заклинание» (1830)","Туманский, «Птичка» (1827)","Лермонтов, «Тучи» (1840)"],a:0,
+  fix:"Это пушкинское «Заклинание» 1830 года. Именно эти строки девочка прочла в настоящем томе Пушкина.",
+  src:"А. С. Пушкин. «Заклинание», 1830.",sec:"#author-sec"},
+ {q:"Что поразило девочку в этих строках?",o:["Яркие картинки: луна и могилы","Повтор слов, их звучание","Имя автора на переплёте"],a:1,
+  fix:"«Я не увидела ни лунного света, ни могильных камней — ничего, я только услышала это повторенное „О, если правда“».",
+  src:"Тэффи. «Мой первый Пушкин», 1912.",sec:"#lives-sec"},
+ {q:"О чём говорит деталь «стояла всегда на одной ноге»?",o:["Она устала стоять","Она читала тайком и готова была убежать","Она разучивала танец"],a:1,
+  fix:"«Чтобы скорее можно было убежать на случай беды» — чтение было запретным и потому особенно дорогим.",
+  src:"Тэффи. «Мой первый Пушкин», 1912.",sec:"#details-sec"},
+ {q:"Зачем в рассказе появляется Лермонтов?",o:["Чтобы доказать, что он хуже Пушкина","Чтобы показать верность первому чувству","Он упомянут случайно"],a:1,
+  fix:"Девочка боится полюбить другого поэта, а прочитав «Тучки небесные», всё равно видит чугунный взгляд памятника. Спора «кто лучше» в рассказе нет.",
+  src:"Тэффи. «Мой первый Пушкин», 1912; М. Ю. Лермонтов. «Тучи», 1840.",sec:"#details-sec"},
+ {q:"Что значит финальная фраза про деревянную скамеечку?",o:["Героиня устала и хочет посидеть","Первое чувство осталось с ней навсегда","Её наказали и посадили на скамейку"],a:1,
+  fix:"«Нет, я никогда не уйду с этой деревянной скамеечки, всю жизнь буду я здесь» — речь о месте, где живёт её вторая, внутренняя жизнь.",
+  src:"Тэффи. «Мой первый Пушкин», 1912.",sec:"#lives-sec"}
+];
+var qState=[];
+function buildQuiz(){
+  var box=$("#quiz"); box.innerHTML=""; qState=new Array(QS.length).fill(null);
+  QS.forEach(function(item,i){
+    var q=document.createElement("div"); q.className="q";
+    var h=document.createElement("h3"); h.textContent=(i+1)+". "+item.q; q.appendChild(h);
+    var opts=document.createElement("div"); opts.className="opts";
+    item.o.forEach(function(text,j){
+      var b=document.createElement("button"); b.className="opt"; b.type="button"; b.textContent=text;
+      b.addEventListener("click",function(){answer(i,j,q);});
+      opts.appendChild(b);
+    });
+    q.appendChild(opts);
+    var fb=document.createElement("div"); fb.className="fb";
+    fb.innerHTML="<b class='verdict'></b><span class='text'></span><span class='src'></span>";
+    q.appendChild(fb); box.appendChild(q);
+  });
+  $("#review").classList.remove("show"); $("#review").innerHTML="";
+  updateScore();
+}
+function answer(i,j,q){
+  if(qState[i]!==null) return;
+  qState[i]=j;
+  var item=QS[i],ok=j===item.a,fb=$(".fb",q);
+  $$(".opt",q).forEach(function(b,k){
+    b.disabled=true;
+    if(k===item.a)b.classList.add("right");
+    else if(k===j)b.classList.add("wrong");
+  });
+  $(".verdict",fb).textContent=ok?"Верно. ":"Ошибка. ";
+  $(".text",fb).textContent=item.fix;
+  $(".src",fb).textContent="Источник: "+item.src;
+  fb.classList.toggle("bad",!ok); fb.classList.add("show");
+  updateScore();
+}
+function updateScore(){
+  var done=qState.filter(function(v){return v!==null;}).length;
+  var right=qState.filter(function(v,i){return v===QS[i].a;}).length;
+  $("#ring").style.setProperty("--p",String(Math.round(right/QS.length*100)));
+  $("#ringTxt").textContent=right+"/"+QS.length;
+  $("#qStatus").textContent=done<QS.length?("Отвечено "+done+" из "+QS.length):
+    (right===QS.length?"Все ответы верные — рассказ понятен точно.":"Верных ответов: "+right+" из "+QS.length+". Ниже — разбор ошибок.");
+  $("#qSub").textContent=done<QS.length?"После каждого ответа появится объяснение и источник.":"Можно пройти заново или вернуться к нужному разделу.";
+  if(done===QS.length) showReview();
+}
+function showReview(){
+  var rv=$("#review"),wrong=[];
+  qState.forEach(function(v,i){if(v!==QS[i].a)wrong.push(i);});
+  rv.innerHTML="";
+  var h=document.createElement("h3");
+  h.textContent=wrong.length?"Разбор ошибок":"Ошибок нет";
+  rv.appendChild(h);
+  if(!wrong.length){
+    var p=document.createElement("p");
+    p.textContent="Ты различаешь авторов, понимаешь поворот рассказа и видишь, зачем нужны детали. Теперь напиши свою работу в конструкторе.";
+    rv.appendChild(p);
+    var a=document.createElement("a"); a.className="btn primary"; a.href="#build-sec"; a.textContent="Перейти к работе";
+    a.style.display="inline-block"; a.style.marginTop="8px"; rv.appendChild(a);
+  }else{
+    wrong.forEach(function(i){
+      var d=document.createElement("div"); d.className="item";
+      var b=document.createElement("b"); b.textContent=(i+1)+". "+QS[i].q; d.appendChild(b);
+      var p=document.createElement("p"); p.style.margin="6px 0 4px";
+      p.textContent="Правильный ответ: "+QS[i].o[QS[i].a]+". "+QS[i].fix; d.appendChild(p);
+      var s=document.createElement("div"); s.className="note"; s.textContent="Источник: "+QS[i].src; d.appendChild(s);
+      var a=document.createElement("a"); a.href=QS[i].sec; a.textContent="Перечитать раздел"; a.style.fontSize=".85rem";
+      d.appendChild(a); rv.appendChild(d);
+    });
+  }
+  rv.classList.add("show");
+}
+$("#qReset").addEventListener("click",function(){buildQuiz();$("#quiz").scrollIntoView({behavior:"smooth",block:"start"});});
+buildQuiz();
+
+/* ---------- EXPORT ---------- */
+function docShell(title,body){
+  return '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">'+
+  '<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>'+title+'</title>'+
+  '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->'+
+  '<style>@page WordSection1{size:595.3pt 841.9pt;margin:2cm 1.5cm 2cm 3cm;}div.WordSection1{page:WordSection1;}'+
+  'body{font-family:"Times New Roman",serif;font-size:14pt;color:#000;line-height:1.35;}'+
+  'h1{font-size:18pt;text-align:center;margin:0 0 6pt;}h2{font-size:15pt;margin:16pt 0 6pt;border-bottom:0.75pt solid #808080;padding-bottom:2pt;}'+
+  'h3{font-size:14pt;margin:10pt 0 4pt;}p{margin:0 0 6pt;text-align:justify;}'+
+  'table{border-collapse:collapse;width:100%;font-size:13pt;}td,th{border:0.75pt solid #808080;padding:4pt 6pt;vertical-align:top;text-align:left;}'+
+  'th{background:#EFEFEF;}.poem{margin:6pt 0 6pt 18pt;font-style:italic;}.poem .ln{display:block;}'+
+  '.tag{font-size:10pt;font-style:normal;}.note{font-size:11pt;}.dbody{display:block!important;}'+
+  'ul,ol{margin:0 0 8pt 20pt;}li{margin-bottom:4pt;}.eyebrow,.kicker{font-size:10pt;color:#555;}'+
+  '.subtitle{text-align:center;font-size:12pt;margin:0 0 12pt;}</style></head><body><div class="WordSection1">'+body+'</div></body></html>';
+}
+function download(name,html){
+  var blob=new Blob(["\ufeff"+html],{type:"application/msword;charset=utf-8"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url; a.download=name; document.body.appendChild(a); a.click();
+  document.body.removeChild(a); setTimeout(function(){URL.revokeObjectURL(url);},4000);
+}
+function handoutBody(){
+  var out=[];
+  $$('[data-doc="1"]').forEach(function(sec){
+    var c=sec.cloneNode(true);
+    $$(".ui,svg,input,select,textarea,.chips,.opts,.counter,.meter,.plus,.clouds",c).forEach(function(n){n.parentNode.removeChild(n);});
+    $$("button.dhead",c).forEach(function(b){
+      var h=document.createElement("h3"); h.textContent=b.textContent.replace(/\+$/,"").trim();
+      b.parentNode.replaceChild(h,b);
+    });
+    $$("button",c).forEach(function(b){b.parentNode.removeChild(b);});
+    $$("span.w",c).forEach(function(s){s.parentNode.replaceChild(document.createTextNode(s.textContent),s);});
+    $$("mark.d",c).forEach(function(s){s.parentNode.replaceChild(document.createTextNode(s.textContent),s);});
+    $$("details",c).forEach(function(d){
+      var wrap=document.createElement("div"),sum=d.querySelector("summary");
+      if(sum){var h=document.createElement("h3");h.textContent=sum.textContent;wrap.appendChild(h);}
+      while(d.firstChild){if(d.firstChild!==sum)wrap.appendChild(d.firstChild);else d.removeChild(sum);}
+      d.parentNode.replaceChild(wrap,d);
+    });
+    $$("[style]",c).forEach(function(n){n.removeAttribute("style");});
+    $$("[tabindex],[role],[data-d],[data-k],[data-step],[data-start],[data-doc],[data-c],[data-for]",c).forEach(function(n){
+      ["tabindex","role","data-d","data-k","data-step","data-start","data-doc","data-c","data-for"].forEach(function(at){n.removeAttribute(at);});
+    });
+    var head=c.querySelector("h2");
+    if(head){var t=document.createElement("h2");t.textContent=head.textContent;c.insertBefore(t,c.firstChild);head.parentNode.removeChild(head);}
+    out.push(c.innerHTML);
+  });
+  return out.join("\n");
+}
+function exportHandout(){
+  var body='<h1>Тэффи. «Мой первый Пушкин»</h1><p class="subtitle">Как понять рассказ и написать о нём. 7 класс</p>'+handoutBody();
+  download("Тэффи. Мой первый Пушкин. 7 класс.doc",docShell("Тэффи. Мой первый Пушкин. 7 класс",body));
+  toast("Памятка сохранена в формате Word",null);
+}
+$("#docBtn").addEventListener("click",exportHandout);
+$("#docBtn2").addEventListener("click",exportHandout);
+$("#workDoc").addEventListener("click",function(){
+  var ps=workParagraphs();
+  if(!ps.length){toast("Сначала напиши хотя бы один шаг",null);return;}
+  var body='<h1>Моя работа</h1><p class="subtitle">по рассказу Тэффи «Мой первый Пушкин»</p>'+
+    ps.map(function(t){var d=document.createElement("p");d.textContent=t;return d.outerHTML;}).join("");
+  download("Моя работа. Тэффи. 7 класс.doc",docShell("Моя работа",body));
+  toast("Работа сохранена в формате Word",null);
+});
+function doPrint(){window.print();}
+$("#printBtn").addEventListener("click",doPrint);
+$("#printBtn2").addEventListener("click",doPrint);
+})();
+</script>
+</body>
+</html>
