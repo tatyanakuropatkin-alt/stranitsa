@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Орфографическая раскраска · ОГЭ-2027 · Задание 7</title>
+<style>
+:root{
+  --ink:#3A2E39; --paper:#FBF6EC; --surface:#FFFDF7; --line:rgba(58,46,57,.16);
+  --ok:#2E9E6B; --bad:#D64550; --warn:#E8A13C; --info:#3E7CB1;
+  --acc:#E8890C; --acc2:#C2452F; --amb1:rgba(232,137,12,.16); --amb2:rgba(194,69,47,.13);
+  --chipbg:#FFF6E4; --shadow:0 10px 30px rgba(58,46,57,.12);
+  --serif:Georgia,"Times New Roman",serif; --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+body[data-letter="O"]{--acc:#3E7CB1;--acc2:#7B5EA7;--amb1:rgba(62,124,177,.16);--amb2:rgba(123,94,167,.14);--chipbg:#EDF4FA}
+body[data-letter="I"]{--acc:#2E9E6B;--acc2:#E56399;--amb1:rgba(46,158,107,.15);--amb2:rgba(229,99,153,.12);--chipbg:#EDF7F0}
+body[data-letter="E"]{--acc:#F3722C;--acc2:#7B5EA7;--amb1:rgba(243,114,44,.16);--amb2:rgba(123,94,167,.15);--chipbg:#FDF0E6}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);min-height:100vh;overflow-x:hidden}
+::selection{background:var(--acc);color:#fff}
+*{scrollbar-width:thin;scrollbar-color:var(--acc) rgba(58,46,57,.08)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:rgba(58,46,57,.07);border-radius:8px}
+::-webkit-scrollbar-thumb{background:linear-gradient(160deg,var(--acc),var(--acc2));border-radius:8px;border:2px solid var(--paper)}
+::-webkit-scrollbar-thumb:hover{background:var(--acc2)}
+button{font-family:inherit;cursor:pointer;color:inherit}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px;border-radius:6px}
+.ambient{position:fixed;inset:0;z-index:-1;overflow:hidden;background:
+  radial-gradient(60% 50% at 12% 8%,var(--amb1),transparent 70%),
+  radial-gradient(55% 45% at 88% 90%,var(--amb2),transparent 70%),var(--paper);transition:background 1s}
+.ambient i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;animation:drift 46s ease-in-out infinite alternate}
+.ambient i:nth-child(1){width:44vw;height:44vw;left:-10vw;top:-12vw;background:var(--amb1)}
+.ambient i:nth-child(2){width:38vw;height:38vw;right:-8vw;bottom:-10vw;background:var(--amb2);animation-delay:-18s}
+.ambient i:nth-child(3){width:26vw;height:26vw;left:52%;top:38%;background:var(--amb1);animation-delay:-30s}
+.ambient::after{content:"";position:absolute;inset:0;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(6vw,4vw) scale(1.15)}}
+header{position:fixed;top:0;left:0;right:0;height:66px;z-index:50;display:flex;align-items:center;gap:14px;padding:0 18px;
+  background:rgba(255,253,247,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand .mark{display:grid;grid-template-columns:repeat(2,17px);gap:2px;flex:none}
+.brand .mark b{width:17px;height:17px;border-radius:5px;display:grid;place-items:center;font:700 10px var(--serif);color:#fff}
+.brand .mark b:nth-child(1){background:#E8890C}.brand .mark b:nth-child(2){background:#3E7CB1}
+.brand .mark b:nth-child(3){background:#2E9E6B}.brand .mark b:nth-child(4){background:#F3722C}
+.brand h1{font:700 17px/1.1 var(--serif);letter-spacing:.2px;white-space:nowrap}
+.brand small{display:block;font:500 11px var(--sans);opacity:.65;letter-spacing:.4px}
+.tabs{display:flex;gap:6px;margin-left:auto}
+.tab{position:relative;display:flex;align-items:center;gap:7px;padding:6px 12px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);transition:.25s}
+.tab:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.tab .tl{font:700 20px var(--serif)}
+.tab .ring{width:22px;height:22px;flex:none}
+.tab .ring circle{fill:none;stroke-width:3.4}
+.tab .ring .bgc{stroke:rgba(58,46,57,.14)}
+.tab .ring .fgc{stroke:var(--acc);stroke-linecap:round;transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset .6s}
+.tab .cnt{font:600 11px var(--sans);opacity:.7;min-width:32px;text-align:left}
+.tab.on{border-color:var(--acc);background:linear-gradient(150deg,var(--chipbg),var(--surface));box-shadow:0 4px 14px var(--amb1)}
+.tab.on .tl{color:var(--acc2)}
+.hbtns{display:flex;gap:8px}
+.iconbtn{width:40px;height:40px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);font-size:17px;display:grid;place-items:center;transition:.2s}
+.iconbtn:hover{border-color:var(--acc);transform:translateY(-2px)}
+.iconbtn[aria-pressed="true"]{background:var(--chipbg);border-color:var(--acc)}
+main{max-width:1420px;margin:0 auto;padding:86px 18px 30px;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(360px,1fr);gap:20px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);animation:rise .6s both}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.stage{position:sticky;top:84px;padding:16px 16px 14px}
+.stage-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:2px 6px 12px}
+.stage-head h2{font:700 24px var(--serif)}
+.stage-head .sub{font:italic 400 14px var(--serif);opacity:.7}
+.stage-head .badge{margin-left:auto;font:700 12px var(--sans);color:#fff;background:linear-gradient(140deg,var(--acc),var(--acc2));padding:5px 12px;border-radius:20px;letter-spacing:.4px}
+.canvas-wrap{position:relative;border-radius:16px;overflow:hidden;border:1.5px solid var(--line);background:#fff}
+.canvas-wrap svg{display:block;width:100%;height:auto}
+#regionG path{transition:fill .55s ease;cursor:pointer}
+#regionG path:hover{filter:brightness(1.06)}
+#regionG path.flash{animation:pop .55s ease}
+@keyframes pop{0%{filter:brightness(1.9) saturate(1.6)}100%{filter:none}}
+.spark{animation:spark .7s ease-out forwards;pointer-events:none}
+@keyframes spark{from{opacity:1;r:3}to{opacity:0;r:26}}
+.confetti{position:absolute;top:-14px;width:9px;height:14px;border-radius:2px;pointer-events:none;animation:conf 2.3s ease-in forwards}
+@keyframes conf{from{transform:translateY(0) rotate(0);opacity:1}to{transform:translateY(620px) rotate(560deg);opacity:0}}
+.controls{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;padding:14px 4px 2px}
+.seg{display:flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{border:0;background:var(--surface);padding:8px 13px;font:600 13px var(--sans);transition:.2s}
+.seg button[aria-pressed="true"]{background:linear-gradient(140deg,var(--acc),var(--acc2));color:#fff}
+.palette{display:flex;gap:5px;flex-wrap:wrap}
+.sw{width:26px;height:26px;border-radius:8px;border:2px solid rgba(58,46,57,.25);transition:.15s;padding:0}
+.sw:hover{transform:scale(1.18)}
+.sw.on{border-color:var(--ink);box-shadow:0 0 0 2.5px var(--surface),0 0 0 4.5px var(--acc)}
+.sw.eraser{background:repeating-linear-gradient(45deg,#fff,#fff 4px,#eee 4px,#eee 8px);font-size:12px;display:grid;place-items:center}
+.ctl{display:flex;align-items:center;gap:7px;font:600 12px var(--sans)}
+.ctl input[type=range]{width:90px;accent-color:var(--acc)}
+.ctl select{border:1.5px solid var(--line);border-radius:9px;background:var(--surface);padding:5px 7px;font:600 12px var(--sans);color:var(--ink)}
+.switch{position:relative;width:36px;height:20px;flex:none}
+.switch input{position:absolute;opacity:0;width:100%;height:100%;cursor:pointer;margin:0}
+.switch i{position:absolute;inset:0;border-radius:20px;background:rgba(58,46,57,.2);transition:.2s;pointer-events:none}
+.switch i::after{content:"";position:absolute;left:2.5px;top:2.5px;width:15px;height:15px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.switch input:checked+i{background:var(--acc)}
+.switch input:checked+i::after{left:18.5px}
+.btn{border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 15px;font:700 13px var(--sans);transition:.2s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{transform:translateY(-2px);border-color:var(--acc);box-shadow:0 5px 14px var(--amb1)}
+.btn.primary{background:linear-gradient(140deg,var(--acc),var(--acc2));color:#fff;border-color:transparent}
+.btn.primary:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.ghost{background:transparent}
+.btn.small{padding:7px 11px;font-size:12px}
+.btn.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
+.panel{position:sticky;top:84px;max-height:calc(100vh - 102px);overflow:auto;padding:18px;display:flex;flex-direction:column;gap:14px;animation-delay:.12s}
+.q-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.q-num{font:700 19px var(--serif)}
+.q-obz{font:600 10.5px ui-monospace,Consolas,monospace;background:rgba(58,46,57,.08);padding:3px 8px;border-radius:8px;letter-spacing:.5px}
+.q-letter{margin-left:auto;font:700 12px var(--sans);color:var(--acc2);background:var(--chipbg);border:1.5px solid var(--acc);padding:4px 11px;border-radius:16px}
+.q-progress{display:flex;align-items:center;gap:10px}
+.q-progress .bar{flex:1;height:9px;border-radius:6px;background:rgba(58,46,57,.1);overflow:hidden}
+.q-progress .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .6s}
+.q-progress span{font:700 12px var(--sans);opacity:.7}
+.q-instr{font:600 14px/1.5 var(--sans)}
+.q-instr b{color:var(--acc2);font-size:16px}
+.q-hint{font:500 12px/1.5 var(--sans);background:var(--chipbg);border:1px dashed var(--acc);border-radius:11px;padding:8px 11px}
+.q-hint b{color:var(--acc2)}
+.q-text{font:400 17px/2.05 var(--serif);background:linear-gradient(170deg,var(--chipbg),var(--surface));border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.q-text .w{white-space:nowrap}
+.gap{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:1.3em;height:1.3em;margin:0 .1em;padding:0 .12em;
+  border:1.6px dashed var(--acc);border-radius:.38em;background:var(--surface);font:700 .92em var(--serif);color:var(--acc2);
+  vertical-align:baseline;transform:translateY(.16em);transition:.18s;line-height:1}
+.gap:hover{background:var(--chipbg);transform:translateY(.16em) scale(1.12)}
+.gap b{position:absolute;top:-.62em;right:-.5em;font:600 .5em var(--sans);background:var(--ink);color:var(--paper);border-radius:1em;padding:.1em .34em;line-height:1.25;pointer-events:none}
+.gap.sel{background:linear-gradient(140deg,var(--acc),var(--acc2));color:#fff;border-style:solid;border-color:transparent;animation:chippop .25s}
+.gap.sel b{background:var(--acc2)}
+@keyframes chippop{50%{transform:translateY(.16em) scale(1.25)}}
+.gap.hit{background:var(--ok);border-color:var(--ok);color:#fff;border-style:solid}
+.gap.hit b{background:#1d6b47}
+.gap.bad{background:var(--bad);border-color:var(--bad);color:#fff;border-style:solid;animation:shake .4s}
+.gap.bad b{background:#9c2f38}
+@keyframes shake{25%{transform:translateY(.16em) translateX(-3px)}75%{transform:translateY(.16em) translateX(3px)}}
+.gap.other{border-color:var(--line);color:rgba(58,46,57,.55);background:transparent}
+.gap.lock{pointer-events:none}
+.q-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.q-score{margin-left:auto;font:700 14px var(--sans);display:flex;gap:10px;align-items:center}
+.q-score .st{color:var(--acc2);font-size:12px}
+.explain{border-radius:14px;border:1.5px solid var(--line);overflow:hidden;animation:rise .4s both}
+.explain .banner{padding:10px 14px;font:700 14px var(--sans);color:#fff;display:flex;gap:8px;align-items:center}
+.explain.ok .banner{background:var(--ok)}
+.explain.warn .banner{background:var(--warn)}
+.explain.reveal{border-left:4px solid var(--acc)}
+.explain .body{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.explain .full-label{font:700 12px var(--sans);color:var(--acc2);letter-spacing:.6px;text-transform:uppercase}
+.words{list-style:none;display:flex;flex-direction:column;gap:7px}
+.words li{display:flex;flex-direction:column;gap:1px;padding:7px 10px;border-radius:10px;background:var(--chipbg)}
+.words .ww{font:700 15px var(--serif)}
+.words .ww b{color:var(--acc2);text-decoration:underline;text-underline-offset:3px}
+.words .rr{font:500 12px/1.45 var(--sans);opacity:.85}
+.explain details{border:1px dashed var(--line);border-radius:10px;padding:8px 11px}
+.explain summary{font:700 12.5px var(--sans);cursor:pointer;color:var(--acc2)}
+.explain .full{font:400 14.5px/1.9 var(--serif);padding-top:8px}
+.explain .full b{color:var(--acc2)}
+.explain .full .o{color:var(--info);font-weight:700}
+.explain .src{font:500 11px var(--sans);opacity:.6}
+.explain .row{display:flex;gap:8px;flex-wrap:wrap}
+.q-foot{display:flex;align-items:center;gap:10px;justify-content:space-between;border-top:1px dashed var(--line);padding-top:11px}
+.linklike{border:0;background:none;font:600 12px var(--sans);color:var(--acc2);text-decoration:underline dotted;padding:4px}
+.linklike.armed{color:#fff;background:var(--bad);border-radius:8px;text-decoration:none}
+.q-foot .src{font:500 10.5px var(--sans);opacity:.55;text-align:right}
+.brushcard,.donecard{display:flex;flex-direction:column;gap:13px}
+.brushcard h3,.donecard h3{font:700 22px var(--serif)}
+.brushcard p,.donecard p{font:400 14px/1.6 var(--sans)}
+.curcolor{display:flex;align-items:center;gap:10px;font:600 13px var(--sans)}
+.curcolor i{width:34px;height:34px;border-radius:10px;border:2px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.stat{background:var(--chipbg);border-radius:12px;padding:10px 12px}
+.stat b{display:block;font:700 21px var(--serif);color:var(--acc2)}
+.stat span{font:600 11px var(--sans);opacity:.7}
+.mistakes{display:flex;flex-direction:column;gap:8px;max-height:260px;overflow:auto;padding-right:4px}
+.mist{border:1px solid var(--line);border-left:4px solid var(--bad);border-radius:10px;padding:9px 11px;font:500 12.5px/1.55 var(--sans)}
+.mist b{font-family:var(--serif);font-size:14px}
+.mist .ans{color:var(--ok);font-weight:700}
+.mist .was{color:var(--bad)}
+.modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;background:rgba(38,30,40,.5);backdrop-filter:blur(4px);padding:18px}
+.modal.open{display:grid}
+.modal .box{background:var(--surface);border-radius:20px;max-width:720px;width:100%;max-height:86vh;overflow:auto;padding:24px 26px;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:rise .35s both}
+.modal h3{font:700 22px var(--serif);margin-bottom:6px}
+.modal h4{font:700 15px var(--serif);margin:16px 0 6px;color:var(--acc2)}
+.modal p,.modal li{font:400 13.5px/1.65 var(--sans)}
+.modal ul,.modal ol{padding-left:20px;display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.modal .close{float:right}
+.modal .fine{font-size:11.5px;opacity:.65;margin-top:14px;border-top:1px dashed var(--line);padding-top:10px}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(80px);z-index:120;background:var(--ink);color:var(--paper);
+  font:600 13px var(--sans);padding:11px 18px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.3);transition:.35s;max-width:88vw;text-align:center}
+#toast.show{transform:translateX(-50%) translateY(0)}
+.print-title{display:none}
+@media (max-width:1020px){
+  main{grid-template-columns:1fr;padding-top:80px}
+  .stage,.panel{position:static;max-height:none}
+  .brand small{display:none}
+  .brand h1{font-size:14px}
+  .tab{padding:5px 8px}.tab .cnt{display:none}
+  header{gap:8px;padding:0 10px}
+}
+@media (max-width:560px){
+  .brand h1{display:none}
+  .q-text{font-size:16px;padding:12px}
+  .stage-head h2{font-size:19px}
+  .controls{gap:8px 10px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+@media print{
+  header,.panel,.controls,.ambient,#toast,.modal,.stage-head .badge{display:none!important}
+  body{background:#fff}
+  main{display:block;padding:0;max-width:none}
+  .stage{position:static;box-shadow:none;border:0;padding:0}
+  .stage-head{padding:0 0 8px}
+  .print-title{display:block;font:700 16px var(--serif);margin-bottom:6px}
+  .canvas-wrap{border:1px solid #999}
+}
+</style>
+</head>
+<body data-letter="A">
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<header>
+  <div class="brand">
+    <span class="mark" aria-hidden="true"><b>А</b><b>О</b><b>И</b><b>Е</b></span>
+    <h1>Орфографическая раскраска<small>ОГЭ-2027 · задание 7 · открытый банк ФИПИ</small></h1>
+  </div>
+  <nav class="tabs" id="tabs" aria-label="Выбор буквы"></nav>
+  <div class="hbtns">
+    <button class="iconbtn" id="soundBtn" aria-pressed="true" title="Звук включён/выключен">🔊</button>
+    <button class="iconbtn" id="teacherBtn" title="Как использовать">📖</button>
+  </div>
+</header>
+
+<main>
+  <section class="stage card">
+    <p class="print-title" id="printTitle"></p>
+    <div class="stage-head">
+      <h2 id="stageTitle"></h2>
+      <span class="sub" id="stageSub"></span>
+      <span class="badge" id="letterBadge"></span>
+    </div>
+    <div class="canvas-wrap" id="canvasWrap">
+      <svg id="art" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Раскраска">
+        <rect id="paperRect" x="0" y="0" width="1000" height="700"></rect>
+        <g id="regionG" stroke-linejoin="round" stroke-linecap="round"></g>
+        <g id="decoG" fill="none" pointer-events="none"></g>
+        <g id="numsG" pointer-events="none"></g>
+        <g id="fxG" pointer-events="none"></g>
+      </svg>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Режим">
+        <button id="modeQuiz" aria-pressed="true">🎓 Учёная</button>
+        <button id="modeBrush" aria-pressed="false">🖌 Кисть</button>
+      </div>
+      <div class="palette" id="palette" aria-label="Палитра"></div>
+      <label class="ctl">Контур <input type="range" id="strokeRange" min="1" max="5" step="0.5" value="2.5"></label>
+      <label class="ctl">Бумага
+        <select id="paperSelect">
+          <option value="warm">тёплая</option>
+          <option value="cold">холодная</option>
+          <option value="night">ночная</option>
+        </select>
+      </label>
+      <label class="ctl">Номера <span class="switch"><input type="checkbox" id="numsToggle" checked><i></i></span></label>
+      <label class="ctl">Подсказки <span class="switch"><input type="checkbox" id="hintsToggle" checked><i></i></span></label>
+      <label class="ctl">Печать контура <span class="switch"><input type="checkbox" id="outlineToggle"><i></i></span></label>
+      <button class="btn small" id="undoBtn">↩ Отменить</button>
+      <button class="btn small" id="randBtn">🎲 Случайные цвета</button>
+      <button class="btn small" id="eraseBtn">🧽 Стереть краски</button>
+      <button class="btn small" id="pngBtn">⬇ PNG</button>
+      <button class="btn small" id="printBtn">🖨 Печать</button>
+      <button class="btn small" id="wordBtn">📄 Разбор в Word</button>
+    </div>
+  </section>
+
+  <aside class="panel card">
+    <div id="quizCard">
+      <div class="q-top">
+        <span class="q-num" id="qNum"></span>
+        <span class="q-obz" id="qObz"></span>
+        <span class="q-letter" id="qLetter"></span>
+      </div>
+      <div class="q-progress"><div class="bar"><i id="qBar"></i></div><span id="qCount"></span></div>
+      <p class="q-instr" id="qInstr"></p>
+      <p class="q-hint" id="qHint" hidden></p>
+      <div class="q-text" id="qText"></div>
+      <div class="q-actions">
+        <button class="btn primary" id="checkBtn" disabled>Проверить</button>
+        <button class="btn ghost" id="clearBtn">Сбросить выбор</button>
+        <div class="q-score">★ <b id="ptsEl">0</b><span class="st" id="streakEl"></span></div>
+      </div>
+      <div id="explainEl"></div>
+      <div class="q-foot">
+        <button class="linklike" id="restartBtn">↺ Начать эту картину заново</button>
+        <span class="src">Нажимайте на пропуски: буква появится в слове.<br>Клавиши 1–9 и Enter тоже работают.</span>
+      </div>
+    </div>
+
+    <div id="brushCard" class="brushcard" hidden>
+      <h3>Свободная кисть</h3>
+      <p>Выберите цвет в палитре под картиной и нажимайте на любой фрагмент — он закрасится. Ластик возвращает бумагу. Кнопка «↩ Отменить» отменяет последний мазок, «🎲 Случайные цвета» раскрашивает всё сразу.</p>
+      <div class="curcolor">Текущий цвет: <i id="brushColor"></i><span id="brushCount"></span></div>
+      <p style="opacity:.7;font-size:12.5px">Заработанные за верные ответы краски сохраняются — свободное творчество их не портит.</p>
+      <button class="btn primary" id="brushBack">🎓 Вернуться к заданиям</button>
+    </div>
+
+    <div id="doneCard" class="donecard" hidden>
+      <h3>✨ Картина готова!</h3>
+      <p id="donePraise"></p>
+      <div class="stats" id="doneStats"></div>
+      <div id="doneMistWrap">
+        <h3 style="font-size:16px">Разбор ошибок</h3>
+        <div class="mistakes" id="doneMistakes"></div>
+      </div>
+      <div class="q-actions">
+        <button class="btn primary" id="donePng">⬇ Сохранить PNG</button>
+        <button class="btn" id="doneWord">📄 Разбор в Word</button>
+        <button class="btn" id="doneBrush">🖌 Раскрасить самой</button>
+        <button class="btn ghost" id="doneAgain">↺ Пройти ещё раз</button>
+      </div>
+      <p style="font-size:12px;opacity:.65">Выберите другую букву вверху — там новая картина и новые задания.</p>
+    </div>
+  </aside>
+</main>
+
+<div class="modal" id="teacherModal" role="dialog" aria-modal="true" aria-label="Как использовать">
+  <div class="box">
+    <button class="iconbtn close" id="modalClose" aria-label="Закрыть">✕</button>
+    <h3>Как использовать</h3>
+    <ol>
+      <li>Ученик отмечает пропуски, где пишется заданная буква, и нажимает «Проверить». Верный ответ закрашивает фрагмент картины и открывает пояснение с правилом.</li>
+      <li>Ошибка — подсказка о количестве верных позиций и вторая попытка; затем показывается полный текст с ответами. Все неидеальные ответы попадают в «Разбор ошибок».</li>
+      <li>Режим «Кисть» — свободное раскрашивание. «Печать контура» выводит чистый чёрно-белый лист для работы в классе. «Разбор в Word» выгружает все тексты с ответами и правилами.</li>
+    </ol>
+    <h4>О материале</h4>
+    <p>Интерактивная раскраска по заданию 7 ОГЭ-2027: орфография (гласные в корнях, приставках, суффиксах и окончаниях). Четыре картины — по букве на каждую: <b>А</b> «Осенний сад» (12 заданий), <b>О</b> «Зимняя сказка» (18), <b>И</b> «Весенний городок» (32), <b>Е</b> «Летний вечер» (28). Всего 90 заданий подборки.</p>
+    <h4>Источник</h4>
+    <p>Тексты и коды ОБЗ сохранены из подборки открытого банка заданий ФИПИ (ОГЭ-2027, задание 7).</p>
+    <p class="fine">Материал предназначен для бесплатного учебного использования. Файл автономный: работает без интернета, прогресс сохраняется в браузере.</p>
+  </div>
+</div>
+
+<div id="toast" role="status"></div>
+<noscript><p style="padding:100px 20px;text-align:center">Для работы раскраски включите JavaScript.</p></noscript>
+
+<script>
+"use strict";
+/* ================= ПРАВИЛА ================= */
+const GAR='Чередование ГАР/ГОР: без ударения пишется О',
+KAS_O='Чередование КАС/КОС: нет суффикса -А- — О',KAS_A='Чередование КАС/КОС: есть суффикс -А- — А',
+ROS='Чередование РАСТ/РАЩ/РОС: перед С пишется О',RAST='Чередование РАСТ/РАЩ/РОС: перед СТ и Щ пишется А',
+KLON='Чередование КЛОН/КЛАН: без ударения — О',TVOR='Чередование ТВАР/ТВОР: без ударения — О',
+MAK='Чередование МАК/МОК: «погружать в жидкость» — А',MOK='Чередование МАК/МОК: «пропускать жидкость» — О',
+LOZH='Корень -ЛОЖ-: перед Ж пишется О (ср. -ЛАГ-)',
+MIR='Чередование МЕР/МИР: есть суффикс -А- — И',BIR='Чередование БЕР/БИР: есть суффикс -А- — И',
+DIR='Чередование ДЕР/ДИР: есть суффикс -А- — И',PIR='Чередование ПЕР/ПИР: есть суффикс -А- — И',
+ZHIG='Чередование ЖЕГ/ЖИГ: есть суффикс -А- — И',CHIT='Чередование ЧЕТ/ЧИТ: есть суффикс -А- — И',
+BLIST='Чередование БЛЕСТ/БЛИСТ: есть суффикс -А- — И',BLEST='Чередование БЛЕСТ/БЛИСТ: нет -А- — Е',
+BER='Чередование БЕР/БИР: нет суффикса -А- — Е',MER='Чередование МЕР/МИР: нет суффикса -А- — Е',
+IVA='Суффикс -ИВА-: в форме «я» сохраняется (я …иваю)',OVA='Суффикс -ОВА-/-ЕВА-: в форме «я» — -ую/-юю',
+EVA='Суффикс -ЕВА-: в форме «я» — -еваю',
+SP2='II спряжение: в личном окончании — И',SP2X='Глагол-исключение II спряжения: в окончании — И',SP1='I спряжение: в личном окончании — Е',
+PAST_N='Прошедшее время, средний род: перед -СЬ — О',PAST_F='Прошедшее время, женский род: перед -СЬ — А',PAST_P='Прошедшее время, множественное число: -И',
+INFL='Перед -Л- сохраняется гласная инфинитива',INFV='Перед -В- сохраняется гласная инфинитива',INFE='Инфинитив на -ЕТЬ: сохраняется Е',
+SHOROH='О в корне после шипящей: шорох (ср. шуршать)',ZHISHI='ЖИ/ШИ пиши с буквой И',CI_I='После Ц в корне пишется И',CI_E='После Ц без ударения — Е',
+OST='Суффикс -ОСТЬ: поверхность, растительность',ONK='Суффикс -ОНК- под ударением после шипящей: речонка',
+OK_SH='Суффикс -ОК под ударением после шипящей',OV_SH='Суффикс -ОВ- под ударением после шипящей: камышовый',
+IK='Суффикс -ИК-: гласная не выпадает',EK='Суффикс -ЕК-: гласная выпадает (листочка)',
+ENK='Суффикс -ЕНЬК-: маленький, голубенький',ENN='Суффикс -ЕНН-: особенная, посаженный',ANN='От глагола на -АТЬ: суффикс -АНН-',
+OV_PR='Суффикс -ОВ- в прилагательном: осиновых',EV_BEZ='Суффикс -ЕВ- без ударения',LIV='Суффикс -ЛИВ-: услужливый',
+IM='Суффикс -ИМ-: движимый, видимый',EM='Суффикс -ЕМ- (I спр.): встречаемый',ESK='Суффикс -ЧЕСК-: исторические',
+ESTV='Суффикс -ЕСТВ-: путешествие',EN='Суффикс -ЕНИ-/-ЕН-: движение, время → времени',IN='Суффикс -ИН-: тишина',
+INK='Суффикс -ИНК-: проталинка',CHIK='Суффикс -ЧИК-: колокольчик',NIK='Суффикс -НИК-: подснежник',
+ER='Суффикс -ЕР-: мать → матери',ENK2='Суффикс -ЕНК-: часовенка',ESHK='Суффикс -ЕШК-: краешек',
+IJA='Слово на -ИЯ: в Р./Д./П. падеже — И',IJE='Слово на -ИЕ: в предложном падеже — И',
+SKL3='3-е склонение: Р./Д./П. падеж — И',SKL1='1-е склонение: предложный падеж — Е',SKL1R='1-е склонение: родительный падеж — И',
+PREDLOG='Производный предлог В ТЕЧЕНИЕ — на конце Е',NI='Частица НИ',NIM='НИ в отрицательном местоимении',
+ADV_A='Наречие: приставки ИЗ-/ДО-/С- → суффикс -А',ADV_O='Наречие: приставки В-/НА-/ЗА- → суффикс -О',
+SOED_O='Сложное слово: соединительная гласная О',SLOVO='Словарное слово: запомните написание',
+END_OM='Окончание -ОМ/-ОЙ: какой? каком?',END_IM='Окончание -ИМ/-ИХ/-ИЕ: каким? каких? какие?',
+END_EJ='Окончание -ЕЙ/-ЕЕ: какой? какое?',END_EGO='Окончание -ЕГО: какого?',END_OI='О в окончании под ударением: какой?',
+SRAVN='Сравнительная степень: суффикс -Е/-ЕЕ',KRAT='Краткое прилагательное среднего рода: -О',
+PRI_B='Приставка ПРИ-: приближение, прибытие',PRI_P='Приставка ПРИ-: присоединение',PRI_N='Приставка ПРИ-: неполнота действия',PRI_BL='Приставка ПРИ-: близость',
+PRE_O='Приставка ПРЕ- в значении «очень»',PRE_P='Приставка ПРЕ- в значении «пере-»',PRED='Приставка ПРЕД-: перед, до',PERE='Приставка ПЕРЕ-',
+OB='Приставка ОБ-',OP='Приставка О-',SO='Приставка СО-',PO='Приставка ПО-',PRO='Приставка ПРО-',ZA='Приставка ЗА-',NA='Приставка НА-',
+RAS='Приставка РАС-: без ударения — А',BES='Приставка БЕС- перед глухой согласной',POSLE_G='После приставки на гласную И сохраняется',
+MIE='Разносклоняемое на -МЯ: времени — Е',LJE='На -ЬЕ: в предложном падеже — Е (в раздумье)',EJA='На -ЕЯ: дательный падеж — Е (по аллее)';
+
+/* ============ ДАННЫЕ: [№, ОБЗ, ответ, буквы 1–9, текст, правила по ответу] ============ */
+const DATA={
+A:{title:'Осенний сад',sub:'Листва, рябина и гриб под клёном',tasks:[
+[2,'49E9FF','3789','оеаоооааа','Возле самой воды, в зар{1}слях, вдруг увидишь подвеш{2}нное к стеблям гнездо кр{3}пивницы или выд{4}лбленное в трухлявом осиновом пне гнездо мух{5}ловки-пеструшки. Но нечаст{6} обн{7}ружишь искусно свитые, искусно спрят{8}нные в буйной зелени гнёзда, хотя их, должно быть, очень много: вокруг весь буерак н{9}полнен щебетаньем, пересвистом птиц.',[SLOVO+' (крапивница)',SLOVO+' (обнаружить)',ANN+' (спрятать)',NA]],
+[8,'2F5D08','3689','еоаооаоаа','Поздним ненастным вечер{1}м геол{2}ги ост{3}новились на ночлег в горн{4}й д{5}лине. Внизу, в узком ущелье, бил{6}сь о скалы река. Р{7}скошная р{8}стительность окружал{9} людей.',[SLOVO+' (остановиться)',PAST_F,RAST,PAST_F]],
+[10,'3D8305','134','аоааооооо','Девушка р{1}душно предл{2}жила мне чаю, но я попросил её сначал{3} показать мне сад, выр{4}щенный чуть ли не под самым Полярным кругом. Мы вышли из дома. За калиткой я неожиданн{5} увидел ябл{6}ньки, малинник, усыпанный ягод{7}й. Почувствовав смолистый аромат, я повернул голову налев{8}: там крас{9}вались кедры.',['Проверяемая гласная: рАд',ADV_A,RAST]],
+[24,'6D761E','1589','аоооаооаа','Любое средство выр{1}зительности – это не случайн{2}сть, а продуманный автором приём, необходимый ему для того, чтобы донести до читателя свои мысли и чувства. С помощью художественных средств автор д{3}бивается того, чтобы вместе с ним рад{4}вались, пробуждались от р{5}внодушия. Безэм{6}циональный текст не сп{7}собен вызвать отклик в душе́ другого, дать возможность насл{8}диться его кр{9}сотой.',[SLOVO+' (выразительный)',SLOVO+' (равнодушие)','Проверяемая гласная: слАдкий','Проверяемая гласная: красИвый']],
+[42,'FF7FEE','25679','оаооаааоа','Небо то заволакивал{1}сь рыхлыми белыми обл{2}ками, то вдруг местами расчищал{3}сь на мгн{4}вение, и тогда из-за р{5}здвинутых туч показывал{6}сь л{7}зурь, ясная и ласк{8}вая, как прекрасный глаз. Я сидел, и глядел кругом, и слуш{9}л.',[SLOVO+' (облако)','Приставка РАЗ- под ударением: рАздвинутых',PAST_F,SLOVO+' (лазурь)',INFL+' (слушАть)']],
+[54,'AB433D','58','ооооаооао','Из с{1}седней деревни дон{2}сился с{3}бачий лай. Спать не хотел{4}сь, поэтому туристы р{5}сселись в{6}круг к{7}стра и стали р{8}ссказывать всякие смешные и страшные истории. Только к утру сон сморил молодёжь, и все безмятежн{9} заснули.',[RAS,RAS]],
+[60,'A119FD','13','аеаоыоооо','Золотой осенний денёк. Кругом тишина. Лишь изредк{1} прокурлыч{2}т в небе жур{3}вли или пролетит с призывным криком куличок. Дожди см{4}чили землю, и теперь она скрад{5}вает и топ{6}т конских к{7}пыт, и шорох с{8}бачьих лап. Лес поредел, но всё ещё р{9}скошен в осеннем уборе.',[ADV_A,SLOVO+' (журавль)']],
+[71,'37861F','139','аоаоыоооа','Вот к{1}ртина засухи: жаркий сух{2}вей обжигает р{3}стения. Повисла мгла. Это мириады г{4}рячих пылинок в воздухе. От жа́ра свёрт{5}ваются в труб{6}чку листья, к{7}лосья зерновых высыхают, поля чахнут. Лёгкое дуновение ветерка подобн{8} обжигающему пламени. Даже изредк{9} не набегают облака.',[SLOVO+' (картина)',RAST,ADV_A]],
+[72,'0EDC27','256789','оаооааааа','Шлюпку швырял{1}, как щепку, но, не отступая, она двиг{2}лась вперёд. По временам казал{3}сь, что море уже погл{4}тило смельч{5}ков, отважившихся выйти в море на лёгком судёнышке. Наконец шлюпка добр{6}лась до берега. Все действия м{7}тросов были организов{8}нны и согл{9}сованны.',[PAST_F,'Суффикс -АК-: смельчак — смельчака (не выпадает)',PAST_F,SLOVO+' (матрос)','Суффикс -ОВАНН-: организованный',OVA+' (согласовать)']],
+[78,'E7025A','123467','ааааоааоо','З{1}сыпая в п{2}латке, мы и не дум{3}ли, что в эту самую минуту в т{4}йгу вх{5}дила осень. А з{6}снув мёртвым сном, не знали, как осени не хв{7}тило ночи, как утро, увидев, что его место ещё занято, спрятал{8}сь в соседней д{9}лине за речкой.',[ZA,SLOVO+' (палатка)',INFL+' (думАть)',SLOVO+' (тайга)',ZA,'Проверяемая гласная: хвАтка']],
+[85,'1C9CE2','2347','оаааооаюо','Дни стояли невыносим{1} жаркие. Только в смеш{2}нном лесу можно было насл{3}диться свежестью. Листья молодых дубков были упруги, как будто их только что обм{4}кнули в зелёный воск. В траве р{5}сли грибы, нежные колокольчики накл{6}нили к земле свои головки. Тихо, только изредк{7} были слышны стрекоч{8}щие кузнечики. На опушку выск{9}чил заяц и бросился наутёк.',[ANN+' (смешать)','Проверяемая гласная: слАдкий',MAK,ADV_A]],
+[89,'D14A88','6789','оооооаааа','Солнце скл{1}няется к г{2}ризонту, его к{3}сые лучи разливаются по всему небу. Мы бродим по лесу. Постепенно темн{4}та словно выползает из-под земли, л{5}жится у наших ног, прик{6}сается к кустам и деревьям. Птицы замолкают, лишь изредк{7} разд{8}ётся одинокий голосок птички. След знакомой тропинки начал проп{9}дать.',[KAS_A,ADV_A,'Корень -ДА- (дать): раздаётся','Проверяемая гласная: пропАсть']]
+]},
+O:{title:'Зимняя сказка',sub:'Снегопад, шёпот, шорохи…',tasks:[
+[3,'27A1F7','134689','оёооаоаоо','В бурю море становил{1}сь злым, ч{2}рным. Волны неслись к берегу и выбрасывали на песок водор{3}сли. Больше недели свирепств{4}вал ветер, но постепенно затих, море успокоилось. Оно сверкало на солнце, похожее на огромное зерк{5}ло. Было приятно заг{6}рать на берегу, изредк{7} ощущая лёгкое прик{8}сновение ветерка, вслушиваясь в ш{9}рохи трав.',[PAST_N,ROS+' (водоросли)',OVA+' (свирепствовать)',GAR,KAS_O,SHOROH]],
+[6,'9CA1FC','23578','аооеоаооё','Одуванчики – самый р{1}спространённый мед{2}нос в дик{3}й флоре наш{4}й страны, п{5}тому что они цветут раньше сирени, черёмухи и {6}кации. Как правил{7}, цветение одуванчиков длится месяц, а в дождлив{8}е лето и ещ{9} дольше.',[SOED_O+' (медонос)',END_OI+' (дикой)',SLOVO+' (потому)',SLOVO+' (как правило)','Окончание среднего рода: дождливОе (какое?)']],
+[18,'9469BE','124','ооаоаааеё','Лиственницы уже {1}блетели. Их хвоя, тонкая, как к{2}роткие золотые волосы, всё время сыпал{3}сь сверху, хотя ветра не был{4}. На лиственнице около костра трещал{5} к{6}кая-то птица. К{7}залось, что эта птица – здешний лесной парикмахер, что она стриж{8}т хвою, щ{9}лкает ножницами, сыплет эту хвою на реку, на костёр.',[OB,SLOVO+' (короткий)',PAST_N+' (не было)']],
+[22,'1AD315','12578','ооёеоеооё','С б{1}льшим трудом пр{2}бирался я с тяж{3}лой нош{4}й сквозь лесную чащ{5}бу. В посвежевш{6}м воздухе уже чувств{7}валось дыхание осени. Приближался вечер. Мне казал{8}сь, что я заблудился и мне предстоит ноч{9}вка в лесу.',['Проверяемая гласная: бОльше',PRO,'Суффикс -ОБ-: чащоба',OVA+' (чувствовать)',PAST_N]],
+[23,'E6DF13','12345789','оооооаооо','Зап{1}лярная природа словно сотв{2}рила храм для покл{3}нения собственной силе и крас{4}те. Кругом сотни километров тайги, прорезанн{5}й скалами, р{6}внины, тундра с чахлой растительн{7}стью. А здесь – м{8}гучие ели, заросшие деревьями го́ры, озёрная гладь так и г{9}рит под лучами ласкового солнца.',['Проверяемая гласная: пОлюс',TVOR,KLON,'Суффикс -ОТ-: красота',END_OM+' (прорезанной)',OST,'Проверяемая гласная: мОгут',GAR]],
+[29,'F57859','2389','аооаёаёоо','Птицы, не улетающие в тёплые кр{1}я, подвинулись ближе к чел{2}веческому жилью. В садах и ог{3}родах появились кр{4}сногрудые снегири. Их пение, не лиш{5}нное какой-то приятной мелодии, разд{6}ётся с обнаж{7}нных кустов и деревьев. Др{8}зды собираются в б{9}льшие стаи и улетают в сады и парки.',[SLOVO+' (человек)','Полногласие ОРО: огород','Проверяемая гласная: дрОзд','Проверяемая гласная: бОльше']],
+[30,'3A2D5F','2689','ыоёааоаоо','Солнечный свет охват{1}вал и с{2}гревал океаны сентябрьского воздуха над ещ{3} спящей и сумр{4}чной стр{5}ной. Но через полчаса земля начала {6}деваться в б{7}грянец, в ржавчину сжатых п{8}лей, в сырую и яркую зелень озимых, в пурпур осин{9}вых листьев и желтизну трепещущих от ветра берёз.',[SO,OP,'Проверяемая гласная: пОле',OV_PR]],
+[32,'3291A9','1456','оааоооааё','В прибрежн{1}м к{2}мыше квак{3}ли лягушки. На противоположн{4}м берегу дог{5}рали рыбачьи к{6}стры. На ясном, безобл{7}чном небе пок{8}зались первые звёзды и ч{9}тко выступил серп молодого месяца.',[END_OM,END_OM,GAR,'Проверяемая гласная: кОстры (костёр)']],
+[36,'97E2CB','1345689','оёооооаоо','Снег{1}пад. Ш{2}пот, ш{3}рохи, таинственный перезвон вокруг – признаки приближающейся зимней сказки. Заг{4}рается на небе луна, с крыш слетает снеж{5}к, и метель, кружащаяся за окном, словно {6}кутывает тебя с головы до ног. Закрываешь глаза, и созд{7}ётся впечатление, что ты попал в в{8}лшебный мир, сотв{9}рённый зимой.',[SOED_O+' (снегопад)',SHOROH,GAR,OK_SH+' (снежок)',OP,SLOVO+' (волшебный)',TVOR+' (сотворённый)']],
+[49,'B6CE64','1345679','оаоооооао','Усталое летнее солнце уходит за г{1}ризонт. На западе проп{2}дает узкая полоска света. Над гладкой поверхн{3}стью неширокой реч{4}нки л{5}жится туман. На небе заг{6}раются первые звёзды. Сонная тишина не нарушается даже ш{7}рохом листьев. Только изредк{8} пронесётся летучая мышь и к{9}снётся прибрежных камышей.',[SLOVO+' (горизонт)',OST,ONK,LOZH,GAR,SHOROH,KAS_O]],
+[50,'210764','2345679','аооооооао','З{1}ря разг{2}ралась. Лучи солнца к{3}снулись верхушек деревьев, позол{4}тили блестящую поверхн{5}сть озера. Эти окрестности известны камыш{6}выми зар{7}слями. Изредк{8} в них были слышны ш{9}рохи и кряканье уток.',[GAR,KAS_O,'Проверяемая гласная: зОлото',OST,OV_SH,ROS+' (заросли)',SHOROH]],
+[51,'A9D96C','2568','аоаёооеоа','Озеро, взволнов{1}нное ветром, шумел{2} у берегов. Тр{3}ва, не орош{4}нная дождём, сиротливо приникла к земле. Вот медленно приближается огромная свинц{5}вая туча. Она закрывает небо и грозн{6} висит над притихш{7}й землёй. Озеро затихл{8}. Вдруг раздался оглушительный удар грома, и крупный дождь з{9}шумел по листьям.',[PAST_N,'О под ударением после Ц в суффиксе: свинцовый',KRAT+' (грозно)',PAST_N]],
+[55,'AF2C36','24569','аоаоооаао','Близил{1}сь буря. Солнце садил{2}сь, ветер всё крепчал, з{3}кат разг{4}рался пурпур{5}м, и по мере того как пламя разливал{6}сь по небу, синева моря ст{7}новил{8}сь всё глубже и хол{9}днее.',[PAST_N,GAR,'Окончание -ОМ: пурпуром (чем?)',PAST_N,'Полногласие ОЛО: холод (хо́лод)']],
+[58,'8FD588','13678','оаоааоооё','На окраине села, на пригорке, стоит сосна. Выр{1}сшая на приволье, она когда-то пор{2}жала своей мощью. Теперь бугристая кора, напоминающая шерох{3}ватый бок выветренной скалы, местами обв{4}лилась, обн{5}жив тело сосны. Ветви торчат в стороны, словно гигантские костлявые руки, сведённые намертв{6} в страстной м{7}льбе. Только на верхушке дерева можно увидеть клоч{8}к ж{9}лтой хвои.',[ROS+' (выросшая)','Суффикс -ОВАТ-: шероховатый',ADV_O+' (намертво)','Проверяемая гласная: мОльба',OK_SH+' (клочок)']],
+[70,'57F117','13489','оаооёааоо','Вот из густых ёл{1}к вышел к берёзе заяц и ост{2}новился. Не п{3}смел он идти через большую п{4}лянку и пош{5}л вокруг неё от берёзки к берёзке. Вот он ост{6}новился, прислуш{7}лся. Если б{8}ишься, то лучше не х{9}ди в лес, пока листья шепчутся.',['Беглая гласная: ёлка — ёлок',PO,'Проверяемая гласная: пОле','Проверяемая гласная: бОйся','Проверяемая гласная: хОд']],
+[75,'009A55','456789','аааоооооо','На утренней з{1}ре участники экспедиции снов{2} выступили в поход. Тропинка сначал{3} укл{4}нялась на запад, а потом свернула влев{5}, пошла прямо вдоль реч{6}нки с заб{7}лоченными берегами, заросшими камыш{8}м. Путники, несмотря на непром{9}каемые сапоги, с трудом продвигались вперёд.',[KLON,ADV_O+' (влево)',ONK,'Полногласие ОЛО: болото','Окончание под ударением после шипящей: камышОм',MOK+' (непромокаемые)']],
+[82,'D2B49C','12346789','ооооаоооо','В полдень мы распол{1}жились на отдых у небольшой реч{2}нки, берега которой зар{3}сли́ осокой. Заг{4}релые ребятишки разного возр{5}ста купались. Солнце пекло нестерпимо, и к песку нельзя было прик{6}снуться. Я лёг в тени на непром{7}каемый плащ и попроб{8}вал задремать. Когда проснулся, солнце уже клонил{9}сь к горизонту.',[LOZH,ONK,ROS+' (заросли)',GAR,KAS_O,MOK+' (непромокаемый)',OVA+' (попробовать)',PAST_N]],
+[87,'733B6B','1256789','ооаёооооо','В глухом таёжном междуречье распол{1}жился лагерь геол{2}гов: несколько п{3}латок на только что раскорч{4}ванной площадке, длинный свежевыкрашенный стол между ними, алюминиевое ведро над костром. А рядом д{5}щатый домик, в котором присп{6}собили для об{7}грева железный боч{8}нок из-под г{9}рючего.',[LOZH,SLOVO+' (геолог)','Суффикс -АТ-: доска → дощатый','Проверяемая гласная: спосОбный',OB+' (обогрев)',OK_SH+' (бочонок)',GAR+' (горючее)']]
+]},
+I:{title:'Весенний городок',sub:'Малые города живут без спешки',tasks:[
+[1,'10314B','356','ееиеииеее','За тёмной ст{1}ной ракит, где небо уже зеленело от зари, монотонно падала вода. Этот шум – единств{2}нный звук в безмолви{3} ночи – утверждал непр{4}рывное дв{5}жение природы. Должно быть, каждый из нас подумал о лесных ручьях, бегущ{6}х под бур{7}ломом и сгнивш{8}й листвой, о том, как м{9}рцают звёзды в заводях Дубны.',[IJE+' (в безмолвии)',EN+' (движение)',END_IM+' (бегущих)']],
+[9,'EFFD08','23589','еииеиееии','Бывает, поздн{1}й осенью вернутся тёплые деньки. И осень пр{2}тихнет, словно ласковая собака. И тогда зам{3}рающий лес запа́хн{4}т прощальным ароматом палой листвы, ш{5}повника, грибов. В запахах леса есть что-то непр{6}ходящее, вечное, особо ощутимое в последние дни уходящ{7}й осен{8}. Будто осень, засыпая, вид{9}т сон о лете и показывает свои виде́ния нам.',[PRI_N+' (притихнуть)',MIR,'Проверяемая гласная: шИп',SKL3+' (осени)',SP2+' (видит)']],
+[11,'B50070','234789','яииияяиии','Осень – пора ув{1}дания природы, когда вспых{2}вает она последн{3}ми яркими красками. Это время года пр{4}влекает нас гармонией красок. Безм{5}тежна природа, лёгкой грустью ове{6}но всё вокруг. Тиш{7}на. Н{8} звука. Всё зам{9}рает.',[IVA+' (вспыхивать)',END_IM+' (последними)','Приставка ПРИ-: притяжение (привлекать)',IN,NI+' (ни звука)',MIR]],
+[16,'96E9B2','126789','ииеееииии','Море после шторма всё ещё дыш{1}т холодом. Когда на солнце наплывает облако, ветерок усил{2}вается. Тропинка п{3}тляет среди невысоких холмов, затем устр{4}мляется вверх сквозь густой листв{5}нный лес. Мы отважно проб{6}раемся по пр{7}чудливым колюч{8}м кустарн{9}кам.',[SP2X+' (дышит)',IVA+' (усиливаться)',BIR,SLOVO+' (причудливый)',END_IM+' (колючим)',IK+' (кустарник → кустарникам)']],
+[19,'6408BF','12578','иияеиеиие','Одежда опричн{1}ков представляла собой разительную прот{2}воположность лохмоть{3}м нищих: царские телохранит{4}ли бл{5}стали золотом. На каждом из них была бархатная или парчовая шапочка, усаж{6}нная жемчугом и дорогими камнями, и все они казал{7}сь ж{8}выми украшениями пр{9}красного дворца, с которым составляли как бы единое целое.',[SLOVO+' (опричник)','Сложное слово: против + положить',BLIST,PAST_P,ZHISHI]],
+[20,'3418B5','1456','ияеиииеее','Из туч, обложивш{1}х небо со всех сторон, мрачных, т{2}жёлых, вот-вот брызн{3}т дождь. Давно сброс{4}вшая свою листву старая берёза, од{5}нокая, печальная, жалобно скр{6}пит под беш{7}ными порывами осенн{8}го ветра. На фоне сер{9}бристого ствола ярко зеленеет молодая ель.',[END_IM+' (обложивших)',INFL+' (сбросИть)','Проверяемая гласная: одИн','Проверяемая гласная: скрИп']],
+[25,'F4C72A','345689','юеииииаии','Ель располагает свои корни под стел{1}щимся дёрном, где она ищ{2}т себе проп{3}тание. Когда ураган вал{4}т её, корни вздымаются, разд{5}рая зелёные мхи. Потом всё успока{6}вается. Свеж{7}я рана леса затяг{8}вается. Деревья снова застывают в оцепенени{9}.',[SLOVO+' (пропитание)',SP2+' (валит)',DIR,IVA+' (успокаиваться)',IVA+' (затягиваться)',IJE+' (в оцепенении)']],
+[26,'85D32C','1679','иееееииеи','Осенью мы лучше вид{1}м и глазом, и сердц{2}м. Всё устоялось, зам{3}рло для того, каж{4}тся, чтобы собраться с мыслями, полюбоваться на своё отражение в син{5}й воде. Таково состояние пр{6}роды, таково же состояние и душ{7} человека, увид{8}вшего осенний праздник света и тиш{9}ны.',[SP2+' (видим)',SLOVO+' (природа)',SKL1R+' (души)',IN+' (тишины)']],
+[27,'EBE4D0','1246789','ииеиыииии','Малые города Росси{1} живут без спешки и шума. Не встрет{2}шь тут торопливых пеш{3}ходов, отвечающих на вопросы нехотя, на ходу. Напротив, пр{4}езжему ответят обстоятельно, помогут от{5}скать нужное место. Люди здесь пр{6}ветливые, вн{7}мательные, услужл{8}вые. Они нежно пр{9}вязаны к своему родному месту, любят его всей душой.',[IJA+' (России)',SP2+' (встретишь)',PRI_B+' (приезжий)',SLOVO+' (приветливый)',SLOVO+' (внимательный)',LIV,PRI_P+' (привязаны)']],
+[31,'F34AAF','39','еияыыеаеи','В продолжени{1} двух часов пут{2}шественники проб{3}рались к озеру, обходя тр{4}сины и пытаясь от{5}скать удобные проходы. Они пр{6}одолели лесную ч{7}щобу и оказались на берегу. Подним{8}шь голову, а над тобой шумят сосны, упирающ{9}еся в небо.',[BIR,END_IM+' (упирающиеся)']],
+[37,'740E9C','36','еыиееиеее','Есть на средн{1}русской земле особенные города: чуть отойдёшь от главной улиц{2} и увид{3}шь луг, невдал{4}ке лес и поле, отсвечивающ{5}е пшеницей. Воздух чистый, дали неоглядные, тиш{6}на успокоит{7}льная. В городке вдруг остановит тебя старинный дом с узорной р{8}зьбой по дереву или расписным крыльцом. Такое увидишь обычно в малом городе, в глубинк{9} России.',[SP2+' (увидишь)',IN]],
+[39,'34C092','1234568','ииииииеие','Ещё хмур{1}тся свинцовое небо, но в просветах облаков изредка проб{2}вается луч солнца. Весна наб{3}рает скорость. По утрам лёгкий холодок держ{4}тся в низинах, а на южной стороне пр{5}горка уже загорелись огоньки мать-и-мачехи. Н{6} с чем не спутаешь жёлтые корзинки её цветка. В течени{7} недел{8} вернутся птицы. Много трудностей придётся им пр{9}одолеть на пути к родным местам.',[SP2+' (хмурится)',IVA+' (пробиваться)',BIR,SP2X+' (держится)',PRI_BL+' (пригорок)',NI+' (ни с чем)',SKL1R+' (недели)']],
+[40,'818396','56789','ееееиииии','В сент{1}бре под Ярославл{2}м было ещё довольно т{3}пло, на речк{4} ещё не было видно н{5} льдинки. На одной из близк{6}х станц{7}й мы расположил{8}сь на берегу, устро{9}в себе постели в лодках.',[NI+' (ни льдинки)',END_IM+' (близких)','Слово на -ИЯ: Р. п. мн. ч. — станцИй',PAST_P,INFV+' (устроИть)']],
+[43,'5966E4','12458','ииеиияаия','Как н{1} боялись люди засухи, она всё-таки пр{2}шла. Небо было раскал{3}но, и с него почти отвесно падали обж{4}гающие лучи солнца, а в воздухе уже нач{5}нал ве{6}ть дыш{7}щий гарью ветерок. Колосья на полях, раскач{8}ваемые жарким дыханием ветра, насто{9}нного на душистых травах, задыхались от зноя.',[NI+' (как ни боялись)',PRI_B+' (пришла)',ZHIG,SLOVO+' (начинать)',IVA+' (раскачивать)']],
+[45,'A3ADE8','134678','иеиияииие','В тундру пр{1}шла весна. Кое-где белеют и бл{2}стят на солнце пятна снега. Движ{3}мое силой инерци{4}, огромное лед{5}ное поле нап{6}рает на берега озера. Ещё крепко держ{7}т ноги скованная панц{8}рем мерзлота. Необычно соч{9}тание высокого неба с холодным ветром.',[PRI_B,IM+' (движимый)',IJA+' (инерции)',PIR,SP2X+' (держит)',CI_I+' (панцирем)']],
+[46,'9C38E8','35678','ееиеиииие','Пост{1}пенно лес наполня{2}тся птичь{3}м гомоном. В гн{4}зде какой-то п{5}чужки жалобно расп{6}щались птенч{7}ки. Из-за кустов выскоч{8}л зайчонок и пустился наутёк. Не зна{9}т зверушка, что бояться меня нечего.',['Разделительный Ь: птичьИм',SLOVO+' (пичужка)','Проверяемая гласная: пИск',IK+' (птенчик)',INFL+' (выскочИть)']],
+[56,'6C5B35','1368','иеиыяиеие','В апреле всюду, куда н{1} взглянешь, стел{2}тся над землёй туман. Просохли протал{3}нки, синеют луж{4}цы от раста{5}вшего снега. Прилетели скворцы, соб{6}рают зёрнышки. Но к вечеру ударил мороз, в течени{7} ночи шёл снег, а к утру завьюж{8}ло по-зимн{9}му.',[NI+' (куда ни взглянешь)',INK,BIR,INFL+' (завьюжИть)']],
+[57,'BF9C8D','19','иеееееееи','Дальн{1}й бер{2}г давно утонул в туман{3}, брызгах и сум{4}рках наступающ{5}го веч{6}ра. Лодка лавировала, с трудом поб{7}ждая волны и медл{8}нно прибл{9}жаясь к острову.',[END_IM+' (дальний)','Проверяемая гласная: блИзко']],
+[61,'A530F5','12679','ииеаыииеи','Когда ледяным панц{1}рем покрываются реки и озёра, улетают последн{2}е стаи птиц. Осенние пер{3}лёты совершаются неторопливо. Создаётся впеч{4}тление, что птиц{5} не спешат пок{6}дать родные места, надолго задерж{7}ваясь там, где много корма. С наступлением зимы п{8}рнатым трудно добывать себе проп{9}тание.',[CI_I+' (панцирем)',END_IM+' (последние)',SLOVO+' (покидать)',IVA+' (задерживаться)',SLOVO+' (пропитание)']],
+[62,'96CF0C','2456','еиеииияеы','Мы ехали долго, но метель всё не ослаб{1}вала, а как будто усил{2}валась. Ветер гудел непр{3}станно. Ямщик что-то кричал мне, но н{4}чего нельзя было разобрать. Он, вид{5}мо, пытался пр{6}ободрить меня, так как наде{7}лся на скорое окончание пут{8}шествия. Ямщик уже давно не тянул свою без{9}скусную песню, а с тревогой всматривался вдаль.',[IVA+' (усиливаться)',NIM+' (ничего)',IM+' (видимо)',PRI_N+' (приободрить)']],
+[64,'4414B7','3589','еаиаиеяии','В течени{1} нескольких ч{2}сов пароход, н{3} на минуту не замедляя хода, плывёт на юго-запад. Южная ночь, наступивш{4}я как-то внезапно, окрас{5}ла всё вокруг в тёмно-синий цвет. Небо бл{6}стит плотными лиловыми облаками. Мес{7}ца не видно. Н{8}что не нарушает тиш{9}ну, лишь плещутся о борт неугомонные волны.',[NI+' (ни на минуту)',INFL+' (окрасИть)',NIM+' (ничто)',IN+' (тишину)']],
+[66,'59A5B0','2389','еииееяеии','Такого нест{1}рпимо жаркого лета не могли пр{2}помнить даже самые старые люди. С половины июня до конца июля н{3} разу не осв{4}жило дождём воздух. Раскалённая земля трескалась, пр{5}вращалась в камень или пыль, которая лежала т{6}жёлым рыж{7}ватым пластом на дорогах. Каждое утро солнце всходило багровым шаром, н{8}кому не давая отдохнуть от зноя. Всё живущее словно умаялось и повес{9}ло голову.',[PRI_N+' (припомнить)',NI+' (ни разу)',NIM+' (никому)',INFL+' (повесИть)']],
+[67,'6FC4BA','3678','ееиееииие','Человек стал человеком не только потому, что создал первое орудие труда, но и потому, что увид{1}л глубину синего неба, м{2}рцание звёзд, журавлиную стаю в небесной лазур{3}, фиолетовое облачко на сирен{4}вом кусте, нежный ст{5}белёк и голубой колокольч{6}к подснежн{7}ка, – изумился и пошёл по земле, создавая новую красоту. Остановись и ты в изумлени{8} перед красотой, и в твоём сердце расцветёт человеч{9}ская красота.',[SKL3+' (в лазури)',CHIK,NIK,IJE+' (в изумлении)']],
+[68,'3FC2BC','1358','иеиеиееие','Когда мы выехали со станци{1}, дождь пр{2}кратился. Что бы н{3} ожидало меня впереди, настроение из-за показавш{4}гося солнышка улучш{5}лось. В продолжени{6} оставшегося пути нам сопутствовала хорошая погода. Я добрался до Екатеринбурга в течени{7} недел{8}. Но в большом городе я чувствовал себя как заяц, случайно заб{9}жавший из леса в селение.',[IJA+' (со станции)',NI+' (что бы ни ожидало)',INFL+' (улучшИть)',SKL1R+' (недели)']],
+[74,'320DD8','2356789','еиияиииии','Утр{1}нняя заря только что нач{2}нает окраш{3}вать небосклон. Тёмно-син{4}я поверхность моря уже сброс{5}ла с себя сумрак ноч{6} и ждёт первого луча, чтобы за{7}грать весёлым блеском. Вы смотр{8}те на полосатые громады кораблей и на точки шлюпок, быстро движущихся по блестящей лазур{9}.',[SLOVO+' (начинать)',IVA+' (окрашивать)',INFL+' (сбросИть)',SKL3+' (ночи)',POSLE_G+' (заиграть)',SP2+' (смотрите)',SKL3+' (по лазури)']],
+[76,'751A54','39','ееиеееееи','С.И. Ожегов – известный л{1}ксикограф, автор «Толкового словаря русского языка». В течени{2} почти девяти лет учёный соб{3}рал материал для словаря, не пр{4}кращая работы и в годы Великой Отечественной войны. В пр{5}делах одного тома с достаточной полнотой пр{6}дставлен основной словарный состав современного русского языка. Это об{7}спечило долговечность книги, намного переживш{8}й своего составителя. Словарь Ожегова – настольное пособие для людей, любящ{9}х русский язык.',[BIR,END_IM+' (любящих)']],
+[77,'C9FF53','1589','иеяеиееии','Из-за болезн{1} я не был в школ{2} два мес{3}ца и вследстви{4} этого очень отстал. Во что бы то н{5} стало мне необходимо повторить всю программу, пройд{6}нную в течени{7} полугода. Я рассч{8}тал, сколько страниц надо прочитать в день, но стоило мне только сесть за книгу, как в голову сами собой приходили посторонн{9}е мысли, которые не давали сосредоточиться.',[SKL3+' (болезни)',NI+' (во что бы то ни стало)',CHIT+' (рассчитать)',END_IM+' (посторонние)']],
+[79,'A765C1','168','иееееиеия','Поднявш{1}йся утром ветер вдруг стих. На парусник{2}, находивш{3}мся далеко в мор{4}, повисли паруса. Обеспоко{5}нный капитан вышел на мост{6}к. Западная часть неба покрылась тучами и не пр{7}двещала н{8}чего хорошего. Капитан приказал убрать паруса, и команда незамедлительно выполнила его распор{9}жение.',[END_IM+' (поднявшийся)',IK+' (мостик)',NIM+' (ничего)']],
+[83,'94DF9C','124568','ииеиииеие','Летн{1}м вечером в лесу дожд{2}к совсем не меша{3}т. Я перес{4}дел его под ёлкой. Сюда же соб{5}рались от дождя комары. Как н{6} старался я их отогнать, собаку мою они очень мучили. Пришлось разв{7}сти костёр. Дым от еловых ш{8}шек повалил густой, и в течени{9} получаса комары исчезли.',[END_IM+' (летним)',IK+' (дождик)','Проверяемая гласная: сИдя',BIR,NI+' (как ни старался)',ZHISHI+' (шишек)']],
+[84,'701BE1','139','ияиеееееи','Утро на исходе, а уже н{1}куда не денешься от т{2}жёлого зноя, которым дыш{3}т июльский день. Раскалённый воздух колыш{4}тся над лугами. Трава стел{5}тся от горяч{6}го воздуха, дремлет без живит{7}льной влаги листва на деревьях. Вокруг беспр{8}дельная сушь, а на небе н{9} облачка.',[NIM+' (никуда)',SP2X+' (дышит)',NI+' (ни облачка)']],
+[88,'3A2067','256','яиыыииеея','Солнце только что подн{1}лось над горизонтом, когда мы пр{2}шли на болото, а птиц{3} уже проснулись и от{4}скивали корм. Мы проб{5}рались осторожно по болотным зарослям, выслеж{6}вая п{7}рнатых пловцов на открытой воде. Увид{8}в нас, вод{9}ные курочки быстро спрятали свой выводок в зарослях тростника.',[PRI_B+' (пришли)',BIR,IVA+' (выслеживать)']],
+[90,'9DD380','14789','ияяиюеиии','После оттепел{1} ударил мороз и сковал т{2}жёлым плотным настом мокрый снег. Лед{3}ной ветер гон{4}т колюч{5}ю снежную крупу. Под его порывами река ш{6}велится, как громадная пр{7}чудливая змея, с шипением и свистом разб{8}вает льдины, а потом соб{9}рает их вместе.',[SKL3+' (оттепели)',SP2X+' (гонит)',SLOVO+' (причудливая)','Проверяемая гласная: бИть (разбивает)',BIR]]
+]},
+E:{title:'Летний вечер',sub:'Шлюпка, камыши и закат над рекой',tasks:[
+[4,'26E9F7','1456','еияеееиии','Это был мал{1}нький, почти карманный альбом для фотографий. Л{2}стов п{3}тнадцать толстого картона с р{4}льефным изображением голубя на обложк{5}. Я раскрыл его. Первые фотографии были ж{6}лтоватые, с трещ{7}нами. На одной круглолицая малышка глад{8}ла собаку, на другой шест{9}летняя девочка обнимала самодельную куклу.',[ENK,SLOVO+' (рельеф)',SKL1+' (на обложке)','Проверяемая гласная: жЁлтый (ё→е)']],
+[5,'2BD4FA','2359','иееиеияие','Летн{1}м утром мы направляемся на рыбалку. Природа ещё пр{2}спокойно дремл{3}т. В низине расст{4}лается туман. По узкой тропинк{5} проб{6}раемся к реке. Серебр{7}ные росинки перел{8}ваются в лучах солнца. Всё вокруг пр{9}ображается.',[PRE_O+' (преспокойно)',SP1+' (дремлет)',SKL1+' (по тропинке)',PRE_P+' (преображается)']],
+[7,'EA97FD','12369','еееииеяие','Разве не чудо, что бабочки, как в настоящей сказк{1}, в течени{2} жизни пер{3}воплощаются! Они не единственные, кто умеет менять облик, но в этом пр{4}чудливом изменени{5} особенно заметна разница между похож{6}й на черв{7}ка прожорл{8}вой гусеницей и яркой, порхающ{9}й с цветка на цветок бабочкой.',[SKL1+' (в сказке)',PREDLOG,PERE+' (перевоплощаются)',END_EJ+' (похожей)',END_EJ+' (порхающей)']],
+[12,'D50977','3569','яиеиееиие','Мес{1}ц спустился к ивам и отражался в неподвижной чёрной глуб{2}не пруда. Деревья не ш{3}велились н{4} листиком. Берёзовый листоч{5}к робко мелькнул в воздух{6}, словно боясь пр{7}влечь к себе вн{8}мание, и поспешно юркнул в траву. Опять всё зам{9}рло.',['Проверяемая гласная: шевЕлит',EK+' (листочек)',SKL1+' (в воздухе)',MER]],
+[13,'2D39BB','46','иииеиеиюа','Осень – пр{1}чудливая волшебн{2}ца. Она расст{3}лает жёлтые покрывала на поля́, приносит запах свеж{4}сти и лёгкого морозца. Я люблю бродить по городу в осенн{5}е дни. Деревья объяты плам{6}нем. Теперь н{7}кому не остановить осеннего пожара. Се{8}щийся дождь не нарушает оч{9}рования этого времени года.',['Проверяемая гласная: свЕжий (свежесть)','Суффикс -ЕН-: пламя → пламенем']],
+[14,'9835BF','13457','еиеееиеии','Егорушка почувствовал, как воз, на котором он л{1}жал, покачнулся и заскр{2}пел. Обоз тронулся. Егорушка покрепч{3} взялся рукой за верёвку, которой был п{4}ревязан тюк, засм{5}ялся от удовольствия, поправ{6}л в карман{7} прян{8}к и стал засыпать так, как будто он дома в постел{9}.',['Проверяемая гласная: лЁг (ё→е)',SRAVN+' (покрепче)',PERE+' (перевязан)','Проверяемая гласная: смЕх',SKL1+' (в кармане)']],
+[15,'9EC1B0','12489','ееиеииаее','Люблю май. За его имя, лёгкое, летящ{1}е, как шёлковая лента, разв{2}вающаяся на ветру. В мае всё пробуждается к жизн{3}. Каждая травинка тян{4}тся к солнцу. Природа пр{5}меряет свои летн{6}е наряды, не ж{7}лея красок, пр{8}ображает всё вокруг. В мае что-то обновляется и в самих людях: становится радостно на душе, на лицах чаще можно уви́д{9}ть улыбки.',[END_EJ+' (летящее)',EVA+' (развеваться)',SP1+' (тянется)',PRE_P+' (преображает)',INFE+' (увидеть)']],
+[17,'9919BE','12689','ееяииеяее','Вход в п{1}щеру был довольно высоко на склон{2} горы и походил на букву «А». Т{3}жёлая дубовая дверь н{4}когда не зап{5}ралась. Стоять здесь в глубоком мрак{6} и гл{7}деть на зелёную долину, осв{8}щённую солнцем, поначалу было увл{9}кательно.',[SLOVO+' (пещера)',SKL1+' (на склоне)',SKL1+' (в мраке)','Проверяемая гласная: свЕт','Проверяемая гласная: увлЕчь']],
+[21,'7A4416','125','ееииеяиии','В течени{1} многих веков, тысяч{2}летий меняется форма и высота земной поверхност{3}. Там, где раньше шумело море, впоследстви{4} образовалась суша. Сильно разрушаются горные породы, состоящи{5} из нескольких частей. Эти части расш{6}ряются и сж{7}маются, поэтому между ними образуются трещ{8}ны. В них попадает вода. При замерзании она увелич{9}вается в объёме и разрывает самые твёрдые камни.',[PREDLOG,'Сложное слово: тысячЕлетие (после Ч — Е)',END_IM+' (состоящие)']],
+[28,'3EACD1','24589','яеиееииее','Мес{1}ц опускался за лесом. Кол{2}и, налитые недавн{3}м дождём, бл{4}стели в тени. Потом лес раздвинулся, и мы вышли в пойму реки Дубны. Вся она – с дымными громадами с{5}дых ив по берегам, с туманом, стлавш{6}мся над излучинами, с обрыв{7}стыми берегами и игрою звёзд над чащами – пр{8}дставлялась нам загадочной и давно ж{9}ланной страной.',[SLOVO+' (колея)',BLEST,'Проверяемая гласная: сЕд',PRED+' (представлялась)',SLOVO+' (желанный)']],
+[33,'D8EEC5','123','еееиииаии','Жёлтый одуванчик. В течени{1} лета не выб{2}решь дня, в который нельзя было бы увид{3}ть эти цветы. Но в мае разл{4}вается их первая, самая яркая волна. Говорят, что всякий цветок похож на солнце. Рассматр{5}вая озёра цветущ{6}х одуванчиков, невозможно освободиться от впеч{7}тления, что художник-г{8}гант окунал свою кисть прямо в солнце и разбрызг{9}вал его по зелёной земле.',[PREDLOG,BER,INFE+' (увидеть)']],
+[34,'56CCCD','1279','ееаияиеие','Мы часто говорим «врем{1}на Чехова», но вкладываем в эти слова пр{2}имущественно книжное представление. Атмосфера этой эпохи, слагавш{3}яся из неисч{4}слимых черт, почти потер{5}на для нас. В качестве св{6}детельств остались произведения искусства, историч{7}ские документы, комплекты пожелтевших газет, воспом{8}нания людей, старинные пр{9}дания, предметы быта.',['Суффикс -ЕН-: время → времена',PRE_P+' (преимущественно)',ESK,PRED+' (предания)']],
+[35,'AF8CC2','12578','ееииеоеея','Пр{1}драссветная тишь не наруша{2}тся н{3}какими звуками. Подн{4}маться в такую рань не хоч{5}тся. Вот из-за гор{6}зонта медл{7}нно выплыва{8}т солнце, освещая серебр{9}ные капли росы на траве.',[PRED+' (предрассветная)',SP1+' (нарушается)','ХОТЕТЬ: хочЕтся (I спр.)','Проверяемая гласная: мЕдленный',SP1+' (выплывает)']],
+[38,'B79F9A','3478','яиееииееи','Конец сент{1}бря. Клён раскрасился ярк{2}м багрянц{3}м, а молодая берёзка у наш{4}го дома, которая первая распустила свои клейк{5}е л{6}сточки, совсем пож{7}лтела. Резкие порывы ветра сбрасывают их убранство. Иссохшие листья кружат, словно мал{8}нькие парашютики, уст{9}лая мокрую землю.',[CI_E+' (багрянцем)',END_EGO,'Проверяемая гласная: жЁлтый (ё→е)',ENK]],
+[41,'F71CE9','124','ееиеиаиии','Мат{1}рью русских рек люди издавна называли Волгу. Из-под сруба старинной часов{2}нки близ деревн{3} Волгино-Верховье выт{4}кает непр{5}метный ручеёк, через который перекинут бревенч{6}тый мостик. Так нач{7}нает свой путь великая русская река. А дальше – лодки, причалы, пристан{8}, катера, плотины, каналы. Проделав путь в 3688 километров, Волга пр{9}ходит к Каспийскому морю.',[ER,ENK2,SP1+' (вытекает)']],
+[44,'5222EC','2456','яеяеееяяа','Однажды я неча{1}нно забрёл в незнакомую усадьбу. Солнце уже село, на цветущ{2}й ржи раст{3}нулись вечерние тени. Я пошёл по липовой алле{4}. Прошлогодняя листва печально ш{5}лестела под ногами, и в сум{6}рках между деревь{7}ми прятались тени. На миг пове{8}ло оч{9}рованием чего-то родного и знакомого.',[END_EJ+' (цветущей)',EJA,SLOVO+' (шелест)',SLOVO+' (сумерки)']],
+[47,'6EBBE0','34789','яиееииеее','Туман почти рассе{1}лся. Теперь нет опасност{2} заблудиться в лесу. Горяч{3}е яркое солнце покаж{4}т направлен{5}е пути. Н{6} в какое время года не быва{7}т так пр{8}красно утро, как в начал{9} лета.',[END_EJ+' (горячее)',SP1+' (покажет)',SP1+' (бывает)',PRE_O+' (прекрасно)',SKL1+' (в начале)']],
+[48,'475568','1246','ееиеиеяии','Я рад предстоящ{1}й встреч{2} с осенним лесом. Не хочется н{3}чего пропустить. Каких красок н{4} увид{5}шь здесь! У самого края леса бл{6}снуло небольшое озеро с тёмной водой цвета насто{7}нного чая. А на косогоре тонконогие осинки застенч{8}во толпятся у опушки, поворач{9}вая к солнцу листья.',[END_EJ+' (предстоящей)',SKL1+' (к встрече)','НЕ в восклицании: каких красок не увидишь!',BLEST+' (блеснуло)']],
+[52,'6DF668','1234689','ееееиеиее','Я уже пр{1}двкушал, как лив{2}нь хлын{3}т на опалённый зно{4}м мир. Однако крупные капли пот{5}хоньку пош{6}лестели справа и слева, но не сл{7}лись в ливн{8}вый поток. Ритм их падения становился всё медленн{9}е и вдруг совсем затих.',[PRED+' (предвкушал)','Суффикс -ЕНЬ: ливень',SP1+' (хлынет)','Окончание -ЕМ: зноем (чем?)',SLOVO+' (шелест)',EV_BEZ+' (ливневый)',SRAVN+' (медленнее)']],
+[53,'57623D','1345689','еиееееиее','В ст{1}не форта вспыхнул огонёк, другой, трет{2}й. Лодки уже не было видно, но рыбак мог вид{3}ть огни – несколько треп{4}тных искр над б{5}спредельным взволнованным ок{6}аном. Но вот лодка поворач{7}вается на самом гребн{8} волны и вдруг опуска{9}т парус.',['Проверяемая гласная: стЕны',INFE+' (видеть)',SLOVO+' (трепет)',BES+' (беспредельным)',SLOVO+' (океан)',SKL1+' (на гребне)',SP1+' (опускает)']],
+[59,'1B02FE','147','еияеяиеии','Когда я подходил к избушк{1}, из травы выскочила пёстрая собака и зал{2}лась отча{3}нным лаем. Это был Соболько – сторож{4}вой пёс рыбака Тараса, ла{5}вший на незнакомых людей отрыв{6}сто и резко. Когда я позвал его по кличке, пёс остановился в раздумь{7}, но, вид{8}мо, ещё не верил в старое знакомство. Потом в{9}новато завилял хвостом, будто бы говоря, что ошибся.',[SKL1+' (к избушке)',EV_BEZ+' (сторожевой)',LJE]],
+[63,'90F970','1249','ееиеиииие','В л{1}су стояла та особ{2}нная тиш{3}на, которая быва{4}т только осенью. Неподвижно в{5}сели мохнатые ветви, не качалась н{6} одна вершина, не слышалось н{7}чьих шагов. Лес стоял молча, пр{8}слушиваясь к собственной вековой дум{9}.',['Проверяемая гласная: лЕс',ENN,SP1+' (бывает)',SKL1+' (о думе)']],
+[65,'12CFBE','1258','ееииеииеи','В течени{1} недели сер{2}брится одуванчиками луг. Куда н{3} глянь, всюду их пышные шапки. Цветут колокольчики, незабудки пр{4}жались к кра{5}шку ручейка. Я осторожно перешаг{6}ваю через цветы, проб{7}раясь к воде. Скромные голуб{8}нькие цветочки, а сколько радост{9} дарят людям!',[PREDLOG,'Проверяемая гласная: сЕребро',ESHK,ENK]],
+[69,'18021E','237','иееиииеии','Ненастная погода установилась надолго. Неприветл{1}вое небо непр{2}станно хмурилось. Не пр{3}кращаясь н{4} на день, шли дожди. Сколько н{5} рассматр{6}вал я нависшие облака, не смог увид{7}ть ни малейшего проблеска. И хотя я прим{8}рился с тем, что пр{9}дётся отсиживаться дома, но в душе надеялся на лучшее.',[PRE_P+' (непрестанно)',PRE_P+' (прекращаясь)',INFE+' (увидеть)']],
+[73,'F877D7','1348','еиееияяеи','Отбл{1}стали молнии, отгрохотал гром. Дождь-барабанщик сначала пр{2}остановил, а затем и совсем пр{3}кратил свою дробь. Буря отбуш{4}вала. Дыш{5}шь чудесной свежестью. Скоро должно по{6}виться солнышко. Выпр{7}мляется рожь, трепещ{8}т листва на деревьях, нач{9}нают жужжать шмели и пчёлы.',[BLEST+' (отблестали)',PRE_P+' (прекратил)',EVA+' (бушевать)',SP1+' (трепещет)']],
+[80,'EE11C1','12347','ееееяиеии','День между тем клонился к вечеру, солнце се́ло, золотые хр{1}бты туч, бледнея на дальн{2}м горизонт{3}, давали знать, что скоро наступят сум{4}рки. Осенний ветер пове{5}л холодом и заш{6}пел в колеях разбитой колёсами дороги. Время от врем{7}ни он изменял своё направление, и тогда слыш{8}лись с реки отрыв{9}стые крики народа, ожидавшего паром.',['Проверяемая гласная: хребЕт','Окончание -ЕМ: на дальнем (каком?)',SKL1+' (на горизонте)',SLOVO+' (сумерки)',MIE]],
+[81,'B3D195','169','еиияяеиие','О том, что ночью на море буш{1}вал шторм, напом{2}нали лишь водоросли, выброшенные на пр{3}брежные скалы. По{4}вились первые лучи солнца, и серебр{5}ные капли забл{6}стали везде: на кустах, деревьях, траве. Нам надо поторапливаться, поэтому мы отправляемся дальше. Как н{7} тяжёл был наш путь, впоследстви{8} мы с удовольствием вспоминали наше пут{9}шествие.',[EVA+' (бушевать)',BLEST+' (заблестали)',ESTV]],
+[86,'FA4767','234569','иеееееяие','С чего нач{1}нается любовь к Родин{2}, к своей земле? С деревца, посаж{3}нного у наш{4}го окна, первого рассвета, встреча{5}мого на опушк{6} леса. Человек связан с природой тыс{7}чами невидимых, но прочных нитей, н{8}кто из людей не мож{9}т существовать без неё.',[SKL1+' (к Родине)',ENN+' (посаженного)',END_EGO,EM,SKL1+' (на опушке)',SP1+' (может)']]
+]}
+};
+for(const k in DATA){DATA[k].tasks=DATA[k].tasks.map(t=>({n:t[0],obz:t[1],ans:t[2].split('').map(Number),letters:t[3],text:t[4],rules:t[5]}));}
+
+/* ================= ГЕОМЕТРИЯ ================= */
+function rng(seed){let t=seed>>>0;return()=>{t+=0x6D2B79F5;let r=Math.imul(t^t>>>15,1|t);r^=r+Math.imul(r^r>>>7,61|r);return((r^r>>>14)>>>0)/4294967296}}
+const F=n=>(+n).toFixed(1);
+function blob(cx,cy,rx,ry,n,irr,seed){const R=rng(seed),p=[];for(let i=0;i<n;i++){const a=i/n*Math.PI*2,k=1+(R()*2-1)*irr;p.push([cx+Math.cos(a)*rx*k,cy+Math.sin(a)*ry*k]);}
+const mid=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];let d='M'+F(mid(p[0],p[1])[0])+','+F(mid(p[0],p[1])[1]);
+for(let i=1;i<=n;i++){const q=p[i%n],m=mid(q,p[(i+1)%n]);d+='Q'+F(q[0])+','+F(q[1])+' '+F(m[0])+','+F(m[1]);}return d+'Z';}
+function circle(cx,cy,r){return `M${F(cx-r)},${F(cy)}a${F(r)},${F(r)} 0 1,0 ${F(2*r)},0a${F(r)},${F(r)} 0 1,0 ${F(-2*r)},0Z`;}
+function ell(cx,cy,rx,ry){return `M${F(cx-rx)},${F(cy)}a${F(rx)},${F(ry)} 0 1,0 ${F(2*rx)},0a${F(rx)},${F(ry)} 0 1,0 ${F(-2*rx)},0Z`;}
+function star4(cx,cy,r){const q=r*.2;return `M${F(cx)},${F(cy-r)}Q${F(cx+q)},${F(cy-q)} ${F(cx+r)},${F(cy)}Q${F(cx+q)},${F(cy+q)} ${F(cx)},${F(cy+r)}Q${F(cx-q)},${F(cy+q)} ${F(cx-r)},${F(cy)}Q${F(cx-q)},${F(cy-q)} ${F(cx)},${F(cy-r)}Z`;}
+function flake(cx,cy,r){let d=circle(cx,cy,r*.16);const w=r*.09;
+for(let k=0;k<6;k++){const a=k*Math.PI/3,ca=Math.cos(a),sa=Math.sin(a),tx=cx+ca*r,ty=cy+sa*r,px=-sa*w,py=ca*w;
+d+=`M${F(cx+px)},${F(cy+py)}L${F(tx)},${F(ty)}L${F(cx-px)},${F(cy-py)}Z`;
+const bx=cx+ca*r*.62,by=cy+sa*r*.62;
+for(const s of[-1,1]){const ba=a+s*Math.PI/4,bl=r*.28,ex=bx+Math.cos(ba)*bl,ey=by+Math.sin(ba)*bl,qx=-Math.sin(ba)*w*.8,qy=Math.cos(ba)*w*.8;
+d+=`M${F(bx+qx)},${F(by+qy)}L${F(ex)},${F(ey)}L${F(bx-qx)},${F(by-qy)}Z`;}}return d;}
+function maple(x,y,s,rot){const P=[[0,-1],[.18,-.45],[.55,-.75],[.42,-.28],[.95,-.35],[.6,.02],[.85,.35],[.35,.28],[.3,.75],[.06,.42],[.04,.95],[-.04,.95],[-.06,.42],[-.3,.75],[-.35,.28],[-.85,.35],[-.6,.02],[-.95,-.35],[-.42,-.28],[-.55,-.75],[-.18,-.45]];
+const a=rot*Math.PI/180,c=Math.cos(a),sn=Math.sin(a);
+return 'M'+P.map(p=>{const X=p[0]*s,Y=p[1]*s;return F(x+X*c-Y*sn)+','+F(y+X*sn+Y*c);}).join('L')+'Z';}
+function fir(x,y,h){const w=h*.62;return `M${F(x)},${F(y-h)}L${F(x+w*.32)},${F(y-h*.62)}L${F(x+w*.18)},${F(y-h*.62)}L${F(x+w*.5)},${F(y-h*.3)}L${F(x+w*.3)},${F(y-h*.3)}L${F(x+w*.66)},${F(y)}L${F(x-w*.66)},${F(y)}L${F(x-w*.3)},${F(y-h*.3)}L${F(x-w*.5)},${F(y-h*.3)}L${F(x-w*.18)},${F(y-h*.62)}L${F(x-w*.32)},${F(y-h*.62)}Z`;}
+function firSnow(x,y,h){const w=h*.62;let d='';const tier=(yi,wi)=>{d+=`M${F(x-wi)},${F(yi)}Q${F(x)},${F(yi-11)} ${F(x+wi)},${F(yi)}L${F(x+wi*.78)},${F(yi-5)}Q${F(x)},${F(yi-16)} ${F(x-wi*.78)},${F(yi-5)}Z`;};
+tier(y,w*.66);tier(y-h*.3,w*.5);tier(y-h*.62,w*.32);return d;}
+function cloud(cx,cy,s){return `M${F(cx-70*s)},${F(cy+18*s)}A${F(26*s)},${F(26*s)} 0 0 1 ${F(cx-40*s)},${F(cy-16*s)}A${F(32*s)},${F(32*s)} 0 0 1 ${F(cx+8*s)},${F(cy-26*s)}A${F(28*s)},${F(28*s)} 0 0 1 ${F(cx+52*s)},${F(cy-6*s)}A${F(22*s)},${F(22*s)} 0 0 1 ${F(cx+66*s)},${F(cy+18*s)}Z`;}
+function hill(y,amp){return `M0,${y}Q250,${y-amp} 500,${y}T1000,${y}L1000,700L0,700Z`;}
+function rays(cx,cy,r1,r2,n){let d='';for(let i=0;i<n;i++){const a=i/n*Math.PI*2,a1=a-.09,a2=a+.09;
+d+=`M${F(cx+Math.cos(a1)*r1)},${F(cy+Math.sin(a1)*r1)}L${F(cx+Math.cos(a)*r2)},${F(cy+Math.sin(a)*r2)}L${F(cx+Math.cos(a2)*r1)},${F(cy+Math.sin(a2)*r1)}Z`;}return d;}
+function stem(x,y,h,lean,w){return `M${F(x)},${F(y)}Q${F(x+lean)},${F(y-h*.6)} ${F(x+lean*.6)},${F(y-h)}L${F(x+lean*.6+w)},${F(y-h)}Q${F(x+lean+w)},${F(y-h*.6)} ${F(x+w)},${F(y)}Z`;}
+function leafRib(x,y,len,dir){return `M${F(x)},${F(y)}Q${F(x+dir*len*.7)},${F(y-len*.5)} ${F(x+dir*len)},${F(y-len*.15)}Q${F(x+dir*len*.55)},${F(y+len*.12)} ${F(x)},${F(y)}Z`;}
+function flower(cx,cy,r,seed){return blob(cx,cy,r,r*.92,12,.22,seed)+circle(cx,cy,r*.3);}
+function capsule(x,y,w,h,r){return `M${F(x+r)},${F(y)}H${F(x+w-r)}A${F(r)},${F(r)} 0 0 1 ${F(x+w)},${F(y+r)}V${F(y+h-r)}A${F(r)},${F(r)} 0 0 1 ${F(x+w-r)},${F(y+h)}H${F(x+r)}A${F(r)},${F(r)} 0 0 1 ${F(x)},${F(y+h-r)}V${F(y+r)}A${F(r)},${F(r)} 0 0 1 ${F(x+r)},${F(y)}Z`;}
+function pickets(x,y,n,w,h,gap){let d='';for(let i=0;i<n;i++){const X=x+i*(w+gap);d+=`M${F(X)},${F(y)}V${F(y-h+8)}L${F(X+w/2)},${F(y-h)}L${F(X+w)},${F(y-h+8)}V${F(y)}Z`;}
+d+=`M${F(x-4)},${F(y-h*.55)}H${F(x+n*(w+gap)-gap+4)}V${F(y-h*.55+7)}H${F(x-4)}Z`;return d;}
+function bird(x,y,s,seed){return blob(x,y,10*s,6*s,7,.15,seed)+`M${F(x-2*s)},${F(y-2*s)}L${F(x-14*s)},${F(y-12*s)}L${F(x+4*s)},${F(y-4*s)}ZM${F(x+2*s)},${F(y-2*s)}L${F(x+14*s)},${F(y-10*s)}L${F(x+6*s)},${F(y-3*s)}ZM${F(x+8*s)},${F(y)}L${F(x+16*s)},${F(y+4*s)}L${F(x+8*s)},${F(y+3*s)}Z`;}
+function tuft(x,y){let d='';for(let i=0;i<5;i++){const dx=(i-2)*9,h=26+((i*13)%17),ln=(i-2)*4;d+=stem(x+dx,y,h,ln,4);}return d;}
+function waveBand(y,amp,w){return `M0,${y}Q125,${y-amp} 250,${y}T500,${y}T750,${y}T1000,${y}L1000,${y+w}Q875,${y+w+amp} 750,${y+w}T500,${y+w}T250,${y+w}T0,${y+w}Z`;}
+function reeds(xs,y,h0){let d='';xs.forEach((x,i)=>{d+=stem(x,y,h0+(i%3)*16,(i%2?6:-6),4);});return d;}
+function strands(x0,y,n){let d='';for(let i=0;i<n;i++){const x=x0+i*24,len=70+(i*17)%40;d+=`M${F(x)},${F(y)}Q${F(x+7)},${F(y+len*.6)} ${F(x+2)},${F(y+len)}Q${F(x-4)},${F(y+len*.6)} ${F(x-4)},${F(y)}Z`;}return d;}
+
+/* ================= СЦЕНЫ ================= */
+function sceneA(){const R=[],D={lines:[],dots:[]};const add=(d,c,n,fr)=>R.push({d,c,n,fr});
+add('M0,0H1000V700H0Z','#FFE9C7','небо');
+add(circle(840,120,58),'#FFB703','солнце');
+add(rays(840,120,70,96,12),'#FFD166','лучи');
+add(cloud(200,110,1.1),'#FFF7EA','облако');
+add(cloud(520,70,.85),'#FFF3DF','облако');
+add(hill(400,60),'#E9C46A','дальний холм');
+add(hill(480,40),'#D9A441','луг');
+add('M430,700Q520,600 545,505L585,505Q560,610 640,700Z','#C68B59','дорожка');
+add('M285,520L292,340Q300,320 308,340L315,520Q300,530 285,520ZM295,385L252,342L260,333L300,372ZM305,375L345,335L352,344L310,388Z','#7F5539','ствол клёна');
+add(blob(300,250,150,110,10,.18,7),'#E76F51','крона клёна');
+add(blob(300,240,95,65,8,.2,11),'#F4A261','крона клёна, светлая');
+add('M690,540L697,380Q703,365 709,380L716,540Q703,548 690,540Z','#8A5A44','ствол рябины');
+add(blob(703,330,105,85,9,.2,13),'#C08A2D','крона рябины');
+add(circle(660,360,7)+circle(680,375,7)+circle(700,362,7)+circle(720,378,7)+circle(740,360,7)+circle(690,395,7)+circle(715,398,7),'#D62828','гроздь рябины');
+add(blob(120,540,90,48,8,.22,17),'#C77B3F','куст');
+add(blob(880,560,95,50,8,.22,19),'#A9713A','куст');
+add('M470,600Q520,545 570,600Q520,615 470,600Z','#D62828','шляпка гриба');
+add('M505,602L502,650Q520,660 538,650L535,602Q520,610 505,602Z','#FFF3E0','ножка гриба');
+add(circle(495,585,6)+circle(525,575,7)+circle(550,590,5),'#FFF7EA','крапинки');
+add(maple(480,170,34,-15),'#E9C46A','лист');
+add(maple(620,430,30,25),'#D62828','лист');
+add(maple(180,400,28,-30),'#F4A261','лист');
+add(blob(400,645,55,32,14,.3,23),'#8A5A44','ёжик');
+add(blob(448,650,22,16,8,.12,29),'#EAC086','мордочка ёжика');
+D.dots.push({x:452,y:646,r:2.5},{x:467,y:652,r:3});
+D.lines.push({d:'M446,657q6,4 12,1',w:2},{d:'M478,657q4,-11 8,0M548,655q4,-11 8,0',w:2});
+return{R,D};}
+function sceneO(){const R=[],D={lines:[],dots:[]};const add=(d,c,n,fr)=>R.push({d,c,n,fr});
+add('M0,0H1000V700H0Z','#22335C','ночное небо');
+add(circle(150,120,72),'#54689A','сияние луны');
+add('M165,58A62,62 0 1 0 165,182A50,50 0 1 1 165,58Z','#FFD97D','месяц');
+add(star4(320,80,16),'#FFE9A8','звезда');
+add(star4(520,60,12),'#FFE9A8','звезда');
+add(star4(870,90,14),'#FFE9A8','звезда');
+let f='M0,420L0,395';for(let x=0;x<=1000;x+=80){f+=`L${x+40},${365+(x/80%3)*10}L${x+80},395`;}f+='L1000,420Z';
+add(f,'#2F4B6E','дальний лес');
+add(hill(430,50),'#DCE9F5','сугроб');
+add(hill(520,60),'#F4F9FF','снежное поле');
+add('M560,430H760V580H560Z','#B75D3F','стены дома');
+add('M540,435L660,350L780,435Z','#46557A','крыша');
+add('M552,428L660,352L768,428L750,428L660,366L570,428Z','#FFFFFF','снег на крыше');
+add('M600,470H652V522H600Z','#FFC94D','окно');
+add('M690,580V505Q712,492 734,505V580Z','#7A4A2B','дверь');
+add('M700,392H730V335H700Z','#8C5A3C','труба');
+add(blob(722,300,26,20,8,.25,31)+blob(742,264,18,14,7,.25,37),'#D9E4F0','дым');
+add(fir(120,560,190),'#2E6B5E','ель');
+add(firSnow(120,560,190),'#FFFFFF','снег на ели');
+add(fir(260,585,150),'#3B7F6E','ель');
+add(firSnow(260,585,150),'#FFFFFF','снег на ели');
+add(fir(900,560,170),'#2E6B5E','ель');
+add(circle(450,610,48),'#FFFFFF','снеговик, низ');
+add(circle(450,545,36),'#FFFFFF','снеговик, середина');
+add(circle(450,492,26),'#FFFFFF','снеговик, голова');
+add('M424,478L476,478L470,445L430,445ZM418,478H482V486H418Z','#5B7DA8','ведро');
+add('M424,512Q450,524 476,512L476,524Q450,536 424,524ZM460,522L472,556L456,560L450,528Z','#E63946','шарф');
+add('M450,492L482,498L450,502Z','#F77F00','морковка');
+add(pickets(795,585,6,14,55,18),'#A98467','забор');
+add('M600,700Q640,640 660,585L700,585Q680,650 720,700Z','#E8F1FA','тропинка');
+add(blob(80,660,110,26,8,.2,41),'#F4F9FF','сугроб');
+add(blob(830,672,130,26,8,.2,43),'#F4F9FF','сугроб');
+add(blob(905,470,16,12,8,.15,47)+'M918,468L936,462L934,472Z','#5C6B8A','снегирь');
+add(blob(900,477,9,7,7,.1,53),'#E63946','грудка снегиря');
+add(flake(390,180,34),'#CFE3F5','снежинка');
+add(flake(700,150,26),'#CFE3F5','снежинка');
+add(flake(560,262,20),'#CFE3F5','снежинка');
+D.lines.push({d:'M626,470V522M600,496H652',w:2.4});
+D.dots.push({x:726,y:545,r:3},{x:441,y:486,r:2.5},{x:459,y:486,r:2.5},{x:441,y:503,r:1.8},{x:450,y:506,r:1.8},{x:459,y:503,r:1.8},{x:450,y:540,r:2.5},{x:450,y:557,r:2.5},{x:898,y:466,r:1.8});
+return{R,D};}
+function sceneI(){const R=[],D={lines:[],dots:[]};const add=(d,c,n,fr)=>R.push({d,c,n,fr});
+add('M0,0H1000V700H0Z','#BFE3F7','небо');
+add(circle(120,110,52),'#FFD166','солнце');
+add(rays(120,110,62,86,12),'#FFE29A','лучи');
+add(cloud(300,90,1),'#FFFFFF','облако');
+add(cloud(760,70,.9),'#FFFFFF','облако');
+add(hill(380,55),'#A7C957','холмы');
+add(hill(470,45),'#7FB069','луг');
+add('M0,560Q250,520 500,560T1000,545L1000,610Q750,640 500,615T0,625Z','#5FA8D3','речка');
+add('M440,585Q500,540 560,585L560,600Q500,556 440,600ZM448,588V614H456V584ZM544,584V614H552V588Z','#B08968','мостик');
+add('M470,700Q490,650 495,612L525,612Q525,655 560,700Z','#E4C590','тропинка');
+add('M640,420H790V540H640Z','#FFE8D6','дом, стены');
+add('M625,425L715,355L805,425Z','#E07A5F','дом, крыша');
+add('M668,455H708V495H668Z','#FFD166','окно');
+add('M735,540V480Q752,470 769,480V540Z','#8A5A44','дверь');
+add('M830,450H950V545H830Z','#F2CC8F','домик, стены');
+add('M820,455L890,395L960,455Z','#81B29A','домик, крыша');
+add('M858,478H890V510H858Z','#FFD166','окно домика');
+add('M905,545V500Q918,492 931,500V545Z','#7F5539','дверь домика');
+add(pickets(300,505,8,12,42,16),'#C89F6E','заборчик');
+add('M180,520L188,360Q195,345 202,360L210,520Q195,528 180,520Z','#7F5539','ствол');
+add(blob(195,300,120,95,10,.18,61),'#57A773','крона');
+add(blob(195,290,75,55,8,.2,67),'#A7C957','крона, светлая');
+add('M330,505L336,395Q342,383 348,395L354,505Q342,512 330,505Z','#7F5539','ствол');
+add(blob(342,355,80,65,9,.2,71),'#81B29A','крона');
+add(blob(560,520,55,30,8,.22,73),'#57A773','куст');
+add(blob(950,565,60,32,8,.22,79),'#4C956C','куст');
+add(stem(120,660,70,8,5)+leafRib(122,640,20,1),'#4C956C','стебель');
+add(flower(128,585,26,121),'#E63946','цветок','evenodd');
+add(stem(200,670,60,-6,5)+leafRib(198,650,18,-1),'#4C956C','стебель');
+add(flower(194,605,22,131),'#FFD166','цветок','evenodd');
+add(stem(280,665,65,6,5)+leafRib(282,645,18,1),'#4C956C','стебель');
+add(flower(286,595,24,141),'#E56399','цветок','evenodd');
+add(stem(60,675,55,-5,4),'#4C956C','стебель');
+add(flower(55,615,18,151),'#F4A261','цветок','evenodd');
+add(blob(420,478,13,9,8,.12,83)+'M430,476L444,470L442,480Z','#3D405B','скворец');
+add(bird(600,180,1.2,89),'#3D405B','ласточка');
+add(blob(820,296,14,11,8,.2,161)+blob(842,296,14,11,8,.2,163)+capsule(828,288,6,20,3),'#E56399','бабочка');
+add(tuft(45,700),'#4C956C','трава');
+add(tuft(955,700),'#4C956C','трава');
+add(ell(120,590,42,9),'#FFE29A','блик на воде');
+D.lines.push({d:'M688,455V495M668,475H708M874,478V510M858,494H890',w:2.2},{d:'M840,455l10,8l10,-8l10,8l10,-8l10,8l10,-8l10,8l10,-8',w:2},{d:'M824,288q-6,-10 -12,-12M838,288q6,-10 12,-12',w:1.8});
+D.dots.push({x:762,y:512,r:2.6},{x:925,y:522,r:2.4},{x:414,y:475,r:1.8});
+return{R,D};}
+function sceneE(){const R=[],D={lines:[],dots:[]};const add=(d,c,n,fr)=>R.push({d,c,n,fr});
+add('M0,0H1000V700H0Z','#3A4E7A','вечернее небо');
+add('M0,330Q250,300 500,315T1000,320L1000,432H0Z','#F8961E','закатное сияние');
+add('M430,432A70,70 0 0 1 570,432Z','#FF6B35','садящееся солнце');
+add('M478,458Q466,505 482,548Q494,592 478,640L522,640Q508,592 522,548Q536,505 522,458Z','#F9C74F','дорожка света');
+add(cloud(220,120,1),'#6D597A','облако');
+add(cloud(780,90,.85),'#6D597A','облако');
+add('M0,455L0,440Q250,425 500,438T1000,435L1000,455Z','#33415C','дальний берег');
+add('M0,455H1000V700H0Z','#2F4858','вода');
+add(waveBand(520,8,10),'#40699A','волна');
+add(waveBand(600,9,12),'#3B5F8A','волна');
+add('M600,560L760,560L740,595Q680,605 620,595Z','#9E2B25','лодка');
+add('M695,450Q760,500 768,552L695,552Z','#FFE8D6','парус');
+add('M685,460Q630,505 622,550L685,550Z','#F9C74F','передний парус');
+add('M688,440H694V560H688Z','#6B4F3A','мачта');
+add('M694,440L730,448L694,458Z','#E63946','флажок');
+add('M0,700L0,640Q120,615 240,645Q300,660 330,700Z','#3E7C59','берег');
+add(reeds([60,84,108,132,150],700,120),'#3A7D44','камыши');
+add(capsule(76,542,13,36,6),'#7F4F24','початок камыша');
+add(capsule(120,558,12,32,6),'#7F4F24','початок камыша');
+add(reeds([880,905,930,955],700,105),'#3A7D44','камыши');
+add(capsule(908,562,13,34,6),'#7F4F24','початок камыша');
+add('M330,600Q345,585 370,588Q395,590 400,600Q395,616 365,617Q340,617 330,600ZM395,595L412,584L404,603Z','#FFF6E8','утка');
+add(circle(322,585,11)+'M316,592Q318,601 332,603L337,596Q326,594 327,587Z','#2A9D8F','головка утки');
+add(blob(368,601,18,10,7,.15,97),'#D9C9A3','крыло');
+add(blob(432,613,11,8,7,.12,101)+circle(422,606,5.5),'#FFD166','утёнок');
+add(blob(460,619,10,7,7,.12,103)+circle(451,612,5),'#FFD166','утёнок');
+add(ell(560,642,34,12),'#57A773','кувшинка, лист');
+add(ell(820,656,30,11),'#57A773','кувшинка, лист');
+add(blob(560,629,12,9,8,.25,107),'#EF476F','цветок кувшинки');
+add(capsule(238,478,30,5,2)+ell(244,472,12,4)+ell(258,472,12,4)+ell(244,487,12,4)+ell(258,487,12,4),'#4CC9F0','стрекоза');
+add(blob(80,300,110,90,10,.2,109),'#588157','ива');
+add('M60,660L70,390Q80,375 90,390L100,660Q80,668 60,660Z','#6B4F3A','ствол ивы');
+add(strands(16,372,7),'#6A994E','ветви ивы');
+add(star4(600,80,12),'#FFE9A8','звезда');
+add(star4(900,150,10),'#FFE9A8','звезда');
+add(circle(200,620,4)+circle(240,600,3)+circle(170,590,3)+circle(300,640,3),'#D9ED92','светлячки');
+D.lines.push({d:'M692,445Q660,500 626,552M615,576H745',w:2});
+D.dots.push({x:318,y:582,r:2},{x:420,y:604,r:1.5},{x:449,y:610,r:1.4},{x:240,y:480,r:2});
+return{R,D};}
+const SCENES={A:sceneA,O:sceneO,I:sceneI,E:sceneE};
+const PAPERS={warm:{paper:'#FBF6EC',ink:'#3A2E39'},cold:{paper:'#F2F7FA',ink:'#2F3A4A'},night:{paper:'#262233',ink:'#EDE7F4'}};
+const FREE_COLORS=['#E63946','#F77F00','#FFD166','#FFF3E0','#8AC926','#2A9D8F','#57A773','#4CC9F0','#3A6EA5','#7B5EA7','#E56399','#7F5539'];
+
+/* ================= СОСТОЯНИЕ ================= */
+const KEY='orfo-raskraska-v1';
+const $=s=>document.querySelector(s);
+const SVGNS='http://www.w3.org/2000/svg';
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function freshLetter(k){return{res:new Array(DATA[k].tasks.length).fill(null),points:0,streak:0,started:Date.now(),custom:{},hideEarned:false,done:false};}
+let state={letter:'A',mode:'quiz',brushColor:'#E63946',
+settings:{sound:true,paper:'warm',stroke:2.5,nums:true,hints:true,outline:false},
+L:{A:freshLetter('A'),O:freshLetter('O'),I:freshLetter('I'),E:freshLetter('E')}};
+try{const raw=localStorage.getItem(KEY);if(raw){const s=JSON.parse(raw);
+if(s&&s.L){for(const k of['A','O','I','E']){if(s.L[k]&&Array.isArray(s.L[k].res)&&s.L[k].res.length===DATA[k].tasks.length)state.L[k]=Object.assign(freshLetter(k),s.L[k]);}
+Object.assign(state.settings,s.settings||{});if(DATA[s.letter])state.letter=s.letter;state.mode=s.mode==='brush'?'brush':'quiz';if(FREE_COLORS.includes(s.brushColor))state.brushColor=s.brushColor;}}}catch(e){}
+let saveT=null;function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify({letter:state.letter,mode:state.mode,brushColor:state.brushColor,settings:state.settings,L:state.L}));}catch(e){}},250);}
+const L=()=>state.L[state.letter];
+const tasks=()=>DATA[state.letter].tasks;
+const idx=()=>{const i=L().res.findIndex(r=>!r);return i<0?tasks().length:i;};
+let phase='answer',selected=new Set(),attempts=0,undoStack=[],cascadeTimers=[],regionEls=[],numEls=[],groups=[],scene=null;
+
+/* ================= ЗВУК ================= */
+let AC=null;function ac(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC;}
+function tone(f,t0,d,type,g){const c=ac();if(!c||!state.settings.sound)return;try{const o=c.createOscillator(),ga=c.createGain();o.type=type||'sine';o.frequency.value=f;const t=c.currentTime+t0;ga.gain.setValueAtTime(0,t);ga.gain.linearRampToValueAtTime(g||.1,t+.012);ga.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(ga);ga.connect(c.destination);o.start(t);o.stop(t+d+.05);}catch(e){}}
+const sfx={tick:()=>tone(880,0,.06,'triangle',.045),ok:()=>{tone(660,0,.12,'sine',.11);tone(880,.09,.16,'sine',.11);tone(1320,.18,.22,'sine',.07);},bad:()=>{tone(196,0,.2,'triangle',.09);tone(147,.08,.25,'triangle',.07);},paint:k=>tone(500+k*55,0,.09,'sine',.06),win:()=>{[523,659,784,1047,1319].forEach((f,i)=>tone(f,i*.12,.32,'sine',.1));}};
+document.addEventListener('pointerdown',()=>ac(),{once:true});
+
+/* ================= ПОСТРОЕНИЕ СЦЕНЫ ================= */
+function chunkGroups(total,n){const base=Math.floor(total/n),extra=total%n,out=[];let p=0;for(let g=0;g<n;g++){const sz=base+(g<extra?1:0);const arr=[];for(let j=0;j<sz;j++)arr.push(p++);out.push(arr);}return out;}
+function buildScene(){
+cascadeTimers.forEach(clearTimeout);cascadeTimers=[];
+scene=SCENES[state.letter]();groups=chunkGroups(scene.R.length,tasks().length);
+const P=PAPERS[state.settings.paper];
+$('#paperRect').setAttribute('fill',P.paper);
+const g=$('#regionG');g.innerHTML='';g.setAttribute('stroke',P.ink);g.setAttribute('stroke-width',state.settings.stroke);
+const dg=$('#decoG');dg.innerHTML='';dg.setAttribute('stroke',P.ink);
+const ng=$('#numsG');ng.innerHTML='';$('#fxG').innerHTML='';
+regionEls=[];numEls=[];
+scene.R.forEach((r,i)=>{const p=document.createElementNS(SVGNS,'path');p.setAttribute('d',r.d);p.setAttribute('fill',P.paper);if(r.fr)p.setAttribute('fill-rule',r.fr);p.dataset.i=i;p.setAttribute('aria-label',r.n);g.appendChild(p);regionEls.push(p);});
+scene.D.lines.forEach(l=>{const p=document.createElementNS(SVGNS,'path');p.setAttribute('d',l.d);p.setAttribute('stroke-width',l.w||2);dg.appendChild(p);});
+scene.D.dots.forEach(dt=>{const c=document.createElementNS(SVGNS,'circle');c.setAttribute('cx',dt.x);c.setAttribute('cy',dt.y);c.setAttribute('r',dt.r);c.setAttribute('fill',P.ink);c.setAttribute('stroke','none');dg.appendChild(c);});
+groups.forEach((gr,gi)=>{const first=regionEls[gr[0]];const bb=first.getBBox();const t=document.createElementNS(SVGNS,'text');
+t.setAttribute('x',bb.x+bb.width/2);t.setAttribute('y',bb.y+bb.height/2+5);t.setAttribute('text-anchor','middle');
+t.setAttribute('font-size','15');t.setAttribute('font-family','system-ui,sans-serif');t.setAttribute('font-weight','700');
+t.setAttribute('fill',P.ink);t.setAttribute('opacity','.6');t.setAttribute('stroke',P.paper);t.setAttribute('stroke-width','3.5');t.setAttribute('paint-order','stroke');
+t.textContent=gi+1;t.dataset.g=gi;ng.appendChild(t);numEls.push(t);});
+ng.style.display=state.settings.nums?'':'none';
+syncFills();
+$('#stageTitle').textContent=DATA[state.letter].title;
+$('#stageSub').textContent='«'+DATA[state.letter].sub+'»';
+$('#printTitle').textContent='Орфографическая раскраска · буква '+state.letter+' · «'+DATA[state.letter].title+'» · ОГЭ-2027, задание 7';
+document.body.dataset.letter=state.letter;
+}
+function groupOfRegion(i){for(let g=0;g<groups.length;g++)if(groups[g].includes(i))return g;return 0;}
+function earnedVisible(g){return !!L().res[g]&&!L().hideEarned;}
+function fillFor(i){const c=L().custom;if(Object.prototype.hasOwnProperty.call(c,i))return c[i]||PAPERS[state.settings.paper].paper;
+const g=groupOfRegion(i);return earnedVisible(g)?scene.R[i].c:PAPERS[state.settings.paper].paper;}
+function syncFills(){regionEls.forEach((p,i)=>{const f=fillFor(i);p.style.fill=f;p.classList.toggle('painted',f!==PAPERS[state.settings.paper].paper);});
+numEls.forEach((t,g)=>{const painted=groups[g].every(i=>fillFor(i)!==PAPERS[state.settings.paper].paper);t.style.display=painted?'none':'';});
+updateBadge();}
+function paintGroupAnimated(g){groups[g].forEach((i,k)=>{cascadeTimers.push(setTimeout(()=>{const p=regionEls[i];p.style.fill=fillFor(i);p.classList.add('painted','flash');
+setTimeout(()=>p.classList.remove('flash'),600);
+numEls.forEach((t,gg)=>{if(gg===g&&groups[g].every(j=>fillFor(j)!==PAPERS[state.settings.paper].paper))t.style.display='none';});
+sparkle(p);sfx.paint(k);},k*160));});}
+function sparkle(el){if(reduced)return;const bb=el.getBBox();const fx=$('#fxG');const cx=bb.x+bb.width/2,cy=bb.y+bb.height/2;
+for(let k=0;k<5;k++){const c=document.createElementNS(SVGNS,'circle');const a=Math.random()*Math.PI*2,r=Math.random()*Math.min(bb.width,bb.height)*.3;
+c.setAttribute('cx',cx+Math.cos(a)*r);c.setAttribute('cy',cy+Math.sin(a)*r);c.setAttribute('r','3');
+c.setAttribute('fill',k%2?'#FFD166':'#FFFFFF');c.classList.add('spark');fx.appendChild(c);setTimeout(()=>c.remove(),750);}}
+function celebrate(){if(reduced)return;const wrap=$('#canvasWrap');const cols=FREE_COLORS;
+for(let i=0;i<38;i++){const s=document.createElement('span');s.className='confetti';s.style.left=(Math.random()*98)+'%';
+s.style.background=cols[i%cols.length];s.style.animationDelay=(Math.random()*.7)+'s';s.style.animationDuration=(1.7+Math.random()*1.1)+'s';
+wrap.appendChild(s);s.addEventListener('animationend',()=>s.remove());setTimeout(()=>s.remove(),4000);}}
+function updateBadge(){const done=L().res.filter(Boolean).length;$('#letterBadge').textContent='буква '+state.letter+' · '+done+'/'+tasks().length;
+document.querySelectorAll('.tab').forEach(tb=>{const k=tb.dataset.k;const d=state.L[k].res.filter(Boolean).length,n=DATA[k].tasks.length;
+tb.querySelector('.cnt').textContent=d+'/'+n;const circ=tb.querySelector('.fgc');const C=2*Math.PI*9;circ.style.strokeDasharray=C;circ.style.strokeDashoffset=C*(1-d/n);
+tb.classList.toggle('on',k===state.letter);tb.setAttribute('aria-current',k===state.letter?'true':'false');});}
+
+/* ================= ВИКТОРИНА ================= */
+function wordFor(text,n,letter){const toks=text.split(' ');for(const t of toks){if(t.includes('{'+n+'}')){
+let w=t.replace(/^[«„.,;:!?()—–-]+|[«».,;:!?()—–]+$/g,'');w=w.replace('{'+n+'}',letter);return w;}}return '';}
+function renderText(container,task){container.innerHTML='';
+const parts=task.text.split(/(\{\d\})/);let cur=document.createElement('span');cur.className='w';
+parts.forEach(part=>{const m=part.match(/^\{(\d)\}$/);
+if(m){const n=+m[1];const b=document.createElement('button');b.type='button';b.className='gap';b.dataset.n=n;b.setAttribute('aria-pressed','false');
+b.innerHTML='<i style="font-style:normal">·</i><b>'+n+'</b>';cur.appendChild(b);}
+else{part.split(' ').forEach((wd,wi)=>{if(wi>0){container.appendChild(cur);container.appendChild(document.createTextNode(' '));cur=document.createElement('span');cur.className='w';}
+if(wd)cur.appendChild(document.createTextNode(wd));});}});
+container.appendChild(cur);}
+function chip(n){return $('#qText .gap[data-n="'+n+'"]');}
+function setChip(n){const c=chip(n);if(!c)return;const sel=selected.has(n);c.classList.toggle('sel',sel);c.setAttribute('aria-pressed',sel);
+c.querySelector('i').textContent=sel?state.letter:'·';}
+function renderQuiz(){
+const i=idx(),n=tasks().length;
+$('#quizCard').hidden=state.mode!=='quiz'||L().done;
+$('#brushCard').hidden=state.mode!=='brush';
+$('#doneCard').hidden=!(L().done&&state.mode==='quiz');
+if(L().done&&state.mode==='quiz'){renderDone();return;}
+if(state.mode==='brush'){renderBrush();return;}
+if(i>=n){L().done=true;save();renderQuiz();return;}
+const t=tasks()[i];phase='answer';selected=new Set();attempts=0;
+$('#qNum').textContent='Задание №'+t.n;
+$('#qObz').textContent='ОБЗ '+t.obz;
+$('#qLetter').textContent='буква '+state.letter;
+$('#qBar').style.width=(i/n*100)+'%';
+$('#qCount').textContent=i+'/'+n;
+$('#qInstr').innerHTML='Укажите все цифры, на месте которых пишется буква <b>'+state.letter+'</b>.';
+const fams=[...new Set(t.rules.map(r=>r.split(':')[0]))].slice(0,4);
+$('#qHint').hidden=!state.settings.hints;
+$('#qHint').innerHTML='<b>Подсказка.</b> Здесь встречаются: '+fams.join(' · ')+(t.rules.length>4?' …':'');
+renderText($('#qText'),t);
+$('#explainEl').innerHTML='';
+$('#checkBtn').disabled=true;$('#checkBtn').textContent='Проверить';
+$('#clearBtn').hidden=false;
+$('#ptsEl').textContent=L().points;
+$('#streakEl').textContent=L().streak>=2?'🔥×'+L().streak:'';
+updateBadge();}
+function toggleChip(n){if(phase!=='answer')return;if(selected.has(n))selected.delete(n);else selected.add(n);setChip(n);sfx.tick();
+$('#checkBtn').disabled=selected.size===0;}
+function sameArr(a,b){return a.length===b.length&&a.every(x=>b.includes(x));}
+function explainHTML(kind,t,extra){
+const words=t.ans.map((d,k)=>{const w=wordFor(t.text,d,'<b>'+state.letter.toLowerCase()+'</b>');
+return '<li><span class="ww">'+w+'</span><span class="rr">'+t.rules[k]+'</span></li>';}).join('');
+const full=t.text.replace(/\{(\d)\}/g,(m,d)=>{d=+d;const lt=t.letters[d-1];return t.ans.includes(d)?'<b>'+lt+'</b>':'<span class="o">'+lt+'</span>';});
+const src='<div class="src">Источник: открытый банк заданий ФИПИ · ОГЭ-2027 · ОБЗ '+t.obz+'</div><div class="row" id="expRow"></div>';
+if(kind==='ok'){return '<div class="explain ok"><div class="banner">✔ Верно! Фрагмент картины закрашен'+(extra?' · +'+extra+' очков':'')+'</div><div class="body"><ul class="words">'+words+'</ul><details><summary>Полный текст с ответами</summary><div class="full">'+full+'</div></details>'+src+'</div></div>';}
+if(kind==='retry'){return '<div class="explain warn"><div class="banner">✎ Пока не всё: верных позиций — '+extra.hit+' из '+t.ans.length+(extra.extra?', лишних — '+extra.extra:'')+'. Уберите красные и поищите ещё.</div><div class="body">'+src+'</div></div>';}
+return '<div class="explain reveal"><div class="body"><div class="full-label">Полный текст с ответами</div><div class="full">'+full+'</div>'+src+'</div></div>';}
+function doCheck(){
+const i=idx(),t=tasks()[i];if(!t||phase!=='answer'||selected.size===0)return;
+attempts++;
+const sel=[...selected].sort();
+const ok=sameArr(sel,t.ans);
+if(ok){
+const bonus=attempts===1?12+2*Math.min(L().streak,5):6;
+L().points+=bonus;L().streak=attempts===1?L().streak+1:0;
+L().res[i]={ok:true,tries:attempts,sel};
+const repaint=L().hideEarned;L().hideEarned=false;
+phase='resolved';
+t.ans.forEach(d=>{const c=chip(d);c.classList.remove('sel');c.classList.add('hit','lock');c.querySelector('i').textContent=state.letter;});
+for(let d=1;d<=9;d++)if(!t.ans.includes(d)){const c=chip(d);c.classList.remove('sel','bad');c.classList.add('other','lock');c.querySelector('i').textContent=t.letters[d-1];}
+$('#explainEl').innerHTML=explainHTML('ok',t,bonus);
+const last=i===tasks().length-1;
+$('#expRow').innerHTML='<button class="btn primary" id="nextBtn">'+(last?'Завершить картину ✨':'Следующее задание →')+'</button>';
+$('#nextBtn').onclick=nextTask;
+$('#checkBtn').disabled=true;$('#clearBtn').hidden=true;
+$('#ptsEl').textContent=L().points;$('#streakEl').textContent=L().streak>=2?'🔥×'+L().streak:'';
+$('#qBar').style.width=((i+1)/tasks().length*100)+'%';$('#qCount').textContent=(i+1)+'/'+tasks().length;
+if(repaint)syncFills();paintGroupAnimated(i);sfx.ok();save();updateBadge();
+}else{
+L().streak=0;$('#streakEl').textContent='';
+const hit=sel.filter(d=>t.ans.includes(d)).length,extra=sel.length-hit;
+sel.forEach(d=>{const c=chip(d);c.classList.remove('sel');c.classList.add(t.ans.includes(d)?'hit':'bad');c.querySelector('i').textContent=state.letter;});
+if(attempts===1){
+phase='retry';
+$('#explainEl').innerHTML=explainHTML('retry',t,{hit,extra});
+$('#expRow').innerHTML='<button class="btn primary" id="retryBtn">Попробовать ещё раз</button><button class="btn ghost" id="revealBtn">Показать ответ</button>';
+$('#retryBtn').onclick=()=>{phase='answer';selected=new Set(t.ans.filter(d=>sel.includes(d)));
+for(let d=1;d<=9;d++){const c=chip(d);c.classList.remove('bad','hit','sel');if(selected.has(d)){c.classList.add('sel');}c.querySelector('i').textContent=selected.has(d)?state.letter:'·';c.setAttribute('aria-pressed',selected.has(d));}
+$('#explainEl').innerHTML='';$('#checkBtn').disabled=selected.size===0;$('#clearBtn').hidden=false;};
+$('#revealBtn').onclick=()=>reveal(t,i,sel);
+$('#checkBtn').disabled=true;sfx.bad();
+}else{reveal(t,i,sel);}
+save();}
+}
+function reveal(t,i,sel){
+L().res[i]={ok:false,tries:attempts,sel};
+const repaint=L().hideEarned;L().hideEarned=false;phase='resolved';
+for(let d=1;d<=9;d++){const c=chip(d);c.classList.remove('sel','bad','hit');c.classList.add(t.ans.includes(d)?'hit':'other','lock');c.querySelector('i').textContent=t.ans.includes(d)?state.letter:t.letters[d-1];}
+$('#explainEl').innerHTML=explainHTML('reveal',t);
+const last=i===tasks().length-1;
+$('#expRow').innerHTML='<button class="btn primary" id="nextBtn">'+(last?'Завершить картину ✨':'Дальше →')+'</button>';
+$('#nextBtn').onclick=nextTask;
+$('#checkBtn').disabled=true;$('#clearBtn').hidden=true;
+$('#qBar').style.width=((i+1)/tasks().length*100)+'%';$('#qCount').textContent=(i+1)+'/'+tasks().length;
+if(repaint)syncFills();paintGroupAnimated(i);sfx.bad();save();updateBadge();}
+function nextTask(){const i=idx();if(i>=tasks().length){L().done=true;save();renderQuiz();celebrate();sfx.win();toast('Картина «'+DATA[state.letter].title+'» готова!');}else renderQuiz();}
+function renderDone(){
+const res=L().res,n=res.length;
+const first=res.filter(r=>r&&r.ok&&r.tries===1).length;
+const second=res.filter(r=>r&&r.ok&&r.tries>1).length;
+const shown=res.filter(r=>r&&!r.ok).length;
+const mins=Math.max(1,Math.round((Date.now()-L().started)/60000));
+$('#donePraise').textContent=shown===0?'Без единой ошибки — блестяще! Картина «'+DATA[state.letter].title+'» раскрашена полностью.':second+shown>0?'Картина «'+DATA[state.letter].title+'» раскрашена полностью. Ниже — задания, к которым стоит вернуться.':'Картина «'+DATA[state.letter].title+'» раскрашена полностью.';
+$('#doneStats').innerHTML=
+'<div class="stat"><b>'+first+'/'+n+'</b><span>верно с первого раза</span></div>'+
+'<div class="stat"><b>'+second+'</b><span>со второй попытки</span></div>'+
+'<div class="stat"><b>'+shown+'</b><span>разобрано по ответу</span></div>'+
+'<div class="stat"><b>★ '+L().points+'</b><span>очков · ≈'+mins+' мин</span></div>';
+const bad=res.map((r,i)=>({r,i})).filter(x=>x.r&&(!x.r.ok||x.r.tries>1));
+$('#doneMistWrap').style.display=bad.length?'':'none';
+$('#doneMistakes').innerHTML=bad.map(x=>{const t=tasks()[x.i];
+const ws=t.ans.map(d=>wordFor(t.text,d,state.letter.toLowerCase())).join(', ');
+return '<div class="mist"><b>№'+t.n+'</b> · ОБЗ '+t.obz+'<br><span class="ans">Верно: '+t.ans.join('')+'</span> — '+ws+
+(x.r.sel&&x.r.sel.length?'<br><span class="was">Ваш ответ: '+x.r.sel.join('')+'</span>':'')+'</div>';}).join('');
+$('#qBar').style.width='100%';
+updateBadge();}
+function renderBrush(){const painted=regionEls.filter((p,i)=>fillFor(i)!==PAPERS[state.settings.paper].paper).length;
+$('#brushColor').style.background=state.brushColor==='eraser'?PAPERS[state.settings.paper].paper:state.brushColor;
+$('#brushCount').textContent='· закрашено '+painted+' из '+regionEls.length+' фрагментов';}
+
+/* ================= УПРАВЛЕНИЕ ================= */
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2600);}
+function setMode(m){state.mode=m;$('#modeQuiz').setAttribute('aria-pressed',m==='quiz');$('#modeBrush').setAttribute('aria-pressed',m==='brush');save();renderQuiz();}
+function switchLetter(k){if(k===state.letter)return;state.letter=k;undoStack=[];buildScene();renderQuiz();save();toast('Буква '+k+' · «'+DATA[k].title+'»');}
+function snapshot(){undoStack.push({custom:Object.assign({},L().custom),hideEarned:L().hideEarned});if(undoStack.length>60)undoStack.shift();}
+function brushPaint(i){snapshot();L().custom[i]=state.brushColor==='eraser'?'':state.brushColor;
+const p=regionEls[i];p.style.fill=fillFor(i);p.classList.add('flash');setTimeout(()=>p.classList.remove('flash'),600);
+sparkle(p);sfx.paint(i%6);syncFills();renderBrush();save();}
+function arm(btn,fn,label){if(btn.dataset.armed){delete btn.dataset.armed;btn.classList.remove('armed');btn.innerHTML=btn._orig;fn();return;}
+btn._orig=btn.innerHTML;btn.dataset.armed='1';btn.classList.add('armed');btn.innerHTML=label||'Точно? Нажмите ещё раз';
+setTimeout(()=>{if(btn.dataset.armed){delete btn.dataset.armed;btn.classList.remove('armed');btn.innerHTML=btn._orig;}},3000);}
+function resetLetter(){state.L[state.letter]=freshLetter(state.letter);undoStack=[];buildScene();renderQuiz();save();toast('Картина и задания начаты заново');}
+
+/* ================= ЭКСПОРТ ================= */
+function exportPNG(){try{
+const clone=$('#art').cloneNode(true);clone.querySelector('#numsG').remove();clone.querySelector('#fxG').remove();
+clone.setAttribute('width','2000');clone.setAttribute('height','1400');clone.setAttribute('xmlns',SVGNS);
+const str=new XMLSerializer().serializeToString(clone);
+const url=URL.createObjectURL(new Blob([str],{type:'image/svg+xml;charset=utf-8'}));
+const img=new Image();
+img.onload=()=>{const cv=document.createElement('canvas');cv.width=2000;cv.height=1400;
+cv.getContext('2d').drawImage(img,0,0,2000,1400);URL.revokeObjectURL(url);
+cv.toBlob(b=>{if(!b){toast('Не удалось создать PNG');return;}const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='raskraska_'+state.letter+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000);toast('Картинка сохранена в PNG');},'image/png');};
+img.onerror=()=>{URL.revokeObjectURL(url);toast('Не удалось создать PNG');};
+img.src=url;}catch(e){toast('Не удалось создать PNG');}}
+function exportWord(){
+const k=state.letter;let h='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>Разбор</title><style>@page Section1{size:595.3pt 841.9pt;margin:56.7pt 42.5pt 56.7pt 85pt}div.Section1{page:Section1}body{font-family:"Times New Roman",serif;font-size:12pt;line-height:1.4}h1{font-size:16pt}h2{font-size:13pt;margin:14pt 0 4pt}p{margin:4pt 0}.src{font-size:9pt;color:#666}b.a{color:#B03A2E}</style></head><body><div class="Section1">';
+h+='<h1>Задание 7. ОГЭ-2027. Буква '+k+' — полный разбор</h1><p class="src">Открытый банк заданий ФИПИ · «'+DATA[k].title+'» · '+DATA[k].tasks.length+' заданий. Для бесплатного учебного использования.</p>';
+DATA[k].tasks.forEach(t=>{
+const full=t.text.replace(/\{(\d)\}/g,(m,d)=>{d=+d;const lt=t.letters[d-1];return t.ans.includes(d)?'<b class="a">'+lt+'</b>':lt;});
+h+='<h2>Задание №'+t.n+' · ОБЗ '+t.obz+'</h2><p>Укажите все цифры, на месте которых пишется буква '+k+'.</p><p>'+full+'</p><p><b>Ответ: '+t.ans.join('')+'</b></p><ul>';
+t.ans.forEach((d,i)=>{h+='<li>'+wordFor(t.text,d,state.letter.toLowerCase())+' — '+t.rules[i]+'</li>';});
+h+='</ul>';});
+h+='</div></body></html>';
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+h],{type:'application/msword'}));a.download='Razbor_zadanie7_'+k+'.doc';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000);toast('Разбор сохранён (.doc)');}
+let printBackup=null;
+window.addEventListener('beforeprint',()=>{if(state.settings.outline){printBackup=regionEls.map(p=>p.style.fill);regionEls.forEach(p=>p.style.fill='');}});
+window.addEventListener('afterprint',()=>{if(printBackup){regionEls.forEach((p,i)=>p.style.fill=printBackup[i]);printBackup=null;}});
+
+/* ================= ИНТЕРФЕЙС ================= */
+function buildTabs(){const nav=$('#tabs');nav.innerHTML='';
+for(const k of['A','O','I','E']){const b=document.createElement('button');b.className='tab';b.dataset.k=k;b.title='Буква '+k+' · «'+DATA[k].title+'»';
+b.innerHTML='<span class="tl">'+k+'</span><svg class="ring" viewBox="0 0 24 24"><circle class="bgc" cx="12" cy="12" r="9"/><circle class="fgc" cx="12" cy="12" r="9"/></svg><span class="cnt"></span>';
+b.onclick=()=>switchLetter(k);nav.appendChild(b);}}
+function buildPalette(){const p=$('#palette');p.innerHTML='';
+FREE_COLORS.forEach(c=>{const b=document.createElement('button');b.className='sw';b.style.background=c;b.title=c;b.setAttribute('aria-label','Цвет '+c);
+b.onclick=()=>{state.brushColor=c;markSwatch();if(state.mode!=='brush')setMode('brush');else renderBrush();save();sfx.tick();};p.appendChild(b);});
+const e=document.createElement('button');e.className='sw eraser';e.textContent='⌫';e.title='Ластик';e.setAttribute('aria-label','Ластик');
+e.onclick=()=>{state.brushColor='eraser';markSwatch();if(state.mode!=='brush')setMode('brush');else renderBrush();save();sfx.tick();};p.appendChild(e);markSwatch();}
+function markSwatch(){document.querySelectorAll('#palette .sw').forEach(b=>{const isEr=b.classList.contains('eraser');
+b.classList.toggle('on',isEr?state.brushColor==='eraser':b.title===state.brushColor);});}
+function applySettings(){$('#soundBtn').textContent=state.settings.sound?'🔊':'🔇';$('#soundBtn').setAttribute('aria-pressed',state.settings.sound);
+$('#strokeRange').value=state.settings.stroke;$('#paperSelect').value=state.settings.paper;
+$('#numsToggle').checked=state.settings.nums;$('#hintsToggle').checked=state.settings.hints;$('#outlineToggle').checked=state.settings.outline;}
+function init(){
+buildTabs();buildPalette();applySettings();buildScene();renderQuiz();
+$('#modeQuiz').onclick=()=>setMode('quiz');
+$('#modeBrush').onclick=()=>setMode('brush');
+$('#brushBack').onclick=()=>setMode('quiz');
+$('#soundBtn').onclick=()=>{state.settings.sound=!state.settings.sound;applySettings();save();if(state.settings.sound)sfx.tick();toast(state.settings.sound?'Звук включён':'Звук выключен');};
+$('#teacherBtn').onclick=()=>$('#teacherModal').classList.add('open');
+$('#modalClose').onclick=()=>$('#teacherModal').classList.remove('open');
+$('#teacherModal').addEventListener('click',e=>{if(e.target.id==='teacherModal')e.target.classList.remove('open');});
+document.addEventListener('keydown',e=>{
+if(e.key==='Escape')$('#teacherModal').classList.remove('open');
+if($('#teacherModal').classList.contains('open'))return;
+if(/^[1-9]$/.test(e.key)&&state.mode==='quiz'&&!L().done&&phase==='answer'){toggleChip(+e.key);e.preventDefault();}
+if(e.key==='Enter'&&state.mode==='quiz'&&!L().done){if(phase==='answer'&&!$('#checkBtn').disabled)doCheck();else{const nb=$('#nextBtn')||$('#retryBtn');if(nb)nb.click();}e.preventDefault();}});
+$('#qText').addEventListener('click',e=>{const g=e.target.closest('.gap');if(g)toggleChip(+g.dataset.n);});
+$('#checkBtn').onclick=doCheck;
+$('#clearBtn').onclick=()=>{if(phase!=='answer')return;selected.clear();for(let d=1;d<=9;d++)setChip(d);$('#checkBtn').disabled=true;sfx.tick();};
+$('#restartBtn').onclick=function(){arm(this,resetLetter);};
+$('#art').addEventListener('click',e=>{const p=e.target.closest('#regionG path');if(!p)return;const i=+p.dataset.i;
+if(state.mode==='brush'){brushPaint(i);}else{const g=groupOfRegion(i);
+if(L().res[g])toast('Этот фрагмент уже заработан ✔');
+else if(g===idx())toast('Этот фрагмент откроется за верный ответ в текущем задании');
+else toast('Фрагмент откроется в задании '+(g+1)+' из '+tasks().length);}});
+$('#strokeRange').oninput=e=>{state.settings.stroke=+e.target.value;$('#regionG').setAttribute('stroke-width',state.settings.stroke);save();};
+$('#paperSelect').onchange=e=>{state.settings.paper=e.target.value;buildScene();renderQuiz();save();};
+$('#numsToggle').onchange=e=>{state.settings.nums=e.target.checked;$('#numsG').style.display=e.target.checked?'':'none';save();};
+$('#hintsToggle').onchange=e=>{state.settings.hints=e.target.checked;save();if(state.mode==='quiz'&&!L().done)$('#qHint').hidden=!e.target.checked;};
+$('#outlineToggle').onchange=e=>{state.settings.outline=e.target.checked;save();toast(e.target.checked?'При печати выйдет чистый контур':'Печать в текущих красках');};
+$('#undoBtn').onclick=()=>{const s=undoStack.pop();if(!s){toast('Отменять нечего');return;}L().custom=s.custom;L().hideEarned=s.hideEarned;syncFills();if(state.mode==='brush')renderBrush();save();sfx.tick();};
+$('#randBtn').onclick=()=>{snapshot();const pool=scene.R.map(r=>r.c).concat(FREE_COLORS);
+regionEls.forEach((p,i)=>{L().custom[i]=pool[Math.floor(Math.random()*pool.length)];});
+L().hideEarned=false;syncFills();if(state.mode==='brush')renderBrush();save();sfx.ok();toast('Случайная палитра! ↩ вернёт прежние краски');};
+$('#eraseBtn').onclick=function(){arm(this,()=>{snapshot();L().custom={};L().hideEarned=true;syncFills();if(state.mode==='brush')renderBrush();save();toast('Краски стёрты. ↩ Отменить — вернёт всё');},'Стереть всё? Ещё раз');};
+$('#pngBtn').onclick=exportPNG;
+$('#printBtn').onclick=()=>window.print();
+$('#wordBtn').onclick=exportWord;
+$('#donePng').onclick=exportPNG;
+$('#doneWord').onclick=exportWord;
+$('#doneBrush').onclick=()=>setMode('brush');
+$('#doneAgain').onclick=function(){arm(this,resetLetter);};
+for(const k in DATA)DATA[k].tasks.forEach(t=>{const fromLetters=t.letters.split('').map((c,i)=>c===k.toLowerCase()?i+1:0).filter(Boolean);
+console.assert(sameArr(fromLetters,t.ans),'Ключ не совпадает с буквами: '+k+' №'+t.n);});
+}
+init();
+</script>
+</body>
+</html>
