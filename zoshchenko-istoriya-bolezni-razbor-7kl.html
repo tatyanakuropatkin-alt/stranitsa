@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="paper">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>М. Зощенко. «История болезни» — разбор для 7 класса (олимпиада)</title>
+<style>
+:root{
+  --ink:#12151E; --ink2:#1E2333; --paper:#F7F0E3; --paper2:#FFFDF8; --line:#DCCDB4;
+  --crimson:#C8102E; --vermilion:#E4572E; --gold:#E9B44C; --bronze:#8A6A43;
+  --verdigris:#2E7D6F; --azure:#2D6BE4;
+  --bg:var(--paper); --surface:var(--paper2); --surface2:#F2E8D6; --text:#1B1A17; --muted:#6B6152;
+  --accent:var(--crimson); --accent2:var(--vermilion); --ok:var(--verdigris); --info:var(--azure); --warn:#9A6B00; --danger:var(--crimson);
+  --hero1:#0E1A16; --hero2:#16241E; --herotext:#F6EEDF;
+  --nav:64px; --read-size:18px; --read-lh:1.62; --read-width:74ch; --read-font:Georgia,"Times New Roman",serif;
+  --shadow:0 10px 30px rgba(30,18,10,.10); --radius:14px;
+}
+html[data-theme="dusk"]{
+  --bg:#12151E; --surface:#1A1F2E; --surface2:#232939; --text:#EFE7D8; --muted:#A79E8C; --line:#333B4F;
+  --accent:#FF5A4E; --accent2:#FF8A3D; --gold:#F2C463; --ok:#4FC2A8; --info:#6E9BFF; --warn:#F2C463; --danger:#FF6B6B;
+  --hero1:#0A120E; --hero2:#101A15; --shadow:0 12px 34px rgba(0,0,0,.45);
+}
+html[data-theme="contrast"]{
+  --bg:#FFFFFF; --surface:#FFFFFF; --surface2:#F2F2F2; --text:#000000; --muted:#2B2B2B; --line:#000000;
+  --accent:#A80020; --accent2:#8A3200; --gold:#7A5200; --ok:#12564A; --info:#123C9E; --warn:#6B4A00; --danger:#A80020;
+  --hero1:#FFFFFF; --hero2:#F0F0F0; --herotext:#000000; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--read-font);font-size:var(--read-size);line-height:var(--read-lh);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.35;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.5'/></svg>")}
+html[data-theme="dusk"] body::before{mix-blend-mode:screen;opacity:.16}
+html[data-theme="contrast"] body::before{display:none}
+::selection{background:var(--gold);color:#1B1A17}
+*{scrollbar-width:thin;scrollbar-color:var(--accent) var(--surface2)}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--surface2);border-radius:20px}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),var(--accent2));border-radius:20px;border:2px solid var(--surface2)}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--gold),var(--accent2))}
+h1,h2,h3,h4{font-family:"Palatino Linotype","Book Antiqua",Georgia,serif;line-height:1.18;margin:0 0 .5em}
+h2{font-size:1.72rem;letter-spacing:.2px}
+h3{font-size:1.16rem}
+p{margin:0 0 .85em}
+a{color:var(--info)}
+.shell{max-width:1180px;margin:0 auto;padding:0 20px}
+.ui{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header.top{position:fixed;top:0;left:0;right:0;height:var(--nav);z-index:60;display:flex;align-items:center;gap:14px;
+  padding:0 18px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-family:system-ui,sans-serif;font-weight:700;font-size:.94rem;white-space:nowrap}
+.brand i{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--crimson),var(--verdigris) 60%,var(--gold));display:inline-block;box-shadow:0 0 0 1px var(--line)}
+nav.links{display:flex;gap:4px;overflow-x:auto;flex:1;padding:4px 0}
+nav.links a{font-family:system-ui,sans-serif;font-size:.83rem;text-decoration:none;color:var(--muted);padding:7px 11px;border-radius:999px;white-space:nowrap;border:1px solid transparent;transition:.18s}
+nav.links a:hover{color:var(--text);background:var(--surface2)}
+nav.links a.on{color:#fff;background:linear-gradient(120deg,var(--accent),var(--accent2));border-color:transparent}
+.topacts{display:flex;gap:8px}
+.btn{font-family:system-ui,sans-serif;font-size:.83rem;font-weight:600;border-radius:10px;padding:9px 13px;border:1px solid var(--line);
+  background:var(--surface);color:var(--text);cursor:pointer;transition:.16s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px);border-color:var(--accent);box-shadow:var(--shadow)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.btn.gold{background:linear-gradient(120deg,var(--gold),#F6D897);color:#2A1C05;border-color:transparent}
+.btn.ghost{background:transparent}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--info);outline-offset:2px}
+#bar{position:fixed;top:var(--nav);left:0;height:3px;width:0;z-index:61;background:linear-gradient(90deg,var(--crimson),var(--vermilion),var(--gold),var(--verdigris))}
+.rail{font-family:system-ui,sans-serif;background:var(--surface);border:1px solid var(--line);z-index:50}
+.rail h4{font-family:system-ui,sans-serif;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.ctl{margin-bottom:12px}
+.ctl label{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-bottom:5px;gap:8px}
+.ctl label b{color:var(--text);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--gold));outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--surface);border:3px solid var(--accent);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--surface);border:3px solid var(--accent);cursor:pointer}
+select{width:100%;font-family:system-ui,sans-serif;font-size:.82rem;padding:7px 9px;border-radius:9px;border:1px solid var(--line);background:var(--surface2);color:var(--text)}
+.seg{display:flex;gap:4px}
+.seg button{flex:1;font-size:.74rem;padding:7px 4px;border-radius:9px;border:1px solid var(--line);background:var(--surface2);color:var(--muted);cursor:pointer;font-family:system-ui,sans-serif}
+.seg button[aria-pressed=true]{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.8rem;padding:6px 0;cursor:pointer}
+.sw input{position:absolute;opacity:0;width:0;height:0}
+.track{width:40px;height:22px;border-radius:999px;background:var(--surface2);border:1px solid var(--line);position:relative;transition:.2s;flex:none}
+.track::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:.2s}
+.sw input:checked+.track{background:linear-gradient(120deg,var(--ok),var(--verdigris));border-color:transparent}
+.sw input:checked+.track::after{left:20px;background:#fff}
+.sw input:focus-visible+.track{outline:3px solid var(--info);outline-offset:2px}
+@media(min-width:1240px){
+  body{padding-right:302px}
+  .rail{position:fixed;right:16px;top:calc(var(--nav) + 18px);width:270px;max-height:calc(100vh - var(--nav) - 36px);overflow-y:auto;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+  .rail .railstrip{display:block}
+}
+@media(max-width:1239px){
+  .rail{position:sticky;top:var(--nav);margin:0;border-left:0;border-right:0;padding:10px 14px;overflow-x:auto}
+  .rail h4{display:none}
+  .rail .railstrip{display:flex;gap:16px;align-items:flex-end;width:max-content}
+  .rail .ctl{margin:0;width:150px}
+  .rail .sw{width:132px;font-size:.72rem;padding:0}
+  .rail .railacts{display:flex;gap:6px}
+  .rail .btn{padding:8px 10px;font-size:.76rem}
+}
+.hero{position:relative;margin-top:var(--nav);padding:70px 0 60px;overflow:hidden;background:
+  radial-gradient(900px 420px at 78% 18%,rgba(200,16,46,.34),transparent 62%),
+  radial-gradient(700px 380px at 12% 82%,rgba(46,125,111,.4),transparent 65%),
+  linear-gradient(160deg,var(--hero1),var(--hero2) 55%,#0E1520);
+  color:var(--herotext);border-bottom:1px solid var(--line)}
+html[data-theme="contrast"] .hero{background:#fff;border-bottom:2px solid #000}
+.hero .shell{position:relative;z-index:3;display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center}
+.kicker{font-family:system-ui,sans-serif;font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.hero h1{font-size:clamp(2.1rem,5vw,3.5rem);margin-bottom:.3em;color:var(--herotext)}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold),#FFF1C6 45%,var(--bronze));-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme="contrast"] .hero h1 em{color:#A80020;-webkit-text-fill-color:#A80020}
+.hero p.lead{font-size:1.06rem;max-width:52ch;color:color-mix(in srgb,var(--herotext) 86%,transparent)}
+html[data-theme="contrast"] .hero p.lead{color:#000}
+.herocta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.metastrip{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;font-family:system-ui,sans-serif;font-size:.78rem;color:color-mix(in srgb,var(--herotext) 72%,transparent)}
+html[data-theme="contrast"] .metastrip{color:#222}
+.metastrip b{display:block;font-size:1.05rem;color:var(--gold)}
+html[data-theme="contrast"] .metastrip b{color:#7A5200}
+.scene{position:relative;height:330px}
+.scene svg{position:absolute;inset:0;width:100%;height:100%}
+.mote{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.5;filter:blur(.4px);animation:drift linear infinite}
+@keyframes drift{0%{transform:translate3d(0,20px,0) scale(.6);opacity:0}20%{opacity:.65}100%{transform:translate3d(26px,-160px,0) scale(1.1);opacity:0}}
+.boxcard{position:absolute;left:4%;top:8%;width:210px;height:120px;border:0;padding:0;background:none;cursor:pointer;z-index:4}
+.boxcard .body{position:absolute;inset:0;border-radius:4px;background:linear-gradient(160deg,#FBF3E2,#EFE2C8);box-shadow:0 14px 30px rgba(0,0,0,.4),inset 0 0 0 3px var(--crimson),inset 0 0 0 6px #FBF3E2,inset 0 0 0 8px var(--crimson);display:grid;place-items:center;transform:rotate(-4deg);transition:transform .4s cubic-bezier(.2,.8,.25,1)}
+.boxcard:hover .body,.boxcard:focus-visible .body{transform:rotate(0) scale(1.06)}
+.boxcard .body span{font-family:"Palatino Linotype",Georgia,serif;font-size:.92rem;color:#7A1020;text-align:center;line-height:1.35;letter-spacing:.03em}
+.boxcard .body span b{display:block;font-size:1.15rem;letter-spacing:.08em}
+.boxcard .hint{position:absolute;left:0;bottom:-24px;font-family:system-ui,sans-serif;font-size:.7rem;color:var(--gold);white-space:nowrap}
+main{position:relative;z-index:2}
+section{padding:56px 0;border-bottom:1px solid var(--line);scroll-margin-top:calc(var(--nav) + 22px)}
+section:nth-of-type(even){background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 60%,transparent),transparent)}
+.eyebrow{font-family:system-ui,sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card.tint{background:linear-gradient(150deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface))}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.25,1)}
+.reveal.in{opacity:1;transform:none}
+html[data-motion="off"] .reveal{opacity:1;transform:none;transition:none}
+html[data-motion="off"] .mote,html[data-motion="off"] .cloud{animation:none}
+.storywrap{max-width:var(--read-width);margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:34px clamp(18px,4vw,44px);box-shadow:var(--shadow);position:relative}
+.storywrap::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:14px 0 0 14px;background:linear-gradient(180deg,var(--crimson),var(--gold),var(--verdigris))}
+#story p{margin:0 0 .9em}
+#story p.dlg{padding-left:1.1em;border-left:2px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.poem{margin:16px 0 16px 18px;padding:14px 18px;border-radius:12px;font-style:italic;position:relative;
+  background:linear-gradient(120deg,color-mix(in srgb,var(--gold) 16%,var(--surface)),var(--surface));border:1px solid color-mix(in srgb,var(--gold) 55%,var(--line))}
+.poem.pushkin{background:linear-gradient(120deg,color-mix(in srgb,var(--verdigris) 15%,var(--surface)),var(--surface));border-color:color-mix(in srgb,var(--verdigris) 55%,var(--line))}
+.poem .tag{display:inline-block;font-family:system-ui,sans-serif;font-style:normal;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;margin-bottom:9px;color:#fff;background:var(--accent)}
+.poem.pushkin .tag{background:var(--ok)}
+.poem .ln{display:block}
+span.w{border-bottom:2px dotted var(--info);cursor:help}
+html[data-words="off"] span.w{border-bottom:0;cursor:text}
+mark.d{background:linear-gradient(180deg,transparent 58%,color-mix(in srgb,var(--gold) 70%,transparent) 58%);color:inherit;cursor:pointer;padding:0 1px;border-radius:3px}
+html[data-details="off"] mark.d{background:none;cursor:text}
+html[data-steps="on"] #story p[data-start]{position:relative;padding-left:44px}
+html[data-steps="on"] #story p[data-start]::before{content:attr(data-start);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:system-ui,sans-serif;font-size:.85rem;font-weight:700;color:#fff;background:linear-gradient(130deg,var(--accent),var(--accent2))}
+html[data-steps="on"] #story [data-step]{border-left:2px solid color-mix(in srgb,var(--accent) 22%,transparent);padding-left:12px;margin-left:-14px}
+html[data-steps="on"] #story p[data-start]{padding-left:44px;margin-left:-14px}
+#pop{position:absolute;z-index:70;max-width:290px;background:var(--ink2);color:#F4ECDD;border:1px solid var(--gold);border-radius:12px;padding:12px 14px;font-family:system-ui,sans-serif;font-size:.84rem;line-height:1.45;box-shadow:0 18px 40px rgba(0,0,0,.4);display:none}
+#pop b{color:var(--gold);display:block;margin-bottom:4px}
+html[data-theme="contrast"] #pop{background:#000;color:#fff}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:.88rem;position:relative;transition:.2s}
+.step:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:var(--shadow)}
+.step b{display:grid;place-items:center;font-family:system-ui,sans-serif;font-size:.72rem;color:#fff;background:linear-gradient(130deg,var(--accent),var(--accent2));width:26px;height:26px;border-radius:50%;margin-bottom:8px}
+.poemcards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.pcard .verse{font-style:italic;margin:10px 0 14px;line-height:1.7}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{font-family:system-ui,sans-serif;font-size:.84rem;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);color:var(--text);cursor:pointer;transition:.16s;text-align:left}
+.opt:hover{border-color:var(--accent);transform:translateY(-1px)}
+.opt.right{background:linear-gradient(120deg,var(--ok),#3FA48F);color:#fff;border-color:transparent}
+.opt.wrong{background:linear-gradient(120deg,var(--danger),#E0533C);color:#fff;border-color:transparent}
+.opt[disabled]{cursor:default;opacity:.92}
+.fb{margin-top:12px;font-family:system-ui,sans-serif;font-size:.85rem;line-height:1.5;padding:12px 14px;border-radius:11px;display:none;border-left:4px solid var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--surface))}
+.fb.bad{border-left-color:var(--danger);background:color-mix(in srgb,var(--danger) 10%,var(--surface))}
+.fb .src{display:block;margin-top:6px;font-size:.75rem;color:var(--muted)}
+.fb.show{display:block}
+.lives{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:linear-gradient(115deg,#2A1220,#12202A)}
+html[data-theme="contrast"] .lives{background:#fff;border:2px solid #000}
+.livesgrid{display:grid;grid-template-columns:1fr 1fr}
+.life{padding:26px;min-height:250px;color:#F6EEDF;transition:opacity .25s,filter .25s}
+html[data-theme="contrast"] .life{color:#000}
+.life.noisy{background:linear-gradient(150deg,rgba(200,16,46,.55),rgba(228,87,46,.25))}
+.life.quiet{background:linear-gradient(150deg,rgba(46,125,111,.5),rgba(45,107,228,.28))}
+html[data-theme="contrast"] .life.noisy{background:#FBE9EC}
+html[data-theme="contrast"] .life.quiet{background:#E6F2EF}
+.life h3{color:inherit}
+.life ul{margin:0;padding-left:18px;font-size:.94rem}
+.life li{margin-bottom:6px}
+.lifeq{font-style:italic;margin-top:12px;font-size:.92rem;opacity:.95}
+.mixrow{display:flex;align-items:center;gap:14px;margin-top:16px;font-family:system-ui,sans-serif;font-size:.82rem;color:var(--muted)}
+.mixrow input{flex:1}
+#mixlabel{min-width:230px;text-align:right;color:var(--text);font-weight:600}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.detail{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:.2s}
+.detail.open{border-color:var(--accent);box-shadow:var(--shadow)}
+.dhead{width:100%;display:flex;align-items:center;gap:12px;padding:15px 16px;background:none;border:0;cursor:pointer;text-align:left;font-family:var(--read-font);font-size:1rem;color:var(--text)}
+.dhead svg{flex:none;width:34px;height:34px}
+.dhead .plus{margin-left:auto;font-family:system-ui,sans-serif;color:var(--accent);font-size:1.3rem;transition:.2s}
+.detail.open .plus{transform:rotate(45deg)}
+.dbody{display:none;padding:0 16px 16px;font-size:.94rem;border-top:1px dashed var(--line)}
+.detail.open .dbody{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.builder{display:grid;grid-template-columns:1fr 330px;gap:22px;align-items:start}
+.stepbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+.stepbox h3{display:flex;align-items:center;gap:10px;font-size:1.02rem}
+.stepbox h3 i{font-style:normal;font-family:system-ui,sans-serif;font-size:.75rem;font-weight:700;color:#fff;background:linear-gradient(130deg,var(--accent),var(--accent2));width:24px;height:24px;border-radius:50%;display:grid;place-items:center}
+.stepbox .task{font-size:.88rem;color:var(--muted);margin-bottom:10px}
+textarea{width:100%;min-height:96px;resize:vertical;font-family:var(--read-font);font-size:1rem;line-height:1.55;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--surface2);color:var(--text)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.chip{font-family:system-ui,sans-serif;font-size:.76rem;padding:6px 10px;border-radius:999px;border:1px dashed var(--accent);background:transparent;color:var(--accent);cursor:pointer;transition:.15s}
+.chip:hover{background:var(--accent);color:#fff;border-style:solid}
+.counter{font-family:system-ui,sans-serif;font-size:.74rem;color:var(--muted);margin-top:7px;display:flex;justify-content:space-between}
+.counter b{color:var(--ok)}
+.sidepanel{position:sticky;top:calc(var(--nav) + 20px);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.meter{height:10px;border-radius:999px;background:var(--surface2);overflow:hidden;margin:8px 0 14px;border:1px solid var(--line)}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--crimson),var(--gold),var(--verdigris));transition:width .35s}
+.check{list-style:none;margin:0 0 14px;padding:0;font-family:system-ui,sans-serif;font-size:.82rem}
+.check li{display:flex;gap:9px;align-items:flex-start;margin-bottom:8px;color:var(--muted)}
+.check li::before{content:"○";color:var(--muted);font-weight:700}
+.check li.done{color:var(--text)}
+.check li.done::before{content:"✓";color:var(--ok)}
+#preview{display:none;margin-top:16px;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:18px}
+#preview.show{display:block}
+#preview p{margin-bottom:.8em}
+details.sample{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+details.sample summary{cursor:pointer;font-family:system-ui,sans-serif;font-weight:600;font-size:.9rem;color:var(--accent)}
+details.sample[open] summary{margin-bottom:10px}
+.quiz{display:grid;gap:14px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.q h3{font-size:1.02rem;margin-bottom:12px}
+.q .opts{display:grid;gap:8px}
+.scorebar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 12%,var(--surface)),color-mix(in srgb,var(--info) 10%,var(--surface)));border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-bottom:18px}
+.ring{width:74px;height:74px;flex:none;border-radius:50%;display:grid;place-items:center;font-family:system-ui,sans-serif;font-weight:700;font-size:1.05rem;
+  background:conic-gradient(var(--ok) calc(var(--p,0)*1%),var(--surface2) 0);position:relative}
+.ring::after{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--surface)}
+.ring span{position:relative;z-index:2}
+#review{display:none;margin-top:18px}
+#review.show{display:block}
+#review .item{border-left:4px solid var(--danger);background:color-mix(in srgb,var(--danger) 8%,var(--surface));border-radius:10px;padding:12px 14px;margin-bottom:10px;font-size:.92rem}
+#review .item b{color:var(--danger)}
+table{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--surface);border-radius:12px;overflow:hidden}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 14%,var(--surface)),var(--surface2));font-family:system-ui,sans-serif;font-size:.82rem}
+.note{font-size:.86rem;color:var(--muted)}
+.traps li{margin-bottom:10px}
+footer{padding:34px 0 60px;font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted)}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,140%);z-index:90;display:flex;gap:12px;align-items:center;
+  background:var(--ink2);color:#F4ECDD;border:1px solid var(--gold);border-radius:12px;padding:12px 16px;font-family:system-ui,sans-serif;font-size:.86rem;box-shadow:0 18px 40px rgba(0,0,0,.4);transition:transform .35s cubic-bezier(.2,.8,.25,1)}
+#toast.show{transform:translate(-50%,0)}
+#toast button{background:var(--gold);color:#2A1C05;border:0;border-radius:8px;padding:7px 12px;font-weight:700;cursor:pointer;font-family:system-ui,sans-serif}
+@media(max-width:1000px){
+  .hero .shell{grid-template-columns:1fr}
+  .scene{height:250px;order:-1}
+  .cols,.poemcards,.details,.builder{grid-template-columns:1fr}
+  .cols3{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .livesgrid{grid-template-columns:1fr}
+  .sidepanel{position:static}
+}
+@media(max-width:620px){
+  :root{--nav:58px}
+  .brand span{display:none}
+  section{padding:40px 0}
+  .steps{grid-template-columns:1fr}
+  .storywrap{padding:22px 16px}
+  .boxcard{width:170px;height:100px}
+  .topacts .btn{padding:8px 10px}
+}
+@media print{
+  header.top,#bar,.rail,.hero,.herocta,#toast,.ui,.chips,.opts,.counter,.meter,.sidepanel .btn,#pop{display:none!important}
+  body{padding:0;background:#fff;color:#000;font-size:12pt}
+  body::before{display:none}
+  section{padding:12pt 0;border:0;break-inside:auto}
+  .card,.storywrap,.q,.detail,.stepbox,.pcard{box-shadow:none;border:1px solid #999;background:#fff}
+  .dbody{display:block!important}
+  .reveal{opacity:1!important;transform:none!important}
+  a{color:#000;text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top ui">
+  <div class="brand"><i></i><span>История болезни · 7 класс · олимпиада</span></div>
+  <nav class="links" id="nav">
+    <a href="#story-sec">Рассказ</a>
+    <a href="#steps-sec">Восемь шагов</a>
+    <a href="#author-sec">Загадки</a>
+    <a href="#lives-sec">Дом и больница</a>
+    <a href="#details-sec">Детали</a>
+    <a href="#build-sec">Моя работа</a>
+    <a href="#quiz-sec">Проверка</a>
+    <a href="#teacher-sec">Учителю</a>
+  </nav>
+  <div class="topacts">
+    <button class="btn gold" id="docBtn" title="Скачать памятку для Word">Word</button>
+    <button class="btn ghost" id="printBtn">Печать</button>
+  </div>
+</header>
+<div id="bar"></div>
+
+<div class="rail ui" id="rail">
+  <h4>Настройки чтения</h4>
+  <div class="railstrip">
+    <div class="ctl"><label>Размер текста <b id="vSize">18</b></label><input type="range" id="cSize" min="15" max="26" step="1" value="18"></div>
+    <div class="ctl"><label>Интервал <b id="vLh">1.6</b></label><input type="range" id="cLh" min="1.2" max="2.1" step="0.05" value="1.62"></div>
+    <div class="ctl"><label>Ширина колонки <b id="vW">74</b></label><input type="range" id="cW" min="52" max="96" step="2" value="74"></div>
+    <div class="ctl"><label>Тема</label>
+      <div class="seg" id="cTheme">
+        <button data-th="paper" aria-pressed="true">Бумага</button>
+        <button data-th="dusk" aria-pressed="false">Сумерки</button>
+        <button data-th="contrast" aria-pressed="false">Контраст</button>
+      </div>
+    </div>
+    <div class="ctl"><label>Шрифт</label>
+      <select id="cFont">
+        <option value='Georgia,"Times New Roman",serif'>С засечками</option>
+        <option value='system-ui,-apple-system,"Segoe UI",Roboto,sans-serif'>Без засечек</option>
+        <option value='"Palatino Linotype","Book Antiqua",Georgia,serif'>Книжный</option>
+      </select>
+    </div>
+    <label class="sw">Словарные слова<input type="checkbox" id="cWords" checked><span class="track"></span></label>
+    <label class="sw">Шаги сюжета<input type="checkbox" id="cSteps"><span class="track"></span></label>
+    <label class="sw">Подсветка деталей<input type="checkbox" id="cDetails" checked><span class="track"></span></label>
+    <label class="sw">Живой фон<input type="checkbox" id="cMotion" checked><span class="track"></span></label>
+    <div class="ctl railacts">
+      <button class="btn" id="resetBtn">Сброс</button>
+      <button class="btn primary" id="docBtn2">Word</button>
+      <button class="btn" id="printBtn2">Печать</button>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="shell">
+    <div>
+      <div class="kicker">М. М. Зощенко · олимпиадная работа · 1936</div>
+      <h1>История <em>болезни</em></h1>
+      <p class="lead">Рассказ о человеке, который предпочитает хворать дома, но попадает в больницу, где у трупов есть приёмные часы. Читаем медленно, слушаем, как казённый язык выдаёт героя, и собираем свою олимпиадную работу.</p>
+      <div class="herocta ui">
+        <a class="btn primary" href="#story-sec">Читать рассказ</a>
+        <a class="btn" href="#build-sec">Собрать свою работу</a>
+        <a class="btn ghost" href="#author-sec">Загадка: чей отрывок?</a>
+      </div>
+      <div class="metastrip">
+        <div><b>1936</b>год рассказа</div>
+        <div><b>8 шагов</b>от дома до дома</div>
+        <div><b>2 задания</b>олимпиады в разборе</div>
+        <div><b>120 слов</b>минимум для работы</div>
+      </div>
+    </div>
+    <div class="scene" aria-hidden="true">
+      <svg viewBox="0 0 420 330" preserveAspectRatio="xMidYMax meet">
+        <defs>
+          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2E4A40"/><stop offset="1" stop-color="#1C2E28"/>
+          </linearGradient>
+          <linearGradient id="desk" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#6E5334"/><stop offset=".5" stop-color="#2B2119"/><stop offset="1" stop-color="#15100C"/>
+          </linearGradient>
+          <radialGradient id="lamp"><stop offset="0" stop-color="#E9B44C" stop-opacity=".5"/><stop offset="1" stop-color="#E9B44C" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect x="0" y="0" width="420" height="330" fill="url(#wall)"/>
+        <rect x="0" y="236" width="420" height="10" fill="#14211C"/>
+        <circle cx="330" cy="70" r="90" fill="url(#lamp)"/>
+        <path d="M330 18v22" stroke="#8A6A43" stroke-width="3"/>
+        <path d="M312 40h36l-8 16h-20z" fill="#E9B44C" opacity=".85"/>
+        <g stroke="#7E6A4C" stroke-width="2" fill="none" opacity=".5">
+          <path d="M20 236 L20 120 M20 150 L2 132 M20 168 L42 146"/>
+          <path d="M400 236 L400 110 M400 140 L420 122"/>
+        </g>
+        <rect x="238" y="196" width="130" height="40" fill="url(#desk)"/>
+        <rect x="228" y="186" width="150" height="12" rx="3" fill="url(#desk)"/>
+        <rect x="252" y="176" width="52" height="12" rx="2" fill="#F6EEDF" opacity=".9"/>
+        <path d="M252 176h52" stroke="#C8102E" stroke-width="2"/>
+        <g fill="url(#desk)">
+          <rect x="96" y="216" width="104" height="8" rx="3"/><rect x="96" y="228" width="104" height="8" rx="3"/>
+          <rect x="100" y="236" width="8" height="22"/><rect x="188" y="236" width="8" height="22"/>
+        </g>
+        <rect x="0" y="316" width="420" height="14" fill="#0B0A0E" opacity=".65"/>
+      </svg>
+      <button class="boxcard" id="boxcard" title="Прочитать плакат">
+        <span class="body"><span><b>ВЫДАЧА ТРУПОВ</b>от 3-х до 4-х</span></span>
+        <span class="hint">наведи — прочитаешь плакат</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<section id="read-sec" data-doc="1">
+  <div class="shell">
+    <div class="eyebrow">Привычка первая</div>
+    <h2>Читать медленно, а не «пробежать глазами»</h2>
+    <p style="max-width:70ch">Читай этот рассказ как историю, которую тебе рассказывает знакомый, слегка кривляясь. Останавливайся там, где смешно и где вдруг становится не смешно. Три-четыре остановки — и разбор уже начался.</p>
+    <div class="cols3" style="margin-top:20px">
+      <div class="card tint reveal"><h3>Что я вижу глазами?</h3><p class="note">Плакат на стене, голова старухи над водой, рубаха с клеймом на рукаве, палату, где тридцать человек свистят и играют в пешки. Картина складывается из мелочей.</p></div>
+      <div class="card tint reveal"><h3>Что меня удивило?</h3><p class="note">Герой с температурой 39 и 8 спорит о том, как называть ванну. Его больше заботит, где стоит клеймо, чем собственная болезнь.</p></div>
+      <div class="card tint reveal"><h3>Где герой стал другим?</h3><p class="note">Нигде. Он приходит с фразой «предпочитаю хворать дома» и уходит с фразой «и теперь хвораю дома». Изменился не герой, а вес этих слов: между ними — извещение о его собственном теле.</p></div>
+    </div>
+    <div class="card reveal" style="margin-top:18px">
+      <h3>Кто это написал</h3>
+      <p>Михаил Михайлович Зощенко (1894–1958) — прозаик, мастер комического рассказа. «История болезни» датирована 1936 годом — так, как подписан текст в олимпиадном бланке.</p>
+      <p style="margin-bottom:0">Здесь один голос: герой сам рассказывает о себе в прошедшем времени. Но авторский смех спрятан за его самоуверенностью: читатель видит то, чего не видит сам рассказчик. Не путай: смешон герой, а осуждена система, которая делает человека бумагой.</p>
+    </div>
+  </div>
+</section>
+
+<section id="story-sec" data-doc="1">
+  <div class="shell">
+    <div class="eyebrow">Текст целиком</div>
+    <h2>М. Зощенко. «История болезни»</h2>
+    <p class="note ui" style="margin-bottom:18px">Слова с пунктиром можно нажать — появится объяснение. Золотая подсветка — детали, о которых стоит подумать. Переключатель «Шаги сюжета» расставит номера прямо в тексте. Текст приведён дословно по олимпиадному бланку.</p>
+    <div class="storywrap">
+      <div id="story">
+        <p data-step="1" data-start="1">Откровенно говоря, я предпочитаю хворать дома.</p>
+        <p data-step="1">Конечно, слов нет, в больнице, может быть, светлей и культурней. И калорийность пищи, может быть, у них более предусмотрена. Но, как говорится, дома и солома едома.</p>
+        <p data-step="1">А в больницу меня привезли с брюшным тифом. Домашние думали этим облегчить мои неимоверные страдания.</p>
+        <p data-step="1">Но только этим они не достигли цели, поскольку мне попалась какая-то особенная больница, где мне не все понравилось.</p>
+        <p data-step="2" data-start="2">Все-таки только больного привезли, записывают его в книгу, и вдруг он читает на стене плакат: <mark class="d" data-d="d-poster" tabindex="0">«Выдача трупов от 3-х до 4-х»</mark>.</p>
+        <p data-step="2">Не знаю, как другие больные, но я прямо закачался на ногах, когда прочел это воззвание. Главное, у меня высокая температура, и вообще жизнь, может быть, еле теплится в моем организме, может быть, она на волоске висит — и вдруг приходится читать такие слова.</p>
+        <p data-step="2">Я сказал мужчине, который меня записывал:</p>
+        <p class="dlg" data-step="2">— Что вы, — говорю, — товарищ фельдшер, такие пошлые надписи вывешиваете? Все-таки, — говорю, — больным не доставляет интереса это читать.</p>
+        <p data-step="2">Фельдшер, или как там его, — лекпом, — удивился, что я ему так сказал, и говорит:</p>
+        <p class="dlg" data-step="2">— Глядите: больной, и еле он ходит, и чуть у него пар изо рта не идет от жара, а тоже, — говорит, — наводит на все самокритику. Если, — говорит, — вы поправитесь, что вряд ли, тогда и критикуйте, а не то мы действительно от трех до четырех выдадим вас в виде того, что тут написано, вот тогда будете знать.</p>
+        <p data-step="3" data-start="3">Хотел я с этим лекпомом схлестнуться, но поскольку у меня была высокая температура, 39 и 8, то я с ним спорить не стал. Я только ему сказал:</p>
+        <p class="dlg" data-step="3">— Вот погоди, медицинская трубка, я поправлюсь, так ты мне ответишь за свое нахальство. Разве, — говорю, — можно больным такие речи слушать? Это, — говорю, — морально подкашивает их силы.</p>
+        <p data-step="3">Фельдшер удивился, что тяжелобольной так свободно с ним объясняется, и сразу замял разговор. И тут сестричка подскочила.</p>
+        <p class="dlg" data-step="3">— Пойдемте, — говорит, — больной, на <mark class="d" data-d="d-washing" tabindex="0">обмывочный пункт</mark>.</p>
+        <p data-step="3">Но от этих слов меня тоже передернуло.</p>
+        <p class="dlg" data-step="3">— Лучше бы, — говорю, — называли не обмывочный пункт, а ванна. Это, — говорю, — красивей и возвышает больного. И я, — говорю, — не лошадь, чтоб меня обмывать.</p>
+        <p data-step="3">Медсестра говорит:</p>
+        <p class="dlg" data-step="3">— Даром что больной, а тоже, — говорит, — замечает всякие тонкости. Наверно, — говорит, — вы не выздоровеете, что во все нос суете.</p>
+        <p data-step="4" data-start="4">Тут она привела меня в ванну и велела раздеваться.</p>
+        <p data-step="4">И вот я стал раздеваться и вдруг вижу, что в ванне над водой уже торчит какая-то голова. И вдруг вижу, что это как будто старуха в ванне сидит, наверно, из больных.</p>
+        <p data-step="4">Я говорю сестре:</p>
+        <p class="dlg" data-step="4">— Куда же вы меня, собаки, привели — в дамскую ванну? Тут, — говорю, — уже кто-то купается.</p>
+        <p data-step="4">Сестра говорит:</p>
+        <p class="dlg" data-step="4">— Да это тут одна больная старуха сидит. Вы на нее не обращайте внимания. У нее высокая температура, и <mark class="d" data-d="d-oldwoman" tabindex="0">она ни на что не реагирует</mark>. Так что вы раздевайтесь без смущения. А тем временем мы старуху из ванны вынем и набуровим вам свежей воды.</p>
+        <p data-step="4">Я говорю:</p>
+        <p class="dlg" data-step="4">— Старуха не реагирует, но я, может быть, еще реагирую. И мне, — говорю, — определенно неприятно видеть то, что там у вас плавает в ванне.</p>
+        <p data-step="4">Вдруг снова приходит лекпом.</p>
+        <p class="dlg" data-step="4">— Я, — говорит, — первый раз вижу такого привередливого больного. И то ему, нахалу, не нравится, и это ему нехорошо. Умирающая старуха купается, и то он претензию выражает. А у нее, может быть, около сорока температуры, и она ничего в расчет не принимает и все видит как сквозь сито. И, уж во всяком случае, ваш вид не задержит ее в этом мире лишних пять минут. Нет, — говорит, — я больше люблю, когда к нам больные поступают в бессознательном состоянии. По крайней мере, тогда им все по вкусу, всем они довольны и не вступают с нами в научные пререкания.</p>
+        <p data-step="4">Тут купающаяся старуха подает голос:</p>
+        <p class="dlg" data-step="4">— Вынимайте, — говорит, — меня из воды, или, — говорит, — я сама сейчас выйду и <mark class="d" data-d="d-oldwoman" tabindex="0">всех тут вас распатроню</mark>.</p>
+        <p data-step="5" data-start="5">Тут они занялись старухой и мне велели раздеваться.</p>
+        <p data-step="5">И пока я раздевался, они моментально напустили горячей воды и велели мне туда сесть.</p>
+        <p data-step="5">И, зная мой характер, они уже не стали спорить со мной и старались во всем поддакивать. Только после купанья они дали мне <mark class="d" data-d="d-linen" tabindex="0">огромное, не по моему росту, белье</mark>.</p>
+        <p data-step="5">Я думал, что они нарочно от злобы подбросили мне такой комплект не по мерке, но потом я увидел, что у них это — нормальное явление. У них маленькие больные, как правило, были в больших рубахах, а большие — в маленьких.</p>
+        <p data-step="5">И даже мой комплект оказался лучше, чем другие. На моей рубахе больничное <mark class="d" data-d="d-linen" tabindex="0">клеймо стояло на рукаве</mark> и не портило общего вида, а на других больных клейма стояли у кого на спине, а у кого на груди, и это морально унижало человеческое достоинство.</p>
+        <p data-step="5">Но поскольку у меня температура все больше повышалась, то я и не стал об этих предметах спорить.</p>
+        <p data-step="6" data-start="6">А положили меня в небольшую палату, где лежало около тридцати разного сорта больных. И некоторые, видать, были тяжелобольные. А некоторые, наоборот, поправлялись. <mark class="d" data-d="d-bazaar" tabindex="0">Некоторые свистели.</mark> Другие играли в пешки. Третьи шлялись по палатам и по складам читали, чего написано над изголовьем.</p>
+        <p data-step="6">Я говорю сестрице:</p>
+        <p class="dlg" data-step="6">— Может быть, я попал в больницу для душевнобольных, так вы так и скажите. Я, — говорю, — каждый год в больницах лежу и никогда ничего подобного не видел. Всюду тишина и порядок, <mark class="d" data-d="d-bazaar" tabindex="0">а у вас что базар</mark>.</p>
+        <p class="dlg" data-step="6">Та говорит: — Может быть, вас прикажете положить в отдельную палату и приставить к вам часового, чтобы он от вас мух и блох отгонял?</p>
+        <p data-step="6">Я поднял крик, чтоб пришел главный врач, но вместо него вдруг пришел этот самый фельдшер. А я был в ослабленном состоянии. И при виде его я окончательно потерял свое сознание.</p>
+        <p data-step="7" data-start="7">Только очнулся я, наверно, так думаю, дня через три.</p>
+        <p data-step="7">Сестричка говорит мне:</p>
+        <p class="dlg" data-step="7">— Ну, — говорит, — у вас прямо двужильный организм, Вы, — говорит, — скрозь все испытания прошли. И даже мы вас случайно положили около открытого окна, и то вы неожиданно стали поправляться. И теперь, — говорит, — если вы не заразитесь от своих соседних больных, то, — говорит, — вас можно будет чистосердечно поздравить с выздоровлением.</p>
+        <p data-step="7">Однако организм мой не поддался больше болезням, и только я единственно перед самым выходом захворал детским заболеванием — коклюшем.</p>
+        <p data-step="7">Сестричка говорит:</p>
+        <p class="dlg" data-step="7">— Наверно, вы подхватили заразу из соседнего флигеля. Там у нас детское отделение. И вы, наверно, неосторожно покушали, из прибора, на котором ел коклюшный ребенок. Вот через это вы и прихворнули.</p>
+        <p data-step="7">В общем, вскоре организм взял свое, и я снова стал поправляться. Но когда дело дошло до выписки, то я и тут, как говорится, настрадался и снова захворал, на этот раз нервным заболеванием. У меня на нервной почве на коже пошли мелкие прыщики вроде сыпи. И врач сказал: «Перестаньте нервничать, и это у вас со временем пройдет».</p>
+        <p data-step="7">А я нервничал просто потому, что они меня не выписывали. То они забывали, то у них чего-то не было, то кто-то не пришел и нельзя было отметить. То, наконец, у них началось движение жен больных, и весь персонал с ног сбился.</p>
+        <p data-step="7">Фельдшер говорит:</p>
+        <p class="dlg" data-step="7">— У нас такое переполнение, что мы прямо не поспеваем больных выписывать. Вдобавок у вас только восемь дней перебор, и то вы поднимаете тарарам. А у нас тут некоторые выздоровевшие по три недели не выписываются, и то они терпят.</p>
+        <p data-step="8" data-start="8">Но вскоре они меня выписали, и я вернулся домой.</p>
+        <p data-step="8">Супруга говорит:</p>
+        <p class="dlg" data-step="8">— Знаешь, Петя, неделю назад мы думали, что ты отправился в загробный мир, поскольку из больницы пришло извещение, в котором говорится: <mark class="d" data-d="d-note" tabindex="0">«По получении сего срочно явитесь за телом вашего мужа»</mark>.</p>
+        <p data-step="8">Оказывается, моя супруга побежала в больницу, но там извинились за ошибку, которая у них произошла в бухгалтерии. Это у них скончался кто-то другой, а они почему-то подумали на меня. Хотя я к тому времени был здоров, и только меня на нервной почве закидало прыщами.</p>
+        <p data-step="8">В общем, мне почему-то стало неприятно от этого происшествия, и я хотел побежать в больницу, чтоб с кем-нибудь там побраниться, но как вспомнил, что у них там бывает, так, знаете, и не пошел.</p>
+        <p data-step="8">И теперь хвораю дома.</p>
+        <p class="note" data-step="8">Михаил Зощенко, 1936</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:28px">Словарик: слова, которые мешают читать</h3>
+    <table>
+      <tr><th style="width:26%">Слово</th><th>Что значит</th></tr>
+      <tr><td>Хворать</td><td>Разговорное: болеть, лежать в болезни. Вся позиция героя — в этом слове: хворать он хочет по-своему, дома.</td></tr>
+      <tr><td>Едом</td><td>Вторая часть пословицы «дома и солома едома» — то есть съедобна: дома всё мило и по вкусу.</td></tr>
+      <tr><td>Калорийность</td><td>Пищевая ценность, сытность пищи. Герой рассуждает о больнице как потребитель.</td></tr>
+      <tr><td>Воззвание</td><td>Торжественное обращение к народу. Здесь ирония: плакат о выдаче трупов назван «воззванием».</td></tr>
+      <tr><td>Фельдшер</td><td>Средний медицинский работник. Герой то называет его «товарищ фельдшер», то «лекпом».</td></tr>
+      <tr><td>Лекпом</td><td>Сокращение: лекарственный помощник. Казённое звание, которое герой кидает как укор.</td></tr>
+      <tr><td>Самокритика</td><td>В 1930-е — обязательное слово отчётов и собраний. Фельдшер упрекает героя, что тот «наводит самокритику».</td></tr>
+      <tr><td>Обмывочный пункт</td><td>Казённое название места, где моют больных. Герой требует слова «ванна»: имя, по его мнению, возвышает.</td></tr>
+      <tr><td>Распатроню</td><td>Просторечное: выпотрошу, разделаю. Угроза умирающей старухи — вершина комического ужаса рассказа.</td></tr>
+      <tr><td>Набуровим</td><td>Просторечное от «бурить»: наберём, напустим воды. Речь персонала — та же казённая грубоватая смесь.</td></tr>
+      <tr><td>Пререкания</td><td>Споры, тяжбы. «Научные пререкания» — фельдшер предпочитает больных без сознания: с ними не споришь.</td></tr>
+      <tr><td>Двужильный</td><td>Крепкий, выносливый (от «две жилы»). Сестричка хвалит организм героя тем же казённым словцом.</td></tr>
+      <tr><td>Коклюш</td><td>Детская заразная болезнь с приступами кашля. Герой подхватывает её перед выпиской — «детское» наказание от взрослой больницы.</td></tr>
+      <tr><td>Тарарам</td><td>Просторечное: шум, переполох. Фельдшер упрекает: восемь дней перебор — а он поднимает тарарам.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="steps-sec" data-doc="1">
+  <div class="shell">
+    <div class="eyebrow">Каркас сюжета</div>
+    <h2>Восемь шагов: от дома до дома</h2>
+    <div class="steps" style="margin-top:18px">
+      <div class="step reveal"><b>1</b>Герой объявляет принцип: хворать предпочитает дома; но с брюшным тифом его привозят в больницу.</div>
+      <div class="step reveal"><b>2</b>При регистрации он читает плакат «Выдача трупов от 3-х до 4-х» и протестует фельдшеру.</div>
+      <div class="step reveal"><b>3</b>Лекпом отвечает: поправишься — тогда и критикуй; герой грозится рассчитаться и требует назвать ванну ванной.</div>
+      <div class="step reveal"><b>4</b>В ванне сидит умирающая старуха, которая «не реагирует»; она угрожает всех распатронить.</div>
+      <div class="step reveal"><b>5</b>Герою дают бельё не по мерке; он спорит о клейме: на рукаве — хорошо, на спине — унижение.</div>
+      <div class="step reveal"><b>6</b>Палата на тридцать человек — базар: свист, пешки, чтение надписей; герой теряет сознание.</div>
+      <div class="step reveal"><b>7</b>Он поправляется, но цепляет коклюш, а перед выпиской — нервную сыпь: его не выписывают.</div>
+      <div class="step reveal"><b>8</b>Жена рассказывает об извещении «явитесь за телом»; ошибка в бухгалтерии; герой возвращается к принципу: хвораю дома.</div>
+    </div>
+    <div class="card reveal" style="margin-top:20px">
+      <h3>Четыре слова, без которых не обойтись</h3>
+      <table>
+        <tr><th style="width:20%">Слово</th><th style="width:32%">Простыми словами</th><th>В этом рассказе</th></tr>
+        <tr><td>Тема</td><td>О чём текст</td><td>Сталкивание живого человека с казённой системой</td></tr>
+        <tr><td>Главная мысль</td><td>Что автор хотел этим сказать</td><td>Учреждение обращается с человеком как с бумагой; отвечая ему тем же языком, человек теряет живое</td></tr>
+        <tr><td>Деталь</td><td>Мелкая подробность, которая работает на смысл</td><td>«Клеймо стояло на рукаве и не портило общего вида»</td></tr>
+        <tr><td>Композиция</td><td>Как части соединены между собой</td><td>Кольцо: «предпочитаю хворать дома» → «и теперь хвораю дома»; между концами — весь ад больницы</td></tr>
+      </table>
+      <p class="note" style="margin:12px 0 0">Больше терминов не нужно. В олимпиадном задании прямо сказано: обилие терминов ещё не делает работу научной. Важно сказать ясно и точно.</p>
+    </div>
+  </div>
+</section>
+
+<section id="author-sec">
+  <div class="shell">
+    <div class="eyebrow">Главные загадки</div>
+    <h2>Чей язык и чей отрывок?</h2>
+    <p style="max-width:72ch">Первая загадка — про Зощенко: почему герой говорит с медперсоналом казёнными словами. Вторая — задание 2.1 вашей олимпиады: определить, чей это зимний вечер и какой жанр.</p>
+    <div class="poemcards ui" style="margin-top:18px">
+      <div class="pcard" data-answer="dignity">
+        <div class="verse">«Это, — говорю, — морально подкашивает их силы»… «не вступают с нами в научные пререкания»… «вас можно будет чистосердечно поздравить».<br><br>Почему герой говорит с фельдшером и сестричкой этим казённым языком?</div>
+        <div class="opts">
+          <button class="opt" data-pick="edu">Он образован и любит правильную речь</button>
+          <button class="opt" data-pick="dignity">Чужими казёнными словами он пытается отстоять своё достоинство</button>
+          <button class="opt" data-pick="accident">Так писал весь период, автору ничего не оставалось</button>
+        </div>
+        <div class="fb"><b class="verdict"></b><span class="text"></span><span class="src"></span></div>
+      </div>
+      <div class="pcard" data-answer="push">
+        <div class="verse">«Три года тому назад, однажды, в зимний вечер, когда смотритель разлиновывал новую книгу, а дочь его за перегородкой шила себе платье, тройка подъехала…»<br><br>Чей это текст и какой жанр? (задание 2.1)</div>
+        <div class="opts">
+          <button class="opt" data-pick="push">А. С. Пушкин, повесть «Станционный смотритель»</button>
+          <button class="opt" data-pick="gogol">Н. В. Гоголь, повесть «Шинель»</button>
+          <button class="opt" data-pick="lerm">М. Ю. Лермонтов, повесть «Бэла»</button>
+        </div>
+        <div class="fb"><b class="verdict"></b><span class="text"></span><span class="src"></span></div>
+      </div>
+    </div>
+    <div class="card" data-doc="1" style="margin-top:22px">
+      <h3>Как на самом деле</h3>
+      <p><b>Про Зощенко.</b> Герой заимствует язык учреждения, чтобы спорить с учреждением: «морально подкашивает», «научные пререкания», «чистосердечно поздравить». Этими словами он пытается казаться большим, чем есть, — и выдаёт себя: при температуре 39 и 8 его волнует, где стоит клеймо. Смех здесь двойной: над больницей и над самим рассказчиком, который не видит себя со стороны. В работе не останавливайся на слове «смешно»: покажи, что этот язык делает с героем.</p>
+      <p><b>Про отрывок.</b> Это А. С. Пушкин, повесть «Станционный смотритель» (1830), из цикла «Повести покойного Ивана Петровича Белкина». Проезжий в черкесской шапке — гусар Минский; Дуня — дочь смотрителя Самсона Вырина. По условию задания жанр — прозаическое эпическое произведение, повесть.</p>
+      <p style="margin-bottom:0"><b>Важно для задания 2.1:</b> по инструкции бланка ответ, написанный с ошибкой или опечаткой, не засчитывается. Пиши: «Станционный смотритель», А. С. Пушкин, повесть — проверь каждое слово.</p>
+    </div>
+  </div>
+</section>
+
+<section id="lives-sec">
+  <div class="shell">
+    <div class="eyebrow">Приём: противопоставление и кольцо</div>
+    <h2>Дом и больница</h2>
+    <p style="max-width:70ch">Рассказ построен на антитезе: дом — где хоть знают, как тебя зовут, и больница — где у всего есть номер, клеймо и приёмные часы. Подвигай ползунок и посмотри, как одна территория вытесняет другую.</p>
+    <div class="lives" style="margin-top:16px">
+      <div class="livesgrid">
+        <div class="life noisy" id="lifeA">
+          <h3>Больница</h3>
+          <ul>
+            <li>плакат: «Выдача трупов от 3-х до 4-х»</li>
+            <li>«обмывочный пункт» вместо ванны</li>
+            <li>умирающая старуха в общей воде</li>
+            <li>бельё не по мерке, клеймо на спине</li>
+            <li>палата-базар на тридцать человек</li>
+            <li>извещение: «явитесь за телом вашего мужа»</li>
+          </ul>
+          <p class="lifeq">Здесь у всего есть номер, клеймо и приёмные часы.</p>
+        </div>
+        <div class="life quiet" id="lifeB">
+          <h3>Дом</h3>
+          <ul>
+            <li>«дома и солома едома»</li>
+            <li>жена, которая бежит в больницу за мужем</li>
+            <li>привычная солома и свой угол</li>
+            <li>здесь героя зовут Петей</li>
+          </ul>
+          <p class="lifeq">«И теперь хвораю дома».</p>
+        </div>
+      </div>
+    </div>
+    <div class="mixrow ui">
+      <span>больница</span><input type="range" id="mix" min="0" max="100" value="50" aria-label="Соотношение дома и больницы"><span>дом</span>
+      <span id="mixlabel">Больница начинает</span>
+    </div>
+    <div class="card" data-doc="1" style="margin-top:18px">
+      <p style="margin-bottom:0">Антитеза усиливается кольцевой композицией: рассказ начинается и кончается одной и той же мыслью о домашнем хворании. Но между первым и последним словом — извещение о его собственном теле. Дом побеждает не потому, что хорош, а потому, что здесь героя хотя бы зовут по имени: имя Петя звучит только в финале, из уст супруги. До этого система видит в нём случай.</p>
+    </div>
+  </div>
+</section>
+
+<section id="details-sec">
+  <div class="shell">
+    <div class="eyebrow">Микроанализ</div>
+    <h2>Вещи, которые говорят за героя</h2>
+    <p class="note ui">Нажми на карточку — откроется объяснение. Золотые слова в тексте рассказа ведут сюда же.</p>
+    <div class="details" style="margin-top:16px">
+      <article class="detail" id="d-poster">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="6" width="28" height="28" rx="2" fill="#FBF3E2" stroke="#C8102E" stroke-width="2"/><rect x="9" y="9" width="22" height="22" fill="none" stroke="#C8102E" stroke-width="1"/><path d="M12 15h16M12 20h16M12 25h10" stroke="#7A1020" stroke-width="2"/></svg>
+          Плакат «Выдача трупов от 3-х до 4-х»<span class="plus">+</span></button>
+        <div class="dbody"><p>Бюрократический язык доходит до предела: даже смерть получает приёмные часы. Герой «закачался на ногах» — не от болезни, а от объявления. Одна строка плаката объясняет всю больницу: здесь человек — запись в книге, и у записи есть график выдачи.</p></div>
+      </article>
+      <article class="detail" id="d-washing">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="8" y="10" width="24" height="20" rx="3" fill="#2E7D6F"/><path d="M12 14c2 3 2 5 0 8M20 14c2 3 2 5 0 8M28 14c2 3 2 5 0 8" stroke="#F6EEDF" stroke-width="2" fill="none"/><rect x="8" y="30" width="24" height="3" fill="#8A6A43"/></svg>
+          «Обмывочный пункт» вместо ванны<span class="plus">+</span></button>
+        <div class="dbody"><p>Герой требует переименовать: «ванна» — «красивей и возвышает больного». Смешно и горько: он понимает, что имя вещи и есть её суть, и пытается защитить себя словом. Но казённое название не исправить казённым же спором.</p></div>
+      </article>
+      <article class="detail" id="d-oldwoman">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 26h28v6H6z" fill="#2D6BE4" opacity=".5"/><circle cx="20" cy="22" r="5" fill="#F6EEDF"/><path d="M15 22c0-4 2-6 5-6s5 2 5 6" stroke="#8A6A43" stroke-width="2" fill="none"/></svg>
+          Старуха в ванне, которая «не реагирует»<span class="plus">+</span></button>
+        <div class="dbody"><p>Граница между живой и мёртвой размыта: старуха с температурой около сорока «всё видит как сквозь сито», а потом угрожает: «всех тут вас распатроню». Комический ужас рассказа в одной ванне: здесь моются и живут, и умирают, и не делают различий.</p></div>
+      </article>
+      <article class="detail" id="d-linen">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M12 8l-6 6 4 4v14h20V18l4-4-6-6-4 4h-8z" fill="#F6EEDF" stroke="#8A6A43" stroke-width="2"/><circle cx="26" cy="24" r="4" fill="none" stroke="#C8102E" stroke-width="2"/></svg>
+          Клеймо на рукаве<span class="plus">+</span></button>
+        <div class="dbody"><p>«На моей рубахе больничное клеймо стояло на рукаве и не портило общего вида, а на других… у кого на спине, а у кого на груди, и это морально унижало человеческое достоинство». Герой сравнивает степень унижения по расположению штампа. Система приучила его мерить себя бумагой — и это самая точная сатирическая деталь рассказа.</p></div>
+      </article>
+      <article class="detail" id="d-bazaar">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="22" width="30" height="4" rx="2" fill="#8A6A43"/><rect x="7" y="26" width="3" height="8" fill="#6E5334"/><rect x="30" y="26" width="3" height="8" fill="#6E5334"/><path d="M12 18c1-3 3-3 4 0M20 16c1-3 3-3 4 0M28 18c1-3 3-3 4 0" stroke="#C8102E" stroke-width="2" fill="none"/></svg>
+          Палата-базар<span class="plus">+</span></button>
+        <div class="dbody"><p>Тридцать больных: «некоторые свистели. Другие играли в пешки. Третьи шлялись… читали, чего написано над изголовьем». Больница — рынок страданий, где никто никого не лечит по-настоящему. Герой прав, говоря «базар»: тишины и порядка нет, есть очередь и шум.</p></div>
+      </article>
+      <article class="detail" id="d-note">
+        <button class="dhead" aria-expanded="false">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="12" width="28" height="18" rx="2" fill="#FBF3E2" stroke="#8A6A43" stroke-width="2"/><path d="M6 14l14 10 14-10" stroke="#C8102E" stroke-width="2" fill="none"/></svg>
+          Извещение «явитесь за телом»<span class="plus">+</span></button>
+        <div class="dbody"><p>Кульминация абсурда: живого человека система уже записала в мёртвые. «По получении сего срочно явитесь за телом вашего мужа» — ошибка вышла «в бухгалтерии». Бумага важнее человека: это и есть диагноз, который Зощенко ставит не герою, а учреждению.</p></div>
+      </article>
+    </div>
+
+    <div class="cols" style="margin-top:22px" data-doc="1">
+      <div class="card">
+        <h3>Зачем в рассказе лекпом и сестричка</h3>
+        <p>Их реплики — логика учреждения вслух: «если вы поправитесь, что вряд ли, тогда и критикуйте»; «я больше люблю, когда к нам больные поступают в бессознательном состоянии… тогда им все по вкусу». Персоналу удобны молчаливые: спор — признак живого.</p>
+        <p style="margin-bottom:0">Герой же спорит, значит, жив — и потому мешает. Конфликт не в хамстве отдельных людей, а в системе, где удобный пациент — послушный или мёртвый.</p>
+      </div>
+      <div class="card">
+        <h3>Почему рассказ называется «История болезни»</h3>
+        <p>Двойное дно. «История болезни» — медицинский документ, карта пациента. Но у Зощенко это ещё и история болезни системы: хроника того, как учреждение лечит тела и калечит людей.</p>
+        <p style="margin-bottom:0">Герой ведёт свою «историю» как отчёт: с датами, протоколами обид и клеймами. Название предупреждает: перед тобой не сказка, а документ — и потому смешно так горько.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="build-sec">
+  <div class="shell">
+    <div class="eyebrow">Практика · задание 1</div>
+    <h2>Собери свою работу за четыре шага</h2>
+    <p class="note ui" style="max-width:74ch">Пиши коротко и честно. Нажми на подсказку — она встанет в текст. Работа сохраняется сама, её можно скопировать, напечатать или скачать в Word. Помни: меньше 120 слов — ноль баллов по критериям олимпиады.</p>
+    <div class="builder" style="margin-top:18px">
+      <div>
+        <div class="stepbox">
+          <h3><i>1</i>Вступление: о чём рассказ</h3>
+          <div class="task">Одно-два предложения. Назови автора и название.</div>
+          <textarea id="t1" placeholder="Рассказ М. Зощенко «История болезни» — это…"></textarea>
+          <div class="chips ui">
+            <button class="chip" data-for="t1">Рассказ М. Зощенко «История болезни» — это…</button>
+            <button class="chip" data-for="t1">Герой считает, что лучше хворать дома, потому что…</button>
+          </div>
+          <div class="counter ui"><span>шаг 1</span><span><b id="w1">0</b> слов</span></div>
+        </div>
+        <div class="stepbox">
+          <h3><i>2</i>Что происходит: начало — поворот — финал</h3>
+          <div class="task">Три-четыре предложения. Поворот здесь — не болезнь, а язык: спор героя с казёнными словами.</div>
+          <textarea id="t2" placeholder="Сначала… Поворотным моментом становится… В финале…"></textarea>
+          <div class="chips ui">
+            <button class="chip" data-for="t2">Сначала герой попадает в больницу с…</button>
+            <button class="chip" data-for="t2">Поворотом становится…</button>
+            <button class="chip" data-for="t2">В финале герой…</button>
+          </div>
+          <div class="counter ui"><span>шаг 2</span><span><b id="w2">0</b> слов</span></div>
+        </div>
+        <div class="stepbox">
+          <h3><i>3</i>Одна деталь крупным планом</h3>
+          <div class="task">Короткая цитата в кавычках «…» и объяснение своими словами. Без объяснения цитата не работает.</div>
+          <textarea id="t3" placeholder="Особенно важна деталь… Она помогает понять…"></textarea>
+          <div class="chips ui">
+            <button class="chip" data-for="t3">Особенно важна деталь…</button>
+            <button class="chip" data-for="t3">Эта подробность помогает понять…</button>
+            <button class="chip" data-for="t3">«Выдача трупов от 3-х до 4-х»</button>
+            <button class="chip" data-for="t3">«По получении сего срочно явитесь за телом вашего мужа»</button>
+            <button class="chip" data-for="t3">«клеймо стояло на рукаве и не портило общего вида»</button>
+          </div>
+          <div class="counter ui"><span>шаг 3</span><span><b id="w3">0</b> слов</span></div>
+        </div>
+        <div class="stepbox">
+          <h3><i>4</i>Вывод: главная мысль</h3>
+          <div class="task">Одно-два предложения, ясно и без общих слов про «бюрократию вообще».</div>
+          <textarea id="t4" placeholder="Таким образом, Зощенко показывает, что…"></textarea>
+          <div class="chips ui">
+            <button class="chip" data-for="t4">Таким образом, автор показывает, что…</button>
+            <button class="chip" data-for="t4">Сравнивая дом и больницу, Зощенко…</button>
+          </div>
+          <div class="counter ui"><span>шаг 4</span><span><b id="w4">0</b> слов</span></div>
+        </div>
+        <div class="ui" style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn primary" id="assemble">Показать работу</button>
+          <button class="btn" id="copyWork">Копировать</button>
+          <button class="btn gold" id="workDoc">Скачать .doc</button>
+          <button class="btn ghost" id="clearWork">Очистить</button>
+        </div>
+        <div id="preview"></div>
+      </div>
+      <aside class="sidepanel ui">
+        <h4 style="font-family:system-ui,sans-serif;font-size:.95rem;margin:0 0 4px">Готовность работы</h4>
+        <div class="meter"><i id="mfill"></i></div>
+        <ul class="check" id="checks">
+          <li data-c="named">Названы автор и название</li>
+          <li data-c="steps">Есть начало, поворот и финал</li>
+          <li data-c="quote">Есть цитата в кавычках «…»</li>
+          <li data-c="explain">Деталь объяснена своими словами</li>
+          <li data-c="idea">Сформулирована главная мысль</li>
+          <li data-c="size">Всего не меньше 120 слов</li>
+        </ul>
+        <p style="font-size:.8rem;color:var(--muted);margin:0 0 12px">Всего слов: <b id="wAll">0</b>. Черновик сохраняется в этом браузере.</p>
+        <details class="sample" data-doc="1">
+          <summary>Образец разбора (около 190 слов)</summary>
+          <div>
+            <p>Рассказ М. Зощенко «История болезни» (1936) — хроника одного пребывания в больнице: герой, который предпочитает хворать дома, попадает в «особенную» больницу и проходит череду абсурда.</p>
+            <p>Сначала его привозят с брюшным тифом, и на стене он читает плакат «Выдача трупов от 3-х до 4-х». Поворотом становится не болезнь, а язык: герой спорит с фельдшером казёнными словами — «морально подкашивает», «научные пререкания», — пытаясь отстоять достоинство. В финале его выписывают, но домой приходит извещение: «явитесь за телом вашего мужа».</p>
+            <p>Особенно важна деталь — клеймо: на рубахе героя оно «стояло на рукаве и не портило общего вида», а у других — на спине или на груди. Эта подробность помогает понять: человеку важнее, как выглядит унижение со стороны, чем само унижение; система приучила его мерить себя бумагой.</p>
+            <p>Таким образом, Зощенко показывает: учреждение обращается с человеком как с документом, а человек, отвечая ему чужим языком, теряет живое. Финал закольцован — «и теперь хвораю дома»: победа лишь в том, чтобы уйти к себе.</p>
+            <p class="note">Это не образец для переписывания: возьми свою деталь — плакат, старуху в ванне, палату-базар — и скажи о ней своё.</p>
+          </div>
+        </details>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="quiz-sec">
+  <div class="shell">
+    <div class="eyebrow">Проверка</div>
+    <h2>Восемь вопросов по рассказу и заданию 2</h2>
+    <div class="scorebar ui">
+      <div class="ring" id="ring" style="--p:0"><span id="ringTxt">0/8</span></div>
+      <div style="flex:1;min-width:220px">
+        <b id="qStatus">Отвечай по порядку или вразнобой — проверка сразу.</b>
+        <div style="font-size:.84rem;color:var(--muted)" id="qSub">После каждого ответа появится объяснение и источник.</div>
+      </div>
+      <button class="btn" id="qReset">Пройти заново</button>
+    </div>
+    <div class="quiz ui" id="quiz"></div>
+    <div id="review"></div>
+
+    <div class="cols" style="margin-top:24px" data-doc="1">
+      <div class="card">
+        <h3>Проверь себя перед сдачей</h3>
+        <ul>
+          <li>В работе не меньше 120 слов? Меньше — ноль баллов по критериям.</li>
+          <li>Есть ли хотя бы одна короткая цитата в «ёлочках» и объяснение к ней?</li>
+          <li>Не перепутал ли я голос героя с позицией автора: смешон рассказчик, а не только больница?</li>
+          <li>Помню ли, что имя Петя звучит только в финале, из речи жены?</li>
+          <li>В задании 2.1 название «Станционный смотритель» написано без опечаток?</li>
+          <li>Прочитал ли вслух? Если спотыкаешься — предложение надо переделать.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Три ловушки</h3>
+        <ul class="traps">
+          <li><b>«Зощенко смеётся только над больницей».</b> Нет: смех и над рассказчиком, который спорит о клейме при температуре 39 и 8.</li>
+          <li><b>«Герой — борец с системой».</b> Скорее жалкий защитник: его «свобода речи» — казённые слова, которыми он пытается казаться большим.</li>
+          <li><b>«Финал — победа дома».</b> Это отступление, а не победа: извещение догнало героя уже дома, кольцо замкнулось.</li>
+        </ul>
+        <h3 style="margin-top:16px">Задания для тренировки</h3>
+        <ol>
+          <li>Выпиши пять казённых словечек героя («самокритика», «пререкания», «чистосердечно», «тарарам», «двужильный») и объясни, что каждое выдаёт.</li>
+          <li>Перескажи эпизод со старухой в ванне в трёх предложениях глазами сестрички.</li>
+          <li>Напиши мини-фрагмент (5–7 реплик) спора героя с лекпомом — в форме задания 2: диалог с ремарками.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="teacher-sec" data-doc="1">
+  <div class="shell">
+    <div class="eyebrow">Справка</div>
+    <h2>Учителю: атрибуции, критерии, разбор детских работ</h2>
+    <div class="card">
+      <h3>Точные атрибуции</h3>
+      <ul class="note">
+        <li>М. М. Зощенко (1894–1958). «История болезни» — 1936 год по подписи в тексте олимпиадного бланка; место первой публикации в бланке не указано, поэтому не приводится. Текст на странице дословно по бланку задания.</li>
+        <li>Отрывок задания 2.1 — А. С. Пушкин, «Станционный смотритель» (1830), из цикла «Повести покойного Ивана Петровича Белкина». Проезжий — гусар Минский; Дуня — дочь смотрителя Самсона Вырина. Жанр по условию: прозаическое эпическое произведение, повесть.</li>
+        <li>Дистракторы задания 2.1: Н. В. Гоголь, «Шинель»; М. Ю. Лермонтов, «Бэла» — в бланке не приведены, названы здесь для проверки.</li>
+      </ul>
+      <h3>О самом задании</h3>
+      <p class="note">Задание 1: анализ текста, 5 вопросов, максимум 50 баллов. «Работа объёмом менее 120 слов будет оцениваться нулём баллов. Оцениваются: 1) глубина ответа, правильность, соответствие авторской позиции, 2) логичность, 3) связность, 4) отсутствие фактических ошибок, 5) грамотность». Время работы — 120 минут, максимум за всю работу — 100 баллов.</p>
+      <p class="note">Задание 2.1: указать название, автора, жанр. «Внимание! Ответ, написанный с ошибкой/опечаткой, не засчитывается».</p>
+      <p class="note">Задание 2.2: драматический фрагмент для школьного театра по отрывку из «Станционного смотрителя». Оцениваются: логичность и оригинальность, преемственность к авторскому тексту и адаптация для постановки, соответствие драматическому жанру, сохранение основной коллизии, общая логика и стиль, грамотность.</p>
+      <h3>Расхождение в бланке</h3>
+      <p class="note" style="margin-bottom:0">В заголовке документа написано «задания регионального этапа Оренбургской областной олимпиады школьников 5–8 классов», в приветствии — «на муниципальном этапе». Оба варианта приведены как в источнике; при ссылке на работу ориентуйтесь на заголовок и уточните год по своему изданию бланка (год в документе не указан).</p>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3>Разбор детских работ (формат сохранён)</h3>
+      <p class="note">Если к странице приложена работа ученика (одна–три, без имён), разбирай каждую по чек-листу конструктора: что удалось; какие из шести пунктов не выполнены; две–три конкретные правки с опорой на текст рассказа. Без ярлыков, без оценивания личности ребёнка, без имён. Оценку не ставить, если не просили. Тон — поддерживающий, но точный: указывай не «непонятно», а «вот здесь добавь цитату и объясни, что она выдаёт».</p>
+      <p class="note" style="margin-bottom:0">Типовые недочёты по этому тексту, которые стоит искать: пересказ вместо анализа; оценка больницы как «плохих врачей» вместо системы; цитата без объяснения; смешение голоса героя и позиции автора; работа короче 120 слов.</p>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3>Образец драматического фрагмента (задание 2)</h3>
+      <details class="sample">
+        <summary>Показать фрагмент (около 130 слов)</summary>
+        <div>
+          <p class="note">Комната станционного смотрителя. Зимний вечер. Смотритель разлиновывает книгу; за перегородкой шьёт Дуня. Стук; входит проезжий в черкесской шапке, в военной шинели, окутанный шалью.</p>
+          <p><b>Проезжий.</b> Лошадей! Немедленно.</p>
+          <p><b>Смотритель.</b> Все в разгоне, батюшка. Не извольте гневаться.</p>
+          <p><b>Проезжий</b> (возвышая голос, с нагайкой). Чтобы сейчас!</p>
+          <p><b>Дуня</b> (выбегая, ласково). Не угодно ли покушать? Дождите лошадок, мы вам ужин накроем.</p>
+          <p><b>Проезжий</b> (мягчея). Ладно, подожду. Ужинать.</p>
+          <p class="note">Снимает шапку, отпутывает шаль, сдёргивает шинель — молодой гусар с чёрными усиками. Разговор с смотрителем и Дуней веселеет. Подают ужин. Смотритель приказывает запрячь кибитку, не кормя лошадей; возвращается и видит гусара почти без памяти на лавке.</p>
+          <p><b>Смотритель.</b> Этому дурно… Голова разболелась. Как быть!</p>
+          <p><b>Дуня.</b> Батюшка, уступите ему свою кровать.</p>
+          <p><b>Смотритель.</b> Уступаю. А к утру, коли не полегчает, пошлём в С*** за лекарем.</p>
+          <p class="note" style="margin-bottom:0">Коллизия сохранена: гнев проезжего → мягкость от появления Дуни → болезнь → уступка кровати. Ремарки краткие, речь приближена к пушкинской интонации отрывка.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3>Источники</h3>
+      <p class="note" style="margin-bottom:0">Текст рассказа и отрывка, вопросы и критерии — по загруженному бланку. Сведения о «Повестях Белкина» и «Станционном смотрителе» — общешкольная программа и традиционное литературоведение; при необходимости сверяйте по академическим изданиям Пушкина.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    Материал для бесплатного учебного использования. Страница работает без интернета.
+  </div>
+</footer>
+
+<div id="pop" role="dialog" aria-live="polite"></div>
+<div id="toast" role="status"><span id="toastText"></span><button id="toastAct" type="button">Вернуть</button></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s);};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+var root=document.documentElement;
+var store={
+  get:function(k,d){try{var v=localStorage.getItem(k);return v===null?d:JSON.parse(v);}catch(e){return d;}},
+  set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}},
+  del:function(k){try{localStorage.removeItem(k);}catch(e){}}
+};
+
+/* ---------- SETTINGS ---------- */
+var DEF={size:18,lh:1.62,w:74,theme:"paper",font:'Georgia,"Times New Roman",serif',words:true,steps:false,details:true,motion:true};
+var S=Object.assign({},DEF,store.get("zosh7-settings",{}));
+if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches){S.motion=false;}
+function apply(){
+  root.style.setProperty("--read-size",S.size+"px");
+  root.style.setProperty("--read-lh",String(S.lh));
+  root.style.setProperty("--read-width",S.w+"ch");
+  root.style.setProperty("--read-font",S.font);
+  root.setAttribute("data-theme",S.theme);
+  root.setAttribute("data-words",S.words?"on":"off");
+  root.setAttribute("data-steps",S.steps?"on":"off");
+  root.setAttribute("data-details",S.details?"on":"off");
+  root.setAttribute("data-motion",S.motion?"on":"off");
+  $("#vSize").textContent=S.size; $("#vLh").textContent=Number(S.lh).toFixed(2); $("#vW").textContent=S.w;
+  $("#cSize").value=S.size; $("#cLh").value=S.lh; $("#cW").value=S.w; $("#cFont").value=S.font;
+  $("#cWords").checked=S.words; $("#cSteps").checked=S.steps; $("#cDetails").checked=S.details; $("#cMotion").checked=S.motion;
+  $$("#cTheme button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.th===S.theme));});
+  store.set("zosh7-settings",S);
+}
+function bindRange(id,key,cast){$(id).addEventListener("input",function(){S[key]=cast(this.value);apply();});}
+bindRange("#cSize","size",Number); bindRange("#cLh","lh",Number); bindRange("#cW","w",Number);
+$("#cFont").addEventListener("change",function(){S.font=this.value;apply();});
+$$("#cTheme button").forEach(function(b){b.addEventListener("click",function(){S.theme=b.dataset.th;apply();});});
+[["#cWords","words"],["#cSteps","steps"],["#cDetails","details"],["#cMotion","motion"]].forEach(function(p){
+  $(p[0]).addEventListener("change",function(){S[p[1]]=this.checked;apply();});
+});
+$("#resetBtn").addEventListener("click",function(){S=Object.assign({},DEF);apply();toast("Настройки чтения сброшены",null);});
+apply();
+
+/* ---------- AMBIENT MOTES ---------- */
+(function(){
+  var scene=$(".scene"); if(!scene) return;
+  for(var i=0;i<14;i++){
+    var m=document.createElement("span"); m.className="mote";
+    m.style.left=(6+Math.random()*88)+"%";
+    m.style.top=(40+Math.random()*55)+"%";
+    m.style.animationDuration=(9+Math.random()*11)+"s";
+    m.style.animationDelay=(-Math.random()*14)+"s";
+    m.style.background=i%3===0?"#E9B44C":(i%3===1?"#4FC2A8":"#E4572E");
+    scene.appendChild(m);
+  }
+})();
+$("#boxcard").addEventListener("click",function(){location.hash="#story-sec";});
+
+/* ---------- NAV / PROGRESS / REVEAL ---------- */
+var navLinks=$$("#nav a");
+var secs=navLinks.map(function(a){return document.querySelector(a.getAttribute("href"));}).filter(Boolean);
+function onScroll(){
+  var h=document.documentElement;
+  var p=h.scrollTop/Math.max(1,(h.scrollHeight-h.clientHeight));
+  $("#bar").style.width=(p*100)+"%";
+}
+window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
+if("IntersectionObserver" in window){
+  var spy=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        navLinks.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id);});
+      }
+    });
+  },{rootMargin:"-45% 0px -50% 0px"});
+  secs.forEach(function(s){spy.observe(s);});
+  var rev=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");rev.unobserve(e.target);}});
+  },{rootMargin:"0px 0px -8% 0px"});
+  $$(".reveal").forEach(function(el,i){el.style.transitionDelay=(Math.min(i,6)*45)+"ms";rev.observe(el);});
+}else{$$(".reveal").forEach(function(el){el.classList.add("in");});}
+navLinks.concat($$('.herocta a')).forEach(function(a){
+  a.addEventListener("click",function(ev){
+    var id=a.getAttribute("href"); if(!id||id.charAt(0)!=="#") return;
+    var t=document.querySelector(id); if(!t) return;
+    ev.preventDefault();
+    var nav=parseInt(getComputedStyle(root).getPropertyValue("--nav"),10)||64;
+    var extra=window.innerWidth<1240?($("#rail").offsetHeight||0):0;
+    window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-nav-extra-14,behavior:"smooth"});
+    history.replaceState(null,"",id);
+  });
+});
+
+/* ---------- DICTIONARY ---------- */
+var DICT={
+  "хворать":["Хворать","Разговорное: болеть. Вся позиция героя в этом слове: хворать он хочет по-своему, дома."],
+  "едом":["Едом","Вторая часть пословицы «дома и солома едома» — то есть съедобна: дома всё мило."],
+  "калорийность":["Калорийность","Пищевая ценность, сытность. Герой рассуждает о больнице как потребитель."],
+  "воззвание":["Воззвание","Торжественное обращение. Ирония: плакат о выдаче трупов назван «воззванием»."],
+  "фельдшер":["Фельдшер","Средний медицинский работник. Герой то «товарищ фельдшер», то «лекпом»."],
+  "лекпом":["Лекпом","Лекарственный помощник. Казённое звание, которое герой кидает как укор."],
+  "самокритику":["Самокритика","Обязательное слово отчётов 1930-х. Фельдшер упрекает героя казённым термином."],
+  "обмывочный":["Обмывочный пункт","Казённое название ванны для больных. Герой требует слова «ванна»: имя, по его мнению, возвышает."],
+  "распатроню":["Распатроню","Просторечное: выпотрошу. Угроза умирающей старухи — вершина комического ужаса."],
+  "набуровим":["Набуровим","Просторечное от «бурить»: напустим воды. Речь персонала — та же казённая смесь."],
+  "пререкания":["Пререкания","Споры, тяжбы. «Научные пререкания» — фельдшеру удобны больные без сознания."],
+  "двужильный":["Двужильный","Крепкий, выносливый. Сестричка хвалит организм героя тем же казённым словцом."],
+  "коклюшем":["Коклюш","Детская болезнь с приступами кашля. Герой цепляет её перед выпиской — «детское» наказание взрослой больницы."],
+  "тарарам":["Тарарам","Просторечное: шум, переполох. Фельдшер упрекает: восемь дней перебор — а он поднимает тарарам."]
+};
+(function(){
+  var story=$("#story"); if(!story) return;
+  var keys=Object.keys(DICT).sort(function(a,b){return b.length-a.length;});
+  var re=new RegExp("(^|[^А-Яа-яЁё])("+keys.join("|")+")(?![А-Яа-яЁё])","g");
+  var walker=document.createTreeWalker(story,NodeFilter.SHOW_TEXT,null,false);
+  var nodes=[],n; while((n=walker.nextNode())){nodes.push(n);}
+  nodes.forEach(function(node){
+    var txt=node.nodeValue; if(!txt||txt.indexOf(" ")<0&&txt.length<4) return;
+    if(!re.test(txt)) return; re.lastIndex=0;
+    var frag=document.createDocumentFragment(),last=0,m;
+    while((m=re.exec(txt))!==null){
+      var start=m.index+m[1].length;
+      frag.appendChild(document.createTextNode(txt.slice(last,start)));
+      var sp=document.createElement("span"); sp.className="w"; sp.textContent=m[2];
+      sp.dataset.k=m[2].toLowerCase(); sp.setAttribute("tabindex","0"); sp.setAttribute("role","button");
+      frag.appendChild(sp); last=start+m[2].length;
+    }
+    frag.appendChild(document.createTextNode(txt.slice(last)));
+    node.parentNode.replaceChild(frag,node);
+  });
+})();
+var pop=$("#pop"),popOwner=null;
+function showPop(el){
+  var d=DICT[el.dataset.k]; if(!d) return;
+  pop.innerHTML="<b></b><span></span>";
+  pop.firstChild.textContent=d[0]; pop.lastChild.textContent=d[1];
+  pop.style.display="block";
+  var r=el.getBoundingClientRect(), pw=pop.offsetWidth, ph=pop.offsetHeight;
+  var left=Math.min(Math.max(8,r.left+window.pageXOffset-20),window.pageXOffset+document.documentElement.clientWidth-pw-10);
+  var top=r.bottom+window.pageYOffset+8;
+  if(r.bottom+ph+16>window.innerHeight){top=r.top+window.pageYOffset-ph-8;}
+  pop.style.left=left+"px"; pop.style.top=top+"px"; popOwner=el;
+}
+function hidePop(){pop.style.display="none";popOwner=null;}
+document.addEventListener("click",function(e){
+  var w=e.target.closest?e.target.closest("span.w"):null;
+  if(w&&S.words){e.stopPropagation();showPop(w);return;}
+  if(popOwner&&!pop.contains(e.target)) hidePop();
+});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){hidePop();}
+  if((e.key==="Enter"||e.key===" ")&&document.activeElement&&document.activeElement.classList.contains("w")){
+    e.preventDefault();showPop(document.activeElement);
+  }
+});
+window.addEventListener("scroll",function(){if(popOwner)hidePop();},{passive:true});
+
+/* ---------- DETAILS ---------- */
+$$(".detail").forEach(function(d){
+  var head=$(".dhead",d);
+  head.addEventListener("click",function(){
+    var open=d.classList.toggle("open");
+    head.setAttribute("aria-expanded",String(open));
+  });
+});
+function openDetail(id){
+  var d=document.getElementById(id); if(!d) return;
+  d.classList.add("open"); $(".dhead",d).setAttribute("aria-expanded","true");
+  var nav=parseInt(getComputedStyle(root).getPropertyValue("--nav"),10)||64;
+  var extra=window.innerWidth<1240?($("#rail").offsetHeight||0):0;
+  window.scrollTo({top:d.getBoundingClientRect().top+window.pageYOffset-nav-extra-20,behavior:"smooth"});
+}
+$$("mark.d").forEach(function(m){
+  m.setAttribute("role","button");
+  m.addEventListener("click",function(){if(S.details)openDetail(m.dataset.d);});
+  m.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&S.details){e.preventDefault();openDetail(m.dataset.d);}});
+});
+
+/* ---------- RIDDLE ---------- */
+var RIDDLE={
+  dignity:{name:"Достоинство",text:"Герой заимствует язык учреждения, чтобы спорить с учреждением: «морально подкашивает», «научные пререкания», «чистосердечно поздравить». Этими словами он пытается казаться большим, чем есть, — и выдаёт себя: при температуре 39 и 8 его волнует, где стоит клеймо. Смех двойной: над больницей и над рассказчиком, который не видит себя со стороны.",src:"М. М. Зощенко. «История болезни», 1936."},
+  edu:{name:"Не совсем",text:"Герой не «любит правильную речь» — он боится оказаться маленьким. Казённые слова для него броня, и эта броня его выдаёт.",src:"М. М. Зощенко. «История болезни», 1936."},
+  accident:{name:"Не совсем",text:"Язык эпохи — не оправдание, а материал: Зощенко выбирает этого рассказчика, потому что в казённых словах видна зависимость человека от системы.",src:"М. М. Зощенко. «История болезни», 1936."},
+  push:{name:"А. С. Пушкин",text:"Это повесть А. С. Пушкина «Станционный смотритель» (1830) из цикла «Повести покойного Ивана Петровича Белкина». Проезжий в черкесской шапке — гусар Минский; Дуня — дочь смотрителя Самсона Вырина. Жанр по условию задания — прозаическое эпическое произведение, повесть. Пишите название без опечаток: ответ с ошибкой не засчитывается.",src:"А. С. Пушкин. «Станционный смотритель», 1830; задание 2.1 олимпиадной работы."},
+  gogol:{name:"Не угадал",text:"У Гоголя в «Шинели» другой герой и другая интонация; здесь же — станционный смотритель, Дуня и гусар Минский. Это Пушкин, «Станционный смотритель» (1830).",src:"А. С. Пушкин. «Станционный смотритель», 1830; задание 2.1 олимпиадной работы."},
+  lerm:{name:"Не угадал",text:"У Лермонтова «Бэла» — кавказская история рассказчика-офицера; здесь зимний вечер у станционного смотрителя. Это Пушкин, «Станционный смотритель» (1830).",src:"А. С. Пушкин. «Станционный смотритель», 1830; задание 2.1 олимпиадной работы."}
+};
+$$(".pcard").forEach(function(card){
+  var right=card.dataset.answer, fb=$(".fb",card);
+  $$(".opt",card).forEach(function(btn){
+    btn.addEventListener("click",function(){
+      if(card.dataset.done) return;
+      card.dataset.done="1";
+      var pick=btn.dataset.pick, ok=pick===right;
+      $$(".opt",card).forEach(function(b){
+        b.disabled=true;
+        if(b.dataset.pick===right)b.classList.add("right");
+        else if(b===btn)b.classList.add("wrong");
+      });
+      var info=RIDDLE[pick]||RIDDLE[right];
+      $(".verdict",fb).textContent=ok?"Верно. ":"Не угадал. ";
+      $(".text",fb).textContent=info.text;
+      $(".src",fb).textContent="Источник: "+info.src;
+      fb.classList.toggle("bad",!ok); fb.classList.add("show");
+    });
+  });
+});
+
+/* ---------- HOME / HOSPITAL MIX ---------- */
+var mix=$("#mix");
+function applyMix(){
+  var v=Number(mix.value)/100;
+  $("#lifeA").style.opacity=String(1-v*0.72);
+  $("#lifeB").style.opacity=String(0.28+v*0.72);
+  $("#lifeA").style.filter="saturate("+(1.15-v*0.85).toFixed(2)+")";
+  $("#lifeB").style.filter="saturate("+(0.35+v*0.85).toFixed(2)+")";
+  var lbl=$("#mixlabel");
+  lbl.textContent=v<0.25?"Больница забирает героя":v<0.5?"Больница начинает":v<0.78?"Герой теряет сознание в палате-базаре":"«И теперь хвораю дома»";
+}
+mix.addEventListener("input",applyMix); applyMix();
+
+/* ---------- BUILDER ---------- */
+var IDS=["t1","t2","t3","t4"];
+var draft=store.get("zosh7-draft",{t1:"",t2:"",t3:"",t4:""});
+IDS.forEach(function(id){document.getElementById(id).value=draft[id]||"";});
+function words(s){var t=(s||"").trim();return t?t.split(/\s+/).length:0;}
+function collect(){var o={};IDS.forEach(function(id){o[id]=document.getElementById(id).value;});return o;}
+function checks(o){
+  var all=(o.t1+" "+o.t2+" "+o.t3+" "+o.t4);
+  return {
+    named:/зощенко/i.test(o.t1)&&/история\s+болезни/i.test(o.t1),
+    steps:words(o.t2)>=25&&/сначала|в начале|начал|попал/i.test(o.t2)&&/поворот|перелом|потом|затем|когда|внезап/i.test(o.t2),
+    quote:/«[^»]{3,}»/.test(o.t3),
+    explain:words(o.t3)>=22&&/потому что|значит|показывает|помогает понять|это значит|выдаёт|выдает/i.test(o.t3),
+    idea:words(o.t4)>=10,
+    size:words(all)>=120
+  };
+}
+function refresh(){
+  var o=collect(); draft=o; store.set("zosh7-draft",o);
+  var total=0;
+  IDS.forEach(function(id,i){var w=words(o[id]);total+=w;document.getElementById("w"+(i+1)).textContent=w;});
+  $("#wAll").textContent=total;
+  var c=checks(o),done=0;
+  $$("#checks li").forEach(function(li){var ok=!!c[li.dataset.c];li.classList.toggle("done",ok);if(ok)done++;});
+  $("#mfill").style.width=Math.round(done/6*100)+"%";
+  if($("#preview").classList.contains("show")) renderPreview();
+}
+IDS.forEach(function(id){document.getElementById(id).addEventListener("input",refresh);});
+$$(".chip").forEach(function(ch){
+  ch.addEventListener("click",function(){
+    var ta=document.getElementById(ch.dataset.for);
+    var add=ch.textContent.trim();
+    ta.value=(ta.value.trim()?ta.value.replace(/\s*$/,"")+" ":"")+add+" ";
+    ta.focus(); ta.setSelectionRange(ta.value.length,ta.value.length);
+    refresh();
+  });
+});
+function workParagraphs(){
+  var o=collect();
+  return IDS.map(function(id){return o[id].trim();}).filter(Boolean);
+}
+function renderPreview(){
+  var pv=$("#preview"),ps=workParagraphs();
+  pv.innerHTML="";
+  if(!ps.length){pv.innerHTML="<p class='note'>Пока пусто. Напиши хотя бы первый шаг.</p>";return;}
+  var h=document.createElement("h3"); h.textContent="Моя работа"; pv.appendChild(h);
+  ps.forEach(function(t){var p=document.createElement("p");p.textContent=t;pv.appendChild(p);});
+  var n=document.createElement("p"); n.className="note"; n.textContent="Слов: "+words(ps.join(" "))+". Прочитай вслух: если спотыкаешься — переделай предложение.";
+  pv.appendChild(n);
+}
+$("#assemble").addEventListener("click",function(){
+  var pv=$("#preview"); pv.classList.add("show"); renderPreview();
+  pv.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+function copyText(t){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(function(){toast("Работа скопирована",null);},function(){fallbackCopy(t);});
+  }else fallbackCopy(t);
+}
+function fallbackCopy(t){
+  var ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  var ok=false; try{ok=document.execCommand("copy");}catch(e){}
+  document.body.removeChild(ta);
+  toast(ok?"Работа скопирована":"Не удалось скопировать — выдели текст вручную",null);
+}
+$("#copyWork").addEventListener("click",function(){
+  var ps=workParagraphs();
+  if(!ps.length){toast("Сначала напиши хотя бы один шаг",null);return;}
+  copyText("Моя работа по рассказу М. Зощенко «История болезни»\n\n"+ps.join("\n\n"));
+});
+var undoData=null,undoTimer=null;
+$("#clearWork").addEventListener("click",function(){
+  var cur=collect();
+  if(!IDS.some(function(id){return cur[id].trim();})){toast("Черновик и так пуст",null);return;}
+  undoData=cur;
+  IDS.forEach(function(id){document.getElementById(id).value="";});
+  $("#preview").classList.remove("show"); refresh();
+  toast("Черновик очищен",function(){
+    if(!undoData)return;
+    IDS.forEach(function(id){document.getElementById(id).value=undoData[id]||"";});
+    refresh(); undoData=null; toast("Черновик возвращён",null);
+  });
+});
+refresh();
+
+/* ---------- TOAST ---------- */
+function toast(text,action){
+  var t=$("#toast"),b=$("#toastAct");
+  $("#toastText").textContent=text;
+  if(action){b.style.display="";b.onclick=function(){action();hideToast();};}
+  else{b.style.display="none";b.onclick=null;}
+  t.classList.add("show");
+  if(undoTimer)clearTimeout(undoTimer);
+  undoTimer=setTimeout(hideToast,action?8000:2600);
+}
+function hideToast(){$("#toast").classList.remove("show");}
+
+/* ---------- QUIZ ---------- */
+var QS=[
+ {q:"Где герой предпочитает хворать?",o:["Дома","В больнице","В санатории"],a:0,
+  fix:"Первая фраза рассказа: «Откровенно говоря, я предпочитаю хворать дома». Весь финал вернётся к этой строке.",
+  src:"М. М. Зощенко. «История болезни», 1936.",sec:"#story-sec"},
+ {q:"С какой болезнью героя привезли в больницу?",o:["С брюшным тифом","С корью","С коклюшем"],a:0,
+  fix:"«А в больницу меня привезли с брюшным тифом». Коклюш он подхватит позже, перед самой выпиской, — это другая болезнь.",
+  src:"М. М. Зощенко. «История болезни», 1936.",sec:"#story-sec"},
+ {q:"Что было написано на плакате при регистрации?",o:["«Выдача трупов от 3-х до 4-х»","«Приём больных с 9 до 12»","«Не курить»"],a:0,
+  fix:"Плакат: «Выдача трупов от 3-х до 4-х». Герой «прямо закачался на ногах» — не от болезни, а от объявления.",
+  src:"М. М. Зощенко. «История болезни», 1936.",sec:"#details-sec"},
+ {q:"Как герой просит называть «обмывочный пункт»?",o:["Ванна","Водные процедуры","Гигиеническая комната"],a:0,
+  fix:"«Лучше бы, — говорю, — называли не обмывочный пункт, а ванна. Это красивей и возвышает больного».",
+  src:"М. М. Зощенко. «История болезни», 1936.",sec:"#details-sec"},
+ {q:"Почему старуха в ванне не реагирует на героя?",o:["У неё высокая температура, она всё видит «как сквозь сито»","Она спит","Она глухая"],a:0,
+  fix:"«У нее высокая температура, и она ни на что не реагирует»; фельдшер добавит: «все видит как сквозь сито». А потом старуха сама подаст голос.",
+  src:"М. М. Зощенко. «История болезни», 1936.",sec:"#details-sec"},
+ {q:"Как зовут героя и когда мы это узнаём?",o:["Петя, в финале, из речи жены","Самсон, в начале","Имя не называется"],a:0,
+  fix:"Имя звучит только в конце: «Знаешь, Петя…». До этого герой безымянен: система видит в нём случай, дом — человека.",
+  src:"М. М. Зощенко. «История болезни», 1936.",sec:"#story-sec"},
+ {q:"Что говорилось в извещении, которое пришло супруге?",o:["«По получении сего срочно явитесь за телом вашего мужа»","«Заберите вещи вашего мужа»","«Ваш муж умер»"],a:0,
+  fix:"«По получении сего срочно явитесь за телом вашего мужа». Ошибка вышла в бухгалтерии: скончался другой, а подумали на героя.",
+  src:"М. М. Зощенко. «История болезни», 1936.",sec:"#details-sec"},
+ {q:"Чей отрывок про зимний вечер и смотрителя, и какой жанр? (задание 2.1)",o:["А. С. Пушкин, повесть «Станционный смотритель»","Н. В. Гоголь, повесть «Шинель»","А. С. Пушкин, стихотворение"],a:0,
+  fix:"«Станционный смотритель» А. С. Пушкина (1830), повесть из «Повестей покойного Ивана Петровича Белкина». Название пишите без опечаток: по инструкции ответ с ошибкой не засчитывается.",
+  src:"А. С. Пушкин. «Станционный смотритель», 1830; задание 2.1 олимпиадной работы.",sec:"#author-sec"}
+];
+var qState=[];
+function buildQuiz(){
+  var box=$("#quiz"); box.innerHTML=""; qState=new Array(QS.length).fill(null);
+  QS.forEach(function(item,i){
+    var q=document.createElement("div"); q.className="q";
+    var h=document.createElement("h3"); h.textContent=(i+1)+". "+item.q; q.appendChild(h);
+    var opts=document.createElement("div"); opts.className="opts";
+    item.o.forEach(function(text,j){
+      var b=document.createElement("button"); b.className="opt"; b.type="button"; b.textContent=text;
+      b.addEventListener("click",function(){answer(i,j,q);});
+      opts.appendChild(b);
+    });
+    q.appendChild(opts);
+    var fb=document.createElement("div"); fb.className="fb";
+    fb.innerHTML="<b class='verdict'></b><span class='text'></span><span class='src'></span>";
+    q.appendChild(fb); box.appendChild(q);
+  });
+  $("#review").classList.remove("show"); $("#review").innerHTML="";
+  updateScore();
+}
+function answer(i,j,q){
+  if(qState[i]!==null) return;
+  qState[i]=j;
+  var item=QS[i],ok=j===item.a,fb=$(".fb",q);
+  $$(".opt",q).forEach(function(b,k){
+    b.disabled=true;
+    if(k===item.a)b.classList.add("right");
+    else if(k===j)b.classList.add("wrong");
+  });
+  $(".verdict",fb).textContent=ok?"Верно. ":"Ошибка. ";
+  $(".text",fb).textContent=item.fix;
+  $(".src",fb).textContent="Источник: "+item.src;
+  fb.classList.toggle("bad",!ok); fb.classList.add("show");
+  updateScore();
+}
+function updateScore(){
+  var done=qState.filter(function(v){return v!==null;}).length;
+  var right=qState.filter(function(v,i){return v===QS[i].a;}).length;
+  $("#ring").style.setProperty("--p",String(Math.round(right/QS.length*100)));
+  $("#ringTxt").textContent=right+"/"+QS.length;
+  $("#qStatus").textContent=done<QS.length?("Отвечено "+done+" из "+QS.length):
+    (right===QS.length?"Все ответы верные — рассказ и задание 2 поняты точно.":"Верных ответов: "+right+" из "+QS.length+". Ниже — разбор ошибок.");
+  $("#qSub").textContent=done<QS.length?"После каждого ответа появится объяснение и источник.":"Можно пройти заново или вернуться к нужному разделу.";
+  if(done===QS.length) showReview();
+}
+function showReview(){
+  var rv=$("#review"),wrong=[];
+  qState.forEach(function(v,i){if(v!==QS[i].a)wrong.push(i);});
+  rv.innerHTML="";
+  var h=document.createElement("h3");
+  h.textContent=wrong.length?"Разбор ошибок":"Ошибок нет";
+  rv.appendChild(h);
+  if(!wrong.length){
+    var p=document.createElement("p");
+    p.textContent="Ты различаешь дом и больницу, помнишь, откуда берётся имя героя, и знаешь ответ задания 2.1. Теперь напиши свою работу в конструкторе.";
+    rv.appendChild(p);
+    var a=document.createElement("a"); a.className="btn primary"; a.href="#build-sec"; a.textContent="Перейти к работе";
+    a.style.display="inline-block"; a.style.marginTop="8px"; rv.appendChild(a);
+  }else{
+    wrong.forEach(function(i){
+      var d=document.createElement("div"); d.className="item";
+      var b=document.createElement("b"); b.textContent=(i+1)+". "+QS[i].q; d.appendChild(b);
+      var p=document.createElement("p"); p.style.margin="6px 0 4px";
+      p.textContent="Правильный ответ: "+QS[i].o[QS[i].a]+". "+QS[i].fix; d.appendChild(p);
+      var s=document.createElement("div"); s.className="note"; s.textContent="Источник: "+QS[i].src; d.appendChild(s);
+      var a=document.createElement("a"); a.href=QS[i].sec; a.textContent="Перечитать раздел"; a.style.fontSize=".85rem";
+      d.appendChild(a); rv.appendChild(d);
+    });
+  }
+  rv.classList.add("show");
+}
+$("#qReset").addEventListener("click",function(){buildQuiz();$("#quiz").scrollIntoView({behavior:"smooth",block:"start"});});
+buildQuiz();
+
+/* ---------- EXPORT ---------- */
+function docShell(title,body){
+  return '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">'+
+  '<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>'+title+'</title>'+
+  '<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->'+
+  '<style>@page WordSection1{size:595.3pt 841.9pt;margin:2cm 1.5cm 2cm 3cm;}div.WordSection1{page:WordSection1;}'+
+  'body{font-family:"Times New Roman",serif;font-size:14pt;color:#000;line-height:1.35;}'+
+  'h1{font-size:18pt;text-align:center;margin:0 0 6pt;}h2{font-size:15pt;margin:16pt 0 6pt;border-bottom:0.75pt solid #808080;padding-bottom:2pt;}'+
+  'h3{font-size:14pt;margin:10pt 0 4pt;}p{margin:0 0 6pt;text-align:justify;}'+
+  'table{border-collapse:collapse;width:100%;font-size:13pt;}td,th{border:0.75pt solid #808080;padding:4pt 6pt;vertical-align:top;text-align:left;}'+
+  'th{background:#EFEFEF;}.poem{margin:6pt 0 6pt 18pt;font-style:italic;}.poem .ln{display:block;}'+
+  '.tag{font-size:10pt;font-style:normal;}.note{font-size:11pt;}.dbody{display:block!important;}'+
+  'ul,ol{margin:0 0 8pt 20pt;}li{margin-bottom:4pt;}.eyebrow,.kicker{font-size:10pt;color:#555;}'+
+  '.subtitle{text-align:center;font-size:12pt;margin:0 0 12pt;}</style></head><body><div class="WordSection1">'+body+'</div></body></html>';
+}
+function download(name,html){
+  var blob=new Blob(["\ufeff"+html],{type:"application/msword;charset=utf-8"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url; a.download=name; document.body.appendChild(a); a.click();
+  document.body.removeChild(a); setTimeout(function(){URL.revokeObjectURL(url);},4000);
+}
+function handoutBody(){
+  var out=[];
+  $$('[data-doc="1"]').forEach(function(sec){
+    var c=sec.cloneNode(true);
+    $$(".ui,svg,input,select,textarea,.chips,.opts,.counter,.meter,.plus,.clouds",c).forEach(function(n){n.parentNode.removeChild(n);});
+    $$("button.dhead",c).forEach(function(b){
+      var h=document.createElement("h3"); h.textContent=b.textContent.replace(/\+$/,"").trim();
+      b.parentNode.replaceChild(h,b);
+    });
+    $$("button",c).forEach(function(b){b.parentNode.removeChild(b);});
+    $$("span.w",c).forEach(function(s){s.parentNode.replaceChild(document.createTextNode(s.textContent),s);});
+    $$("mark.d",c).forEach(function(s){s.parentNode.replaceChild(document.createTextNode(s.textContent),s);});
+    $$("details",c).forEach(function(d){
+      var wrap=document.createElement("div"),sum=d.querySelector("summary");
+      if(sum){var h=document.createElement("h3");h.textContent=sum.textContent;wrap.appendChild(h);}
+      while(d.firstChild){if(d.firstChild!==sum)wrap.appendChild(d.firstChild);else d.removeChild(sum);}
+      d.parentNode.replaceChild(wrap,d);
+    });
+    $$("[style]",c).forEach(function(n){n.removeAttribute("style");});
+    $$("[tabindex],[role],[data-d],[data-k],[data-step],[data-start],[data-doc],[data-c],[data-for]",c).forEach(function(n){
+      ["tabindex","role","data-d","data-k","data-step","data-start","data-doc","data-c","data-for"].forEach(function(at){n.removeAttribute(at);});
+    });
+    var head=c.querySelector("h2");
+    if(head){var t=document.createElement("h2");t.textContent=head.textContent;c.insertBefore(t,c.firstChild);head.parentNode.removeChild(head);}
+    out.push(c.innerHTML);
+  });
+  return out.join("\n");
+}
+function exportHandout(){
+  var body='<h1>М. Зощенко. «История болезни»</h1><p class="subtitle">Как понять олимпиадный текст и написать работу. 7 класс</p>'+handoutBody();
+  download("Зощенко. История болезни. 7 класс.doc",docShell("Зощенко. История болезни. 7 класс",body));
+  toast("Памятка сохранена в формате Word",null);
+}
+$("#docBtn").addEventListener("click",exportHandout);
+$("#docBtn2").addEventListener("click",exportHandout);
+$("#workDoc").addEventListener("click",function(){
+  var ps=workParagraphs();
+  if(!ps.length){toast("Сначала напиши хотя бы один шаг",null);return;}
+  var body='<h1>Моя работа</h1><p class="subtitle">по рассказу М. Зощенко «История болезни»</p>'+
+    ps.map(function(t){var d=document.createElement("p");d.textContent=t;return d.outerHTML;}).join("");
+  download("Моя работа. Зощенко. 7 класс.doc",docShell("Моя работа",body));
+  toast("Работа сохранена в формате Word",null);
+});
+function doPrint(){window.print();}
+$("#printBtn").addEventListener("click",doPrint);
+$("#printBtn2").addEventListener("click",doPrint);
+})();
+</script>
+</body>
+</html>
