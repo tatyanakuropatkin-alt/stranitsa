@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Интерактивный рабочий лист. Н.В. Гоголь «Шинель». 8 класс</title>
+<style>
+:root{
+  --ink:#16324A; --frost:#7FA8BC; --silver:#C9D8E0; --ice:#EAF1F4; --bg:#EEF3F5;
+  --amber:#C98A2B; --brick:#A85548; --pine:#3E7C6B; --steel:#4E6E80; --mist:#8AA6B5;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+.bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1}
+header{max-width:900px;margin:0 auto;padding:18px 16px 4px}
+.grad{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--ink),var(--steel),var(--frost),var(--silver),var(--amber))}
+h1{font-size:24px;margin:12px 0 4px;letter-spacing:.2px}
+.sub{margin:0 0 4px;font-size:16px;color:var(--steel)}
+.meta{margin:0;font-size:13px;color:var(--mist)}
+.snow{vertical-align:-4px;margin-left:8px}
+.frostline{height:1px;background:linear-gradient(90deg,transparent,var(--silver),transparent);margin:6px 0 0}
+.timer-bar{position:sticky;top:0;z-index:50;background:var(--ink);color:#fff;padding:8px 16px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-size:14px}
+.timer-bar.pulse{background:var(--brick);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.55}}
+.progress{flex:1;min-width:220px;height:14px;background:rgba(255,255,255,.22);border-radius:7px;overflow:hidden}
+#progressFill{height:100%;width:0;background:var(--frost);transition:width .3s}
+.timehint{max-width:900px;margin:6px auto 0;padding:6px 14px;font-size:13px;color:var(--brick);font-weight:600;display:none}
+.timehint.show{display:block}
+.rules{max-width:900px;margin:10px auto;padding:10px 14px;background:#fff;border:1px dashed var(--frost);border-radius:8px;font-size:13px;color:var(--steel)}
+main{max-width:900px;margin:0 auto;padding:0 16px 30px}
+.card{background:#fff;border-radius:10px;padding:16px 18px;margin:14px 0;border-left:6px solid var(--steel);box-shadow:0 2px 10px rgba(22,50,74,.07)}
+.c1{border-left-color:var(--steel)} .c2{border-left-color:var(--frost)} .c3{border-left-color:var(--amber)}
+.c4{border-left-color:var(--pine)} .c5{border-left-color:var(--ink)} .c6{border-left-color:var(--mist)}
+.card h2{font-size:17px;margin:0 0 8px}
+.ball{font-size:12px;color:var(--mist);font-weight:600}
+.task{margin:6px 0}
+.options{margin:8px 0}
+.opt{display:block;margin:6px 0;padding:6px 10px;border:1px solid var(--silver);border-radius:6px;cursor:pointer}
+.opt:hover{background:var(--ice)}
+select{font:inherit;padding:4px 8px;border:1px solid var(--mist);border-radius:6px;background:#fff;color:var(--ink)}
+textarea{width:100%;min-height:130px;font:inherit;padding:10px;border:1px solid var(--mist);border-radius:8px;color:var(--ink);background:#fff}
+.support{background:var(--ice);border:1px dashed var(--frost);padding:8px 12px;border-radius:6px;font-size:13.5px;margin-top:10px}
+.quote{background:var(--ice);border-left:3px solid var(--frost);padding:8px 14px;font-style:italic;white-space:pre-line;margin:8px 0}
+.matchrow{display:flex;gap:10px;align-items:flex-start;margin:8px 0;flex-wrap:wrap}
+.matchrow .who{flex:1;min-width:220px}
+.status{margin-top:10px;font-weight:700;font-size:14px}
+.status.ok{color:var(--pine)}.status.part{color:var(--amber)}.status.bad{color:var(--brick)}
+.mini{font-size:12px;color:var(--mist);margin-top:4px}
+.actions{max-width:900px;margin:0 auto;padding:0 16px}
+button{font:inherit;padding:10px 18px;border:none;border-radius:8px;background:var(--steel);color:#fff;cursor:pointer;font-weight:600}
+button:hover{filter:brightness(1.1)}
+button:disabled{background:var(--silver);color:var(--steel);cursor:not-allowed}
+#printButtons button{margin:4px 6px 4px 0;background:var(--mist)}
+.result-box{max-width:900px;margin:16px auto;padding:14px 18px;background:#fff;border-radius:10px;border-left:6px solid var(--pine);box-shadow:0 2px 10px rgba(22,50,74,.07)}
+.result-box h2{margin-top:0}
+.rline{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px solid var(--ice);font-size:14px}
+.rline.ok{color:var(--pine)}.rline.part{color:var(--amber)}.rline.bad{color:var(--brick)}
+.total{font-size:16px;font-weight:700;margin-top:10px}
+.answer-mirror{display:none}
+.keys-only{display:none;max-width:900px;margin:0 auto;padding:0 16px 40px}
+.keys-only h2{font-size:18px}
+.keys-only table{border-collapse:collapse;width:100%;margin:8px 0}
+.keys-only td,.keys-only th{border:1px solid var(--mist);padding:6px 8px;font-size:13.5px;vertical-align:top;text-align:left}
+.report{max-width:900px;margin:10px auto 40px;padding:0 16px;font-size:12px;color:var(--steel)}
+.report summary{cursor:pointer;font-weight:600}
+@media print{
+  .no-print,.timer-bar,.timehint,.rules,.actions,.report{display:none !important}
+  .bg{display:none !important}
+  body{background:#fff}
+  .card{box-shadow:none;break-inside:avoid}
+  .answer-mirror{display:none}
+  body.print-blank .answer-mirror,body.print-blank .result-box,body.print-blank .status{display:none !important}
+  body.print-answers .answer-mirror{display:block;white-space:pre-wrap;background:var(--ice);border:1px solid var(--silver);border-radius:6px;padding:8px 10px;margin-top:8px;font-size:13px}
+  body.print-answers textarea,body.print-answers select,body.print-answers .options,body.print-answers .mini{display:none !important}
+  body.print-keys header,body.print-keys main,body.print-keys .result-box,body.print-keys .rules,body.print-keys .report{display:none !important}
+  body.print-keys .keys-only{display:block}
+}
+</style>
+</head>
+<body>
+
+<svg class="bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <g opacity=".30" fill="#D3E0E6">
+    <rect x="0" y="600" width="1440" height="300"/>
+    <rect x="120" y="560" width="150" height="40"/>
+    <rect x="320" y="575" width="120" height="25"/>
+    <rect x="900" y="565" width="170" height="35"/>
+    <rect x="1150" y="580" width="140" height="20"/>
+    <polygon points="700,600 712,300 724,600"/>
+    <rect x="706" y="300" width="12" height="300"/>
+  </g>
+  <g opacity=".42" fill="#BFD2DB">
+    <rect x="0" y="690" width="1440" height="210"/>
+    <rect x="220" y="640" width="120" height="50"/>
+    <polygon points="220,640 280,610 340,640"/>
+    <rect x="300" y="600" width="10" height="40"/>
+    <rect x="1040" y="650" width="90" height="40"/>
+    <polygon points="1040,650 1085,625 1130,650"/>
+    <rect x="560" y="640" width="46" height="50"/>
+    <polygon points="556,640 583,622 610,640"/>
+    <circle cx="583" cy="612" r="7" fill="#EAF1F4"/>
+    <rect x="581" y="619" width="4" height="21"/>
+    <circle cx="820" cy="612" r="8"/>
+    <path d="M808 622 L832 622 L838 700 L802 700 Z"/>
+    <rect x="812" y="700" width="5" height="22"/>
+    <rect x="824" y="700" width="5" height="22"/>
+    <rect x="70" y="470" width="7" height="230" fill="#E6EFF2"/>
+    <g stroke="#AFC4CE" stroke-width="2" fill="none">
+      <path d="M73 520 q-30 -20 -48 -44"/>
+      <path d="M73 560 q34 -16 56 -40"/>
+      <path d="M73 600 q-26 -10 -40 -30"/>
+      <path d="M25 476 q-6 14 -2 26"/>
+      <path d="M129 520 q6 14 2 26"/>
+    </g>
+    <ellipse cx="24" cy="500" rx="2.5" ry="7" fill="#AFC4CE"/>
+    <ellipse cx="130" cy="546" rx="2.5" ry="7" fill="#AFC4CE"/>
+    <rect x="1330" y="480" width="7" height="220" fill="#E6EFF2"/>
+    <g stroke="#AFC4CE" stroke-width="2" fill="none">
+      <path d="M1333 530 q30 -18 48 -42"/>
+      <path d="M1333 570 q-34 -14 -56 -38"/>
+      <path d="M1333 610 q26 -10 40 -28"/>
+      <path d="M1381 488 q6 14 2 26"/>
+      <path d="M1277 532 q-6 14 -2 26"/>
+    </g>
+    <ellipse cx="1382" cy="512" rx="2.5" ry="7" fill="#AFC4CE"/>
+    <ellipse cx="1276" cy="558" rx="2.5" ry="7" fill="#AFC4CE"/>
+  </g>
+  <g fill="#FFFFFF" opacity=".55">
+    <circle cx="140" cy="120" r="3"/><circle cx="300" cy="200" r="2"/><circle cx="520" cy="90" r="3"/>
+    <circle cx="760" cy="160" r="2"/><circle cx="980" cy="110" r="3"/><circle cx="1180" cy="220" r="2"/>
+    <circle cx="1320" cy="140" r="3"/><circle cx="420" cy="300" r="2"/><circle cx="860" cy="320" r="2"/>
+    <circle cx="120" cy="380" r="2"/><circle cx="1400" cy="380" r="2"/><circle cx="640" cy="420" r="2"/>
+    <circle cx="240" cy="440" r="2"/><circle cx="1080" cy="420" r="2"/><circle cx="700" cy="250" r="2"/>
+  </g>
+  <g stroke="#FFFFFF" stroke-width="1.4" fill="none" opacity=".65">
+    <g transform="translate(200,170)">
+      <line x1="0" y1="-16" x2="0" y2="16"/><line x1="-13.9" y1="-8" x2="13.9" y2="8"/><line x1="-13.9" y1="8" x2="13.9" y2="-8"/>
+      <path d="M0 -16 l-4 5 M0 -16 l4 5 M0 16 l-4 -5 M0 16 l4 -5"/>
+      <path d="M-13.9 -8 l1 6 M-13.9 -8 l6 -1 M13.9 8 l-1 -6 M13.9 8 l-6 1"/>
+      <path d="M-13.9 8 l6 1 M-13.9 8 l1 -6 M13.9 -8 l-6 -1 M13.9 -8 l-1 6"/>
+    </g>
+    <g transform="translate(1230,250) scale(.8)">
+      <line x1="0" y1="-16" x2="0" y2="16"/><line x1="-13.9" y1="-8" x2="13.9" y2="8"/><line x1="-13.9" y1="8" x2="13.9" y2="-8"/>
+      <path d="M0 -16 l-4 5 M0 -16 l4 5 M0 16 l-4 -5 M0 16 l4 -5"/>
+    </g>
+    <g transform="translate(520,360) scale(.7)">
+      <line x1="0" y1="-16" x2="0" y2="16"/><line x1="-13.9" y1="-8" x2="13.9" y2="8"/><line x1="-13.9" y1="8" x2="13.9" y2="-8"/>
+      <path d="M0 -16 l-4 5 M0 -16 l4 5 M0 16 l-4 -5 M0 16 l4 -5"/>
+    </g>
+  </g>
+</svg>
+
+<header>
+  <div class="grad"></div>
+  <h1>Интерактивный рабочий лист
+    <svg class="snow" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <g stroke="#7FA8BC" stroke-width="1.5" fill="none">
+        <line x1="12" y1="2" x2="12" y2="22"/>
+        <line x1="3.3" y1="7" x2="20.7" y2="17"/>
+        <line x1="3.3" y1="17" x2="20.7" y2="7"/>
+        <path d="M12 5 l-2 2 M12 5 l2 2 M12 19 l-2 -2 M12 19 l2 -2"/>
+      </g>
+    </svg>
+  </h1>
+  <p class="sub">Литература, 8 класс. Н.В. Гоголь «Шинель»: тема, идея, особенности конфликта</p>
+  <p class="meta">Время работы: 20 минут · Максимальный балл: 17 · Одна попытка · Черновик сохраняется автоматически</p>
+  <div class="frostline"></div>
+</header>
+
+<div class="timer-bar no-print" id="timerBar">
+  <span id="timerText">Осталось: 20:00</span>
+  <div class="progress"><div id="progressFill"></div></div>
+  <span id="progressText">Прогресс: 0 / 6</span>
+</div>
+<div class="timehint no-print" id="timeHint">Время вышло. Работа не блокируется — отправьте её кнопкой ниже, когда будете готовы.</div>
+
+<div class="rules no-print">Правила: попытка одна — после того как вы сами нажмёте «Отправить на проверку», ответы проверяются и поля блокируются. Переключение на другие вкладки и окна (например, на текст повести для сверки) ничем не ограничено и не фиксируется. Таймер носит справочный характер: по истечении двадцати минут он останавливается и напоминает отправить работу, но не запирает её автоматически. Черновик хранится в браузере: после перезагрузки страницы работа продолжится с того же места, включая остаток времени.</div>
+
+<main>
+
+<section class="card c1" id="card1">
+  <h2>Задание 1. Факты и имена <span class="ball">1 балл</span></h2>
+  <p class="task">Какой чин имел главный герой повести «Шинель»?</p>
+  <div class="options">
+    <label class="opt"><input type="radio" name="q1" value="a"> а) коллежский регистратор</label>
+    <label class="opt"><input type="radio" name="q1" value="b"> б) титулярный советник</label>
+    <label class="opt"><input type="radio" name="q1" value="c"> в) коллежский асессор</label>
+    <label class="opt"><input type="radio" name="q1" value="d"> г) надворный советник</label>
+  </div>
+  <div class="support">Опора. Памятка: по Табели о рангах 1722 года коллежский регистратор — XIV класс, губернский секретарь — XII, титулярный советник — IX, коллежский асессор — VIII, надворный советник — VII. Чин героя назван в самом начале повести.</div>
+  <div class="answer-mirror" id="m1"></div>
+  <div class="status" id="s1"></div>
+</section>
+
+<section class="card c2" id="card2">
+  <h2>Задание 2. Герой и его роль <span class="ball">1 балл</span></h2>
+  <p class="task">Соотнесите персонажа и его поступок. Для каждого персонажа выберите букву верного описания. Балл начисляется только при всех четырёх верных соответствиях.</p>
+  <p class="task">Описания:<br>
+  А. Позволив себе посмеяться над товарищем по примеру других, вдруг остановился, словно поражённый: в словах униженного писца ему послышалось братство.<br>
+  Б. Осмотрел старую шинель-капот и заявил, что поправить её нельзя: гардероб худой.<br>
+  В. Будучи по природе человеком добрым и услужливым, так распёк просителя, что того вынесли из кабинета почти без движения.<br>
+  Г. Вместо помощи по делу стал допытываться, почему чиновник так поздно возвращался и не заходил ли в какой непорядочный дом.</p>
+  <div class="matchrow"><span class="who">Петрович, портной</span><select id="q2_pet"><option value="">—</option><option>А</option><option>Б</option><option>В</option><option>Г</option></select></div>
+  <div class="matchrow"><span class="who">Частный пристав</span><select id="q2_priv"><option value="">—</option><option>А</option><option>Б</option><option>В</option><option>Г</option></select></div>
+  <div class="matchrow"><span class="who">Значительное лицо</span><select id="q2_zn"><option value="">—</option><option>А</option><option>Б</option><option>В</option><option>Г</option></select></div>
+  <div class="matchrow"><span class="who">Молодой чиновник</span><select id="q2_mol"><option value="">—</option><option>А</option><option>Б</option><option>В</option><option>Г</option></select></div>
+  <div class="support">Опора. Найдите в тексте сцену с каждым персонажем и вспомните, что он делает и говорит: поступок точнее всего отличает его от других.</div>
+  <div class="answer-mirror" id="m2"></div>
+  <div class="status" id="s2"></div>
+</section>
+
+<section class="card c3" id="card3">
+  <h2>Задание 3. Порядок событий <span class="ball">1 балл</span></h2>
+  <p class="task">Расставьте события повести в хронологическом порядке: укажите для каждого события его номер (от 1 до 5). Балл начисляется только за полностью верную последовательность.</p>
+  <div class="matchrow"><span class="who">Вечер у помощника столоначальника, где хозяина новой шинели заставили выпить два бокала</span><select id="q3_e1"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+  <div class="matchrow"><span class="who">Акакий Акакиевич несёт изношенную шинель к портному Петровичу</span><select id="q3_e2"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+  <div class="matchrow"><span class="who">Грабёж на пустынной площади: люди с усами снимают с героя шинель</span><select id="q3_e3"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+  <div class="matchrow"><span class="who">Петрович приносит новую шинель и примеряет её на хозяина</span><select id="q3_e4"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+  <div class="matchrow"><span class="who">Приём у значительного лица, завершившийся тяжёлым распеканьем</span><select id="q3_e5"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+  <div class="support">Опора. Порядок сцен в повести совпадает с порядком событий. Ищите в тексте хронологические подсказки: утро и вечер, «поутру», «на другой день», время возвращения домой. Не угадывайте — сверяйте каждую сцену с местом в тексте.</div>
+  <div class="answer-mirror" id="m3"></div>
+  <div class="status" id="s3"></div>
+</section>
+
+<section class="card c4" id="card4">
+  <h2>Задание 4. Язык повести <span class="ball">2 балла</span></h2>
+  <p class="task">Определите, какой приём использует Гоголь в каждой цитате. Для каждой строки выберите один приём. Засчитываются только точные ответы без альтернатив.</p>
+  <p class="task">Строка 1. «Фамилия чиновника была Башмачкин. Уже по самому имени видно, что она когда-то произошла от башмака...»</p>
+  <div class="matchrow"><select id="q4_r1"><option value="">—</option><option value="1">Говорящая фамилия</option><option value="2">Умолчание рассказчика (ироническое самоограничение)</option><option value="3">Развёрнутая метафора</option><option value="4">Риторический вопрос</option></select></div>
+  <p class="task">Строка 2. «В департаменте... но лучше не называть, в каком департаменте.»</p>
+  <div class="matchrow"><select id="q4_r2"><option value="">—</option><option value="1">Говорящая фамилия</option><option value="2">Умолчание рассказчика (ироническое самоограничение)</option><option value="3">Развёрнутая метафора</option><option value="4">Риторический вопрос</option></select></div>
+  <div class="support">Опора. Памятка: говорящая фамилия — фамилия, намекающая на происхождение, ремесло или судьбу героя; умолчание — намеренный отказ назвать предмет прямо; метафора — скрытое сравнение; риторический вопрос — вопрос, не требующий ответа.</div>
+  <div class="answer-mirror" id="m4"></div>
+  <div class="status" id="s4"></div>
+</section>
+
+<section class="card c5" id="card5">
+  <h2>Задание 5. Работа с фрагментом <span class="ball">5 баллов</span></h2>
+  <p class="quote">«И что-то странное заключалось в словах и в голосе, с каким они были произнесены. В нем слышалось что-то такое преклоняющее на жалость, что один молодой человек, недавно определившийся, который, по примеру других, позволил было себе посмеяться над ним, вдруг остановился, как будто пронзенный...»</p>
+  <p class="task">Почему молодой чиновник, позволивший себе посмеяться над Башмачкиным, вдруг остановился? Что значат слова «Я брат твой», которые послышались ему в речи униженного героя? Дайте развёрнутый ответ объёмом от 30 слов, опираясь на текст повести.</p>
+  <textarea id="a5" placeholder="Введите ваш ответ..."></textarea>
+  <div class="mini no-print">Слов: <span id="w5">0</span> (минимум 30)</div>
+  <div class="support">Опора. Банк слов: совесть, жалость, прозрение, братство, равенство, равнодушие, привычка, стыд, сострадание. Наблюдение: эти слова принадлежат не самому Башмачкину, а слышатся внутри другого человека. Объясните, почему именно слышатся, а не произносятся вслух.</div>
+  <div class="answer-mirror" id="m5"></div>
+  <div class="status" id="s5"></div>
+</section>
+
+<section class="card c6" id="card6">
+  <h2>Задание 6. Отклик о прочитанном <span class="ball">7 баллов</span></h2>
+  <p class="task">Продолжите фразу и напишите мини-сочинение объёмом от 60 слов (считая вместе с началом). Обязательны тезис, аргументы с опорой на текст и вывод.</p>
+  <textarea id="a6">Самым страшным в повести Н.В. Гоголя «Шинель» я считаю...</textarea>
+  <div class="mini no-print">Слов: <span id="w6">10</span> (минимум 60)</div>
+  <div class="support">Опора. Памятка-план: что именно страшнее — насмешка, молчание окружающих, превращение человека в вещь или то, что служебное распеканье оказалось сильнее мороза? Назовите одно и докажите примером из текста.</div>
+  <div class="answer-mirror" id="m6"></div>
+  <div class="status" id="s6"></div>
+</section>
+
+</main>
+
+<div class="actions no-print">
+  <button id="submitBtn">Отправить на проверку</button>
+</div>
+
+<div class="result-box" id="resultBox" hidden></div>
+
+<div class="actions no-print" id="printButtons" hidden>
+  <button id="printBlank">Печать: пустой лист</button>
+  <button id="printAnswers">Печать: лист с ответами</button>
+  <button id="printKeys">Печать: ключи для учителя</button>
+</div>
+
+<section class="keys-only" id="keysBlock">
+  <h2>Ключи, критерии и шкала (для учителя)</h2>
+  <table>
+    <tr><th>Задание</th><th>Верный ответ / критерии</th><th>Баллы</th></tr>
+    <tr><td>1</td><td>б) титулярный советник</td><td>1</td></tr>
+    <tr><td>2</td><td>Петрович — Б; частный пристав — Г; значительное лицо — В; молодой чиновник — А</td><td>1 (все четыре соответствия)</td></tr>
+    <tr><td>3</td><td>Порядок: 1 — Акакий Акакиевич несёт изношенную шинель к Петровичу; 2 — Петрович приносит новую шинель; 3 — вечер у помощника столоначальника; 4 — грабёж на площади; 5 — приём у значительного лица</td><td>1 (только полностью верная последовательность)</td></tr>
+    <tr><td>4</td><td>Строка 1 — говорящая фамилия; строка 2 — умолчание рассказчика (ироническое самоограничение)</td><td>по 1 за строку, всего 2</td></tr>
+    <tr><td>5</td><td>К1 понимание (2): три и более совпадений с ключевыми словами понимания = 2, одно-два = 1, ноль = 0. К2 опора на текст (2): три и более маркеров опоры = 2, один-два = 1, ноль = 0. К3 связность (1): три и более предложения и два и более союза или вводных слова. Если К1 = 0, то К2 и К3 = 0. Объём ниже 30 слов — 0 баллов. Ключевые слова понимания: брат, совесть, жалость, человечность, равнодушие, жестокость, насмешка, прозрение, стыд, сострадание, унижение, достоинство. Маркеры опоры: цитата, текст, повесть, Гоголь, автор, рассказчик, герой, Башмачкин, Акакий, чиновник, фраза, слова, эпизод, сцена.</td><td>5</td></tr>
+    <tr><td>6</td><td>К1 понимание (2) и К2 опора на текст (2) — по тем же правилам, что в задании 5. К3 рассуждение (2): есть маркеры тезиса, аргумента и вывода = 2; есть две группы из трёх = 1; иначе 0. К4 связность (1): три и более предложения и два и более союза или вводных слова. Если К1 = 0, то К2, К3, К4 = 0. Объём ниже 60 слов — 0 баллов. Маркеры тезиса: я считаю, я думаю, по-моему, мне кажется, я убеждён, я уверен, на мой взгляд. Маркеры аргумента: потому что, так как, ведь, поскольку, например, подтверждением, доказательством, вспомним. Маркеры вывода: таким образом, итак, следовательно, значит, в заключение, подводя итог, поэтому, вот почему.</td><td>7</td></tr>
+  </table>
+  <p><b>Шкала перевода:</b> «2» — 0–8 баллов | «3» — 9–11 | «4» — 12–14 | «5» — 15–17. Диапазоны не пересекаются.</p>
+  <p><b>Модельный ответ к заданию 5.</b> Молодой чиновник остановился потому, что впервые увидел в униженном писце не «чиновника для письма», а человека, а в себе — мучителя. Слова «Я брат твой» прозвучали для него не извне, а из собственной совести: все люди — братья, и ни чин, ни канцелярское остроумие этого не отменяют. Гоголь показывает: насмешка над тем, кто не может ответить, и есть бесчеловечье, спрятанное под образованностью. Потому герой эпизода и закрывал себя рукою, и потом много раз содрогался, вспоминая эту сцену.</p>
+  <p><b>Модельный ответ к заданию 6.</b> Самым страшным в повести Н.В. Гоголя «Шинель» я считаю не грабёж и не смерть героя, а тишину вокруг него. Акакия Акакиевича ежедневно обижают, и никто не считает это злом: молодые чиновники подсмеивались и острились над ним, во сколько хватало канцелярского остроумия. Даже смерть ничего не меняет: на другой день уже на его месте сидел новый чиновник. Страшно, что человек может прожить и умереть незамеченным, а мир вокруг даже не заметит потери. Поэтому Гоголь и даёт своему герою лишь одну ясную фразу — «Оставьте меня, зачем вы меня обижаете?» — и она оказывается сильнее всего канцелярского остроумия.</p>
+</section>
+
+<details class="report">
+  <summary>Отчёт о проверке (для учителя)</summary>
+  <p><b>Что изменено по запросу автора материала.</b> По прямому требованию Татьяны полностью удалены: контроль переключения вкладок и окон (события visibilitychange и blur), счётчик нарушений, порог досрочного завершения, блокирующий оверлей и автоотправка по истечении таймера. Причина — в рабочем окружении автора (браузер с панелью закладок и расширениями, необходимость сверяться с текстом повести в соседней вкладке) эти функции давали ложные срабатывания и блокировали лист до начала работы. Базовый промпт интерактивного листа предписывал их наличие; отступление от промпта зафиксировано здесь открыто. Таймер сохранён как справочный: при нуле останавливается, подсвечивается и показывает напоминание, но не отправляет и не запирает работу. Единственная оставшаяся блокировка полей — штатная для теста: после того как ученик сам нажимает «Отправить на проверку» (режим одной попытки из промпта не отменён).</p>
+  <p><b>Что подтверждено предоставленным фрагментом текста повести.</b> Описание Б в задании 2 дословно опирается на фразу Петровича «Нет, нельзя поправить: худой гардероб!», присутствующую в файле. Хвост описания Г («непорядочном доме») также встречается в файле; сама характеристика частного пристава дана пересказом без кавычек. Факт о классах Табели о рангах 1722 года соответствует справочным данным. Баллы пересчитаны: 1+1+1+2+5+7 = 17; шкала 0–8 / 9–11 / 12–14 / 15–17 без пересечений. Каждое задание решено автором листа; опоры не содержат готового ответа; заданий исповедального или травмоопасного характера нет.</p>
+  <p><b>Исправление собственной ошибки прошлого отчёта.</b> В предыдущей версии было ошибочно указано, что цитата задания 4, строка 2 («В департаменте... но лучше не называть, в каком департаменте») дословно присутствует в загруженном файле. При повторной построчной сверке установлено: в файле начало повести дано в иной формулировке («лучше департамент, о котором идет дело, мы назовем одним департаментом»), и указанной цитаты там нет. Аналогично в файле отсутствуют абзац о фамилии Башмачкин (строка 1 задания 4) и весь эпизод канцелярских насмешек с фрагментом и словами «Я брат твой» (задание 5). Это подлинные строки академического текста «Шинели», но по данному файлу они не сверяются. Ошибка признана и устранена в настоящем отчёте.</p>
+  <p><b>Что является канонической цитатой повести, но отсутствует в предоставленных фрагментах (сверка по файлу невозможна).</b> Загруженный файл содержит лишь разрозненные куски текста, а не полную повесть. По нему нельзя подтвердить дословность: задания 4 (обе строки); задания 5 (фрагмент и «Я брат твой»); описания В в задании 2 («в душе добрый человек»); события задания 3 (вечер у помощника столоначальника с двумя бокалами в файле не представлен); модельные ответы (включая «Оставьте меня, зачем вы меня обижаете?»). Перед уроком сверьте эти места по полному печатному изданию, которое есть у Вас в классе.</p>
+  <p><b>Что не проверено.</b> Поведение печати, таймера и автосохранения в конкретных браузерах проверено логически, а не на всех платформах; отображение цветов статусов при печати зависит от настроек браузера. Полнота и орфография канонических цитат, отсутствующих в файле, не подтверждены (см. предыдущий пункт).</p>
+  <p><b>Нерешённые вопросы.</b> Предоставленный файл фрагментарен, поэтому для большинства цитат листа невозможна посимвольная сверка по нему; требуется полное издание. В загруженных фрагментах есть ошибки распознавания; в цитаты листа они не попали, но при сверке по печатному изданию рекомендуется проверить спорные слова. Атрибуция крылатой фразы «все мы вышли из гоголевской "Шинели"» в листе не используется.</p>
+  <p>В пределах перечисленных проверок выявленные ошибки исправлены. Непроверенные и нерешённые вопросы указаны отдельно.</p>
+</details>
+
+<script>
+(function(){
+"use strict";
+var LS="shinel_8_konflikt_worksheet_v3";
+var SCHEMA=3;
+var TOTAL=1200;
+var OPEN6="Самым страшным в повести Н.В. Гоголя «Шинель» я считаю...";
+var COR1="b";
+var COR2={q2_pet:"Б",q2_priv:"Г",q2_zn:"В",q2_mol:"А"};
+var COR3={q3_e1:"3",q3_e2:"1",q3_e3:"4",q3_e4:"2",q3_e5:"5"};
+var COR4={q4_r1:"1",q4_r2:"2"};
+var KW5=["брат","совест","жалост","человечн","равнодуш","жесток","насмеш","прозрен","стыд","сострадан","униж","достоинств","очнулся","пробужд"];
+var KW6=["равнодуш","жесток","одиноч","незамет","униж","достоинств","человечн","систем","чин","вещ","шинел","бессердеч","травл","насмеш","страх","смерт","душ","молчан"];
+var REF=["цитат","текст","повест","гогол","автор","рассказчик","герой","башмачкин","акаки","чиновник","фраз","слов","эпизод","сцен","строк"];
+var CONJ=["и","но","а","же","ведь","хотя","если","когда","потому","поэтому","значит","итак","однако","следовательно","например","во-первых","во-вторых","кроме","того","таким","образом"];
+var TH6=["я считаю","я думаю","по-моему","мне кажется","я убежд","я уверен","на мой взгляд"];
+var AR6=["потому что","так как","ведь","поскольку","например","подтверждением","доказательством","вспомним","об этом говорит","на это указывает"];
+var CN6=["таким образом","итак","следовательно","значит","в заключение","подводя итог","поэтому","вот почему"];
+
+var $=function(id){return document.getElementById(id);};
+var inputs=function(){return document.querySelectorAll("main input, main select, main textarea");};
+var state={left:TOTAL,submitted:false,results:null};
+var timer=null;
+
+function tokens(t){return t.toLowerCase().replace(/[^a-zа-яё0-9\s-]/g," ").split(/\s+/).filter(function(w){return w.length>0;});}
+function words(t){return tokens(t).length;}
+function sentences(t){return t.split(/[.!?…]+/).map(function(s){return s.trim();}).filter(function(s){return s.length>1;}).length;}
+function stems(t,arr){var l=t.toLowerCase(),c=0;for(var i=0;i<arr.length;i++){if(l.indexOf(arr[i])>-1)c++;}return c;}
+function conjCount(t){var tk=tokens(t),c=0;for(var i=0;i<tk.length;i++){if(CONJ.indexOf(tk[i])>-1)c++;}return c;}
+
+function gather(){
+  var r=document.querySelector('input[name="q1"]:checked');
+  return {q1:r?r.value:"",q2_pet:$("q2_pet").value,q2_priv:$("q2_priv").value,q2_zn:$("q2_zn").value,q2_mol:$("q2_mol").value,
+    q3_e1:$("q3_e1").value,q3_e2:$("q3_e2").value,q3_e3:$("q3_e3").value,q3_e4:$("q3_e4").value,q3_e5:$("q3_e5").value,
+    q4_r1:$("q4_r1").value,q4_r2:$("q4_r2").value,a5:$("a5").value,a6:$("a6").value};
+}
+function restore(a){
+  if(!a)return;
+  var rs=document.querySelectorAll('input[name="q1"]');
+  for(var i=0;i<rs.length;i++){rs[i].checked=(rs[i].value===a.q1);}
+  ["q2_pet","q2_priv","q2_zn","q2_mol","q3_e1","q3_e2","q3_e3","q3_e4","q3_e5","q4_r1","q4_r2"].forEach(function(id){if($(id))$(id).value=a[id]||"";});
+  $("a5").value=a.a5||"";
+  $("a6").value=(a.a6!==undefined&&a.a6!==null)?a.a6:OPEN6;
+}
+function save(){
+  var a=gather();a.left=state.left;a.submitted=state.submitted;a.results=state.results;a.schema=SCHEMA;
+  try{localStorage.setItem(LS,JSON.stringify(a));}catch(e){}
+}
+function load(){
+  try{var raw=localStorage.getItem(LS);if(!raw)return null;return JSON.parse(raw);}catch(e){return null;}
+}
+
+function progress(){
+  var a=gather(),n=0;
+  if(a.q1)n++;
+  if(a.q2_pet&&a.q2_priv&&a.q2_zn&&a.q2_mol)n++;
+  if(a.q3_e1&&a.q3_e2&&a.q3_e3&&a.q3_e4&&a.q3_e5)n++;
+  if(a.q4_r1&&a.q4_r2)n++;
+  if(a.a5.trim())n++;
+  if(a.a6.trim().length>OPEN6.length)n++;
+  $("progressFill").style.width=(n/6*100)+"%";
+  $("progressText").textContent="Прогресс: "+n+" / 6";
+}
+function counters(){
+  $("w5").textContent=words($("a5").value);
+  $("w6").textContent=words($("a6").value);
+}
+
+function grade5(t){
+  var w=words(t);
+  if(w<30)return{pts:0,k1:0,k2:0,k3:0,w:w};
+  var k1m=stems(t,KW5),k1=k1m>=3?2:(k1m>=1?1:0);
+  var k2m=stems(t,REF),k2=k2m>=3?2:(k2m>=1?1:0);
+  var k3=(sentences(t)>=3&&conjCount(t)>=2)?1:0;
+  if(k1===0){k2=0;k3=0;}
+  return{pts:k1+k2+k3,k1:k1,k2:k2,k3:k3,w:w};
+}
+function grade6(t){
+  var w=words(t);
+  if(w<60)return{pts:0,k1:0,k2:0,k3:0,k4:0,w:w};
+  var k1m=stems(t,KW6),k1=k1m>=3?2:(k1m>=1?1:0);
+  var k2m=stems(t,REF),k2=k2m>=3?2:(k2m>=1?1:0);
+  var g=0;[TH6,AR6,CN6].forEach(function(arr){for(var i=0;i<arr.length;i++){if(t.toLowerCase().indexOf(arr[i])>-1){g++;return;}}});
+  var k3=g>=3?2:(g===2?1:0);
+  var k4=(sentences(t)>=3&&conjCount(t)>=2)?1:0;
+  if(k1===0){k2=0;k3=0;k4=0;}
+  return{pts:k1+k2+k3+k4,k1:k1,k2:k2,k3:k3,k4:k4,w:w};
+}
+
+function status(el,pts,max){
+  el.className="status "+(pts===max?"ok":(pts>0?"part":"bad"));
+  el.textContent=pts===max?"Верно полностью: "+pts+" из "+max:(pts>0?"Частично верно: "+pts+" из "+max:"Неверно или нет ответа: 0 из "+max);
+}
+
+function mirrors(a,res){
+  var lab={a:"а) коллежский регистратор",b:"б) титулярный советник",c:"в) коллежский асессор",d:"г) надворный советник"};
+  $("m1").textContent="Ответ ученика: "+(a.q1?lab[a.q1]:"нет ответа");
+  $("m2").textContent="Ответы ученика: Петрович — "+(a.q2_pet||"—")+", частный — "+(a.q2_priv||"—")+", значительное лицо — "+(a.q2_zn||"—")+", молодой чиновник — "+(a.q2_mol||"—");
+  var ev={q3_e1:"вечер у помощника столоначальника",q3_e2:"шинель отнесена к Петровичу",q3_e3:"грабёж на площади",q3_e4:"Петрович принёс новую шинель",q3_e5:"приём у значительного лица"};
+  var lines=[];for(var k in ev){lines.push(ev[k]+" — место "+(a[k]||"—"));}
+  $("m3").textContent="Ответы ученика: "+lines.join("; ");
+  var rec={1:"говорящая фамилия",2:"умолчание рассказчика",3:"развёрнутая метафора",4:"риторический вопрос"};
+  $("m4").textContent="Ответы ученика: строка 1 — "+(rec[a.q4_r1]||"—")+", строка 2 — "+(rec[a.q4_r2]||"—");
+  $("m5").textContent="Ответ ученика:\n"+a.a5;
+  $("m6").textContent="Ответ ученика:\n"+a.a6;
+}
+
+function renderResults(res){
+  var box=$("resultBox");box.hidden=false;
+  var names=["Задание 1","Задание 2","Задание 3","Задание 4","Задание 5","Задание 6"];
+  var maxes=[1,1,1,2,5,7];
+  var html="<h2>Результат проверки</h2>";
+  for(var i=0;i<6;i++){
+    var p=res.pts[i],cls=p===maxes[i]?"ok":(p>0?"part":"bad");
+    html+='<div class="rline '+cls+'"><span>'+names[i]+'</span><span>'+p+" из "+maxes[i]+"</span></div>";
+  }
+  html+='<div class="rline"><span>Задание 5: К1 понимание '+res.g5.k1+"/2, К2 опора "+res.g5.k2+"/2, К3 связность "+res.g5.k3+'/1</span><span></span></div>';
+  html+='<div class="rline"><span>Задание 6: К1 понимание '+res.g6.k1+"/2, К2 опора "+res.g6.k2+"/2, К3 рассуждение "+res.g6.k3+"/2, К4 связность "+res.g6.k4+'/1</span><span></span></div>';
+  var grade=res.total>=15?"5":(res.total>=12?"4":(res.total>=9?"3":"2"));
+  html+='<div class="total">Итого: '+res.total+" из 17. Отметка: «"+grade+"»</div>";
+  box.innerHTML=html;
+  for(var j=0;j<6;j++){status($("s"+(j+1)),res.pts[j],maxes[j]);}
+}
+
+function lock(){
+  var els=inputs();for(var i=0;i<els.length;i++){els[i].disabled=true;}
+  $("submitBtn").disabled=true;
+}
+
+function submit(){
+  if(state.submitted)return;
+  var a=gather();
+  var p1=a.q1===COR1?1:0;
+  var p2=(a.q2_pet&&a.q2_pet===COR2.q2_pet&&a.q2_priv===COR2.q2_priv&&a.q2_zn===COR2.q2_zn&&a.q2_mol===COR2.q2_mol)?1:0;
+  var p3=(a.q3_e1&&a.q3_e1===COR3.q3_e1&&a.q3_e2===COR3.q3_e2&&a.q3_e3===COR3.q3_e3&&a.q3_e4===COR3.q3_e4&&a.q3_e5===COR3.q3_e5)?1:0;
+  var p4=(a.q4_r1===COR4.q4_r1?1:0)+(a.q4_r2===COR4.q4_r2?1:0);
+  var g5=grade5(a.a5),g6=grade6(a.a6);
+  var res={pts:[p1,p2,p3,p4,g5.pts,g6.pts],g5:g5,g6:g6,total:p1+p2+p3+p4+g5.pts+g6.pts};
+  state.results=res;state.submitted=true;
+  mirrors(a,res);renderResults(res);lock();
+  $("printButtons").hidden=false;
+  $("timerBar").classList.remove("pulse");
+  save();
+  $("resultBox").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function tick(){
+  if(state.submitted)return;
+  if(state.left>0){state.left--;}
+  showTime();
+  if(state.left<=0){
+    /* Время вышло: останавливаемся, подсвечиваем, напоминаем. НЕ отправляем и НЕ блокируем. */
+    $("timerBar").classList.add("pulse");
+    $("timeHint").classList.add("show");
+    if(timer){clearInterval(timer);timer=null;}
+    save();
+    return;
+  }
+  if(state.left%5===0)save();
+}
+function showTime(){
+  var m=Math.floor(state.left/60),s=state.left%60;
+  $("timerText").textContent="Осталось: "+m+":"+(s<10?"0":"")+s;
+  if(state.left<=60&&state.left>0&&!state.submitted){$("timerBar").classList.add("pulse");}
+  else if(state.left>60){$("timerBar").classList.remove("pulse");}
+}
+
+var blankSnap=null,blankPending=false;
+function snapshotUI(){return gather();}
+function clearUI(){
+  var rs=document.querySelectorAll('input[name="q1"]');for(var i=0;i<rs.length;i++){rs[i].checked=false;}
+  ["q2_pet","q2_priv","q2_zn","q2_mol","q3_e1","q3_e2","q3_e3","q3_e4","q3_e5","q4_r1","q4_r2"].forEach(function(id){$(id).value="";});
+  $("a5").value="";$("a6").value=OPEN6;
+  $("resultBox").hidden=true;
+  for(var j=1;j<=6;j++){$("s"+j).textContent="";$("s"+j).className="status";}
+  counters();progress();
+}
+function doPrint(mode){
+  if(mode==="blank"){blankSnap=snapshotUI();blankPending=true;clearUI();}
+  document.body.classList.add("print-"+mode);
+  window.print();
+}
+window.addEventListener("afterprint",function(){
+  document.body.classList.remove("print-blank","print-answers","print-keys");
+  if(blankPending&&blankSnap){restore(blankSnap);blankPending=false;counters();progress();if(state.submitted){renderResults(state.results);}}
+});
+
+function init(){
+  var saved=load();
+  if(saved){
+    /* Миграция: если состояние сохранено прежней версией листа (с ложной блокировкой),
+       снимаем submitted/results, но сохраняем введённые ответы. Время, если испорчено, восстанавливаем. */
+    if(saved.schema!==SCHEMA){
+      saved.submitted=false;saved.results=null;
+      if(!(typeof saved.left==="number")||saved.left<=0)saved.left=TOTAL;
+    }
+    restore(saved);
+    state.left=(typeof saved.left==="number"&&saved.left>0)?saved.left:TOTAL;
+    state.submitted=!!saved.submitted;
+    state.results=saved.results||null;
+  }else{
+    $("a6").value=OPEN6;
+  }
+  counters();progress();showTime();
+  if(state.left<=0){$("timerBar").classList.add("pulse");$("timeHint").classList.add("show");}
+  if(state.submitted){lock();if(state.results){mirrors(gather(),state.results);renderResults(state.results);}$("printButtons").hidden=false;}
+  if(state.left>0&&!state.submitted){timer=setInterval(tick,1000);}
+  save();
+
+  document.addEventListener("input",function(){counters();progress();if(!state.submitted)save();});
+  document.addEventListener("change",function(){counters();progress();if(!state.submitted)save();});
+  $("submitBtn").addEventListener("click",function(){submit();});
+  $("printBlank").addEventListener("click",function(){doPrint("blank");});
+  $("printAnswers").addEventListener("click",function(){doPrint("answers");});
+  $("printKeys").addEventListener("click",function(){doPrint("keys");});
+}
+init();
+})();
+</script>
+</body>
+</html>
